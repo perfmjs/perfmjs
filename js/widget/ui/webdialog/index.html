@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>dialog demo</title>
+<meta name="keywords" content="dialog" />
+<meta name="description" content="dialog" />
+<script type="text/javascript" src="webDialog.js"></script>
+<link id="webDialogSkin" href="skin/chrome/chrome.css" rel="stylesheet" type="text/css" />
+
+<link href="_demo/demo.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="_demo/demo.js"></script>
+</head>
+<body>
+<div id="page">
+ <fieldset>
+    <legend id="d_api">接口</legend>
+    <div class="content">
+	<h3>配置参数</h3>
+    <ul class="api">
+      <li><strong>content</strong>: {消息内容,支持HTML}</li>
+      <li><strong>title</strong>: {标题.默认:'提示'}</li>
+      <li><strong>lock</strong>: {是否锁定屏幕. 默认:false}</li>
+      <li><strong>width</strong>: {宽度,支持em等单位. 默认:'auto'}</li>
+      <li><strong>height</strong>: {高度,支持em等单位. 默认:'auto'}</li>
+      <li><strong>url</strong>: {iframe地址,存在content参数时候,此参数无效}</li>
+      <li><strong>left</strong>: {x坐标,可以使用关键字,如:left/right/center. 默认:'center'}</li>
+      <li><strong>top</strong>: {y坐标,可以使用关键字,如:top/bottom/center. 默认:'center'(并非绝对垂直居中，而是使用的黄金比例)}</li>
+      <li><strong>fixed</strong>: {是否启用静止定位. 默认:false}</li>
+      <li><strong>time</strong>: {多少秒自动关闭}</li>
+      <li><strong>style</strong>: {对话框风格扩展参数,写入自定义className,详情见皮肤css文件的定义,多个用空格隔开}</li>
+      <li><strong>yesText</strong>: {确定按钮文本. 默认:'确定'}</li>
+      <li><strong>noText</strong>: {取消按钮文本. 默认:'取消'}</li>
+      <li><strong>id</strong>: {给对话框定义id,对话框未关闭就不再会有同名对话框弹出. 例如定义id为'my2'，则内容容器id为'my2Content'}</li>
+      <li><strong>parent</strong>: {是否在父页面弹出, 适用于框架页面, 如果父页面不存在则默认本页. 默认:false}</li>
+    </ul>
+    <h3>形式</h3>
+    <p>webDialog({ 配置参数 }, function(){ 确定按钮回调函数 }, function(){ 取消按钮回调函数 }, function(){ 对话框关闭后的回调函数 }) 如:</p>
+<pre><code>webDialog(
+        {	
+            content:'欢迎你用爱彩弹出插件！',
+            lock:true,
+            style:'succeed noClose'
+        },
+        function(){
+            alert('好用');
+        },
+        function(){
+            alert('不好用');
+        }
+);</code></pre>
+    <p>(注：确定与取消按钮的回调函数可以不指定，但执行回调函数完成后会关闭对话框，你可以让回调函数返回false阻止其关闭)</p>
+    <div class="runCode">
+    	<pre><textarea rows="3" id="runCode">webDialog({content:'hello world!'})</textarea></pre>
+    	
+    </div>
+    </div>
+  </fieldset>
+<fieldset>
+    <legend id="d_demo">应用</legend>
+    <div class="content">
+    <ul>
+      <li>
+        <button id="web_btn1">图片</button>
+      </li>
+      <li>
+        <button id="web_btn2">外部页面</button>
+      </li>
+      <li>
+        <button id="web_btn3">动画</button>
+      </li>
+      <li>
+        <button id="web_btn4">询问</button>
+      </li>
+      <li>
+        <button id="web_btn5">警告</button>
+      </li>
+      <li>
+        <button id="web_btn6">弹出菜单</button>
+      </li>
+      <li>
+        <button id="web_btn7">公告消息</button>
+      </li>
+    </ul>
+    </div>
+  </fieldset>
+
+</body>
+</html>

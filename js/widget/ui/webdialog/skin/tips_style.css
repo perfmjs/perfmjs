@@ -1,0 +1,41 @@
+@charset "utf-8";
+/* CSS Document */
+.clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+.clearfix { display:inline-block; }
+/* Hides from IE-mac \*/
+* html .clearfix { height:1%; }
+.clearfix { display:block; }
+/* End hide from IE-mac */
+.txt_center { text-align:center;}
+.font16 { font-size:16px;}
+.font14 { font-size:14px;}
+
+.yebz_box { width:376px; height:145px; line-height:22px;}
+.qrgm_box { width:376px; height:125px; line-height:22px;}
+.qrgm_box_366 { width:366px; height:145px; line-height:22px;}
+.p_lft { float:left; position:relative; left:50%;}
+.m_rt { position:relative; left:-50%; padding:15px 0;}
+
+.c_a { border-bottom:1px solid #e6eff7; height:101px; overflow:hidden;}
+.c_c { border-bottom:1px solid #e6eff7; height:81px; overflow:hidden;}
+.c_d { border-bottom:1px solid #e6eff7; height:101px; overflow:hidden;}
+.c_b { border-top:1px solid #fff; background:#f5faff; height:28px; overflow:hidden; padding:7px 0; line-height:28px; text-align:center; position:relative;}
+.wc_ref { font-family:"宋体"; position:absolute; right:20px;}
+.wc_ref a { text-decoration:underline!important;}
+
+.h3_tips { color:#666; font-size:14px; white-space:nowrap;}
+.s_icon { position:relative;}
+.xx_icon { position:absolute; left:0; top:50%; margin-top:-18px; width:31px; height:31px; background:url(${replace_img_2caipiao}/images/pages/activity/vip/pub_icons.png) 0 0 no-repeat;}
+.xx_s { margin-left:40px;}
+/* Webdialog */
+.noBottom .ui_bottom_wrap { display:none;}
+
+
+
+
+
+
+
+
+
+

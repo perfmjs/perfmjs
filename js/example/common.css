@@ -1,0 +1,65 @@
+/**
+ * common.css
+ * @author  Edgar <mail@edgarhoo.net>
+ * @version 201000806
+ */
+/** 浮动相关 **/
+.fd-left{
+    float:left;
+}
+.fd-right{
+    float:right;
+}
+.fd-clear{
+    clear:both;
+}
+.fd-clr{
+    zoom:1;
+}
+.fd-clr:after{
+    display:block;
+    clear:both;
+    height:0;
+    content:"\0020";
+}
+/** 显示相关 **/
+.fd-hide{
+    display:none;
+}
+.fd-show{
+    display:block;
+}
+.fd-inline{
+    display:inline;
+}
+.fd-lump{
+	display:inline-block; 
+	display:-moz-inline-stack;
+	zoom:1; 
+	*display:inline;
+}
+/** 对象相关 **/
+.fd-visible{
+    visibility:visible;
+}
+.fd-hidden{
+    visibility:hidden;
+}
+/** 定位相关 **/
+.fd-locate{
+    position:relative;
+}
+/**
+ * 人民币符号
+ * 使用方法：<span class="fd-cny">&yen;</span>
+ */
+.fd-cny{
+    font-family:Helvetica,Arial;
+}
+/** 文字相关 **/
+.fd-gray{
+    color:#666;
+}
+.fd-bold{
+    font-weight:700;
+}

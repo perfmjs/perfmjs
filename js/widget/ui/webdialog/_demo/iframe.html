@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>iframe demo</title>
+<link href="../skin/aero/aero.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../artDialog.js"></script>
+<script>
+//try{webDialog = window.top.webDialog}catch(e){}//设置本页所有的对话框都在父窗口弹出
+</script>
+<style>
+html, body { background:#F7F7F7; overflow:hidden; }
+</style>
+<link href="demo.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<a href="#" onclick="webAlert({title:'越狱专家', content:'我是从子页面中弹出来的', parent:true}); return false">穿越框架</a> | <a href="#" onclick="webAlert({title:'关禁闭', content:'本页弹出'}); return false">本页弹出</a> <em class="tip">本页是一个嵌入式框架页面</em>
+</body>
+</html>
