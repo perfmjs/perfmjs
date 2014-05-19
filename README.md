@@ -23,7 +23,7 @@ fast by default;高效，易用，易读
 支持的浏览器包括：ie6+, firefox, chrome, safari, etc
 
 可选功能：
-
+=======
 jQuery是该框架的可选部分，dom操作,ajax,css等功能可以使用jQuery框架提供
 
 TODO:
