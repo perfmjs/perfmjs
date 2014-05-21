@@ -352,8 +352,8 @@
                     //可修改传入参数
                     args = before.apply(this, arguments);
                     //如果返回false, 则停止执行
-                    if ((typeof args != 'undefined') && args == false) {
-                        return false;
+                    if (typeof args !== 'undefined') {
+                        return args;
                     }
                 }
                 //如果before返回一个数组，则用来替换原有参数
@@ -363,17 +363,17 @@
                 if (after && typeof after === 'function') {
                     Array.prototype.unshift.call(args, result);
                     //可修改返回结果
-                    result = after.apply(this, args) || result;
+                    result = after.apply(origObj, args) || result;
                 }
                 return result;
             };
-            for(var i in orig){
-                if(orig.hasOwnProperty(i)){
-                    aopFunc[i] = orig[i];
-                }
-            }
-            aopFunc.origFunc = orig;
-            aopFunc.prototype = orig.prototype;
+//            for(var i in orig) {
+//                if(orig.hasOwnProperty(i)){
+//                    aopFunc[i] = orig[i];
+//                }
+//            }
+//            aopFunc.origFunc = orig;
+            //aopFunc.prototype = orig.prototype;
             return aopFunc;
         },
     	end: 0
