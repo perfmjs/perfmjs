@@ -1,6 +1,6 @@
 ﻿/**
- * perfmjs－高性能javascript
- * @date 2012-12-01
+ * perfmjs－高性能javascript v1.1.1
+ * @date 2014-05-19
  */
 !(function() {
     /**
@@ -395,11 +395,10 @@
         }
     };
 })();perfmjs.plugin('sysconfig', function($$) {
-	$$.sysconfig.events = {
-		lazyLoad: 'perfmjs/lazyload',
-		moduleIsReady: 'perfmjs.ready',
-		end:0
-	};
+    $$.sysconfig.events = {
+        moduleIsReady: 'perfmjs.ready',
+        end:0
+    };
 });/**
  * Browser detect: http://www.quirksmode.org/js/detect.html
  * A useful but often overrated JavaScript function is the browser detect. 
@@ -523,9 +522,9 @@ perfmjs.plugin('browser', function($$) {
 !(function($$) {
 	$$ = $$ || window;
 	/**
-	 * 子类继承父类的例子,调用如：new perfmjs.xxx() 或 new $$.xxx() 或perfmjs.xxx.newInstance(arg) 或用perfmjs.xxx.instance访问实例;
+	 * 子类继承父类的例子,调用如：xxx.newInstance(arg) 或 new perfmjs.xxx() 或 new $$.xxx() 或perfmjs.xxx.newInstance(arg) 或用perfmjs.xxx.instance访问实例;
 	第一级子类例子：
-	!(function($$) {
+    perfmjs.plugin('xxx', function($$) {
 		$$.base("base.xxx", {
 			init: function(arg) {
 				return this;
@@ -536,9 +535,9 @@ perfmjs.plugin('browser', function($$) {
 			scope: 'singleton',
 			end: 0
 		};
-	})(perfmjs);
-	多级子类例子：
-	!(function($$) {
+	});
+   多级子类例子：
+   perfmjs.plugin('xxx', function($$) {
 		$$.base("base.xxx.yyy", {
 			init: function(arg) {
 				return this;
@@ -549,7 +548,7 @@ perfmjs.plugin('browser', function($$) {
 			scope: 'singleton',
 			end: 0
 		};
-	})(perfmjs);
+	});
 	 * @param name e.g. 'base.ssq'
 	 */
 	$$.base = function(name, prototype, parentPrototype, parentDefaults) {
@@ -628,11 +627,11 @@ perfmjs.plugin('browser', function($$) {
 	 *  window.dmtrack 此变量只有online模式才存在，因此可以用于区分debug/online
 	 *  注意拷贝线上html源码时请将不需要的相关代码删除。
 	 */
-	DEBUG_MOD = (typeof window.dmtrack === "undefined") ? false : true;
+	DEBUG_MOD = false;
 	perfmjs.logger=function(){};
 	perfmjs.logger.level=4; 	//default level
 	//perfmjs.logger.errorUri="http://search.china.alibaba.com/rpc/dragoontrack/logError.json?msg="; 	//dragoon url
-	perfmjs.logger.errorUri="http://s.no100.com/rpc/dragoontrack/logError.json?msg="; 	//dragoon url
+	//perfmjs.logger.errorUri="http://s.no100.com/rpc/dragoontrack/logError.json?msg="; 	//dragoon url
 	perfmjs.logger.setLevel=function(level){//set logger level to filter the logger , so just show the logger level you focus.
 		perfmjs.logger.level=level;
 	};
@@ -722,12 +721,12 @@ perfmjs.plugin('browser', function($$) {
 					} 
 				}
 			}
-			//online模式下需要报警
-			if(!DEBUG_MOD){
-				if(level == 0 || level == 1){
-					(new Image()).src = perfmjs.logger.errorUri + this._getBrowserInfo() + msg;
-				}
-			}
+//			//online模式下需要报警
+//			if(!DEBUG_MOD){
+//				if(level == 0 || level == 1){
+//					(new Image()).src = perfmjs.logger.errorUri + this._getBrowserInfo() + msg;
+//				}
+//			}
 		},
 		_log: function(level, msg) {
 			if (this.enabled(level)) {
@@ -2332,18 +2331,6 @@ perfmjs.plugin('app', function($$) {
 //			}
 			return instance;
 		},
-		
-		/**
-		 * 延迟加载|初始化的模块加载成功后也会被注册到app统一管理
-		 */
-		_lazyStart:function(moduleId, creator){	
-			if (this.moduleData[moduleId] == null) {
-				if(this.register(moduleId, creator)){
-					return this.start(moduleId);
-				}
-			}
-			return false;
-		},
 
 		/**
 		 * 将字符串转化为函数
@@ -2367,13 +2354,6 @@ perfmjs.plugin('app', function($$) {
 		end:0
 	}, $$.base.prototype, $$.base.defaults);
 	$$.base.app.defaults = {
-		//server端的数据通过这个属性埋入到模块对应dom节点中，框架会负责取出节点中数据并传给模块的this.options['data']变量。
-		dataField: 'data-conf',
-		//例如：<div data-conf='{"name":"title","url":"http://www.baidu.com/offer/json/validate.htm"}'/></div>										
-		combineField: 'combine-conf',	//在延迟加载模块中，有时页面上的一个功能模块有不同的展现方式，要加载不同的js、css文件，server端通过埋入节点这个
-		//属性来告知前端应该加载的资源文件的组合。框架会负责处理这个属性的获取。	
-		//bigRender的优化方式，请参考：http://lifesinger.wordpress.com/2011/09/23/bigrender-for-taobao-item/
-		scriptField: 'script-conf',
 		scope: 'singleton',
 		end: 0
 	};

@@ -5,9 +5,9 @@
 !(function($$) {
 	$$ = $$ || window;
 	/**
-	 * 子类继承父类的例子,调用如：new perfmjs.xxx() 或 new $$.xxx() 或perfmjs.xxx.newInstance(arg) 或用perfmjs.xxx.instance访问实例;
+	 * 子类继承父类的例子,调用如：xxx.newInstance(arg) 或 new perfmjs.xxx() 或 new $$.xxx() 或perfmjs.xxx.newInstance(arg) 或用perfmjs.xxx.instance访问实例;
 	第一级子类例子：
-	!(function($$) {
+    perfmjs.plugin('xxx', function($$) {
 		$$.base("base.xxx", {
 			init: function(arg) {
 				return this;
@@ -18,9 +18,9 @@
 			scope: 'singleton',
 			end: 0
 		};
-	})(perfmjs);
-	多级子类例子：
-	!(function($$) {
+	});
+   多级子类例子：
+   perfmjs.plugin('xxx', function($$) {
 		$$.base("base.xxx.yyy", {
 			init: function(arg) {
 				return this;
@@ -31,7 +31,7 @@
 			scope: 'singleton',
 			end: 0
 		};
-	})(perfmjs);
+	});
 	 * @param name e.g. 'base.ssq'
 	 */
 	$$.base = function(name, prototype, parentPrototype, parentDefaults) {

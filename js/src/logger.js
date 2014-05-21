@@ -13,11 +13,11 @@
 	 *  window.dmtrack 此变量只有online模式才存在，因此可以用于区分debug/online
 	 *  注意拷贝线上html源码时请将不需要的相关代码删除。
 	 */
-	DEBUG_MOD = (typeof window.dmtrack === "undefined") ? false : true;
+	DEBUG_MOD = false;
 	perfmjs.logger=function(){};
 	perfmjs.logger.level=4; 	//default level
 	//perfmjs.logger.errorUri="http://search.china.alibaba.com/rpc/dragoontrack/logError.json?msg="; 	//dragoon url
-	perfmjs.logger.errorUri="http://s.no100.com/rpc/dragoontrack/logError.json?msg="; 	//dragoon url
+	//perfmjs.logger.errorUri="http://s.no100.com/rpc/dragoontrack/logError.json?msg="; 	//dragoon url
 	perfmjs.logger.setLevel=function(level){//set logger level to filter the logger , so just show the logger level you focus.
 		perfmjs.logger.level=level;
 	};
@@ -107,12 +107,12 @@
 					} 
 				}
 			}
-			//online模式下需要报警
-			if(!DEBUG_MOD){
-				if(level == 0 || level == 1){
-					(new Image()).src = perfmjs.logger.errorUri + this._getBrowserInfo() + msg;
-				}
-			}
+//			//online模式下需要报警
+//			if(!DEBUG_MOD){
+//				if(level == 0 || level == 1){
+//					(new Image()).src = perfmjs.logger.errorUri + this._getBrowserInfo() + msg;
+//				}
+//			}
 		},
 		_log: function(level, msg) {
 			if (this.enabled(level)) {

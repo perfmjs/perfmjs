@@ -31,10 +31,25 @@
 		<br/><br/>
         <input id="eventproxyBtn" type="button" value="模块间交互(需加载jQuery框架)"/>
 		<input id="eventproxyBtnxx" type="button" value="模块间交互xx(不需加载jQuery框架)" onclick="perfmjs.eventproxy.instance.emit(perfmjs.appconfig.events.heartbeat, {msg:'模块间交互xx'});" />
-        <input id="jq_try_btn" type="button" value="测试jquery功能(需加载jQuery框架)"/>
+        <input id="jq_try_btn" type="button" value="测试jquery功能(需预先加载jQuery框架)"/>
+        <input id="jq_load_jquery" type="button" value="加载jQuery框架" onclick="javascript:loadJQuery();"/>
         <div class="placehoder"> I am just a placehoder.</div>
     </div>
     <script type="text/javascript">
+     var loadJQuery = function() {
+         perfmjs.includeres.load({src:"{n:'load-jquery-js',t:'js',m:'jquery;'}"}
+         ).loadModules({name:'load-jquery-js', type:'js', mdCallback:function(source, module, combineUrls) {
+             if (module === 'jquery') {
+                 combineUrls[combineUrls.length] = '/perfmjs/js/src/jquery/jquery-1.11.1.min.js';
+             }
+         }, afterLoadedCallback:function() {
+             alert("已成功加载jQuery框架");
+             $('#eventproxyBtn').unbind();
+             $('#eventproxyBtn').bind('click', function () {
+                 perfmjs.eventproxy.instance.emit(perfmjs.appconfig.events.heartbeat, {msg: "send from index.html"});
+             });
+         }});
+     };
     //第1种加载res方法为加载core.js，如：/perfmjs/build/core.js?v=2012120303^{n:'css-comm',f:'/perfmjs/js/include-css.js',t:'css',m:'fb;common;',d:'http://192.168.66.150:63342'}|{n:'js-comm',f:'/perfmjs/js/include-js.js',t:'js',m:'jq;ajax;form;app;',d:'http://192.168.66.150:63342'}
     //第2种res加载方法如下：
     perfmjs.includeres.loadHeadRes("/perfmjs/js/src/onlyforload.js", function() {

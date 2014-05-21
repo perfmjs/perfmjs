@@ -10,10 +10,12 @@ perfmjs.plugin('module1', function($$) {
 		//模块开发时请使用相同的函数名称，便于团队合作开发。
 		_bindEvent: function() {
 			var _self = this;
-			var data = {msg: "send from Module1"};
-            $('#eventproxyBtn').bind('click', function() {
-				_self.eventproxy.emit($$.appconfig.events.heartbeat, data);
-			});
+            if ($$.utils.isJQueryLoaded()) {
+                $('#eventproxyBtn').unbind();
+                $('#eventproxyBtn').bind('click', function () {
+                    _self.eventproxy.emit($$.appconfig.events.heartbeat, {msg: "send from Module1"});
+                });
+            }
 		},
 		
 		_fetchdata: function(){

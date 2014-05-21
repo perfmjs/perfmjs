@@ -1,7 +1,6 @@
 perfmjs.plugin('sysconfig', function($$) {
-	$$.sysconfig.events = {
-		lazyLoad: 'perfmjs/lazyload',
-		moduleIsReady: 'perfmjs.ready',
-		end:0
-	};
+    $$.sysconfig.events = {
+        moduleIsReady: 'perfmjs.ready',
+        end:0
+    };
 });

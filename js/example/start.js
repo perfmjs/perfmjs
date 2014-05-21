@@ -21,7 +21,7 @@ perfmjs.plugin('start', function($$) {
 		* 所有的普通模块的注册及初始化操作定义在此函数中。
 		* 默认情况下，普通模块注册时并不会自动初始化。若想改变默认值，则config中添加{init:true}参数
 		*/
-		firstViewModuleInit:function(){
+		firstViewModuleInit:function() {
 			$$.app.instance.register("module1", $$.module1);
 			$$.app.instance.register("module2", $$.module2, {callback:function(){
 				//alert('started base.module2');
@@ -37,6 +37,7 @@ perfmjs.plugin('start', function($$) {
                 alert('如果想使用jQuery框架的功能，请加载jquery模块!');
                 return;
             }
+            $('#jq_try_btn').unbind();
             $('#jq_try_btn').bind('click', function() {
                 alert('jQuery is loaded, clicked me!');
             });

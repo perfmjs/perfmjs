@@ -205,18 +205,6 @@ perfmjs.plugin('app', function($$) {
 //			}
 			return instance;
 		},
-		
-		/**
-		 * 延迟加载|初始化的模块加载成功后也会被注册到app统一管理
-		 */
-		_lazyStart:function(moduleId, creator){	
-			if (this.moduleData[moduleId] == null) {
-				if(this.register(moduleId, creator)){
-					return this.start(moduleId);
-				}
-			}
-			return false;
-		},
 
 		/**
 		 * 将字符串转化为函数
@@ -240,13 +228,6 @@ perfmjs.plugin('app', function($$) {
 		end:0
 	}, $$.base.prototype, $$.base.defaults);
 	$$.base.app.defaults = {
-		//server端的数据通过这个属性埋入到模块对应dom节点中，框架会负责取出节点中数据并传给模块的this.options['data']变量。
-		dataField: 'data-conf',
-		//例如：<div data-conf='{"name":"title","url":"http://www.baidu.com/offer/json/validate.htm"}'/></div>										
-		combineField: 'combine-conf',	//在延迟加载模块中，有时页面上的一个功能模块有不同的展现方式，要加载不同的js、css文件，server端通过埋入节点这个
-		//属性来告知前端应该加载的资源文件的组合。框架会负责处理这个属性的获取。	
-		//bigRender的优化方式，请参考：http://lifesinger.wordpress.com/2011/09/23/bigrender-for-taobao-item/
-		scriptField: 'script-conf',
 		scope: 'singleton',
 		end: 0
 	};
