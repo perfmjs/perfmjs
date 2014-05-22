@@ -2,6 +2,10 @@ perfmjs
 =======
 high performance javascript framework  V1.1.1
 
+为什么使用perfmjs?　
+=======
+面对复杂的WEB前端业务开发，有了这个“外壳”框架，开发人员就可以立马编写业务上的javascript代码了！
+
 Features:
 =======
 fast by default;高效，易用，易读
