@@ -22,21 +22,17 @@ fast by default;高效，易用，易读
 
 支持的浏览器包括：ie6+, firefox, chrome, safari, etc
 
+Nodejs版的perfmjs框架请移步：https://github.com/perfmjs/perfmjs-node
+
 可选功能：
 =======
 jQuery是该框架的可选部分，dom操作,ajax,css等功能可以使用jQuery框架提供
 
 TODO:
 =======
-全面实现Common.js规范
-
 增加资源文件自已更新缓存的功能（不需使用版本号）
 
-完善更多插件开发，如widget,css等
-
 支持Html5,支持移动Mobile
-
-支持Node.js开发规范
 
 支持lazyload,bigRender等高效功能（可选功能，默认不开启）
 
