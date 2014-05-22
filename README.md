@@ -16,7 +16,7 @@ fast by default;高效，易用，易读
 
 更高效的插件开发机制
 
-更高效的js和css资源加载功能(有参考head.js的实现)
+更高效的js和css资源加载功能(底层功能由head.js提供)
 
 更高效的js和css资源文件版本号管理功能
 
@@ -30,7 +30,7 @@ Nodejs版的perfmjs框架请移步：https://github.com/perfmjs/perfmjs-node
 
 可选功能：
 =======
-jQuery是该框架的可选部分，dom操作,ajax,css等功能可以使用jQuery框架提供,在这些功能上不重复发明轮子！
+jQuery是该框架的可选部分。dom操作,ajax,css等功能可以使用jQuery框架提供，perfmjs框架在这些功能上不重复发明轮子！
 
 TODO:
 =======
