@@ -12,7 +12,7 @@ perfmjs.plugin('unit.ssqopera', function($$) {
             this['doBuy']();
         },
         'doBuy': function() {
-            $.lottevent.instance.buy(888);
+            $$.lottevent.instance.buy(888);
         }
     });
     $$.base.ssqopera.defaults = {

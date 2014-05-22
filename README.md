@@ -4,7 +4,7 @@ high performance javascript framework  V1.1.1
 
 为什么使用perfmjs?　
 =======
-面对复杂的WEB前端业务开发，有了这个“外壳”框架，开发人员就可以立马编写业务上的javascript代码了！
+面对复杂的WEB前端业务开发，有了这个“外壳”框架，开发人员就可以立即高效地编写业务上的javascript 代码了！
 
 Features:
 =======
@@ -30,7 +30,7 @@ Nodejs版的perfmjs框架请移步：https://github.com/perfmjs/perfmjs-node
 
 可选功能：
 =======
-jQuery是该框架的可选部分，dom操作,ajax,css等功能可以使用jQuery框架提供
+jQuery是该框架的可选部分，dom操作,ajax,css等功能可以使用jQuery框架提供,在这些功能上不重复发明轮子！
 
 TODO:
 =======

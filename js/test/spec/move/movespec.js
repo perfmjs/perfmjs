@@ -21,8 +21,9 @@ describe("core核心", function() {
     });
     it("aop功能应该可以正常运行", function() {
         perfmjs.ready(document, function() {
-            var aop = perfmjs.utils.aop(this, perfmjs.model.plan.multiple, function(){return 2}, function(){return 3})();
-            expect(aop).toEqual(3);
+            var aop = perfmjs.utils.aop(this, perfmjs.model.plan.multiple, function(){return 2}, function(){return 3});
+            perfmjs.model.plan.multiple = aop;
+            expect(perfmjs.model.plan.multiple()).toEqual(2);
         });
     });
     it("opera功能应该可以正常运行", function() {
@@ -32,7 +33,7 @@ describe("core核心", function() {
             perfmjs.app.instance.register('lottevent', perfmjs.lottevent);
             perfmjs.app.instance.startAll();
             perfmjs.ssqopera.newInstance();
-            expect(perfmjs.model.plan.multiple()).toEqual(888);
+            expect(perfmjs.model.plan.multiple()).toEqual(2);
         });
     });
     it("fsm功能应该可以正常运行", function() {

@@ -8,7 +8,7 @@
 	perfmjs.includeres.loadModules({name:'js-comm', type:'js', mdCallback:function(source, module, combineUrls) {
 		//按模块加载资源文件
 		if (module === 'jq') {
-			//combineUrls[combineUrls.length] = '/perfmjs/js/src/jquery/jquery-1.11.1.min.js';
+			combineUrls[combineUrls.length] = '/perfmjs/js/src/jquery/jquery-1.11.1.min.js';
 		} else if (module === 'ajax') {
             combineUrls[combineUrls.length] = '/perfmjs/js/widget/ajax/ajaxcall.js';
         } else if (module === 'webdialog') {

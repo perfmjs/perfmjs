@@ -7,7 +7,7 @@ perfmjs.plugin('unit.lottevent', function($$) {
         init: function (sb) {
             var self = this;
             sb.on('lottevent/heartbeat', function (data) {
-                $.model.plan.multiple(data.multiple);
+                $$.model.plan.multiple(data.multiple);
             });
             return this;
         },
