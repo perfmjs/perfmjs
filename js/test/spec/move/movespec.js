@@ -42,6 +42,58 @@ describe("core核心", function() {
             expect(perfmjs.ssqfsm.instance.current()).toEqual('dantuo');
         });
     });
+
+    it("使用setTimeout错误场景应该可以正常运行", function() {
+        var getTryObj = function(callback) {
+            callback();
+            return {
+                try: function() {console.log("settimeout running try1....");}
+            };
+        };
+        try {
+            var tryObj = getTryObj(function () {
+                tryObj.try();
+            });
+        } catch (e) {
+            console.log("error happened!-" + e);
+        }
+        expect(1).toEqual(1);
+    });
+
+    it("使用setTimeout最佳场景应该可以正常运行", function() {
+        var getTryObj = function(callback) {
+            callback();
+            return {
+                try: function() {console.log("settimeout running try2....");}
+            };
+        };
+        try {
+            var tryObj = getTryObj(function () {
+                setTimeout(function(){tryObj.try();}, 0);
+            });
+        } catch (e) {
+            console.log("error happened!-" + e);
+        }
+        expect(1).toEqual(1);
+    });
+
+    it("setTimeout功能应该可以正常运行", function() {
+        var result = 0, sum = 0, testSetTimeout = function () {
+            for (var k = 1; k <= 3; k++) {
+                setTimeout(function () {
+                    result += k;
+                    console.log("setTimeout result=" + result);
+                }, 0);
+            }
+        };
+        testSetTimeout();
+        for (var j = 1; j < 999999; j++) {
+            sum += j;
+        }
+        result = 1000;
+        expect(result).toEqual(1000);
+    });
+
     it("ajax功能应该可以正常运行", function() {
         beforeEach(function() {
             jasmine.Ajax.install();

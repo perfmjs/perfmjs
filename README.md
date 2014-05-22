@@ -8,7 +8,7 @@ high performance javascript framework  V1.1.1
 
 Features:
 =======
-fast by default;高效，易用，易读
+fast by default：高效，易用，易读
 
 核心库(core.js)压缩后只有32k+，还可以优化至更小
 
@@ -24,7 +24,7 @@ fast by default;高效，易用，易读
 
 可测试性，通过了jasmine库的测试
 
-支持的浏览器包括：ie6+, firefox, chrome, safari, etc
+支持所有的主流浏览器，包括：ie6+, firefox, chrome, safari, etc
 
 Nodejs版的perfmjs框架请移步：https://github.com/perfmjs/perfmjs-node
 
