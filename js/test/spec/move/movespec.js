@@ -43,7 +43,7 @@ describe("core核心", function() {
         });
     });
 
-    it("使用setTimeout错误场景应该可以正常运行", function() {
+    it("没使用setTimeout的错误场景应该可以正常运行", function() {
         var getTryObj = function(callback) {
             callback();
             return {
@@ -60,20 +60,16 @@ describe("core核心", function() {
         expect(1).toEqual(1);
     });
 
-    it("使用setTimeout最佳场景应该可以正常运行", function() {
+    it("使用setTimeout的最佳场景应该可以正常运行", function() {
         var getTryObj = function(callback) {
             callback();
             return {
                 try: function() {console.log("settimeout running try2....");}
             };
         };
-        try {
-            var tryObj = getTryObj(function () {
-                setTimeout(function(){tryObj.try();}, 0);
-            });
-        } catch (e) {
-            console.log("error happened!-" + e);
-        }
+        var tryObj = getTryObj(function () {
+            setTimeout(function(){tryObj.try();}, 0);
+        });
         expect(1).toEqual(1);
     });
 
