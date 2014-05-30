@@ -1,7 +1,7 @@
 perfmjs.plugin('module1', function($$) {
 	$$.base("base.module1", {
-		init: function(event) {
-			this.eventproxy = event;
+		init: function(eventproxy) {
+            this.options['eventproxy'] = eventproxy;
 			this._bindEvent();
 			return this;
 		},
@@ -9,11 +9,11 @@ perfmjs.plugin('module1', function($$) {
 		//简易的MVC分层模式，以下三个函数分别对应controller、modal、view层。
 		//模块开发时请使用相同的函数名称，便于团队合作开发。
 		_bindEvent: function() {
-			var _self = this;
+			var self = this;
             if ($$.utils.isJQueryLoaded()) {
                 $('#eventproxyBtn').unbind();
                 $('#eventproxyBtn').bind('click', function () {
-                    _self.eventproxy.emit($$.appconfig.events.heartbeat, {msg: "send from Module1"});
+                    self.options['eventproxy'].emit($$.appconfig.events.heartbeat, {msg: "send from Module1"});
                 });
             }
 		},
@@ -45,6 +45,7 @@ perfmjs.plugin('module1', function($$) {
 		end: 0
 	});
 	$$.base.module1.defaults = {
+        eventproxy: {},
 		scope: 'singleton',
 		end: 0
 	};

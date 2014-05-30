@@ -1,10 +1,10 @@
 perfmjs.plugin('module3', function($$) {
 	$$.base("base.module3", {
-		init: function(event) {
-			this.eventproxy = event;
+		init: function(eventproxy) {
+            this.options['eventproxy'] = eventproxy;
 			this.createHTML();
-			this.eventproxy.on($$.appconfig.events.heartbeat, this.create);
-			this.eventproxy.on($$.sysconfig.events.moduleIsReady, function() {$$.logger.debug("module3 is ready!");});
+            this.options['eventproxy'].on($$.appconfig.events.heartbeat, this.create);
+            this.options['eventproxy'].on($$.sysconfig.events.moduleIsReady, function() {$$.logger.debug("module3 is ready!");});
 			return this;
 		},
 		create: function(data) {
@@ -16,6 +16,7 @@ perfmjs.plugin('module3', function($$) {
 		end:0
 	});
 	$$.base.module3.defaults = {
+        eventproxy: {},
 		scope: 'singleton',
 		end: 0
 	};

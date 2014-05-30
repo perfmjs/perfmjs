@@ -24,7 +24,7 @@ fast by default：高效，易用，易读
 
 可测试性，通过了jasmine库的测试
 
-支持所有的主流浏览器，包括：ie6+, firefox, chrome, safari, etc
+支持所有的主流浏览器，包括：ie5.5+, firefox, chrome, safari, etc
 
 Nodejs版的perfmjs框架请移步：https://github.com/perfmjs/perfmjs-node
 
