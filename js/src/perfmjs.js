@@ -344,10 +344,10 @@
     		}
     		return obj;
     	},
-        aop: function(origObj, orig, before, after) {
+        aop: function(context, orig, before, after) {
             var _self = this, aopFunc = function() {
                 var args, result;
-                origObj = origObj || this;
+                context = context || this;
                 if (before && typeof before === 'function') {
                     //可修改传入参数
                     args = before.apply(this, arguments);
@@ -359,11 +359,11 @@
                 //如果before返回一个数组，则用来替换原有参数
                 args = _self.isArray(args) ? args : arguments;
                 //调用原对象的原方法
-                result = orig.apply(origObj, args);
+                result = orig.apply(context, args);
                 if (after && typeof after === 'function') {
                     Array.prototype.unshift.call(args, result);
                     //可修改返回结果
-                    result = after.apply(origObj, args) || result;
+                    result = after.apply(context, args) || result;
                 }
                 return result;
             };
@@ -401,7 +401,7 @@
     perfmjs.ready(function($$, app) {
         //注册启动业务对象实例
         app.register("module1", $$.module1);
-        app.register("module2", $$.module2, {callback:function(){
+        app.register("module2", $$.module2, {callback:function() {
             //alert('started base.module2');
         }});
         app.register("module3", $$.module3);
