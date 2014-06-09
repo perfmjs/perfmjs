@@ -97,16 +97,15 @@ perfmjs.plugin('app', function($$) {
 		* @method: startAll 初始化所有已注册模块
 		*/		
 		startAll: function(){
-			var moduleId, _results;
-			_results = [];
+			var moduleId, results = [];
 			for (moduleId in this.moduleData){
 				if (this.moduleData.hasOwnProperty(moduleId)){
-					_results.push(this.start(moduleId));
+                    results.push(this.start(moduleId));
 				}
 			}
 			//通知所有的模块以及初始化完毕，有需要监听此事件的模块可以处理callback函数。
 			this.eventproxy.emit($$.sysconfig.events.moduleIsReady);
-			return _results;		
+			return results;
 		},
 		
 		/**

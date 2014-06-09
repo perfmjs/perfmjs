@@ -394,6 +394,28 @@
             perfmjs.plugins[meta](perfmjs);
         }
     };
+    /**
+     *
+     * 负责所有模块的注册及应用程序的初始化入口,调用例子如下:
+    //应用入口函数
+    perfmjs.ready(function($$, app) {
+        //注册启动业务对象实例
+        app.register("module1", $$.module1);
+        app.register("module2", $$.module2, {callback:function(){
+            //alert('started base.module2');
+        }});
+        app.register("module3", $$.module3);
+        app.startAll();
+    });
+     * @param callback
+     */
+    perfmjs.ready = function(callback) {
+        if (perfmjs.utils.isFunction(callback)) {
+            perfmjs.loadres.ready(document, function () {
+                callback(perfmjs, perfmjs.app.newInstance());
+            });
+        }
+    };
 })();perfmjs.plugin('sysconfig', function($$) {
     $$.sysconfig.events = {
         moduleIsReady: 'perfmjs.ready',
@@ -1705,7 +1727,6 @@ alert(perfmjs.json.toJSON(sample2.toArray()));*////#source 1 1 /src/1.0.0/load.j
 
     /*for perfmjs begin*/
     perfmjs.loadres = api;
-    perfmjs.ready = perfmjs.loadres.ready;
     /*for perfmjs end*/
 }(window);
 /**
@@ -1742,7 +1763,10 @@ alert(perfmjs.json.toJSON(sample2.toArray()));*////#source 1 1 /src/1.0.0/load.j
 				document.write('<link type="text/css" rel="stylesheet" href="' + link + '" />');
 			}
 		},
-        //利用head.load.js类库加载资源文件
+        /**
+         * 利用head.load.js类库加载资源文件
+         * 调用例子: perfmjs.includeres.loadHeadRes("http://domain.com/file.js","http://domain.com/file.js", callBack)
+         */
         loadHeadRes: function() {
             var args = arguments, _args = [];
             for (var i = 0; i < args.length; i++) {
@@ -2223,16 +2247,15 @@ perfmjs.plugin('app', function($$) {
 		* @method: startAll 初始化所有已注册模块
 		*/		
 		startAll: function(){
-			var moduleId, _results;
-			_results = [];
+			var moduleId, results = [];
 			for (moduleId in this.moduleData){
 				if (this.moduleData.hasOwnProperty(moduleId)){
-					_results.push(this.start(moduleId));
+                    results.push(this.start(moduleId));
 				}
 			}
 			//通知所有的模块以及初始化完毕，有需要监听此事件的模块可以处理callback函数。
 			this.eventproxy.emit($$.sysconfig.events.moduleIsReady);
-			return _results;		
+			return results;
 		},
 		
 		/**

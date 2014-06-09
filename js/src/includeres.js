@@ -32,7 +32,10 @@
 				document.write('<link type="text/css" rel="stylesheet" href="' + link + '" />');
 			}
 		},
-        //利用head.load.js类库加载资源文件
+        /**
+         * 利用head.load.js类库加载资源文件
+         * 调用例子: perfmjs.includeres.loadHeadRes("http://domain.com/file.js","http://domain.com/file.js", callBack)
+         */
         loadHeadRes: function() {
             var args = arguments, _args = [];
             for (var i = 0; i < args.length; i++) {

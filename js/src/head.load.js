@@ -708,6 +708,5 @@
 
     /*for perfmjs begin*/
     perfmjs.loadres = api;
-    perfmjs.ready = perfmjs.loadres.ready;
     /*for perfmjs end*/
 }(window);
