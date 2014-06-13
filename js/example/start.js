@@ -1,4 +1,6 @@
-//应用入口函数
+/**
+ * 应用入口函数
+ */
 perfmjs.ready(function($$, app) {
     //注册启动业务对象实例
     app.register("module1", $$.module1);

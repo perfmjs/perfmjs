@@ -29,8 +29,8 @@
         <input type="button" value="测试弹窗(因未加载弹窗组件，该功能第1次使用无效）" onclick="webAlert({content:'您收到 <strong>1</strong> 条消息', left:'right', top:'bottom', time:'100', fixed:true});" />
         <input type="button" value="测试弹窗（使用前先加载弹窗组件，该功能永远有效）" onclick="openWebAlert();" />
 		<br/><br/>
-        <input id="eventproxyBtn" type="button" value="模块间交互(需加载jQuery框架)"/>
-		<input id="eventproxyBtnxx" type="button" value="模块间交互xx(不需加载jQuery框架)" onclick="perfmjs.eventproxy.instance.emit(perfmjs.appconfig.events.heartbeat, {msg:'模块间交互xx'});" />
+        <input id="eventProxyBtn" type="button" value="模块间交互(需加载jQuery框架)"/>
+		<input id="eventProxyBtnxx" type="button" value="模块间交互xx(不需加载jQuery框架)" onclick="perfmjs.eventProxy.instance.emit(perfmjs.appconfig.events.heartbeat, {msg:'模块间交互xx'});" />
         <input id="jq_try_btn" type="button" value="测试jquery功能(需预先加载jQuery框架)"/>
         <input id="jq_load_jquery" type="button" value="加载jQuery框架" onclick="javascript:loadJQuery();"/>
         <div class="placehoder"> I am just a placehoder.</div>
@@ -44,9 +44,9 @@
              }
          }, afterLoadedCallback:function() {
              alert("已成功加载jQuery框架");
-             $('#eventproxyBtn').unbind();
-             $('#eventproxyBtn').bind('click', function () {
-                 perfmjs.eventproxy.instance.emit(perfmjs.appconfig.events.heartbeat, {msg: "send from index.html"});
+             $('#eventProxyBtn').unbind();
+             $('#eventProxyBtn').bind('click', function () {
+                 perfmjs.eventProxy.instance.emit(perfmjs.appconfig.events.heartbeat, {msg: "send from index.html"});
              });
          }});
      };

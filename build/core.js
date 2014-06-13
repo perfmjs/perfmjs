@@ -635,7 +635,7 @@ perfmjs.plugin('browser', function($$) {
 		end: 0
 	};
 })(perfmjs); /**
- * 日志模块
+ * 日志模块 FIXME 待完善
  * 1）允许定义日志等级 -- "error", "warn", "info", "debug", "log"
  * 2）在Firefox中通过firebug控制台输出日志，在IE中通过在url中添加debug=true参数，将日志显示在页面底部。
  * 3）线上模式的错误日志，将记录到draggon监控系统，触发报警。
@@ -1922,13 +1922,13 @@ alert(perfmjs.json.toJSON(sample2.toArray()));*////#source 1 1 /src/1.0.0/load.j
 	//立即解析includeres
 	perfmjs.includeres.load({isScript:true});
 })(window);/**
- * eventproxy
- * 单实例，实现模块间通信的代理类, 每个模块都有自己的 eventproxy，用来降低模块间耦合度，各模块只能直接和eventproxy打交道。
+ * eventProxy
+ * 单实例，实现模块间通信的代理类, 每个模块都有自己的 eventProxy，用来降低模块间耦合度，各模块只能直接和eventProxy打交道。
  * @date 2012-11-30
  * import base.js
  */
-perfmjs.plugin('eventproxy', function($$) {
-	$$.base("base.eventproxy", {
+perfmjs.plugin('eventProxy', function($$) {
+	$$.base("base.eventProxy", {
 		init: function(){
 			this.channels = {};
 			return this;
@@ -2043,7 +2043,7 @@ perfmjs.plugin('eventproxy', function($$) {
 		},
 		end: 0
 	}, $$.base.prototype, $$.base.defaults);
-	$$.base.eventproxy.defaults = {
+	$$.base.eventProxy.defaults = {
 		scope: 'singleton',
 		end: 0
 	};
@@ -2155,14 +2155,14 @@ perfmjs.plugin('fsm', function($$) {
  * 3）负责对系统错误的处理
  * @date 2012-11-30
  * import logger.js
- * import eventproxy.js
+ * import eventProxy.js
  * import lazymodule.js
  */
 perfmjs.plugin('app', function($$) {
 	$$.base("base.app", {
 		init: function(arg) {	
 			this.moduleData = {};
-			this.eventproxy = $$.eventproxy.newInstance();
+			this.eventProxy = $$.eventProxy.newInstance();
 			return this;
 		},
 		
@@ -2254,7 +2254,7 @@ perfmjs.plugin('app', function($$) {
 				}
 			}
 			//通知所有的模块以及初始化完毕，有需要监听此事件的模块可以处理callback函数。
-			this.eventproxy.emit($$.sysconfig.events.moduleIsReady);
+			this.eventProxy.emit($$.sysconfig.events.moduleIsReady);
 			return results;
 		},
 		
@@ -2332,7 +2332,7 @@ perfmjs.plugin('app', function($$) {
         }
 
 			var instance = new module.creator(false, opt), name, method;
-			instance.init($$.eventproxy.newInstance());
+			instance.init($$.eventProxy.newInstance());
 
 			//debug模式下try catch不起作用，交由浏览器自己处理错误。
 			//online模式下可以把错误信息记录在日志服务器上。

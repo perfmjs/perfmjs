@@ -1,10 +1,10 @@
 perfmjs.plugin('module2', function($$) {
 	$$.base("base.module2", {
-		init: function(eventproxy) {
-            this.options['eventproxy'] = eventproxy;
+		init: function(eventProxy) {
+            this.options['eventProxy'] = eventProxy;
 			this.createHTML();
-            this.options['eventproxy'].on($$.appconfig.events.heartbeat, this.create);
-            this.options['eventproxy'].on($$.sysconfig.events.moduleIsReady, function() {$$.logger.debug("module2 is ready!");});
+            this.options['eventProxy'].on($$.appconfig.events.heartbeat, this.create);
+            this.options['eventProxy'].on($$.sysconfig.events.moduleIsReady, function() {$$.logger.debug("module2 is ready!");});
 			return this;
 		},
 		create: function(data) {
@@ -16,7 +16,7 @@ perfmjs.plugin('module2', function($$) {
 		end:0
 	});
 	$$.base.module2.defaults = {
-        eventproxy: {},
+        eventProxy: {},
 		scope: 'singleton',
 		end: 0
 	};

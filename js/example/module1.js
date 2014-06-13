@@ -1,7 +1,7 @@
 perfmjs.plugin('module1', function($$) {
 	$$.base("base.module1", {
-		init: function(eventproxy) {
-            this.options['eventproxy'] = eventproxy;
+		init: function(eventProxy) {
+            this.options['eventProxy'] = eventProxy;
 			this._bindEvent();
 			return this;
 		},
@@ -11,9 +11,9 @@ perfmjs.plugin('module1', function($$) {
 		_bindEvent: function() {
 			var self = this;
             if ($$.utils.isJQueryLoaded()) {
-                $('#eventproxyBtn').unbind();
-                $('#eventproxyBtn').bind('click', function () {
-                    self.options['eventproxy'].emit($$.appconfig.events.heartbeat, {msg: "send from Module1"});
+                $('#eventProxyBtn').unbind();
+                $('#eventProxyBtn').bind('click', function () {
+                    self.options['eventProxy'].emit($$.appconfig.events.heartbeat, {msg: "send from Module1"});
                 });
             }
 		},
@@ -45,7 +45,7 @@ perfmjs.plugin('module1', function($$) {
 		end: 0
 	});
 	$$.base.module1.defaults = {
-        eventproxy: {},
+        eventProxy: {},
 		scope: 'singleton',
 		end: 0
 	};

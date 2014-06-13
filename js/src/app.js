@@ -5,14 +5,14 @@
  * 3）负责对系统错误的处理
  * @date 2012-11-30
  * import logger.js
- * import eventproxy.js
+ * import eventProxy.js
  * import lazymodule.js
  */
 perfmjs.plugin('app', function($$) {
 	$$.base("base.app", {
 		init: function(arg) {	
 			this.moduleData = {};
-			this.eventproxy = $$.eventproxy.newInstance();
+			this.eventProxy = $$.eventProxy.newInstance();
 			return this;
 		},
 		
@@ -104,7 +104,7 @@ perfmjs.plugin('app', function($$) {
 				}
 			}
 			//通知所有的模块以及初始化完毕，有需要监听此事件的模块可以处理callback函数。
-			this.eventproxy.emit($$.sysconfig.events.moduleIsReady);
+			this.eventProxy.emit($$.sysconfig.events.moduleIsReady);
 			return results;
 		},
 		
@@ -182,7 +182,7 @@ perfmjs.plugin('app', function($$) {
         }
 
 			var instance = new module.creator(false, opt), name, method;
-			instance.init($$.eventproxy.newInstance());
+			instance.init($$.eventProxy.newInstance());
 
 			//debug模式下try catch不起作用，交由浏览器自己处理错误。
 			//online模式下可以把错误信息记录在日志服务器上。

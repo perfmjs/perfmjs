@@ -1,11 +1,11 @@
 /**
- * eventproxy
- * 单实例，实现模块间通信的代理类, 每个模块都有自己的 eventproxy，用来降低模块间耦合度，各模块只能直接和eventproxy打交道。
+ * eventProxy
+ * 单实例，实现模块间通信的代理类, 每个模块都有自己的 eventProxy，用来降低模块间耦合度，各模块只能直接和eventProxy打交道。
  * @date 2012-11-30
  * import base.js
  */
-perfmjs.plugin('eventproxy', function($$) {
-	$$.base("base.eventproxy", {
+perfmjs.plugin('eventProxy', function($$) {
+	$$.base("base.eventProxy", {
 		init: function(){
 			this.channels = {};
 			return this;
@@ -120,7 +120,7 @@ perfmjs.plugin('eventproxy', function($$) {
 		},
 		end: 0
 	}, $$.base.prototype, $$.base.defaults);
-	$$.base.eventproxy.defaults = {
+	$$.base.eventProxy.defaults = {
 		scope: 'singleton',
 		end: 0
 	};
