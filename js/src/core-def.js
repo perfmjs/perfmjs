@@ -10,7 +10,7 @@
     importJS('/perfmjs/js/core/joquery.js');
     importJS('/perfmjs/js/core/head.load.js');
     importJS('/perfmjs/js/core/includeres.js');
-    importJS('/perfmjs/js/core/eventProxy.js');
+    importJS('/perfmjs/js/core/event-proxy.js');
     importJS('/perfmjs/js/core/fsm.js');
     importJS('/perfmjs/js/core/app.js');
 })();

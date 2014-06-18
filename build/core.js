@@ -49,6 +49,9 @@
     perfmjs.plugins = {};
     perfmjs.utils = {
     	namespace: _namespace,
+        isH5Supported: function() {
+            return -[1,]; //判断加载页面的浏览器是否为支持Html5的现代浏览器
+        },
     	isJQueryLoaded: function() {
     		return (typeof jQuery !== 'undefined');
     	},
