@@ -1,5 +1,5 @@
 /**
- * perfmjs－高性能javascript v1.1.1
+ * perfmjs－高性能javascript v1.1.3
  * @date 2014-05-19
  */
 !(function() {
