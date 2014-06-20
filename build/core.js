@@ -115,6 +115,12 @@
     	isNumeric: function(obj) {
     		return !isNaN(parseFloat(obj)) && isFinite(obj);
     	},
+        toNumber: function(obj) {
+            return ~~obj; //these is 0: "null,undefined,false,0,'',NaN,非数字的字符串"
+        },
+        toBoolean: function(obj) {
+            return !!obj; //these is false: "null,undefined,false,0,'',NaN"
+        },
     	isWindow: function(obj) {
     		return obj != null && obj == obj.window;
     	},
