@@ -58,6 +58,68 @@
     	getJQuery: function() {
     		return this.isJQueryLoaded()?jQuery:{};
     	},
+        /**
+         * # Bind 有参考https://github.com/codemix/fast.js的代码实现
+         * Analogue of `Function::bind()`.
+         *
+         * ```js
+         * var bind = require('fast.js').bind;
+         * var bound = bind(myfunc, this, 1, 2, 3);
+         *
+         * bound(4);
+         * ```
+         * @param  {Function} fn          The function which should be bound.
+         * @param  {Object}   thisContext The context to bind the function to.
+         * @param  {mixed}    args, ...   Additional arguments to pre-bind.
+         * @return {Function}             The bound function.
+         */
+        fastBind: function(fn, thisContext) {
+            var boundLength = arguments.length - 2, boundArgs;
+            if (boundLength > 0) {
+                boundArgs = new Array(boundLength);
+                for (var i = 0; i < boundLength; i++) {
+                    boundArgs[i] = arguments[i + 2];
+                }
+                return function () {
+                    var length = arguments.length,
+                        args = new Array(boundLength + length),
+                        i;
+                    for (i = 0; i < boundLength; i++) {
+                        args[i] = boundArgs[i];
+                    }
+                    for (i = 0; i < length; i++) {
+                        args[boundLength + i] = arguments[i];
+                    }
+                    return fn.apply(thisContext, args);
+                };
+            } else {
+                return function () {
+                    var length = arguments.length,
+                        args = new Array(length),
+                        i;
+                    for (i = 0; i < length; i++) {
+                        args[i] = arguments[i];
+                    }
+                    return fn.apply(thisContext, args);
+                };
+            }
+        },
+        /**
+         * # For Each 有参考https://github.com/codemix/fast.js的代码实现
+         *
+         * A fast `.forEach()` implementation.
+         *
+         * @param  {Array}    subject     The array (or array-like) to iterate over.
+         * @param  {Function} fn          The visitor function.
+         * @param  {Object}   thisContext The context for the visitor.
+         */
+        forEach: function(subject, fn, thisContext) {
+            var length = subject.length, i,
+                iterator = arguments.length > 2 ? this.fastBind(fn, thisContext) : fn;
+            for (i = 0; i < length; i++) {
+                iterator(subject[i], i, subject);
+            }
+        },
     	//以下方法实现都是来自jquery1.8.2的对应方法:_type,_isFunction,_isArray,_each,_isWindow,_isNumeric, _isPlainObject,_extend
     	each: function(obj, callback, args) {
     		var name, i = 0, length = obj.length, isObj = length === undefined || this.isFunction( obj );

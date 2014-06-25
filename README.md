@@ -1,6 +1,6 @@
 perfmjs
 =======
-high performance javascript framework  V1.1.3
+high performance javascript framework  V1.1.4
 
 为什么使用perfmjs?　
 =======
@@ -20,7 +20,7 @@ fast by default：高效，易用，易读
 
 更高效的js和css资源文件版本号管理功能
 
-支持事件代理,AOP,状态机,日志等功能
+支持高效的数组操作，事件代理,AOP,状态机,日志等功能
 
 可测试性，通过了jasmine库的测试
 

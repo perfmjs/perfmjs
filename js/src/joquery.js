@@ -12,12 +12,20 @@ perfmjs.plugin('joquery', function($$) {
 		},
         version: "1.0.0",
         toArray: function() {return this.items;},
-        where: function(clause) {
+        /**
+         * where条件
+         * @param clause 条件表达式
+         * @param lazySearch： true-找到一个符合条件的记录后不再往后找，false-一直找到最后
+         * @returns {*}
+         */
+        where: function(clause, lazySearch) {
             var newArray = new Array();
-            // The clause was passed in as a Method that return a Boolean
             for (var index = 0; index < this.items.length; index++) {
                 if (clause(this.items[index], index)) {
                     newArray[newArray.length] = this.items[index];
+                    if (lazySearch) {
+                        break;
+                    }
                 }
             }
             return new $$.joquery(false).init(newArray);
@@ -107,7 +115,7 @@ perfmjs.plugin('joquery', function($$) {
         },
         first: function(clause) {
             if (clause != null) {
-                return this.where(clause).first();
+                return this.where(clause, true).first();
             } else {
                 // If no clause was specified, then return the first element in the Array
                 if (this.items.length > 0)
@@ -118,7 +126,7 @@ perfmjs.plugin('joquery', function($$) {
         },
         last: function(clause) {
             if (clause != null) {
-                return this.where(clause).last();
+                return this.reverse().first(clause);
             } else {
                 // If no clause was specified, then return the first element in the Array
                 if (this.items.length > 0)
@@ -172,7 +180,13 @@ perfmjs.plugin('joquery', function($$) {
         lastOrDefault: function(defaultValue) {
             return this.last() || defaultValue;
         },
-        //将新元素插入到指定条件的位置,并返回插入的index等信息
+        /**
+         * 将新元素插入到指定条件的位置,并返回插入的index等信息
+         * 果找不到满足clause条件的记录，则把item追加到目标数组的最后
+         * @param item 新的数组元素
+         * @param clause 条件
+         * @returns {*} 结果
+         */
         insert: function(item, clause) {
          	var result = {'matched':false, 'index':-1, 'item': {}};
          	if (this.items.length < 1) {
@@ -191,7 +205,14 @@ perfmjs.plugin('joquery', function($$) {
             }
             return result;       	
         },
-        //将新元素插入/修改到指定条件的位置,并返回插入/修改的元素的index等信息,如修改条件满足则只进行修改操作
+        /**
+         * 将新元素插入/修改到指定条件的位置,并返回插入/修改的元素的index等信息,如修改条件满足则只进行修改操作
+         * 如果找不到满足updateClause， insertClause条件的记录，则把item追加到目标数组的最后
+         * @param item  新的数组元素
+         * @param updateClause 修改条件
+         * @param insertClause 新增条件
+         * @returns {*} 结果
+         */
         updateOrInsert: function(item, updateClause, insertClause) {
          	var result = {'matched':false, 'index':-1, 'item': {}};
          	if (this.items.length < 1) {

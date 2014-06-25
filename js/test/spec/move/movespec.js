@@ -3,14 +3,53 @@ describe("core核心", function() {
     beforeEach(function() {
     });
 
+    it("utils应该能运行正常", function() {
+        perfmjs.ready(function($$, app) {
+            $$.utils.forEach(['one', 'two', 'three'], function(item, index) {
+                expect(item).toEqual(['one', 'two', 'three'][index]);
+            });
+        });
+    });
+    it("应能测试通过joquery.js-updateOrInsert", function () {
+        perfmjs.ready(function($$, app) {
+            var data = [
+                { ID: 1, firstName: "Chris", lastName: "Pearson", BookIDs: [1001, 1002, 1003] },
+                { ID: 9, firstName: "Bernard", lastName: "Sutherland", BookIDs: [1001, 2002, 3003] },
+                { ID: 20, firstName: "Kate", lastName: "Pinkerton", BookIDs: [4001, 3002, 2003] }
+            ];
+            var result = $$.joquery.newInstance(data).updateOrInsert({ID: 0, firstName: "Chris", lastName: "Pearson", BookIDs: [1001, 1002, 1003]}, function(item, index) {
+                return item.ID == 9;
+            }, function(item, index) {
+                return item.ID > 15;
+            });
+            expect(result.index).toEqual(1);
+        });
+    });
+    it("应能测试通过joquery.js-first", function () {
+        perfmjs.ready(function($$, app) {
+            var data = [
+                { ID: 1, firstName: "Chris", lastName: "Pearson", BookIDs: [1001, 1002, 1003] },
+                { ID: 9, firstName: "Kate", lastName: "Sutherland", BookIDs: [1001, 2002, 3003] },
+                { ID: 20, firstName: "Kate", lastName: "Pinkerton", BookIDs: [4001, 3002, 2003] }
+            ];
+            var first = $$.joquery.newInstance(data).first(function(item, index) {
+                return item.firstName === 'Kate';
+            });
+            var last = $$.joquery.newInstance(data).last(function(item, index) {
+                    return item.firstName === 'Kate';
+            });
+            expect(first.ID).toEqual(9);
+            expect(last.ID).toEqual(20);
+        });
+    });
     it("model应该能运行正常", function() {
-        perfmjs.ready(document, function() {
+        perfmjs.ready(function() {
             perfmjs.model.plan.multiple(20);
             expect(perfmjs.model.plan.multiple()).toEqual(20);
         });
     });
     it("event应该能运行正常", function() {
-        perfmjs.ready(document, function() {
+        perfmjs.ready(function() {
             perfmjs.app.newInstance();
             perfmjs.app.instance.unregister('lottevent');
             perfmjs.app.instance.register('lottevent', perfmjs.lottevent);
@@ -20,14 +59,14 @@ describe("core核心", function() {
         });
     });
     it("aop功能应该可以正常运行", function() {
-        perfmjs.ready(document, function() {
+        perfmjs.ready(function() {
             var aop = perfmjs.utils.aop(this, perfmjs.model.plan.multiple, function(){return 2}, function(){return 3});
             perfmjs.model.plan.multiple = aop;
             expect(perfmjs.model.plan.multiple()).toEqual(2);
         });
     });
     it("opera功能应该可以正常运行", function() {
-        perfmjs.ready(document, function() {
+        perfmjs.ready(function() {
             perfmjs.app.newInstance();
             perfmjs.app.instance.unregister('lottevent');
             perfmjs.app.instance.register('lottevent', perfmjs.lottevent);
@@ -37,7 +76,7 @@ describe("core核心", function() {
         });
     });
     it("fsm功能应该可以正常运行", function() {
-        perfmjs.ready(document, function() {
+        perfmjs.ready(function() {
             perfmjs.ssqfsm.newInstance().event('changePlay');
             expect(perfmjs.ssqfsm.instance.current()).toEqual('dantuo');
         });
