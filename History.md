@@ -1,3 +1,9 @@
+
+1.1.5 / 2014-06-25
+==================
+
+ * add: perfmjs.utils#fastMap, perfmjs.utils#fastReduce
+
 1.1.4 / 2014-06-25
 ==================
 

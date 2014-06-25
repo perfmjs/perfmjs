@@ -120,6 +120,43 @@
                 iterator(subject[i], i, subject);
             }
         },
+        /**
+         * # Map 有参考https://github.com/codemix/fast.js的代码实现
+         *
+         * A fast `.map()` implementation.
+         *
+         * @param  {Array}    subject     The array (or array-like) to map over.
+         * @param  {Function} fn          The mapper function.
+         * @param  {Object}   thisContext The context for the mapper.
+         * @return {Array}                The array containing the results.
+         */
+        fastMap: function(subject, fn, thisContext) {
+            var length = subject.length, result = new Array(length), i,
+                iterator = arguments.length > 2 ? this.fastBind(fn, thisContext) : fn;
+            for (i = 0; i < length; i++) {
+                result[i] = iterator(subject[i], i, subject);
+            }
+            return result;
+        },
+        /**
+         * # Reduce 有参考https://github.com/codemix/fast.js的代码实现
+         *
+         * A fast `.reduce()` implementation.
+         *
+         * @param  {Array}    subject      The array (or array-like) to reduce.
+         * @param  {Function} fn           The reducer function.
+         * @param  {mixed}    initialValue The initial value for the reducer.
+         * @param  {Object}   thisContext  The context for the reducer.
+         * @return {mixed}                 The final result.
+         */
+        fastReduce: function(subject, fn, initialValue, thisContext) {
+            var length = subject.length, result = initialValue, i,
+                iterator = arguments.length > 3 ? this.fastBind(fn, thisContext) : fn;
+            for (i = 0; i < length; i++) {
+                result = iterator(result, subject[i], i, subject);
+            }
+            return result;
+        },
     	//以下方法实现都是来自jquery1.8.2的对应方法:_type,_isFunction,_isArray,_each,_isWindow,_isNumeric, _isPlainObject,_extend
     	each: function(obj, callback, args) {
     		var name, i = 0, length = obj.length, isObj = length === undefined || this.isFunction( obj );
