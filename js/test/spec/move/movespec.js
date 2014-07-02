@@ -12,11 +12,11 @@ describe("core核心", function() {
     });
     it("map-reduce功能应该可以正常运行", function() {
         perfmjs.ready(function($$, app) {
-            var items = [], summary = 0;
+            var items = [], summary = 0, mapResult;
             for (i = 0; i < 101; i++) {
                 items[items.length] = i;
             }
-            var mapResult = $$.utils.fastMap([items.slice(0,31), items.slice(31,61), items.slice(61,101)], function(subItems, subIndex) {
+            mapResult = $$.utils.fastMap([items.slice(0,31), items.slice(31,61), items.slice(61,101)], function(subItems, subIndex) {
                 return $$.utils.fastReduce(subItems, function(result, item, index) {
                     summary += item;
                     return result + item;
@@ -57,14 +57,22 @@ describe("core核心", function() {
             expect(last.ID).toEqual(20);
         });
     });
+    it("perfmjs.utils#keys应该能运行正常", function() {
+        perfmjs.ready(function($$, app) {
+            var arr = [1,2,3,4,5];
+            var jsonObj = {'a':1, 'b':2};
+            expect($$.utils.keys(arr).length).toEqual(5);
+            expect($$.utils.keys(jsonObj).length).toEqual(2);
+        });
+    });
     it("model应该能运行正常", function() {
-        perfmjs.ready(function() {
+        perfmjs.ready(function($$, app) {
             perfmjs.model.plan.multiple(20);
             expect(perfmjs.model.plan.multiple()).toEqual(20);
         });
     });
     it("event应该能运行正常", function() {
-        perfmjs.ready(function() {
+        perfmjs.ready(function($$, app) {
             perfmjs.app.newInstance();
             perfmjs.app.instance.unregister('lottevent');
             perfmjs.app.instance.register('lottevent', perfmjs.lottevent);
@@ -74,14 +82,14 @@ describe("core核心", function() {
         });
     });
     it("aop功能应该可以正常运行", function() {
-        perfmjs.ready(function() {
+        perfmjs.ready(function($$, app) {
             var aop = perfmjs.utils.aop(this, perfmjs.model.plan.multiple, function(){return 2}, function(){return 3});
             perfmjs.model.plan.multiple = aop;
             expect(perfmjs.model.plan.multiple()).toEqual(2);
         });
     });
     it("opera功能应该可以正常运行", function() {
-        perfmjs.ready(function() {
+        perfmjs.ready(function($$, app) {
             perfmjs.app.newInstance();
             perfmjs.app.instance.unregister('lottevent');
             perfmjs.app.instance.register('lottevent', perfmjs.lottevent);
@@ -91,7 +99,7 @@ describe("core核心", function() {
         });
     });
     it("fsm功能应该可以正常运行", function() {
-        perfmjs.ready(function() {
+        perfmjs.ready(function($$, app) {
             perfmjs.ssqfsm.newInstance().event('changePlay');
             expect(perfmjs.ssqfsm.instance.current()).toEqual('dantuo');
         });

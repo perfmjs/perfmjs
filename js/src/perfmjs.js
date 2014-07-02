@@ -58,6 +58,20 @@
     	getJQuery: function() {
     		return this.isJQueryLoaded()?jQuery:{};
     	},
+        isObject: function(obj) {
+            return obj === Object(obj);
+        },
+        keys: function(obj) {
+            if (!this.isObject(obj)) return [];
+            if (Object.keys) return Object.keys(obj);
+            var keys = [];
+            for (var key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    keys[keys.length] = key;
+                }
+            }
+            return keys;
+        },
         /**
          * # Bind 有参考https://github.com/codemix/fast.js的代码实现
          * Analogue of `Function::bind()`.
