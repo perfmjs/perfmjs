@@ -8,7 +8,7 @@
 .ui_move .ui_title_text { color:#FFF; }
 .ui_move .ui_border { filter:alpha(opacity=40); opacity:0.4; }
 .ui_dialog_main { background-color:#FFF; border:1px solid #4E84C0!important; }
-.ui_close, .r0d0, .r0d2, .r2d0, .r2d2 { width:10px; height:10px; background-image:url(./dialog.png); background-repeat:no-repeat; }
+.ui_close, .r0d0, .r0d2, .r2d0, .r2d2 { width:10px; height:10px; background-image:url(dialog.png); background-repeat:no-repeat; }
 .ui_title { height:100%; position:relative; }
 .ui_title_text { height:30px; line-height:30px; padding:0 30px 0 10px; background-color:#214FA3; font-weight:700; color:#EBEBEB; }
 .ui_close { width:13px; height:13px; top:8px; right:8px; text-align:left; text-indent:-9999em; overflow:hidden; background-position:center center; _font-size:0; _line-height:0; }

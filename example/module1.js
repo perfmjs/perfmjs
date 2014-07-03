@@ -32,7 +32,7 @@ perfmjs.plugin('module1', function($$) {
 				<dl>\
 					<dt>\
 						<a href="javascript:;">\
-							<img alt="" src="<%= $data[i].src %>" width="100" />\
+							<img alt="" perfmjs="<%= $data[i].perfmjs %>" width="100" />\
 						</a>\
 					</dt>\
 					<dd class="title"><a href="javascript:;" title="<%= $data[i].title %>"><%= $data[i].title.cut(14,"...") %></a></dd>\

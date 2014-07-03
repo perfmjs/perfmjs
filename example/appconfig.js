@@ -7,36 +7,36 @@ perfmjs.plugin('appconfig', function($) {
 	$.utils.namespace('perfmjs.appconfig');
 	$.appconfig.lazymodule = {
 		lazymodule1:{
-			js: ['js/example/lazyloadmodule1.js'],
+			js: ['lib/example/lazyloadmodule1.js'],
 			css:[$.currentDomain + '/perfmjs/css/app/search/v4.0/core/example/lazyloadmodule1.css']
 		},
 		//这里示例了一个延迟加载模块有多种展现模式时的文件定义方式（魔方项目）
 		lazymodule2:{
 			combine1:{
-				js: ['js/example/lazyloadmodule2.js'],
+				js: ['lib/example/lazyloadmodule2.js'],
 				css:[$.currentDomain + '/perfmjs/css/app/search/v4.0/core/example/lazyloadmodule21.css']
 			},
 			combine2:{
-				js: ['js/example/lazyloadmodule2.js'],
+				js: ['lib/example/lazyloadmodule2.js'],
 				css:['currentDomain/perfmjs/css/app/search/v4.0/core/example/lazyloadmodule22.css']
 			},
 			combine3:{
-				js: ['js/example/lazyloadmodule2.js'],
+				js: ['lib/example/lazyloadmodule2.js'],
 				css:['currentDomain/perfmjs/css/app/search/v4.0/core/example/lazyloadmodule33.css']
 			}
 		},
 		lazymodule3:{
-			js: ['js/example/lazyloadmodule3.js'],
+			js: ['lib/example/lazyloadmodule3.js'],
 			css:['currentDomain/perfmjs/css/app/search/v4.0/core/example/lazyloadmodule3.css']
 		},
 		bigrender1:{
 			combine1:{
-				js: ['js/example/bigrender1.js'],
+				js: ['lib/example/bigrender1.js'],
 				css:['currentDomain/perfmjs/css/app/search/v4.0/core/example/bigrender1.css']
 			}
 		},
 		loadqq:{
-			js: ['js/example/loadqq.js'],
+			js: ['lib/example/loadqq.js'],
 			css:[]
 		},
 		end:0

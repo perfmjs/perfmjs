@@ -8,10 +8,10 @@
 	perfmjs.includeres.loadModules({name:'js-comm', type:'js', mdCallback:function(source, module, combineUrls) {
 		//按模块加载资源文件
         if (module === 'ssqmodel') {
-            combineUrls[combineUrls.length] = '/perfmjs/js/test/src/move/ssq.model.js';
-            combineUrls[combineUrls.length] = '/perfmjs/js/test/src/move/lott.event.js';
-            combineUrls[combineUrls.length] = '/perfmjs/js/test/src/move/ssq.opera.js';
-            combineUrls[combineUrls.length] = '/perfmjs/js/test/src/move/ssqfsm.js';
+            combineUrls[combineUrls.length] = '/perfmjs/test/src/move/ssq.model.js';
+            combineUrls[combineUrls.length] = '/perfmjs/test/src/move/lott.event.js';
+            combineUrls[combineUrls.length] = '/perfmjs/test/src/move/ssq.opera.js';
+            combineUrls[combineUrls.length] = '/perfmjs/test/src/move/ssqfsm.js';
         }
 	}});
 })();

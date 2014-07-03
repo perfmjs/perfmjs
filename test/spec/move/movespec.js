@@ -1,5 +1,4 @@
 describe("core核心", function() {
-
     beforeEach(function() {
     });
 
@@ -25,7 +24,7 @@ describe("core核心", function() {
             expect(summary).toEqual(5050);
         });
     });
-    it("应能测试通过joquery.js-updateOrInsert", function () {
+    it("应能测试通过joquery.lib-updateOrInsert", function () {
         perfmjs.ready(function($$, app) {
             var data = [
                 { ID: 1, firstName: "Chris", lastName: "Pearson", BookIDs: [1001, 1002, 1003] },
@@ -40,7 +39,7 @@ describe("core核心", function() {
             expect(result.index).toEqual(1);
         });
     });
-    it("应能测试通过joquery.js-first", function () {
+    it("应能测试通过joquery.lib-first", function () {
         perfmjs.ready(function($$, app) {
             var data = [
                 { ID: 1, firstName: "Chris", lastName: "Pearson", BookIDs: [1001, 1002, 1003] },

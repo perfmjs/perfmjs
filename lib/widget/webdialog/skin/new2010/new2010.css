@@ -10,7 +10,7 @@
 .ui_title_wrap { _width:100px; }/*IE6下设置一个最小长度，防止关闭按钮错位*/
 
 
-.r0d0, .r0d2, .r1d0, .r1d2, .r2d0, .r2d2, .ui_close,.r0d1, .r2d1,.ui_title_text,.ui_title,.ui_dialog_icon,.ui_btns span, .ui_btns button{ background-image:url(${replace_img_2caipiao}/js/plugins/webdialog/skin/new2010/chrome_s.png?v=2012032601); background-repeat:no-repeat; }
+.r0d0, .r0d2, .r1d0, .r1d2, .r2d0, .r2d2, .ui_close,.r0d1, .r2d1,.ui_title_text,.ui_title,.ui_dialog_icon,.ui_btns span, .ui_btns button{ background-image:url(/perfmjs/lib/widget/webdialog/skin/new2010/chrome_s.png?v=2012032601); background-repeat:no-repeat; }
 .r0d0 { width:0px; height:29px; background-position: -46px -8px; }/*左上*/
 .r0d2 { width:0px; height:29px; background-position: -53px -8px; }/*右上*/
 .r1d0 { background-position:-60px 0; background-repeat:repeat-y; }/*左边*/
@@ -26,7 +26,7 @@
 .r2d1 { background-position: 0 -30px;}
 
 .ui_btns { background-color:#e8eced; border-top:solid 1px #d8dee0; font-size:12px; height:40px; padding-top:5px; }
-/*.ui_btns span, .ui_btns button { background-color:transparent; background-image:url(${replace_img_2caipiao}/js/plugins/webdialog/skin/new2010/btns.png); background-repeat:no-repeat; }*/
+/*.ui_btns span, .ui_btns button { background-color:transparent; background-image:url(${replace_img_2caipiao}/lib/plugins/webdialog/skin/new2010/btns.png); background-repeat:no-repeat; }*/
 .ui_btns span { padding:0 0 0 5px; overflow:hidden; background-position:left -321px; }
 .ui_btns button { height:27px; line-height:27px; padding:0 10px 0 5px; max-width:200px; border:none 0; font-size:12px; color:#047bbe; font-weight:bold; background-position:right -321px; }
 .ui_btns span:hover, .ui_btns span.ui_hover { background-position:left -347px; }

@@ -1,6 +1,6 @@
 perfmjs
 =======
-high performance javascript framework  V1.1.6
+high performance javascript framework  V1.1.7
 
 为什么使用perfmjs?　
 =======
@@ -12,7 +12,7 @@ fast by default：高效，易用，易读
 
 核心库(core.js)压缩后只有32k+，还可以优化至更小
 
-原生态支持面向对象(OO)功能
+原生态支持面向对象(object-oriented)功能
 
 更高效的插件开发机制
 
@@ -41,3 +41,21 @@ TODO:
 支持lazyload,bigRender等高效功能（可选功能，默认不开启）
 
 GitHub上类似框架: Fdev4  https://github.com/swain/Fdev4
+
+
+License
+-------
+
+Copyright 2011 Joe Hewitt
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.

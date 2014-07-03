@@ -21,7 +21,7 @@
 			border:1px solid blue;
 		}
 	</style>
-	<script type="text/javascript" src="/perfmjs/build/core.js?v=2012120303^{n:'css-comm',f:'',t:'css',m:'fb;common;',d:'http://192.168.66.150:63342'}|{n:'js-comm',f:'/perfmjs/js/include.js',t:'js',m:'jq;ajax;form;app;',d:'http://192.168.66.150:63342'}"></script>
+	<script type="text/javascript" src="/perfmjs/build/core.js?v=2012120303^{n:'css-comm',f:'',t:'css',m:'fb;common;',d:'http://192.168.66.150:63342'}|{n:'js-comm',f:'/perfmjs/example/include.js',t:'js',m:'jq;ajax;form;app;',d:'http://192.168.66.150:63342'}"></script>
   </head>
   <!--页面上只应该有一个很小的js文件被放置在<script>标签中加载，其余都是无阻塞加载-->
   <body>
@@ -40,7 +40,7 @@
          perfmjs.includeres.load({src:"{n:'load-jquery-js',t:'js',m:'jquery;'}"}
          ).loadModules({name:'load-jquery-js', type:'js', mdCallback:function(source, module, combineUrls) {
              if (module === 'jquery') {
-                 combineUrls[combineUrls.length] = '/perfmjs/js/src/jquery/jquery-1.11.1.min.js';
+                 combineUrls[combineUrls.length] = '/perfmjs/lib/perfmjs/jquery/jquery-1.11.1.min.js';
              }
          }, afterLoadedCallback:function() {
              alert("已成功加载jQuery框架");
@@ -50,10 +50,10 @@
              });
          }});
      };
-    //第1种加载res方法为加载core.js，如：/perfmjs/build/core.js?v=2012120303^{n:'css-comm',f:'/perfmjs/js/include-css.js',t:'css',m:'fb;common;',d:'http://192.168.66.150:63342'}|{n:'js-comm',f:'/perfmjs/js/include.js',t:'js',m:'jq;ajax;form;app;',d:'http://192.168.66.150:63342'}
+    //第1种加载res方法为加载core.lib，如：/perfmjs/build/core.lib?v=2012120303^{n:'css-comm',f:'/perfmjs/lib/include-css.lib',t:'css',m:'fb;common;',d:'http://192.168.66.150:63342'}|{n:'lib-comm',f:'/perfmjs/lib/include.lib',t:'lib',m:'jq;ajax;form;app;',d:'http://192.168.66.150:63342'}
     //第2种res加载方法如下：
-    perfmjs.includeres.loadHeadRes("/perfmjs/js/src/onlyforload.js", function() {
-      //console.log('==========load onlyforload.js=========');
+    perfmjs.includeres.loadHeadRes("/perfmjs/lib/perfmjs/onlyforload.js", function() {
+      //console.log('==========load onlyforload.lib=========');
     });
     //第3种res加载方法如下：
     var loadedWebAlert = false;
@@ -64,13 +64,13 @@
         perfmjs.includeres.load({src:"{n:'css1-webdialog',t:'css',m:'webdialog;'}|{n:'js1-webdialog',t:'js',m:'webdialog;'}"}
         ).loadModules({name:'css1-webdialog', type:'css', mdCallback:function(source, module, combineUrls) {
             if (module === 'webdialog') {
-                combineUrls[combineUrls.length] = 'http://r.aicaicdn.com/js/plugins/webdialog/skin/new2010/new2010.css?v=20121204001';
+                combineUrls[combineUrls.length] = '/perfmjs/lib/widget/webdialog/skin/new2010/new2010.css?v=20140703001';
             }
         }, afterLoadedCallback:function() {
             //webAlert({content:'您收到 <strong>2</strong> 条消息', left:'right', top:'bottom', time:'100', fixed:true});
         }}).loadModules({name:'js1-webdialog', type:'js', mdCallback:function(source, module, combineUrls) {
             if (module === 'webdialog') {
-                combineUrls[combineUrls.length] = 'http://r.aicaicdn.com/min/b=js&f=plugins/webdialog/webDialog.js';
+                combineUrls[combineUrls.length] = '/perfmjs/lib/widget/webdialog/webDialog.js';
             }
         }, afterLoadedCallback:function() {
             loadedWebAlert = true;
@@ -79,7 +79,7 @@
         return true;
     }
     //第4种res加载资源的方法如下：
-    //perfmjs.includeres.load({src:"{n:'css-webdialog',f:'/perfmjs/js/include-webdialog.js',t:'css',m:'webdialog;'}|{n:'js-webdialog',t:'js',m:'webdialog;'}"});
+    //perfmjs.includeres.load({perfmjs:"{n:'css-webdialog',f:'/perfmjs/lib/include-webdialog.lib',t:'css',m:'webdialog;'}|{n:'lib-webdialog',t:'lib',m:'webdialog;'}"});
     </script>
   </body>
 </html>
