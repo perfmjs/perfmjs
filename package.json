@@ -2,7 +2,7 @@
   "name": "perfmjs-node",
    "description":"perfmjs(high performance javascript framework)",
   "author": "tony",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "private": false,
   "repository": {
      "type": "git",
@@ -16,5 +16,6 @@
         "high performance"
   ],
   "dependencies": {
-  }
+  } ,
+  "licenses": [ "MIT" ]
 }

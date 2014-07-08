@@ -9,6 +9,23 @@ describe("core核心", function() {
             });
         });
     });
+    it("应能测试通过perfmjs.utils.fmtJSONMsg方法", function() {
+        perfmjs.ready(function($$, app) {
+            expect($$.utils.fmtJSONMsg().status).toEqual('fail');
+            expect($$.utils.fmtJSONMsg(new Date).status).toEqual('success');
+            expect($$.utils.fmtJSONMsg('{"key":1}').result.key).toEqual(1);
+            expect($$.utils.fmtJSONMsg('{"key":1}').status).toEqual('success');
+            expect($$.utils.fmtJSONMsg({"key":1}).result.key).toEqual(1);
+            expect($$.utils.fmtJSONMsg({"key":2}).status).toEqual('success');
+        });
+    });
+    it("应能测试通过perfmjs.utils.type方法", function() {
+        perfmjs.ready(function($$, app) {
+            expect($$.utils.type(new Date)).toEqual('date');
+            expect($$.utils.type({})).toEqual('object');
+            expect($$.utils.type([1,2])).toEqual('array');
+        });
+    });
     it("map-reduce功能应该可以正常运行", function() {
         perfmjs.ready(function($$, app) {
             var items = [], summary = 0, mapResult;

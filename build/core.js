@@ -1,6 +1,6 @@
 ﻿/**
- * perfmjs－高性能javascript v1.1.3
- * @date 2014-05-19
+ * perfmjs－高性能javascript v1.1.7
+ * @date 2014-07-3
  */
 !(function() {
     /**
@@ -171,50 +171,22 @@
             }
             return result;
         },
-    	//以下方法实现都是来自jquery1.8.2的对应方法:_type,_isFunction,_isArray,_each,_isWindow,_isNumeric, _isPlainObject,_extend
-    	each: function(obj, callback, args) {
-    		var name, i = 0, length = obj.length, isObj = length === undefined || this.isFunction( obj );
-    		if (args) {
-    			if ( isObj ) {
-    				for (name in obj) {
-    					if (callback.apply(obj[name], args) === false) {
-    						break;
-    					}
-    				}
-    			} else {
-    				for (; i < length;) {
-    					if (callback.apply( obj[ i++ ], args) === false ) {
-    						break;
-    					}
-    				}
-    			}
-    		// A special, fast, case for the most common use of each
-    		} else {
-    			if (isObj) {
-    				for (name in obj) {
-    					if (callback.call( obj[ name ], name, obj[ name ] ) === false) {
-    						break;
-    					}
-    				}
-    			} else {
-    				for (; i < length;) {
-    					if (callback.call( obj[ i ], i, obj[ i++ ] ) === false) {
-    						break;
-    					}
-    				}
-    			}
-    		}
-    		return obj;
-    	},
-    	class2type: undefined,
+        toNumber: function(obj) {
+            return ~~obj; //these is 0: "null,undefined,false,0,'',NaN,非数字的字符串"
+        },
+        toBoolean: function(obj) {
+            return !!obj; //these is false: "null,undefined,false,0,'',NaN"
+        },
+    	//以下方法实现都是来自jquery1.8.2的对应方法:_type,_isFunction,_isArray,_isWindow,_isPlainObject,_extend
+    	_class2type: undefined,
     	type: function(obj) {
-    		if (this.class2type === undefined) {
-    			var _class2type = this.class2type = {};
-    		    this.each("Boolean Number String Function Array Date RegExp Object".split(" "), function(i, name) {
-    		    	_class2type["[object " + name + "]"] = name.toLowerCase();
+    		if (this._class2type === undefined) {
+    			var _class2type = this._class2type = {};
+    		    this.forEach("Boolean Number String Function Array Date RegExp Object".split(" "), function(item, index) {
+    		    	_class2type["[object " + item + "]"] = item.toLowerCase();
     		    });
     		}
-    		return obj == null ? String(obj) : this.class2type[Object.prototype.toString.call(obj)] || "object";
+    		return obj == null ? String(obj) : this._class2type[Object.prototype.toString.call(obj)] || "object";
     	},
     	isString: function(obj) {
     		return typeof obj == "string";
@@ -225,19 +197,10 @@
     	isArray: Array.isArray || function(obj) {
     		return this.type(obj) === "array";
     	},
-    	isNumeric: function(obj) {
-    		return !isNaN(parseFloat(obj)) && isFinite(obj);
-    	},
-        toNumber: function(obj) {
-            return ~~obj; //these is 0: "null,undefined,false,0,'',NaN,非数字的字符串"
-        },
-        toBoolean: function(obj) {
-            return !!obj; //these is false: "null,undefined,false,0,'',NaN"
-        },
     	isWindow: function(obj) {
     		return obj != null && obj == obj.window;
     	},
-    	isPlainObject: function(obj) {
+    	_isPlainObject: function(obj) {
     		var core_hasOwn = Object.prototype.hasOwnProperty;
     		// Must be an Object.
     		// Because of IE, we also have to check the presence of the constructor property.
@@ -296,12 +259,12 @@
         					continue;
         				}
         				// Recurse if we're merging plain objects or arrays
-        				if (deep && copy && ( this.isPlainObject(copy) || (copyIsArray = this.isArray(copy)))) {
+        				if (deep && copy && ( this._isPlainObject(copy) || (copyIsArray = this.isArray(copy)))) {
         					if (copyIsArray) {
         						copyIsArray = false;
         						clone = src && this.isArray(src) ? src : [];
         					} else {
-        						clone = src && this.isPlainObject(src) ? src : {};
+        						clone = src && this._isPlainObject(src) ? src : {};
         					}
         					// Never move original objects, clone them
         					target[name] = this.extend(deep, clone, copy);
@@ -353,29 +316,6 @@
     		}
     		return "null";
     	},
-    	// Cross-browser xml parsing
-    	parseXML: function(data) {
-    		var xml, tmp;
-    		if ( !data || typeof data !== "string" ) {
-    			return null;
-    		}
-    		try {
-    			if (window.DOMParser) { // Standard
-    				tmp = new DOMParser();
-    				xml = tmp.parseFromString(data , "text/xml");
-    			} else { // IE
-    				xml = new ActiveXObject("Microsoft.XMLDOM");
-    				xml.async = "false";
-    				xml.loadXML(data);
-    			}
-    		} catch(e) {
-    			xml = undefined;
-    		}
-    		if (!xml || !xml.documentElement || xml.getElementsByTagName("parsererror").length) {
-    			this.error("Invalid XML: " + data);
-    		}
-    		return xml;
-    	},
     	merge: function(first, second) {
     		var l = second.length, i = first.length, j = 0;
     		if (typeof l === "number") {
@@ -392,10 +332,14 @@
     	},
     	fmtJSONMsg: function(jsonData) {
     		//json格式消息与响应的JSONMessage对象保持一致, status: 成功-success, 失败-fail
-    		var jsonMessage = {status:"success",code:'0',msg:'',result:{}};
+    		var result, jsonMessage = {status:"fail",code:'0',msg:'',result:{}};
     		try {
     			if (typeof jsonData === 'string') {
-    				result = eval("(" + jsonData + ")");
+                    if (typeof(JSON) == 'object' && JSON.parse) {
+                        result = JSON.parse(jsonData);
+                    } else {
+                        result = eval("(" + jsonData + ")");
+                    }
     			} else {
     				result = jsonData;
     			}
@@ -409,62 +353,11 @@
     				jsonMessage = result;
     			}
     		} catch(err) {
-    			try {
-    				if (typeof(JSON) == 'object' && JSON.parse) {
-        				var result = JSON.parse(jsonData);
-    					//对不规范响应内容进行处理
-    					if (result != undefined && result.status == undefined) {
-    						jsonMessage.status = "success";
-    						jsonMessage.code = "0";
-    						jsonMessage.msg = "";
-    						jsonMessage.result = result;
-    					}  else if (result != undefined) {
-    						jsonMessage = result;
-    					}
-    				} else {
-    					//服务器响应失败，错误代码：XXX，请稍后重试或联系我们的客服！
-    					jsonMessage = {status:"fail",code:'0',msg:"服务器响应失败，请稍后重试或联系我们的客服！",result:{}};
-    				}
-    			} catch(err) {
-    				jsonMessage = {status:"fail",code:'0',msg:err.description||err.toString()||'',result:{}};
-    			}
+                //服务器响应失败，错误代码：XXX，请稍后重试或联系我们的客服！
+                //TODO 可将err.description||err.toString()||''发送给日志服务器分析
+                jsonMessage = {status:"fail",code:'0',msg:"服务器响应失败，请稍后重试或联系我们的客服！",result:{}};
     		}
     		return jsonMessage || {status:"fail",code:'0',msg:'',result:{}};
-    	},
-    	xmlToJSON: function(xmlDoc) {
-    		// Create the return object
-    		var obj = {};
-    		if (xmlDoc.nodeType == 1) { // element
-    			// do attributes
-    			if (xmlDoc.attributes.length > 0) {
-    				obj["@attr"] = {};
-    				for (var j = 0; j < xmlDoc.attributes.length; j++) {
-    					var attribute = xmlDoc.attributes.item(j);
-    					obj["@attr"][attribute.nodeName] = attribute.nodeValue;
-    				}
-    			}
-    		} else if (xmlDoc.nodeType == 3) {
-    			//text
-    			obj = xmlDoc.nodeValue.trim();
-    		}
-    		// do children
-    		if (xmlDoc.hasChildNodes()) {
-    			for(var i = 0; i < xmlDoc.childNodes.length; i++) {
-    				var item = xmlDoc.childNodes.item(i);
-    				var nodeName = item.nodeName;
-    				if (typeof(obj[nodeName]) == "undefined") {
-    					obj[nodeName] = this.xmlToJSON(item);
-    				} else {
-    					if (typeof(obj[nodeName].push) == "undefined") {
-    						var old = obj[nodeName];
-    						obj[nodeName] = [];
-    						obj[nodeName].push(old);
-    					}
-    					obj[nodeName].push(this.xmlToJSON(item));
-    				}
-    			}
-    		}
-    		return obj;
     	},
         aop: function(context, orig, before, after) {
             var _self = this, aopFunc = function() {
@@ -489,13 +382,6 @@
                 }
                 return result;
             };
-//            for(var i in orig) {
-//                if(orig.hasOwnProperty(i)){
-//                    aopFunc[i] = orig[i];
-//                }
-//            }
-//            aopFunc.origFunc = orig;
-            //aopFunc.prototype = orig.prototype;
             return aopFunc;
         },
     	end: 0
