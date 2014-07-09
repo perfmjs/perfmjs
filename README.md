@@ -30,7 +30,7 @@ Nodejs版的perfmjs框架请移步：https://github.com/perfmjs/perfmjs-node
 
 可选功能：
 =======
-jQuery是该框架的可选部分。dom操作,ajax,css等功能可以使用jQuery框架提供，perfmjs框架在这些功能上不重复发明轮子！
+jQuery/zepto.js是该框架的可选部分。DOM操作,AJAX,CSS等功能可以使用jQuery及类似框架提供，perfmjs框架在这些功能上不重复发明轮子！
 
 TODO:
 =======
@@ -66,7 +66,7 @@ perfmjs.plugin('foo', function($$) {
 });
 ```
 
-demo.html
+index.html
 ```js
 <!DOCTYPE html>
 <html>

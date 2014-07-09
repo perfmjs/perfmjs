@@ -1,85 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head lang="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>[perfmjs]Demo</title>
-	<style>
-		.delayload{
-			height:160px;
-			width:199px;
-			border:1px solid red;
-			float:left;
-		}
-		.placehoder{
-			height:1360px;
-			width:400px;
-			border:1px solid black;
-		}
-		.delayinit{
-			height:260px;
-			width:400px;
-			border:1px solid blue;
-		}
-	</style>
-	<script type="text/javascript" src="/perfmjs/build/core.js?v=2012120303^{n:'css-comm',f:'',t:'css',m:'fb;common;',d:'http://192.168.66.150:63342'}|{n:'js-comm',f:'/perfmjs/example/include.js',t:'js',m:'jq;ajax;form;app;',d:'http://192.168.66.150:63342'}"></script>
-  </head>
-  <!--页面上只应该有一个很小的js文件被放置在<script>标签中加载，其余都是无阻塞加载-->
-  <body>
-    <div class="content" id="content">
-        <input type="button" value="测试弹窗(因未加载弹窗组件，该功能第1次使用无效）" onclick="webAlert({content:'您收到 <strong>1</strong> 条消息', left:'right', top:'bottom', time:'100', fixed:true});" />
-        <input type="button" value="测试弹窗（使用前先加载弹窗组件，该功能永远有效）" onclick="openWebAlert();" />
-		<br/><br/>
-        <input id="eventProxyBtn" type="button" value="模块间交互(需加载jQuery框架)"/>
-		<input id="eventProxyBtnxx" type="button" value="模块间交互xx(不需加载jQuery框架)" onclick="perfmjs.eventProxy.instance.emit(perfmjs.appconfig.events.heartbeat, {msg:'模块间交互xx'});" />
-        <input id="jq_try_btn" type="button" value="测试jquery功能(需预先加载jQuery框架)"/>
-        <input id="jq_load_jquery" type="button" value="加载jQuery框架" onclick="javascript:loadJQuery();"/>
-        <div class="placehoder"> I am just a placehoder.</div>
-    </div>
-    <script type="text/javascript">
-     var loadJQuery = function() {
-         perfmjs.includeres.load({src:"{n:'load-jquery-js',t:'js',m:'jquery;'}"}
-         ).loadModules({name:'load-jquery-js', type:'js', mdCallback:function(source, module, combineUrls) {
-             if (module === 'jquery') {
-                 combineUrls[combineUrls.length] = '/perfmjs/lib/perfmjs/jquery/jquery-1.11.1.min.js';
-             }
-         }, afterLoadedCallback:function() {
-             alert("已成功加载jQuery框架");
-             $('#eventProxyBtn').unbind();
-             $('#eventProxyBtn').bind('click', function () {
-                 perfmjs.eventProxy.instance.emit(perfmjs.appconfig.events.heartbeat, {msg: "send from index.html"});
-             });
-         }});
-     };
-    //第1种加载res方法为加载core.lib，如：/perfmjs/build/core.lib?v=2012120303^{n:'css-comm',f:'/perfmjs/lib/include-css.lib',t:'css',m:'fb;common;',d:'http://192.168.66.150:63342'}|{n:'lib-comm',f:'/perfmjs/lib/include.lib',t:'lib',m:'jq;ajax;form;app;',d:'http://192.168.66.150:63342'}
-    //第2种res加载方法如下：
-    perfmjs.includeres.loadHeadRes("/perfmjs/lib/perfmjs/onlyforload.js", function() {
-      //console.log('==========load onlyforload.lib=========');
-    });
-    //第3种res加载方法如下：
-    var loadedWebAlert = false;
-    function openWebAlert() {
-        if (loadedWebAlert) {
-            webAlert({content:'您收到 <strong>2</strong> 条消息,  currentDomain:' + perfmjs.currentDomain, left:'right', top:'bottom', time:'100', fixed:true});
-        }
-        perfmjs.includeres.load({src:"{n:'css1-webdialog',t:'css',m:'webdialog;'}|{n:'js1-webdialog',t:'js',m:'webdialog;'}"}
-        ).loadModules({name:'css1-webdialog', type:'css', mdCallback:function(source, module, combineUrls) {
-            if (module === 'webdialog') {
-                combineUrls[combineUrls.length] = '/perfmjs/lib/widget/webdialog/skin/new2010/new2010.css?v=20140703001';
+    <title>Hello perfmjs</title>
+    <script type="text/javascript" src="build/core.js?v=20140709001"></script>
+    <script>
+        perfmjs.includeres.load({src:"{n:'load-js',t:'js',m:'foo;'}"}
+        ).loadModules({name:'load-js', type:'js', mdCallback:function(source, module, combineUrls) {
+            if (module === 'foo') {
+                combineUrls[combineUrls.length] = 'foo.js';
             }
         }, afterLoadedCallback:function() {
-            //webAlert({content:'您收到 <strong>2</strong> 条消息', left:'right', top:'bottom', time:'100', fixed:true});
-        }}).loadModules({name:'js1-webdialog', type:'js', mdCallback:function(source, module, combineUrls) {
-            if (module === 'webdialog') {
-                combineUrls[combineUrls.length] = '/perfmjs/lib/widget/webdialog/webDialog.js';
-            }
-        }, afterLoadedCallback:function() {
-            loadedWebAlert = true;
-            webAlert({content:'您收到 <strong>2</strong> 条消息', left:'right', top:'bottom', time:'100', fixed:true});
+            //应用入口函数
+            perfmjs.ready(function($$, app) {
+                app.register('foo', $$.foo);
+                app.startAll();
+            });
         }});
-        return true;
-    }
-    //第4种res加载资源的方法如下：
-    //perfmjs.includeres.load({perfmjs:"{n:'css-webdialog',f:'/perfmjs/lib/include-webdialog.lib',t:'css',m:'webdialog;'}|{n:'lib-webdialog',t:'lib',m:'webdialog;'}"});
     </script>
-  </body>
+</head>
+<body>
+Hello perfmjs!
+</body>
 </html>

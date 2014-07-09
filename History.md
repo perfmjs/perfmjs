@@ -1,7 +1,7 @@
 1.2.1 / 2014-07-09
 ==================
 
- * improved: improved README.md
+ * improved: improved README.md and Help document
 
 1.2.0 / 2014-07-09
 ==================
