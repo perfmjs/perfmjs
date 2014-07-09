@@ -581,7 +581,7 @@ perfmjs.plugin('browser', function($$) {
 			},
 			end: 0
 		});
-		$$.xxx.yyy.defaults = {
+		$$.yyy.defaults = {
 			scope: 'singleton',
 			end: 0
 		};

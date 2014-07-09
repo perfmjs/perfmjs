@@ -12,7 +12,7 @@ perfmjs.plugin('unittest.ssqfsm', function($$) {
         },
         end: 0
     });
-    $$.fsm.ssqfsm.defaults = {
+    $$.ssqfsm.defaults = {
         initial: {event: 'startup', from: 'init', to: 'fushi'},
         stateMap: {'changePlay': {'fushi': 'dantuo'}},
         end: 0
