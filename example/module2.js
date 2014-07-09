@@ -1,7 +1,7 @@
 perfmjs.plugin('module2', function($$) {
 	$$.base("module2", {
 		init: function(eventProxy) {
-            this.options['eventProxy'] = eventProxy;
+            this.option('eventProxy', eventProxy);
 			this.createHTML();
             this.options['eventProxy'].on($$.appconfig.events.heartbeat, this.create);
             this.options['eventProxy'].on($$.sysconfig.events.moduleIsReady, function() {$$.logger.debug("module2 is ready!");});

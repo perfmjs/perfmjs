@@ -42,6 +42,37 @@ TODO:
 
 GitHub上类似框架: Fdev4  https://github.com/swain/Fdev4
 
+How to use
+-------
+```js
+perfmjs.plugin('module1', function($$) {
+	$$.base("module1", {
+		init: function(eventProxy) {
+            this.option('eventProxy', eventProxy);
+			this.sayHello();
+			return this;
+		},
+		sayHello: function() {
+			alert('hello');
+		},
+		end: 0
+	});
+	$$.module1.defaults = {
+        eventProxy: {},
+		scope: 'singleton',
+		end: 0
+	};
+});
+```
+```js
+/**
+ * 应用入口函数
+ */
+perfmjs.ready(function($$, app) {
+    app.register("module1", $$.module1);
+    app.startAll();
+});
+```
 
 License
 -------

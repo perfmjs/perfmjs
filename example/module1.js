@@ -1,7 +1,7 @@
 perfmjs.plugin('module1', function($$) {
 	$$.base("module1", {
 		init: function(eventProxy) {
-            this.options['eventProxy'] = eventProxy;
+            this.option('eventProxy', eventProxy);
 			this._bindEvent();
 			return this;
 		},
