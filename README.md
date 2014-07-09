@@ -44,34 +44,55 @@ GitHub上类似框架: Fdev4  https://github.com/swain/Fdev4
 
 How to use
 -------
+foo.js
 ```js
-perfmjs.plugin('module1', function($$) {
-	$$.base("module1", {
-		init: function(eventProxy) {
+perfmjs.plugin('foo', function($$) {
+    $$.base("foo", {
+        init: function(eventProxy) {
             this.option('eventProxy', eventProxy);
-			this.sayHello();
-			return this;
-		},
-		sayHello: function() {
-			alert('hello');
-		},
-		end: 0
-	});
-	$$.module1.defaults = {
+            this.sayHello();
+            return this;
+        },
+        sayHello: function() {
+            alert('hello perfmjs!');
+        },
+        end: 0
+    });
+    $$.foo.defaults = {
         eventProxy: {},
-		scope: 'singleton',
-		end: 0
-	};
+        scope: 'singleton',
+        end: 0
+    };
 });
 ```
+
+demo.html
 ```js
-/**
- * 应用入口函数
- */
-perfmjs.ready(function($$, app) {
-    app.register("module1", $$.module1);
-    app.startAll();
-});
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Hello perfmjs</title>
+    <script type="text/javascript" src="build/core.js?v=20140709001"></script>
+    <script>
+        perfmjs.includeres.load({src:"{n:'load-js',t:'js',m:'foo;'}"}
+        ).loadModules({name:'load-js', type:'js', mdCallback:function(source, module, combineUrls) {
+            if (module === 'foo') {
+                combineUrls[combineUrls.length] = 'foo.js';
+            }
+        }, afterLoadedCallback:function() {
+            //应用入口函数
+            perfmjs.ready(function($$, app) {
+                app.register("foo", $$.foo);
+                app.startAll();
+            });
+        }});
+    </script>
+</head>
+<body>
+Hello perfmjs!
+</body>
+</html>
 ```
 
 License
