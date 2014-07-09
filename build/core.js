@@ -391,8 +391,15 @@
 		var name = perfmjs.utils.isString(meta) ? meta : meta['name'];
         runFnNow = runFnNow || true;
 		fn = perfmjs.utils.isFunction(meta) ? meta : fn;
-		if (!perfmjs.utils.isFunction(fn)) throw "Plugin fn required";
-		if (name && fn) perfmjs.plugins[name] = fn;
+		if (!perfmjs.utils.isFunction(fn)) {
+            throw "Plugin fn required!";
+        }
+        if (perfmjs.plugins[name]) {
+            throw "Plugin name [" + name + " ] is existed!";
+        }
+		if (name && fn) {
+            perfmjs.plugins[name] = fn;
+        }
         if (runFnNow) {
             !fn(perfmjs);
         }
@@ -555,26 +562,26 @@ perfmjs.plugin('browser', function($$) {
 	 * 子类继承父类的例子,调用如：xxx.newInstance(arg) 或 new perfmjs.xxx() 或 new $$.xxx() 或perfmjs.xxx.newInstance(arg) 或用perfmjs.xxx.instance访问实例;
 	第一级子类例子：
     perfmjs.plugin('xxx', function($$) {
-		$$.base("base.xxx", {
-			init: function(arg) {
+		$$.base("xxx", {
+			init: function(initParam) {
 				return this;
 			},
 			end: 0
 		});
-		$$.base.xxx.defaults = {
+		$$.xxx.defaults = {
 			scope: 'singleton',
 			end: 0
 		};
 	});
    多级子类例子：
-   perfmjs.plugin('xxx', function($$) {
-		$$.base("base.xxx.yyy", {
-			init: function(arg) {
+   perfmjs.plugin('xxx.yyy', function($$) {
+		$$.base("xxx.yyy", {
+			init: function(initParam) {
 				return this;
 			},
 			end: 0
-		}, $$.base.xxx.prototype, $$.base.xxx.defaults);
-		$$.base.xxx.yyy.defaults = {
+		});
+		$$.xxx.yyy.defaults = {
 			scope: 'singleton',
 			end: 0
 		};
@@ -582,16 +589,21 @@ perfmjs.plugin('browser', function($$) {
 	 * @param name e.g. 'base.ssq'
 	 */
 	$$.base = function(name, prototype, parentPrototype, parentDefaults) {
-		var parentPrototype = parentPrototype || $$.base.prototype;
-		var parentDefaults = parentDefaults || $$.base.defaults;
+        //name必须全局唯一
+        if (name.indexOf('base.') < 0) {
+            name = 'base.' + name;
+        }
 		var namespace = name.split(".").slice(0, name.split(".").length - 1).join('.');
-		//name必须全局唯一
 		name = name.split(".")[name.split(".").length - 1];
-		var spaceLen = namespace.split(".").length;
-		var spaces = namespace.split(".");
+		var parentType, spaceLen = namespace.split(".").length, spaces = namespace.split(".");
 		for (var i = 0; i < spaceLen; i++) {
 			$$[namespace] = (i < 1)?$$[spaces[0]]:$$[namespace][spaces[i]];
+            if (i === (spaceLen - 1)) {
+                parentType = $$[namespace];
+            }
 		}
+        parentPrototype = parentPrototype || parentType.prototype || $$.base.prototype;
+        parentDefaults = parentDefaults || parentType.defaults || $$.base.defaults;
 		$$[namespace] = $$[namespace] || {};
 		$$[name] = $$[namespace][name] = function(callInitFunc, options) {
 			callInitFunc = (callInitFunc === undefined)?true:callInitFunc;
@@ -603,11 +615,11 @@ perfmjs.plugin('browser', function($$) {
 				$$[name]['instance'] = this;
 			}
 		};
-		$$[namespace][name].newInstance = function(arg) {
+		$$[namespace][name].newInstance = function(initParam) {
 			if ($$[name]['instance']) {
 				return $$[name]['instance'];
 			}
-			var _inst = new $$[namespace][name](false); _inst.init(arg);
+			var _inst = new $$[namespace][name](false); _inst.init(initParam);
 			return _inst;
 		};
 		$$[namespace][name].prototype = $$.utils.extend(true, {}, parentPrototype, prototype);
@@ -617,21 +629,17 @@ perfmjs.plugin('browser', function($$) {
 		};
 	};
 	$$.base.prototype = {
-		init: function() {
+		init: function(initParam) {
 			return this;
 		},
 		option: function(key, value) {
-			var _options = key;
-			if (typeof key == "string") {
-				if (typeof value === 'undefined') {
-					return this.options[key];
-				}
-				_options = {};
-				_options[key] = value;
-			}
-			for (_key in _options) {
-				this.options[_key] = _options[_key];
-			}
+            if (typeof key === "string" && this.options.hasOwnProperty(key)) {
+                if (typeof value === 'undefined') {
+                    return this.options[key];
+                } else {
+                    return this.options[key] = value;
+                }
+            }
 		}
 	};
 	/*
@@ -643,7 +651,7 @@ perfmjs.plugin('browser', function($$) {
 		end: 0
 	};
 })(perfmjs); /**
- * 日志模块 FIXME 待完善
+ * 日志模块 FIXME 待完善, 目前仅供Node.js环境下使用
  * 1）允许定义日志等级 -- "error", "warn", "info", "debug", "log"
  * 2）在Firefox中通过firebug控制台输出日志，在IE中通过在url中添加debug=true参数，将日志显示在页面底部。
  * 3）线上模式的错误日志，将记录到draggon监控系统，触发报警。
@@ -800,7 +808,7 @@ perfmjs.plugin('browser', function($$) {
  * import utils.js
  */
 perfmjs.plugin('joquery', function($$) {
-	$$.base("base.joquery", {
+	$$.base("joquery", {
 		init: function() {
 			if (arguments === undefined) return this;
 			//copy传进来的入参数组
@@ -1031,22 +1039,12 @@ perfmjs.plugin('joquery', function($$) {
             }
             return result;       	
         }
-	}, $$.base.prototype, $$.base.defaults);
-	$$.base.joquery.defaults = {
+	});
+	$$.joquery.defaults = {
 		scope: 'prototype',
 		end: 0
 	};
-});
-/*
-SamplesData = [
-   		    { ID: 1, firstName: "Chris", lastName: "Pearson", BookIDs: [1001, 1002, 1003] },
-   		    { ID: 9, firstName: "Bernard", lastName: "Sutherland", BookIDs: [1001, 2002, 3003] },
-   		    { ID: 20, firstName: "Kate", lastName: "Pinkerton", BookIDs: [4001, 3002, 2003] }
-   		];
-var sample = joquery.newInstance(SamplesData).updateOrInsert({ID: 0, firstName: "Chris", lastName: "Pearson", BookIDs: [1001, 1002, 1003]}, function(item){return item.ID == 9;}, function(item){return item.ID > 15;});
-alert(perfmjs.json.toJSON(sample));
-var sample2 = joquery.newInstance(SamplesData).where(function(item, index){return item.ID == 9;});
-alert(perfmjs.json.toJSON(sample2.toArray()));*////#source 1 1 /src/1.0.0/load.js
+});///#source 1 1 /src/1.0.0/load.js
 /* head.load - v1.0.3 */
 /*
  * HeadJS     The only script in your <HEAD>
@@ -1957,7 +1955,7 @@ alert(perfmjs.json.toJSON(sample2.toArray()));*////#source 1 1 /src/1.0.0/load.j
  * import base.js
  */
 perfmjs.plugin('eventProxy', function($$) {
-	$$.base("base.eventProxy", {
+	$$.base("eventProxy", {
 		init: function(){
 			this.channels = {};
 			return this;
@@ -2071,8 +2069,8 @@ perfmjs.plugin('eventProxy', function($$) {
 		  return this;
 		},
 		end: 0
-	}, $$.base.prototype, $$.base.defaults);
-	$$.base.eventProxy.defaults = {
+	});
+	$$.eventProxy.defaults = {
 		scope: 'singleton',
 		end: 0
 	};
@@ -2081,7 +2079,7 @@ perfmjs.plugin('eventProxy', function($$) {
  * Created by tony on 2014/4/11.
  */
 perfmjs.plugin('fsm', function($$) {
-    $$.base("base.fsm", {
+    $$.base("fsm", {
         init: function() {
             if (this.options['initial']) {
                 this.option('current',this.options['initial']['from']);
@@ -2167,7 +2165,7 @@ perfmjs.plugin('fsm', function($$) {
         },
         end: 0
     });
-    $$.base.fsm.defaults = {
+    $$.fsm.defaults = {
         initial: {event: 'startup', from: 'init', to: 'final', defer: false}, //e.g. {event: 'startup', from:'none', to:'final', defer:false}
         stateMap: {},  //e.g. {'startup':{'none':'final', 'on':'final'}}
         current: 'init',
@@ -2188,7 +2186,7 @@ perfmjs.plugin('fsm', function($$) {
  * import lazymodule.js
  */
 perfmjs.plugin('app', function($$) {
-	$$.base("base.app", {
+	$$.base("app", {
 		init: function(arg) {	
 			this.moduleData = {};
 			this.eventProxy = $$.eventProxy.newInstance();
@@ -2360,8 +2358,8 @@ perfmjs.plugin('app', function($$) {
             return module.instance;
         }
 
-			var instance = new module.creator(false, opt), name, method;
-			instance.init($$.eventProxy.newInstance());
+        var instance = new module.creator(false, opt), name, method;
+        instance.init($$.eventProxy.newInstance());
 
 			//debug模式下try catch不起作用，交由浏览器自己处理错误。
 			//online模式下可以把错误信息记录在日志服务器上。
@@ -2404,8 +2402,8 @@ perfmjs.plugin('app', function($$) {
 			return null;
 		},
 		end:0
-	}, $$.base.prototype, $$.base.defaults);
-	$$.base.app.defaults = {
+	});
+	$$.app.defaults = {
 		scope: 'singleton',
 		end: 0
 	};

@@ -1,5 +1,5 @@
 perfmjs.plugin('module3', function($$) {
-	$$.base("base.module3", {
+	$$.base("module3", {
 		init: function(eventProxy) {
             this.options['eventProxy'] = eventProxy;
 			this.createHTML();
@@ -15,7 +15,7 @@ perfmjs.plugin('module3', function($$) {
 		},
 		end:0
 	});
-	$$.base.module3.defaults = {
+	$$.module3.defaults = {
         eventProxy: {},
 		scope: 'singleton',
 		end: 0
