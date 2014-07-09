@@ -32,15 +32,6 @@ Nodejs版的perfmjs框架请移步：https://github.com/perfmjs/perfmjs-node
 =======
 jQuery/zepto.js是该框架的可选部分。DOM操作,AJAX,CSS等功能可以使用jQuery及类似框架提供，perfmjs框架在这些功能上不重复发明轮子！
 
-TODO:
-=======
-增加资源文件自已更新缓存的功能（不需使用版本号）
-
-支持Html5,支持移动Mobile
-
-支持lazyload,bigRender等高效功能（可选功能，默认不开启）
-
-GitHub上类似框架: Fdev4  https://github.com/swain/Fdev4
 
 How to use
 -------
@@ -94,6 +85,17 @@ Hello perfmjs!
 </body>
 </html>
 ```
+
+TODO:
+=======
+增加资源文件自已更新缓存的功能（不需使用版本号）
+
+支持Html5,支持移动Mobile
+
+支持lazyload,bigRender等高效功能（可选功能，默认不开启）
+
+GitHub上类似框架: Fdev4  https://github.com/swain/Fdev4
+
 
 License
 -------
