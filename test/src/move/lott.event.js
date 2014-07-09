@@ -3,7 +3,7 @@
  * Created by Administrator on 2014/4/10.
  */
 perfmjs.plugin('unit.lottevent', function($$) {
-    $$.base("base.lottevent", {
+    $$.base("lottevent", {
         init: function (sb) {
             var self = this;
             sb.on('lottevent/heartbeat', function (data) {
@@ -18,7 +18,7 @@ perfmjs.plugin('unit.lottevent', function($$) {
         },
         end: 0
     });
-    $$.base.lottevent.defaults = {
+    $$.lottevent.defaults = {
         scope: 'singleton',
         end: 0
     };

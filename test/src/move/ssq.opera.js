@@ -3,7 +3,7 @@
  * Created by Administrator on 2014/4/11.
  */
 perfmjs.plugin('unit.ssqopera', function($$) {
-    $$.base("base.ssqopera", {
+    $$.base("ssqopera", {
         init: function() {
             this.dispatcher();
             return this;
@@ -15,7 +15,7 @@ perfmjs.plugin('unit.ssqopera', function($$) {
             $$.lottevent.instance.buy(888);
         }
     });
-    $$.base.ssqopera.defaults = {
+    $$.ssqopera.defaults = {
         scope: 'singleton',
         lottery: 'ssq',
         end: 0
