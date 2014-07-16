@@ -569,12 +569,14 @@ perfmjs.plugin('browser', function($$) {
 			end: 0
 		});
 		$$.xxx.defaults = {
-			scope: 'singleton',
 			end: 0
 		};
 	});
    多级子类例子：
-   perfmjs.plugin('xxx.yyy', function($$) {
+   if (typeof module !== 'undefined' && module.exports) {
+        require('./xxx');
+   }
+   perfmjs.plugin('yyy', function($$) {
 		$$.base("xxx.yyy", {
 			init: function(initParam) {
 				return this;
@@ -582,11 +584,10 @@ perfmjs.plugin('browser', function($$) {
 			end: 0
 		});
 		$$.yyy.defaults = {
-			scope: 'singleton',
 			end: 0
 		};
 	});
-	 * @param name e.g. 'base.ssq'
+	 * @param name e.g. 'dlt','fc.ssq'
 	 */
 	$$.base = function(name, prototype, parentPrototype, parentDefaults) {
         //name必须全局唯一
@@ -611,15 +612,18 @@ perfmjs.plugin('browser', function($$) {
 			this.name = name;
 			this.options = $$.utils.extend({}, parentDefaults, $$[namespace][name].defaults, options);
 			(callInitFunc && this.init());
+            if (!this.options['scope']) {
+                this.options['scope'] = 'singleton';
+            }
 			if (this.options['scope'] === 'singleton') {
 				$$[name]['instance'] = this;
 			}
 		};
-		$$[namespace][name].newInstance = function(initParam) {
+		$$[namespace][name].newInstance = function(initParam, options) {
 			if ($$[name]['instance']) {
 				return $$[name]['instance'];
 			}
-			var _inst = new $$[namespace][name](false); _inst.init(initParam);
+			var _inst = new $$[namespace][name](false, options); _inst.init(initParam);
 			return _inst;
 		};
 		$$[namespace][name].prototype = $$.utils.extend(true, {}, parentPrototype, prototype);
@@ -2183,7 +2187,7 @@ perfmjs.plugin('fsm', function($$) {
  * @date 2012-11-30
  * import logger.js
  * import eventProxy.js
- * import lazymodule.js
+ * import base.js
  */
 perfmjs.plugin('app', function($$) {
 	$$.base("app", {
@@ -2358,11 +2362,11 @@ perfmjs.plugin('app', function($$) {
             return module.instance;
         }
 
-        var instance = new module.creator(false, opt), name, method;
-        instance.init($$.eventProxy.newInstance());
+        return module.creator.newInstance($$.eventProxy.newInstance(), opt);
 
 			//debug模式下try catch不起作用，交由浏览器自己处理错误。
 			//online模式下可以把错误信息记录在日志服务器上。
+//          var name, method;
 //			if (!DEBUG_MOD){
 //				for (name in instance){
 //					method = instance[name];
