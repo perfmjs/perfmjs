@@ -1,3 +1,7 @@
+1.2.3 / 2014-07-16
+==================
+ * fixed: fixed defaults problem in base.js
+
 1.2.2 / 2014-07-16
 ==================
  * fixed: fixed scope problem in app.js

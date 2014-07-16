@@ -596,15 +596,12 @@ perfmjs.plugin('browser', function($$) {
         }
 		var namespace = name.split(".").slice(0, name.split(".").length - 1).join('.');
 		name = name.split(".")[name.split(".").length - 1];
-		var parentType, spaceLen = namespace.split(".").length, spaces = namespace.split(".");
+		var spaceLen = namespace.split(".").length, spaces = namespace.split(".");
 		for (var i = 0; i < spaceLen; i++) {
 			$$[namespace] = (i < 1)?$$[spaces[0]]:$$[namespace][spaces[i]];
-            if (i === (spaceLen - 1)) {
-                parentType = $$[namespace];
-            }
+            parentDefaults = $$.utils.extend({}, parentDefaults, $$[namespace].defaults);
+            parentPrototype = $$.utils.extend({}, parentPrototype, $$[namespace].prototype);
 		}
-        parentPrototype = parentPrototype || parentType.prototype || $$.base.prototype;
-        parentDefaults = parentDefaults || parentType.defaults || $$.base.defaults;
 		$$[namespace] = $$[namespace] || {};
 		$$[name] = $$[namespace][name] = function(callInitFunc, options) {
 			callInitFunc = (callInitFunc === undefined)?true:callInitFunc;
@@ -628,7 +625,8 @@ perfmjs.plugin('browser', function($$) {
 		};
 		$$[namespace][name].prototype = $$.utils.extend(true, {}, parentPrototype, prototype);
 		$$[namespace][name].prototype._super = function(funcName, options) {
-			//FIXME base父类的第一级子类中（base.ssqModule)不可以执行重写的方法：如this._super('init');
+            //FIXME base父类的第一级子类中（base.ssqModule)不可以执行重写的方法：如this._super('init', options);
+            //FIXME this._super('init', options); 只能存在于当前类中
 			parentPrototype[funcName].call(this, options);
 		};
 	};
@@ -2361,7 +2359,6 @@ perfmjs.plugin('app', function($$) {
         if (module.instance != null){
             return module.instance;
         }
-
         return module.creator.newInstance($$.eventProxy.newInstance(), opt);
 
 			//debug模式下try catch不起作用，交由浏览器自己处理错误。
