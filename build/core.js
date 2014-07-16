@@ -600,7 +600,7 @@ perfmjs.plugin('browser', function($$) {
 		for (var i = 0; i < spaceLen; i++) {
 			$$[namespace] = (i < 1)?$$[spaces[0]]:$$[namespace][spaces[i]];
             parentDefaults = $$.utils.extend({}, parentDefaults, $$[namespace].defaults);
-            parentPrototype = $$.utils.extend({}, parentPrototype, $$[namespace].prototype);
+            parentPrototype = $$.utils.extend(true, {}, parentPrototype, $$[namespace].prototype);
 		}
 		$$[namespace] = $$[namespace] || {};
 		$$[name] = $$[namespace][name] = function(callInitFunc, options) {
@@ -626,7 +626,7 @@ perfmjs.plugin('browser', function($$) {
 		$$[namespace][name].prototype = $$.utils.extend(true, {}, parentPrototype, prototype);
 		$$[namespace][name].prototype._super = function(funcName, options) {
             //FIXME base父类的第一级子类中（base.ssqModule)不可以执行重写的方法：如this._super('init', options);
-            //FIXME this._super('init', options); 只能存在于当前类中
+            //FIXME this._super('init', options); 只能存在于最终实例化的那1个子类中
 			parentPrototype[funcName].call(this, options);
 		};
 	};
