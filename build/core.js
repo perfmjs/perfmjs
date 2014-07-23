@@ -835,7 +835,7 @@ perfmjs.plugin('joquery', function($$) {
                     }
                 }
             }
-            return new $$.joquery(false).init(newArray);
+            return $$.joquery.newInstance(newArray);
         },
         select: function(clause) {
             var newArray = new Array();
@@ -845,40 +845,36 @@ perfmjs.plugin('joquery', function($$) {
                     newArray[newArray.length] = this.items[i];
                 }
             }
-            return new $$.joquery(false).init(newArray);
+            return $$.joquery.newInstance(newArray);
         },
         orderBy: function(clause) {
             var tempArray = new Array();
             for (var i = 0; i < this.items.length; i++) {
                 tempArray[tempArray.length] = this.items[i];
             }
-            return new $$.joquery(false).init(
-	            tempArray.sort(function(a, b) {
-	                var x = clause(a);
-	                var y = clause(b);
-	                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-	            })
-            );
+            return $$.joquery.newInstance(tempArray.sort(function(a, b) {
+                    var x = clause(a);
+                    var y = clause(b);
+                    return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            }));
         },
         orderByDescending: function(clause) {
             var tempArray = new Array();
             for (var i = 0; i < this.items.length; i++) {
                 tempArray[tempArray.length] = this.items[i];
             }
-            return new $$.joquery(false).init(
-	            tempArray.sort(function(a, b) {
-	                var x = clause(b);
-	                var y = clause(a);
-	                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-	            })
-            );
+            return $$.joquery.newInstance(tempArray.sort(function(a, b) {
+                var x = clause(b);
+                var y = clause(a);
+                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+            }));
         },
         selectMany: function(clause) {
             var r = new Array();
             for (var i = 0; i < this.items.length; i++) {
                 r = r.concat(clause(this.items[i]));
             }
-            return new $$.joquery(false).init(r);
+            return $$.joquery.newInstance(r);
         },
         count: function(clause) {
             if (clause == null)
@@ -887,19 +883,16 @@ perfmjs.plugin('joquery', function($$) {
                 return this.where(clause).items.length;
         },
         distinct: function(clause) {
-            var item;
-            var dict = new Object();
-            var retVal = new Array();
+            var item, dict = {}, retVal = [];
             for (var i = 0; i < this.items.length; i++) {
                 item = clause(this.items[i]);
-                // TODO - This doens't correctly compare Objects. Need to fix this
-                if (dict[item] == null) {
+                if (!dict[item]) {
                     dict[item] = true;
-                    retVal[retVal.length] = item;
+                    retVal[retVal.length] = this.items[i];
                 }
             }
             dict = null;
-            return new $$.joquery(false).init(retVal);
+            return $$.joquery.newInstance(retVal);
         },
         any: function(clause) {
         	var result = {'matched':false, 'index':-1, 'item': {}};
@@ -918,7 +911,7 @@ perfmjs.plugin('joquery', function($$) {
             var retVal = new Array();
             for (var index = this.items.length - 1; index > -1; index--)
                 retVal[retVal.length] = this.items[index];
-            return new $$.joquery(false).init(retVal);
+            return $$.joquery.newInstance(retVal);
         },
         first: function(clause) {
             if (clause != null) {
@@ -947,7 +940,7 @@ perfmjs.plugin('joquery', function($$) {
         },
         concatArray: function(array) {
             var arr = array.items || array;
-            return new $$.joquery(false).init(this.items.concat(arr));
+            return $$.joquery.newInstance(this.items.concat(arr));
         },
         intersect: function(secondArray, clause) {
             var clauseMethod;
@@ -967,7 +960,7 @@ perfmjs.plugin('joquery', function($$) {
                     }
                 }
             }
-            return new $$.joquery(false).init(result);
+            return $$.joquery.newInstance(result);
         },
         defaultIfEmpty: function(defaultValue) {
             if (this.items.length == 0) {

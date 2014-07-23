@@ -1,3 +1,7 @@
+1.2.4 / 2014-07-23
+==================
+ * improved: improved some function in joquery.js
+
 1.2.3 / 2014-07-16
 ==================
  * fixed: fixed defaults problem in base.js
