@@ -1,3 +1,7 @@
+1.2.5 / 2014-07-28
+==================
+ * fixed: fixed logic about perfmjs.utils.isH5Supported()
+
 1.2.4 / 2014-07-23
 ==================
  * improved: improved some function in joquery.js

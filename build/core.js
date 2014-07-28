@@ -50,7 +50,7 @@
     perfmjs.utils = {
     	namespace: _namespace,
         isH5Supported: function() {
-            return -[1,]; //判断加载页面的浏览器是否为支持Html5的现代浏览器
+            return -[1,] === -1; //判断加载页面的浏览器是否为支持Html5的现代浏览器
         },
     	isJQueryLoaded: function() {
     		return (typeof jQuery !== 'undefined');
@@ -848,22 +848,14 @@ perfmjs.plugin('joquery', function($$) {
             return $$.joquery.newInstance(newArray);
         },
         orderBy: function(clause) {
-            var tempArray = new Array();
-            for (var i = 0; i < this.items.length; i++) {
-                tempArray[tempArray.length] = this.items[i];
-            }
-            return $$.joquery.newInstance(tempArray.sort(function(a, b) {
+            return $$.joquery.newInstance(this.items.slice().sort(function(a, b) {
                     var x = clause(a);
                     var y = clause(b);
                     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
             }));
         },
-        orderByDescending: function(clause) {
-            var tempArray = new Array();
-            for (var i = 0; i < this.items.length; i++) {
-                tempArray[tempArray.length] = this.items[i];
-            }
-            return $$.joquery.newInstance(tempArray.sort(function(a, b) {
+        orderByDesc: function(clause) {
+            return $$.joquery.newInstance(this.items.slice().sort(function(a, b) {
                 var x = clause(b);
                 var y = clause(a);
                 return ((x < y) ? -1 : ((x > y) ? 1 : 0));
