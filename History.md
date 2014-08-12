@@ -1,3 +1,7 @@
+1.3.0 / 2014-08-12
+==================
+ * 增强: 实现浏览器端的AMD模块化规范，功能类似require.js,但比require.js更轻量
+
 1.2.5 / 2014-07-28
 ==================
  * fixed: fixed logic about perfmjs.utils.isH5Supported()

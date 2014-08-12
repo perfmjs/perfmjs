@@ -1,6 +1,6 @@
 perfmjs
 =======
-high performance javascript framework  V1.2.4
+high performance javascript framework  V1.3.0
 
 为什么使用perfmjs?　
 =======
@@ -11,6 +11,8 @@ Features:
 fast by default：高效，易用，易读
 
 核心库(core.js)压缩后只有32k+，还可以优化至更小
+
+实现浏览器端的AMD模块化规范，功能类似require.js,但比require.js更轻量
 
 原生态支持面向对象(object-oriented)功能
 
