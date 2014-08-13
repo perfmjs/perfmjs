@@ -1,6 +1,10 @@
+1.3.1 / 2014-08-13
+==================
+ * add: 给perfmjs框架增加AMD模块化规范并在README.md中增加使用例子
+
 1.3.0 / 2014-08-12
 ==================
- * 增强: 实现浏览器端的AMD模块化规范，功能类似require.js,但比require.js更轻量
+ * add: 实现浏览器端的AMD模块化规范，功能类似require.js,但比require.js更轻量
 
 1.2.5 / 2014-07-28
 ==================
@@ -52,3 +56,5 @@
 ==================
  * fix: fix some bugs
  * add: perfmjs.utils#toNumber, perfmjs.utils#toBoolean
+
+说明：修改类型为: improved(改善功能)/add(新增功能)/remove(移除功能)/modify(修复功能内容)/fix(修改BUG)

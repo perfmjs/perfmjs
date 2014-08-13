@@ -1,6 +1,6 @@
 perfmjs
 =======
-high performance javascript framework  V1.3.0
+high performance javascript framework  V1.3.1
 
 为什么使用perfmjs?　
 =======
@@ -12,7 +12,7 @@ fast by default：高效，易用，易读
 
 核心库(core.js)压缩后只有32k+，还可以优化至更小
 
-实现浏览器端的AMD模块化规范，功能类似require.js,但比require.js更轻量
+实现了浏览器端的AMD模块化规范，功能类似require.js, 但比require.js更轻量
 
 原生态支持面向对象(object-oriented)功能
 
@@ -39,23 +39,39 @@ How to use
 -------
 foo.js
 ```js
-perfmjs.plugin('foo', function($$) {
+define('foo', ['perfmjs'], function($$) {
     $$.base("foo", {
-        init: function(eventProxy) {
-            this.option('eventProxy', eventProxy);
-            this.sayHello();
+        init: function(initParam) {
             return this;
         },
-        sayHello: function() {
-            alert('hello perfmjs!');
+        sayHello: function(name) {
+            return 'hi- ' + name;
         },
         end: 0
     });
     $$.foo.defaults = {
-        eventProxy: {},
-        scope: 'singleton',
         end: 0
     };
+    return $$.foo;
+});
+
+bar.js, bar.js继承foo.js
+```js
+define('bar', ['perfmjs', 'foo'], function($$, foo) {
+    $$.base("foo.bar", {
+        init: function(initParam) {
+            return this;
+        },
+        sayHello: function(name) {
+            var superName = this._super('sayHello', name);
+            return 'call super:' + superName + ', call self: hello- ' + name;
+        },
+        end: 0
+    });
+    $$.bar.defaults = {
+        end: 0
+    };
+    return $$.bar;
 });
 ```
 
@@ -66,18 +82,20 @@ index.html
 <head lang="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Hello perfmjs</title>
-    <script type="text/javascript" src="build/core.js?v=20140709001"></script>
+    <script type="text/javascript" src="build/core.js?v=20140813001"></script>
     <script>
         perfmjs.includeres.load({src:"{n:'load-js',t:'js',m:'foo;'}"}
         ).loadModules({name:'load-js', type:'js', mdCallback:function(source, module, combineUrls) {
             if (module === 'foo') {
                 combineUrls[combineUrls.length] = 'foo.js';
+                combineUrls[combineUrls.length] = 'bar.js';
             }
         }, afterLoadedCallback:function() {
             //应用入口函数
-            perfmjs.ready(function($$, app) {
-                app.register("foo", $$.foo);
-                app.startAll();
+            require(['perfmjs', 'app', 'bar'], function($$, app, bar) {
+                app.register("bar", bar);
+                app.start('bar');
+                alert(bar.instance.sayHello('bar'));
             });
         }});
     </script>

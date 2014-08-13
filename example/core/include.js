@@ -17,11 +17,11 @@
 			combineUrls[combineUrls.length] = '/perfmjs/lib/widget/form/jquery.form.js';
 		} else if (module === 'app') {
 			//装载应用需要的资源
-			combineUrls[combineUrls.length] = '/perfmjs/example/appconfig.js';
-			combineUrls[combineUrls.length] = '/perfmjs/example/module1.js';
-			combineUrls[combineUrls.length] = '/perfmjs/example/module2.js';
-			combineUrls[combineUrls.length] = '/perfmjs/example/module3.js';
-			combineUrls[combineUrls.length] = '/perfmjs/example/start.js';
+			combineUrls[combineUrls.length] = '/perfmjs/example/core/appconfig.js';
+			combineUrls[combineUrls.length] = '/perfmjs/example/core/module1.js';
+			combineUrls[combineUrls.length] = '/perfmjs/example/core/module2.js';
+			combineUrls[combineUrls.length] = '/perfmjs/example/core/module3.js';
+			combineUrls[combineUrls.length] = '/perfmjs/example/core/start.js';
 		}
 	}, afterLoadedCallback:function() {
         //alert('afterLoadedCallback');
@@ -33,7 +33,7 @@
 	}}).loadModules({name:'css-comm', type:'css', mdCallback:function(source, module, combineUrls) {
         //按模块加载资源文件
         if (module === 'common') {
-            combineUrls[combineUrls.length] = "/perfmjs/example/common.css?v=20121204001";
+            combineUrls[combineUrls.length] = "/perfmjs/example/core/common.css?v=20121204001";
         } else if (module === 'webdialog') {
             combineUrls[combineUrls.length] = 'http://r.aicaicdn.com/lib/plugins/webdialog/skin/new2010/new2010.css?v=20121204001';
         }
