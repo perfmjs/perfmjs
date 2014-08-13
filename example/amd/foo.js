@@ -9,6 +9,9 @@ define('foo', ['perfmjs'], function($$) {
         sayHello: function(name) {
             return 'hi- ' + name;
         },
+        foo: function() {
+            return 'foo!';
+        },
         end: 0
     });
     $$.foo.defaults = {

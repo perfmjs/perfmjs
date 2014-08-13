@@ -8,7 +8,7 @@ define('bar', ['perfmjs', 'foo'], function($$, foo) {
         },
         sayHello: function(name) {
             var superName = this._super('sayHello', name);
-            return 'call super:' + superName + ', call self: hello- ' + name;
+            return 'call super:' + superName + ', call self: hello- ' + name + "/foo:" + this.foo();
         },
         end: 0
     });

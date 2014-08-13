@@ -18,7 +18,11 @@
         }
 	}, afterLoadedCallback:function() {
         //alert('callback after loaded amd modules!');
-        require(['perfmjs', 'app', 'bar'], function($$, app, bar) {
+        if (typeof define === "function" && define.amd && define.amd['async']) {
+            define.config.baseUrl = 'http://localhost:63342/perfmjs/example/amd/';
+            define.config.alias['jquery'] = 'plugins/jquery.min';
+        }
+        require(['perfmjs', 'app', 'bar'], function($$, app, bar, m3) {
             app.register("bar", bar);
             app.start('bar');
             alert(bar.instance.sayHello('bar'));

@@ -50,14 +50,14 @@ define('bar', ['perfmjs', 'foo'], function($$, foo) {
     };
     return $$.bar;
 });
-require(['perfmjs', 'app', 'bar'], function($$, app, bar) {
-    app.register("bar", bar);
-    app.start('bar');
-    alert(bar.instance.sayHello('bar'));
-});
-//require(['myModule'], function (myModule) {
-//    alert('main: ' + myModule.getFoo());
+//require(['perfmjs', 'app', 'bar'], function($$, app, bar) {
+//    app.register("bar", bar);
+//    app.start('bar');
+//    alert(bar.instance.sayHello('bar'));
 //});
+require(['myModule'], function (myModule) {
+    alert('main: ' + myModule.getFoo());
+});
 //require(['myModule', 'perfmjs', 'jquery'], function (myModule, $$, $) {
 //    alert('main: ' + myModule.getFoo() + "/perfmjs:" + $$.utils.isAmdSupport() + "/jquery:" + $.isArray([]));
 //});
