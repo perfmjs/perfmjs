@@ -54,6 +54,7 @@ define('foo', ['perfmjs'], function($$) {
     };
     return $$.foo;
 });
+```
 
 bar.js, bar.js继承foo.js
 ```js
