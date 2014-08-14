@@ -20,7 +20,7 @@ require(['loader'], function(loader) {
             define.config.baseUrl = 'http://localhost:63342/perfmjs/example/amd/';
             define.config.alias['jquery'] = 'plugins/jquery.min';
         }
-        require(['perfmjs', 'app', 'bar'], function ($$, app, bar, m3) {
+        require(['perfmjs', 'app', 'bar'], function ($$, app, bar) {
             app.register("bar", bar);
             app.start('bar');
             alert(bar.instance.sayHello('bar'));
