@@ -103,7 +103,7 @@ index.html
                 alert(bar.instance.sayHello('bar'));
             });
         }});
-    }
+    };
     </script>
 </head>
 <body>

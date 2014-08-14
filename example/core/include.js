@@ -2,11 +2,9 @@
  * 按模块加载加载应用所需的js和css文件
  * sources e.g. [{n:'common',f:'http://s.no100.com/perfmjs/js/core2/include-common.js',t:'js',m:'jq;dlt',d:'http://s.no100.com'}]
  * combineUrls e.g. []
- * import loadres.js
  */
-!(function() {
-	perfmjs.includeres.loadModules({name:'js-comm', type:'js', mdCallback:function(source, module, combineUrls) {
-		//按模块加载资源文件
+require(['loader'], function(loader) {
+    loader.loadModules({name:'js-comm', type:'js', mdCallback:function(source, module, combineUrls) {
 		if (module === 'jq') {
 			combineUrls[combineUrls.length] = '/perfmjs/lib/perfmjs/jquery/jquery-1.11.1.min.js';
 		} else if (module === 'ajax') {
@@ -26,16 +24,14 @@
 	}, afterLoadedCallback:function() {
         //alert('afterLoadedCallback');
     }}).loadModules({name:'widget-comm', type:'js', mdCallback:function(source, module, combineUrls) {
-		//按模块加载资源文件
         if (module === 'dlt') {
             combineUrls[combineUrls.length] = 'http://r.aicaicdn.com/min/b=lib&f=plugins/webdialog/webDialog.js';
         }
 	}}).loadModules({name:'css-comm', type:'css', mdCallback:function(source, module, combineUrls) {
-        //按模块加载资源文件
         if (module === 'common') {
             combineUrls[combineUrls.length] = "/perfmjs/example/core/common.css?v=20121204001";
         } else if (module === 'webdialog') {
             combineUrls[combineUrls.length] = 'http://r.aicaicdn.com/lib/plugins/webdialog/skin/new2010/new2010.css?v=20121204001';
         }
     }});
-})();
+});
