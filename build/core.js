@@ -2225,6 +2225,11 @@ perfmjs.plugin('joquery', function($$) {
 			return this.sources;
 		}
 	};
+    if (perfmjs.utils.isAmdSupport()) {
+        define('loader', ['perfmjs'], function ($$) {
+            return perfmjs.includeres;
+        });
+    }
 	//立即解析includeres
 	perfmjs.includeres.load({isScript:true});
 })(window);/**

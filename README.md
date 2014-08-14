@@ -1,6 +1,6 @@
 perfmjs
 =======
-high performance javascript framework  V1.3.1
+high performance javascript framework  V1.3.2
 
 为什么使用perfmjs?　
 =======
@@ -12,7 +12,7 @@ fast by default：高效，易用，易读
 
 核心库(core.js)压缩后只有32k+，还可以优化至更小
 
-实现了浏览器端的AMD模块化规范，功能类似require.js, 但比require.js更轻量
+实现了浏览器端的AMD（Asynchronous Module Definition）异步模块定义规范，功能类似require.js, 但比require.js更轻量
 
 原生态支持面向对象(object-oriented)功能
 
@@ -88,7 +88,8 @@ index.html
     <title>Hello perfmjs</title>
     <script type="text/javascript" src="build/core.js?v=20140813001"></script>
     <script>
-        perfmjs.includeres.load({src:"{n:'load-js',t:'js',m:'foo;'}"}
+    require(['loader'], function(loader) {
+        loader.load({src:"{n:'load-js',t:'js',m:'foo;'}"}
         ).loadModules({name:'load-js', type:'js', mdCallback:function(source, module, combineUrls) {
             if (module === 'foo') {
                 combineUrls[combineUrls.length] = 'foo.js';
@@ -102,6 +103,7 @@ index.html
                 alert(bar.instance.sayHello('bar'));
             });
         }});
+    }
     </script>
 </head>
 <body>
