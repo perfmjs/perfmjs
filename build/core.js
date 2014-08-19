@@ -374,7 +374,7 @@
          * @param  {mixed}    args, ...   Additional arguments to pre-bind.
          * @return {Function}             The bound function.
          */
-        fastBind: function(fn, thisContext) {
+        _fastBind: function(fn, thisContext) {
             var boundLength = arguments.length - 2, boundArgs;
             if (boundLength > 0) {
                 boundArgs = new Array(boundLength);
@@ -416,7 +416,7 @@
          */
         forEach: function(subject, fn, thisContext) {
             var length = subject.length, i,
-                iterator = arguments.length > 2 ? this.fastBind(fn, thisContext) : fn;
+                iterator = arguments.length > 2 ? this._fastBind(fn, thisContext) : fn;
             for (i = 0; i < length; i++) {
                 iterator(subject[i], i, subject);
             }
@@ -433,7 +433,7 @@
          */
         fastMap: function(subject, fn, thisContext) {
             var length = subject.length, result = new Array(length), i,
-                iterator = arguments.length > 2 ? this.fastBind(fn, thisContext) : fn;
+                iterator = arguments.length > 2 ? this._fastBind(fn, thisContext) : fn;
             for (i = 0; i < length; i++) {
                 result[i] = iterator(subject[i], i, subject);
             }
@@ -452,7 +452,7 @@
          */
         fastReduce: function(subject, fn, initialValue, thisContext) {
             var length = subject.length, result = initialValue, i,
-                iterator = arguments.length > 3 ? this.fastBind(fn, thisContext) : fn;
+                iterator = arguments.length > 3 ? this._fastBind(fn, thisContext) : fn;
             for (i = 0; i < length; i++) {
                 result = iterator(result, subject[i], i, subject);
             }
