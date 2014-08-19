@@ -2,7 +2,8 @@
  * Created by Administrator on 2014/8/13.
  */
 define('bar', function(require) {
-    var base = require('base'), foo = require('foo');
+    var base = require('base');
+    require('foo');
     base("foo.bar", {
         init: function(initParam) {
             return this;

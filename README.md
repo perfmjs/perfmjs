@@ -72,7 +72,8 @@ define('foo', ['base'], function(base) {
 bar.js, 继承于foo.js
 ```js
 define('bar', function(require) {
-    var base = require('base'), foo = require('foo');
+    var base = require('base');
+    require('foo');
     base("foo.bar", {
         init: function(initParam) {
             return this;
