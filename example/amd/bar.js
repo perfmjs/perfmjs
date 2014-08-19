@@ -9,7 +9,8 @@ define('bar', function(require) {
         },
         sayHello: function(name) {
             var superName = this._super('sayHello', name);
-            return 'call super:' + superName + ', call self: hello- ' + name + "/foo:" + this.foo();
+            return 'call super:' + superName + ', call self: hello- '
+                        + name + "/foo:" + this.foo();
         },
         end: 0
     });
