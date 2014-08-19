@@ -1,8 +1,9 @@
 /**
  * Created by Administrator on 2014/8/13.
  */
-define('bar', ['perfmjs', 'foo'], function($$, foo) {
-    $$.base("foo.bar", {
+define('bar', function(require) {
+    var base = require('base'), foo = require('foo');
+    base("foo.bar", {
         init: function(initParam) {
             return this;
         },
@@ -12,8 +13,8 @@ define('bar', ['perfmjs', 'foo'], function($$, foo) {
         },
         end: 0
     });
-    $$.bar.defaults = {
+    base.bar.defaults = {
         end: 0
     };
-    return $$.bar;
+    return base.bar;
 });

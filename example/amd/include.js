@@ -15,14 +15,12 @@ require(['loader'], function(loader) {
             combineUrls[combineUrls.length] = '/perfmjs/example/amd/bar.js';
         }
     }, afterLoadedCallback: function () {
-        //alert('callback after loaded amd modules!');
         if (typeof define === "function" && define.amd && define.amd['async']) {
             define.config.baseUrl = 'http://localhost:63342/perfmjs/example/amd/';
             define.config.alias['jquery'] = 'plugins/jquery.min';
         }
-        require(['perfmjs', 'app', 'bar'], function ($$, app, bar) {
-            app.register("bar", bar);
-            app.start('bar');
+        require(['app', 'bar'], function (app, bar) {
+            app.registerAndStart('bar', bar);
             alert(bar.instance.sayHello('bar'));
         });
     }});

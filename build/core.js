@@ -92,7 +92,7 @@
                 }
                 depsCount1++;
             }
-            for (var j = 0; j < deps1.length; j++) {
+            for (var j = 0; j < deps2.length; j++) {
                 if (deps2[j] === 'require' || deps2[j] === 'exports' || deps2[j] === 'module') {
                     continue;
                 }
@@ -283,7 +283,7 @@
         elHead.appendChild(script);
     };
 }();/**
- * perfmjs－高性能javascript v1.1.7
+ * perfmjs－高性能javascript v1.3.2
  * @date 2014-07-3
  */
 !(function() {
@@ -722,6 +722,9 @@
         define('perfmjs', function (require) {
             return perfmjs;
         });
+        define('utils', function (require) {
+            return perfmjs.utils;
+        });
     }
 })();perfmjs.plugin('sysconfig', function($$) {
     $$.sysconfig.events = {
@@ -895,7 +898,7 @@ perfmjs.plugin('browser', function($$) {
             parentPrototype = $$.utils.extend(true, {}, parentPrototype, $$[namespace].prototype);
 		}
 		$$[namespace] = $$[namespace] || {};
-		$$[name] = $$[namespace][name] = function(callInitFunc, options) {
+        $$[name] = $$.base[name] = $$[namespace][name] = function(callInitFunc, options) {
 			callInitFunc = (callInitFunc === undefined)?true:callInitFunc;
 			this.namespace = namespace;
 			this.name = name;
@@ -944,6 +947,11 @@ perfmjs.plugin('browser', function($$) {
 		scope: 'singleton',
 		end: 0
 	};
+    if (perfmjs.utils.isAmdSupport()) {
+        define('base', function () {
+            return perfmjs.base;
+        });
+    }
 })(perfmjs); /**
  * 日志模块 FIXME 待完善, 目前仅供Node.js环境下使用
  * 1）允许定义日志等级 -- "error", "warn", "info", "debug", "log"
@@ -1109,7 +1117,6 @@ perfmjs.plugin('joquery', function($$) {
 			this.items = arguments[0].slice();
 			return this;
 		},
-        version: "1.0.0",
         toArray: function() {return this.items;},
         /**
          * where条件
@@ -1323,6 +1330,11 @@ perfmjs.plugin('joquery', function($$) {
 		scope: 'prototype',
 		end: 0
 	};
+    if (perfmjs.utils.isAmdSupport()) {
+        define('joquery', function () {
+            return perfmjs.joquery;
+        });
+    }
 });///#source 1 1 /src/1.0.0/load.js
 /* head.load - v1.0.3 */
 /*
@@ -2226,7 +2238,7 @@ perfmjs.plugin('joquery', function($$) {
 		}
 	};
     if (perfmjs.utils.isAmdSupport()) {
-        define('loader', ['perfmjs'], function ($$) {
+        define('loader', function () {
             return perfmjs.includeres;
         });
     }
@@ -2244,7 +2256,6 @@ perfmjs.plugin('eventProxy', function($$) {
 			this.channels = {};
 			return this;
 		},
-		
 		/**
 		* @method: on
 		* @param: channel: 要监听事件的名称（string|Array）
@@ -2256,7 +2267,6 @@ perfmjs.plugin('eventProxy', function($$) {
 			if (context == null) context = this;
 			if (this.channels[channel] == null) this.channels[channel] = [];
 			self = this;
-			
 			//允许使用一个回调函数同时监听多个事件，
 			//例如：sb.subscribe( ["event1", "event2"], messageHandler );
 			if (channel instanceof Array) {
@@ -2283,7 +2293,6 @@ perfmjs.plugin('eventProxy', function($$) {
 			}.attach();
 		  }
 		},
-		
 		/**
 		* @method: off，有多种方式可以移除监听事件
 		* @param: ch: 要监听事件的名称（string|function）
@@ -2313,7 +2322,6 @@ perfmjs.plugin('eventProxy', function($$) {
 		  }
 		  return this;
 		},
-		
 		/**
 		* @method: emit
 		* @param: channel: 要监听事件的名称（string）
@@ -2358,6 +2366,11 @@ perfmjs.plugin('eventProxy', function($$) {
 		scope: 'singleton',
 		end: 0
 	};
+    if (perfmjs.utils.isAmdSupport()) {
+        define('eventProxy', function () {
+            return perfmjs.eventProxy.newInstance();
+        });
+    }
 });/**
  * 有限状态机的javascript实现
  * Created by tony on 2014/4/11.
@@ -2459,6 +2472,11 @@ perfmjs.plugin('fsm', function($$) {
         scope: 'singleton',
         end: 0
     };
+    if (perfmjs.utils.isAmdSupport()) {
+        define('fsm', function () {
+            return perfmjs.fsm;
+        });
+    }
 });/**
  * app core 作用：
  * 1）控制各个模块的生命周期，创建及销毁
@@ -2476,31 +2494,41 @@ perfmjs.plugin('app', function($$) {
 			this.eventProxy = $$.eventProxy.newInstance();
 			return this;
 		},
-		
+
 		/**
 		* @method: register 模块注册函数
 		* @param: moduleId: 注册模块的名称（string）, 如果与dom节点的id相同，则会自动获取节点中的data-conf属性的json值
 		* @param: creator: 模块的构造函数（string|function），如果为string，则会被parse成为function
 		* @param: opt: （可选）可配置参数，可以传入callback或其它配置参数
 		*/
-		register: function(moduleId, creator, opt){
+		register: function(moduleId, creator, opt) {
 			if (opt == null) opt = {};
 			try {
 			  this._addModule(moduleId, creator, opt);
 			  if(opt.init){
 					return this.start(moduleId);
 			  }
-			  return true;
+			  return moduleId;
 			} catch (ex) {
 				if(!DEBUG_MOD){
 					perfmjs.logger.error("could not register " + moduleId + " because: " + ex.message);
 				}else{
 					throw ex;
 				}
-			  return false;
+			  return undefined;
 			}
 		},
-		
+
+        /**
+         * register动作与start动作合二为一
+         * @param moduleId
+         * @param creator
+         * @param opt
+         */
+        registerAndStart: function(moduleId, creator, opt) {
+            return this.start(this.register(moduleId, creator, opt));
+        },
+
 		/**
 		* @method: unregister 模块卸载函数
 		* @param: moduleId: 注册模块的名称（string）
@@ -2519,6 +2547,9 @@ perfmjs.plugin('app', function($$) {
 		* @param: moduleId: 注册模块的名称（string）
 		*/
 		start: function(moduleId){
+            if (!moduleId) {
+                return false;
+            }
 			//try-catch保证了在online模式下，一个模块的异常不会影响到其它模块，消除SPOF（单点故障）。
 			//在debug模式下，把错误抛给浏览器处理，一个模块失败会影响到其它模块。这样便于发现错误。
 			try {
@@ -2691,8 +2722,8 @@ perfmjs.plugin('app', function($$) {
 		end: 0
 	};
     if (perfmjs.utils.isAmdSupport()) {
-        define('app', ['perfmjs'], function ($$) {
-            return $$.app.newInstance();
+        define('app', function () {
+            return perfmjs.app.newInstance();
         });
     }
 });

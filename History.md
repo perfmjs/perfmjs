@@ -1,3 +1,7 @@
+1.3.3 / 2014-08-19
+==================
+ * add: 给perfmjs#utils, joquery.js, event-proxy.js, fsm.js, base.js增加AMD模块化规范并在README.md中增加使用例子
+
 1.3.2 / 2014-08-14
 ==================
  * add: 给includeres.js增加AMD模块化规范并在README.md中增加使用例子

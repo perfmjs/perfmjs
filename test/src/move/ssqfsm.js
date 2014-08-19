@@ -2,8 +2,8 @@
  * 双色球-有限状态机
  * Created by Administrator on 2014/4/11.
  */
-perfmjs.plugin('unittest.ssqfsm', function($$) {
-    $$.base("fsm.ssqfsm", {
+require(['base','fsm'], function(base, fsm) {
+    base("fsm.ssqfsm", {
         init: function() {
             this._super('init');
         },
@@ -12,7 +12,7 @@ perfmjs.plugin('unittest.ssqfsm', function($$) {
         },
         end: 0
     });
-    $$.ssqfsm.defaults = {
+    base.ssqfsm.defaults = {
         initial: {event: 'startup', from: 'init', to: 'fushi'},
         stateMap: {'changePlay': {'fushi': 'dantuo'}},
         end: 0

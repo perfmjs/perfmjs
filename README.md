@@ -1,6 +1,6 @@
 perfmjs
 =======
-high performance javascript framework  V1.3.2
+high performance javascript framework  V1.3.3
 
 为什么使用perfmjs?　
 =======
@@ -34,13 +34,23 @@ Nodejs版的perfmjs框架请移步：https://github.com/perfmjs/perfmjs-node
 =======
 jQuery/zepto.js是该框架的可选部分。DOM操作,AJAX,CSS等功能可以使用jQuery及类似框架提供，perfmjs框架在这些功能上不重复发明轮子！
 
+TODO:
+=======
+增加资源文件自已更新缓存的功能（不需使用版本号）
+
+支持Html5,支持移动Mobile
+
+支持lazyload,bigRender等高效功能（可选功能，默认不开启）
+
+GitHub上类似框架: Fdev4  https://github.com/swain/Fdev4
+
 
 How to use
 -------
 foo.js
 ```js
-define('foo', ['perfmjs'], function($$) {
-    $$.base("foo", {
+define('foo', ['base'], function(base) {
+    base("foo", {
         init: function(initParam) {
             return this;
         },
@@ -52,17 +62,18 @@ define('foo', ['perfmjs'], function($$) {
         },
         end: 0
     });
-    $$.foo.defaults = {
+    base.foo.defaults = {
         end: 0
     };
-    return $$.foo;
+    return base.foo;
 });
 ```
 
-bar.js, bar.js继承foo.js
+bar.js, 继承于foo.js
 ```js
-define('bar', ['perfmjs', 'foo'], function($$, foo) {
-    $$.base("foo.bar", {
+define('bar', function(require) {
+    var base = require('base'), foo = require('foo');
+    base("foo.bar", {
         init: function(initParam) {
             return this;
         },
@@ -72,10 +83,10 @@ define('bar', ['perfmjs', 'foo'], function($$, foo) {
         },
         end: 0
     });
-    $$.bar.defaults = {
+    base.bar.defaults = {
         end: 0
     };
-    return $$.bar;
+    return base.bar;
 });
 ```
 
@@ -97,9 +108,8 @@ index.html
             }
         }, afterLoadedCallback:function() {
             //应用入口函数
-            require(['perfmjs', 'app', 'bar'], function($$, app, bar) {
-                app.register("bar", bar);
-                app.start('bar');
+            require(['app', 'bar'], function (app, bar) {
+                app.registerAndStart('bar', bar);
                 alert(bar.instance.sayHello('bar'));
             });
         }});
@@ -112,21 +122,10 @@ Hello perfmjs!
 </html>
 ```
 
-TODO:
-=======
-增加资源文件自已更新缓存的功能（不需使用版本号）
-
-支持Html5,支持移动Mobile
-
-支持lazyload,bigRender等高效功能（可选功能，默认不开启）
-
-GitHub上类似框架: Fdev4  https://github.com/swain/Fdev4
-
-
 License
 -------
 
-Copyright 2011 Joe Hewitt
+Copyright 2011 Tony
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
