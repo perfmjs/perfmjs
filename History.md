@@ -1,3 +1,8 @@
+1.3.4 / 2014-08-22
+==================
+ * add: 在utils中增加方法：isBrowserSupport()和isNodeJSSupport()
+ * add: 增加promise/A+实现类async.js
+
 1.3.3 / 2014-08-19
 ==================
  * add: 给perfmjs#utils, joquery.js, event-proxy.js, fsm.js, base.js增加AMD模块化规范并在README.md中增加使用例子

@@ -287,6 +287,7 @@
  * @date 2014-07-3
  */
 !(function() {
+    "use strict";
     /**
      * Returns the namespace specified and creates it if it doesn't exist
      * <pre>
@@ -333,6 +334,15 @@
     perfmjs.plugins = {};
     perfmjs.utils = {
     	namespace: _namespace,
+        isBrowserSupport: function() {
+            return !this.isNodeJSSupport();
+        },
+        isNodeJSSupport: function() {
+            if (typeof module !== 'undefined' && module.exports) {
+                return true;
+            }
+            return false;
+        },
         isAmdSupport: function() {
             return (typeof define === "function" && define.amd && define.amd['async']);
         },
@@ -652,7 +662,7 @@
                 context = context || this;
                 if (before && typeof before === 'function') {
                     //可修改传入参数
-                    args = before.apply(this, arguments);
+                    args = before.apply(context, arguments);
                     //如果返回false, 则停止执行
                     if (typeof args !== 'undefined') {
                         return args;
@@ -671,6 +681,9 @@
             };
             return aopFunc;
         },
+        nextTick: (typeof module !== 'undefined' && module.exports) ? function(f, v) {
+            process.nextTick(function() {f(v);});
+        } : function(f, v) {setTimeout(function() {f(v);},0);},
     	end: 0
     };
     //perfmjs插件开发接口
@@ -726,7 +739,136 @@
             return perfmjs.utils;
         });
     }
-})();perfmjs.plugin('sysconfig', function($$) {
+})();/**
+ * async v1.0
+ * A minimal implementation of Promises/A+
+ * 参考：Tillthen（v0.3.4） https://github.com/biril/tillthen
+ */
+(function (root, createModule) {
+    "use strict";
+    var _ = {
+            isObject: function (o) {
+                return Object.prototype.toString.call(o) === "[object Objet]";
+            },
+            isFunction: function (f) {
+                return Object.prototype.toString.call(f) === "[object Function]";
+            }
+        },
+        env = (function () {
+            if (typeof define === "function" && define.amd) { return "AMD"; }
+            if (typeof module !== 'undefined' && module.exports) { return "CommonJS"; }
+            return "browser";
+        }());
+    _.evaluateOnNextTurn = (function () {
+        return env === "CommonJS" ? function (f, v) {
+                process.nextTick(function () { f(v); });
+            } :
+            function (f, v) { root.setTimeout(function () { f(v); }, 0); };
+    }());
+
+    switch (env) {
+    case "CommonJS":
+        createModule(_, exports);
+        break;
+    case "AMD":
+        define('async', ["exports"], function (exports) {
+            return createModule(_, exports);
+        });
+        break;
+    case "browser":
+        root.tillthen = createModule(_, {});
+    }
+}(this, function (_, tillthen) {
+    "use strict";
+    var TillthenDeferred = function () {},
+        TillthenPromise = function () {},
+        resolveDeferred = function (deferred, x) {
+            var xThen = null;
+            if (deferred.promise === x) {
+                return deferred.reject(new TypeError("Cannot resolve a promise with itself"));
+            }
+            if (x instanceof TillthenPromise) {
+                if (x.state === "fulfilled") { return deferred.fulfill(x.result); }
+                if (x.state === "rejected") { return deferred.reject(x.result); }
+                return x.then(deferred.fulfill, deferred.reject);
+            }
+            try {
+                if (!(_.isObject(x) || _.isFunction(x)) || !_.isFunction(xThen = x.then)) {
+                    return deferred.fulfill(x);
+                }
+            }
+            catch (error) { deferred.reject(error); }
+            xThen(function (value) {
+                resolveDeferred(deferred, value);
+            }, function (reason) {
+                deferred.reject(reason);
+            });
+        },
+        createEvaluator = function (onResulted, deferred) {
+            return function (result) {
+                try { resolveDeferred(deferred, onResulted(result)); }
+                catch (reason) { deferred.reject(reason); }
+            };
+        },
+        createDeferred = function () {
+            var
+                state = "pending",
+                result,
+                fulfillQueue = [],
+                rejectQueue = [],
+                promise = new TillthenPromise(),
+                deferred = null,
+                queueForFulfillment = function (onFulfilled, dependantDeferred) {
+                    if (state === "rejected") { return; }
+                    _.isFunction(onFulfilled) || (onFulfilled = function (value) { return value; });
+                    var evaluator = createEvaluator(onFulfilled, dependantDeferred);
+                    state === "fulfilled" ? _.evaluateOnNextTurn(evaluator, result) :
+                        fulfillQueue.push(evaluator);
+                },
+                queueForRejection = function (onRejected, dependantDeferred) {
+                    if (state === "fulfilled") { return; }
+                    _.isFunction(onRejected) || (onRejected = function (error) { throw error; });
+                    var evaluator = createEvaluator(onRejected, dependantDeferred);
+                    state === "rejected" ? _.evaluateOnNextTurn(evaluator, result) :
+                        rejectQueue.push(evaluator);
+                },
+                fulfill = function (value) {
+                    if (state !== "pending") { return; }
+                    state = "fulfilled";
+                    for (var i = 0, l = fulfillQueue.length; i < l; ++i) { fulfillQueue[i](value); }
+                    fulfillQueue = [];
+                    result = value;
+                    return promise;
+                },
+                reject = function (reason) {
+                    if (state !== "pending") { return; }
+                    state = "rejected";
+                    for (var i = 0, l = rejectQueue.length; i < l; ++i) { rejectQueue[i](reason); }
+                    rejectQueue = [];
+                    result = reason;
+                    return promise;
+                };
+            promise.then = function (onFulfilled, onRejected) {
+                var dependantDeferred = createDeferred();
+                queueForFulfillment(onFulfilled, dependantDeferred);
+                queueForRejection(onRejected, dependantDeferred);
+                return dependantDeferred.promise;
+            };
+            promise.state = state;
+            promise.result = result;
+            TillthenDeferred.prototype = promise;
+            deferred = new TillthenDeferred();
+            deferred.promise = promise;
+            deferred.fulfill = fulfill;
+            deferred.reject = reject;
+            deferred.resolve = function (result) { resolveDeferred(this, result);};
+            return deferred;
+        };
+    tillthen = tillthen || {};
+    tillthen.defer = createDeferred;
+    tillthen.version = "0.3.4";
+    return tillthen;
+}));perfmjs.plugin('sysconfig', function($$) {
     $$.sysconfig.events = {
         moduleIsReady: 'perfmjs.ready',
         end:0
@@ -2149,12 +2291,14 @@ perfmjs.plugin('joquery', function($$) {
 				//var joquery_execstart = perfmjs.utils.now();
 				combineUrls = perfmjs.joquery.newInstance((options.handleUrlsCallback.call(null, combineUrls)||combineUrls)).distinct(function(item) {return item;}).toArray();
 				//perfmjs.logger.debug("joquery distinct finished in loadModules, cost:" + (perfmjs.utils.now() - joquery_execstart) + " ms");
-				if (combineUrls.length > 0) {
+				if (combineUrls.length >= 0) {
 					if (options.type === 'js') {
 						//应用所需的js文件使用异步加载
-						//var loadmodules_start = perfmjs.utils.now();
-                        this.loadHeadRes(combineUrls.concat([options.afterLoadedCallback]));
-						//perfmjs.logger.debug("loadModules finished, cost:" + (perfmjs.utils.now() - loadmodules_start) + " ms, combineUrls=" + combineUrls);
+                        if (combineUrls.length < 1) {
+                            options.afterLoadedCallback && options.afterLoadedCallback();
+                        } else {
+                            this.loadHeadRes(combineUrls.concat([options.afterLoadedCallback]));
+                        }
 					} else if (options.type === 'css') {
 						//FIXME css文件应使用同步加载且应使用minify或concat之类的在线压缩工具,css文件最好不要使用js类库来管理版本号加载（网速慢的情况下头部样式会乱）
 						var combineUrlsLen = combineUrls.length;

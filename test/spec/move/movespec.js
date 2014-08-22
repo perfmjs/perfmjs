@@ -9,6 +9,11 @@ describe("core核心", function() {
             });
         });
     });
+    it("应能测试通过perfmjs.utils.isBrowserSupport方法", function() {
+        perfmjs.ready(function($$, app) {
+            expect($$.utils.isBrowserSupport()).toEqual(true);
+        });
+    });
     it("应能测试通过perfmjs.utils.fmtJSONMsg方法", function() {
         perfmjs.ready(function($$, app) {
             expect($$.utils.fmtJSONMsg().status).toEqual('fail');
@@ -89,35 +94,40 @@ describe("core核心", function() {
     });
     it("event应该能运行正常", function() {
         perfmjs.ready(function($$, app) {
-            perfmjs.app.newInstance();
-            perfmjs.app.instance.unregister('lottevent');
-            perfmjs.app.instance.register('lottevent', perfmjs.lottevent);
-            perfmjs.app.instance.startAll();
-            perfmjs.lottevent.instance.buy(999);
-            expect(perfmjs.model.plan.multiple()).toEqual(999);
+            app.unregister('lottevent');
+            app.register('lottevent', perfmjs.lottevent);
+            app.startAll();
+            $$.lottevent.instance.buy(999);
+            expect($$.model.plan.multiple()).toEqual(999);
         });
     });
     it("aop功能应该可以正常运行", function() {
         perfmjs.ready(function($$, app) {
-            var aop = perfmjs.utils.aop(this, perfmjs.model.plan.multiple, function(){return 2}, function(){return 3});
-            perfmjs.model.plan.multiple = aop;
-            expect(perfmjs.model.plan.multiple()).toEqual(2);
+            var originalFunc = $$.model.plan.multiple;
+            $$.model.plan.multiple = $$.utils.aop(undefined, $$.model.plan.multiple, function() {
+                //noop
+                return 2;
+            }, function() {
+                //noop
+                return 3;
+            });
+            expect($$.model.plan.multiple()).toEqual(2);
+            $$.model.plan.multiple = originalFunc;
         });
     });
     it("opera功能应该可以正常运行", function() {
         perfmjs.ready(function($$, app) {
-            perfmjs.app.newInstance();
-            perfmjs.app.instance.unregister('lottevent');
-            perfmjs.app.instance.register('lottevent', perfmjs.lottevent);
-            perfmjs.app.instance.startAll();
-            perfmjs.ssqopera.newInstance();
-            expect(perfmjs.model.plan.multiple()).toEqual(2);
+            app.unregister('lottevent');
+            app.register('lottevent', $$.lottevent);
+            app.startAll();
+            $$.ssqopera.newInstance();
+            expect($$.model.plan.multiple()).toEqual(888);
         });
     });
     it("fsm功能应该可以正常运行", function() {
         perfmjs.ready(function($$, app) {
-            perfmjs.ssqfsm.newInstance().event('changePlay');
-            expect(perfmjs.ssqfsm.instance.current()).toEqual('dantuo');
+            $$.ssqfsm.newInstance().event('changePlay');
+            expect($$.ssqfsm.instance.current()).toEqual('dantuo');
         });
     });
 
