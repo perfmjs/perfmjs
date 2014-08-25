@@ -46,7 +46,7 @@ describe("core核心", function() {
             expect(summary).toEqual(5050);
         });
     });
-    it("应能测试通过joquery.lib-updateOrInsert", function () {
+    it("应能测试通过joquery.lib-updateOrInsert", function() {
         perfmjs.ready(function($$, app) {
             var data = [
                 { ID: 1, firstName: "Chris", lastName: "Pearson", BookIDs: [1001, 1002, 1003] },
@@ -125,9 +125,10 @@ describe("core核心", function() {
         });
     });
     it("fsm功能应该可以正常运行", function() {
-        perfmjs.ready(function($$, app) {
-            $$.ssqfsm.newInstance().event('changePlay');
-            expect($$.ssqfsm.instance.current()).toEqual('dantuo');
+        require(['app', 'ssqfsm'], function(app, ssqfsm) {
+            app.registerAndStart('ssqfsm', ssqfsm);
+            ssqfsm.instance.event('changePlay');
+            expect(ssqfsm.instance.current()).toEqual('dantuo');
         });
     });
 

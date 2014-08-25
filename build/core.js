@@ -1,288 +1,4 @@
-﻿/** javascript AMD规范实现, 应注意避免模块间的循环依赖:被依赖的模块放在依赖数组的最后元素位置
- * 参考列表:
- * http://pilotjs.com/
- * https://github.com/amdjs/amdjs-api
- * http://requirejs.org/
- * http://javascript.ruanyifeng.com/tool/requirejs.html
- * http://addyosmani.com/writing-modular-js/
- * http://msdn.microsoft.com/en-us/magazine/hh227261.aspx
- * CMD 模块定义规范 #242  https://github.com/seajs/seajs/issues/242
- * TODO: 1.getInstance的方式 2.打印错误信息 3.功能上向require.js看齐
- * Created by tony on 2014/8/11.
- * @version v0.1
- *
- */
-!function() {
-    var commentRegExp = /(\/\*([\s\S]*?)\*\/|([^:]|^)\/\/(.*)$)/mg, cjsRequireRegExp = /[^.]\s*require\s*\(\s*["']([^'"\s]+)["']\s*\)/g;
-    var parsedRequireStack = {}; //e.g. {'foo':true, 'foo_1':true, 'foo_1_1':true} //用于消除死循环依赖
-    var defines = {}; //e.g. {'foo':{'id':'foo',deps:[],callback:function(){}}};
-    var exports = {
-        'require': {'id':'require', 'getInstance': function() {
-            return function (module) {
-                if (typeof module === 'string') {
-                    if (exports[module]) {
-                        return exports[module]['getInstance'];
-                    }
-                    throw new Error(module + ' has not been defined. Please include it as a dependency in define()');
-                    return;
-                }
-            };
-        }()},
-        'exports': {'id':'exports', 'getInstance': function() {
-            return exports;
-        }()},
-        'module': {'id':'module', 'getInstance': function() {
-            return function(context) {
-                return {
-                    id: context,
-                    uri: loader.toUrl(context)
-                }
-            };
-        }}
-    }; //e.g. {'foo':{'id':'foo','getInstance':function(){return callback.apply(null, args)}}}
-    var loader = {};
-    define = function(id, dependencies, factory) {
-        var argLen = arguments.length;
-        if (argLen === 1) {
-            factory = id;
-            dependencies = undefined;
-            id = undefined;
-        } else if (argLen === 2) {
-            if ({}.toString.call(id) === '[object Array]') {
-                factory = dependencies;
-                dependencies = id;
-                id = undefined;
-            } else {
-                factory = dependencies;
-                dependencies = undefined;
-            }
-        }
-        //在define方法里有require('xxx')的情况
-        if (!dependencies && (typeof factory === 'function')) {
-            dependencies = [];
-            if (factory.length) {
-                factory
-                    .toString()
-                    .replace(commentRegExp, '')
-                    .replace(cjsRequireRegExp, function (match, dep) {
-                        dependencies.push(dep);
-                    });
-                dependencies = (factory.length === 1 ? ['require'] : ['require', 'exports', 'module']).concat(dependencies);
-            }
-        }
-        if (id && !defines[id]) {
-            defines[id] = {'id':id, 'deps':dependencies || [], callback: factory};
-        }
-    };
-    require = function(modules, callback, context) {
-        var loadedModules = [], invokeStack = [];
-        if (typeof modules === 'string') {
-            return;
-        }
-        loader.loadParsedRequireStack(modules);
-        loader.getDepsStack(modules, invokeStack);
-        //TODO 正确的逻辑应是：需等待所有资源完全加载并执行了define方法
-        //将没有依赖或只有'require', 'exports', 'module'的依赖放在列表的后面
-        invokeStack.sort(function(module1, module2){
-            var deps1 = defines[module1]['deps'] || [], depsCount1 = 0;
-            var deps2 = defines[module2]['deps'] || [], depsCount2 = 0;
-            for (var i = 0; i < deps1.length; i++) {
-                if (deps1[i] === 'require' || deps1[i] === 'exports' || deps1[i] === 'module') {
-                    continue;
-                }
-                depsCount1++;
-            }
-            for (var j = 0; j < deps2.length; j++) {
-                if (deps2[j] === 'require' || deps2[j] === 'exports' || deps2[j] === 'module') {
-                    continue;
-                }
-                depsCount2++;
-            }
-            return depsCount2 - depsCount1;
-        });
-        for (var i = invokeStack.length - 1; i >= 0; i--) {
-            var thisExport = invokeStack[i];
-            if (!exports[thisExport]) {
-                exports[thisExport] = {'id':thisExport, 'getInstance': (function() {
-                    var args = [], depsInstances = defines[thisExport]['deps'];
-                    for (var j = 0; j < depsInstances.length; j++) {
-                        if ((exports[depsInstances[j]]||{})['getInstance']) {
-                            args[args.length] = (exports[depsInstances[j]]||{})['getInstance'];
-                        }
-                    }
-                    return defines[thisExport]['callback'].apply(null, args);
-                })()}
-            }
-        }
-        for (var x = 0; x < modules.length; x++) {
-            switch (modules[x]) {
-                case 'require':
-                    loadedModules[x] = exports['require']['getInstance'];
-                    break;
-                case 'exports':
-                    loadedModules[x] = exports['exports']['getInstance']('context');
-                    break;
-                case 'module':
-                    loadedModules[x] = exports['module'].getInstance()('context');
-                    break;
-                case exports[context] ? exports[context]['id'] : '':
-                    loadedModules[x] = exports[context].getInstance();
-                    break;
-                default:
-                    loadedModules[x] = exports[modules[x]]['getInstance'];
-            };
-        }
-        callback && callback.apply(null, loadedModules);
-    };
-    loader.getInstance = function(module, callback, invokedModule) {
-        invokedModule = invokedModule || {};
-        if (invokedModule[module]) {
-            return {};
-        }
-        if (exports[module]) {
-            return exports[module];
-        }
-        if (defines[module]) {
-            invokedModule[module] = true;  //消除死循环依赖
-            var deps = defines[module]['deps'] || [];
-            for (var i = 0; i < deps.length; i++) {
-                if (defines[deps[i]] && defines[deps[i]]['deps']) {
-
-                }
-            }
-        }
-        return callback && callback.apply(null, loader.callStack(/**/));
-    };
-    loader.getDepsStack = function(modules, invokeStack, invokedModules) {
-        invokedModules = invokedModules || {};
-        if (typeof modules === 'string') {
-            modules = [modules];
-        }
-        for (var i = 0; i < modules.length; i++) {
-            var thisModule = modules[i];
-            if (thisModule === 'require' || thisModule === 'exports' || thisModule === 'module') {
-                continue;
-            }
-            if (defines[thisModule]) {
-                if (invokedModules[thisModule]) {
-                    continue;
-                }
-                invokedModules[thisModule] = true;  //消除死循环依赖
-                invokeStack[invokeStack.length] = thisModule;
-                var deps = defines[thisModule]['deps'] || [];
-                for (var j = deps.length - 1; j >= 0; j--) {
-                    //同级的依赖顺序应是：被依赖的赖块ID放在数组前面的元素位置
-                    loader.getDepsStack(deps[j] , invokeStack, invokedModules);
-                }
-            }
-        }
-    };
-    define.config = {
-        'baseUrl': 'http://localhost:63342/perfmjs/lib/amd/',
-        'alias': {
-            'xxx': 'plugins/xxx.min'
-        },
-        'usingInclude': {
-            'default': true,
-            'module': {
-                'foo': false
-            }
-        },
-        'shim': {
-            'backbone': {
-                'deps': [
-                    'underscore',
-                    'jquery'
-                ],
-                'exports': 'Backbone'
-            }
-        }
-    };
-    define.amd = {'async':true};
-    loader.loadParsedRequireStack = function(modules, needLoadModules) {
-        needLoadModules = needLoadModules || [];
-        loader.parseRequireStack(modules, needLoadModules);
-        for (var i = 0; i < needLoadModules.length; i++) {
-            var loadedModule = needLoadModules[i];
-            loader.inject(loader.toUrl(needLoadModules[i]) + '.js', function () {
-                loader.loadParsedRequireStack(defines[loadedModule]['deps'], []);
-            });
-        }
-    };
-    loader.parseRequireStack = function(modules, needLoadModules) {
-        if (typeof modules === 'string') {
-            modules = [modules];
-        }
-        needLoadModules = needLoadModules || [];
-        for (var x = 0; x < modules.length; x++) {
-            var thisModule = modules[x];
-            if (parsedRequireStack[thisModule]) {
-                continue;
-            }
-            parsedRequireStack[thisModule] = true;
-            switch (thisModule) {
-                case 'require':
-                    break;
-                case 'exports':
-                    break;
-                case 'module':
-                    break;
-                default:
-                    if (defines[thisModule]) {
-                        if (defines[thisModule]['deps'] && defines[thisModule]['deps'].length > 0) {
-                            loader.parseRequireStack(defines[thisModule]['deps'], needLoadModules);
-                        }
-                    } else {
-                        needLoadModules.splice(0,0,thisModule);
-                    }
-            }
-        }
-    };
-    loader.toUrl = function(id, context) {
-        var newContext, i, changed;
-        if (define.config.alias[id]) {
-            id = define.config.alias[id];
-        }
-        switch (id) {
-            case 'require':
-            case 'exports':
-            case 'module':
-                return id;
-        }
-        newContext = (context || define.config.baseUrl).split('/');
-        newContext.pop();
-        id = id.split('/');
-        i = id.length;
-        while (--i) {
-            switch (id[0]) {
-                case '..':
-                    newContext.pop();
-                case '.':
-                case '':
-                    id.shift();
-                    changed = true;
-            }
-        }
-        return newContext.join('/') + '/' + id.join('/');
-    };
-    loader.inject = function(file, callback) {
-        var doc = document;
-        var elHead = doc.head || doc.getElementsByTagName("head")[0] || doc.documentElement;
-        var script = doc.createElement('script');
-        script.onload = script.onreadystatechange = function (event) {
-            if (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') {
-                script.onload = script.onreadystatechange = null;
-                elHead.removeChild(script);
-                callback && callback();
-            }
-        };
-        script.type = 'text/javascript';
-        script.charset = 'utf-8';
-        script.async = true;
-        script.src = file;
-        elHead.appendChild(script);
-    };
-}();/**
+﻿/**
  * perfmjs－高性能javascript v1.3.2
  * @date 2014-07-3
  */
@@ -731,264 +447,11 @@
             });
         }
     };
-    if (perfmjs.utils.isAmdSupport()) {
-        define('perfmjs', function (require) {
-            return perfmjs;
-        });
-        define('utils', function (require) {
-            return perfmjs.utils;
-        });
-    }
-})();/**
- * async v1.0
- * A minimal implementation of Promises/A+
- * 参考：Tillthen（v0.3.4） https://github.com/biril/tillthen
- */
-(function (root, createModule) {
-    "use strict";
-    var _ = {
-            isObject: function (o) {
-                return Object.prototype.toString.call(o) === "[object Objet]";
-            },
-            isFunction: function (f) {
-                return Object.prototype.toString.call(f) === "[object Function]";
-            }
-        },
-        env = (function () {
-            if (typeof define === "function" && define.amd) { return "AMD"; }
-            if (typeof module !== 'undefined' && module.exports) { return "CommonJS"; }
-            return "browser";
-        }());
-    _.evaluateOnNextTurn = (function () {
-        return env === "CommonJS" ? function (f, v) {
-                process.nextTick(function () { f(v); });
-            } :
-            function (f, v) { root.setTimeout(function () { f(v); }, 0); };
-    }());
-
-    switch (env) {
-    case "CommonJS":
-        createModule(_, exports);
-        break;
-    case "AMD":
-        define('async', ["exports"], function (exports) {
-            return createModule(_, exports);
-        });
-        break;
-    case "browser":
-        root.tillthen = createModule(_, {});
-    }
-}(this, function (_, tillthen) {
-    "use strict";
-    var TillthenDeferred = function () {},
-        TillthenPromise = function () {},
-        resolveDeferred = function (deferred, x) {
-            var xThen = null;
-            if (deferred.promise === x) {
-                return deferred.reject(new TypeError("Cannot resolve a promise with itself"));
-            }
-            if (x instanceof TillthenPromise) {
-                if (x.state === "fulfilled") { return deferred.fulfill(x.result); }
-                if (x.state === "rejected") { return deferred.reject(x.result); }
-                return x.then(deferred.fulfill, deferred.reject);
-            }
-            try {
-                if (!(_.isObject(x) || _.isFunction(x)) || !_.isFunction(xThen = x.then)) {
-                    return deferred.fulfill(x);
-                }
-            }
-            catch (error) { deferred.reject(error); }
-            xThen(function (value) {
-                resolveDeferred(deferred, value);
-            }, function (reason) {
-                deferred.reject(reason);
-            });
-        },
-        createEvaluator = function (onResulted, deferred) {
-            return function (result) {
-                try { resolveDeferred(deferred, onResulted(result)); }
-                catch (reason) { deferred.reject(reason); }
-            };
-        },
-        createDeferred = function () {
-            var
-                state = "pending",
-                result,
-                fulfillQueue = [],
-                rejectQueue = [],
-                promise = new TillthenPromise(),
-                deferred = null,
-                queueForFulfillment = function (onFulfilled, dependantDeferred) {
-                    if (state === "rejected") { return; }
-                    _.isFunction(onFulfilled) || (onFulfilled = function (value) { return value; });
-                    var evaluator = createEvaluator(onFulfilled, dependantDeferred);
-                    state === "fulfilled" ? _.evaluateOnNextTurn(evaluator, result) :
-                        fulfillQueue.push(evaluator);
-                },
-                queueForRejection = function (onRejected, dependantDeferred) {
-                    if (state === "fulfilled") { return; }
-                    _.isFunction(onRejected) || (onRejected = function (error) { throw error; });
-                    var evaluator = createEvaluator(onRejected, dependantDeferred);
-                    state === "rejected" ? _.evaluateOnNextTurn(evaluator, result) :
-                        rejectQueue.push(evaluator);
-                },
-                fulfill = function (value) {
-                    if (state !== "pending") { return; }
-                    state = "fulfilled";
-                    for (var i = 0, l = fulfillQueue.length; i < l; ++i) { fulfillQueue[i](value); }
-                    fulfillQueue = [];
-                    result = value;
-                    return promise;
-                },
-                reject = function (reason) {
-                    if (state !== "pending") { return; }
-                    state = "rejected";
-                    for (var i = 0, l = rejectQueue.length; i < l; ++i) { rejectQueue[i](reason); }
-                    rejectQueue = [];
-                    result = reason;
-                    return promise;
-                };
-            promise.then = function (onFulfilled, onRejected) {
-                var dependantDeferred = createDeferred();
-                queueForFulfillment(onFulfilled, dependantDeferred);
-                queueForRejection(onRejected, dependantDeferred);
-                return dependantDeferred.promise;
-            };
-            promise.state = state;
-            promise.result = result;
-            TillthenDeferred.prototype = promise;
-            deferred = new TillthenDeferred();
-            deferred.promise = promise;
-            deferred.fulfill = fulfill;
-            deferred.reject = reject;
-            deferred.resolve = function (result) { resolveDeferred(this, result);};
-            return deferred;
-        };
-    tillthen = tillthen || {};
-    tillthen.defer = createDeferred;
-    tillthen.version = "0.3.4";
-    return tillthen;
-}));perfmjs.plugin('sysconfig', function($$) {
+})();perfmjs.plugin('sysconfig', function($$) {
     $$.sysconfig.events = {
         moduleIsReady: 'perfmjs.ready',
         end:0
     };
-});/**
- * Browser detect: http://www.quirksmode.org/js/detect.html
- * A useful but often overrated JavaScript function is the browser detect. 
- * Sometimes you want to give specific instructions or load a new page in case the viewer uses, for instance, Safari.
- * import utils.js
- */
-perfmjs.plugin('browser', function($$) {
-	$$.browser = {
-		init: function() {
-			this.browser = this._searchString(this._dataBrowser) || "An unknown browser";
-			this.version = this._searchVersion(navigator.userAgent) || this._searchVersion(navigator.appVersion) || "an unknown version";
-			this.os = this._searchString(this._dataOS) || "an unknown OS";
-			this.ok = true;
-		},
-		info: function() {
-			if (this.ok === undefined) this.init();
-			return this.browser + " " + this.version + " " + this.os; 
-		},
-		msie: function() {
-			if (this.ok === undefined) this.init();
-			return (this.browser === 'Explorer');
-		},
-		_searchString: function(data) {
-			for (var i=0;i<data.length;i++)	{
-				var dataString = data[i].string;
-				var dataProp = data[i].prop;
-				this.version_searchString = data[i].versionSearch || data[i].identity;
-				if (dataString) {
-					if (dataString.indexOf(data[i].subString) != -1) {
-						return data[i].identity;
-					}
-				} else if (dataProp) {
-					return data[i].identity;
-				}
-			}
-		},
-		_searchVersion: function(dataString) {
-			var index = dataString.indexOf(this.version_searchString);
-			if (index == -1) return;
-			return parseFloat(dataString.substring(index+this.version_searchString.length+1));
-		},
-		_dataBrowser: [{
-				string: navigator.userAgent,
-				subString: "Chrome",
-				identity: "Chrome"
-			},{
-				string: navigator.userAgent,
-				subString: "OmniWeb",
-				versionSearch: "OmniWeb/",
-				identity: "OmniWeb"
-			},{
-				string: navigator.vendor,
-				subString: "Apple",
-				identity: "Safari",
-				versionSearch: "Version"
-			},{
-				prop: window.opera,
-				identity: "Opera",
-				versionSearch: "Version"
-			},{
-				string: navigator.vendor,
-				subString: "iCab",
-				identity: "iCab"
-			},{
-				string: navigator.vendor,
-				subString: "KDE",
-				identity: "Konqueror"
-			},{
-				string: navigator.userAgent,
-				subString: "Firefox",
-				identity: "Firefox"
-			},{
-				string: navigator.vendor,
-				subString: "Camino",
-				identity: "Camino"
-			},{		
-				// for newer Netscapes (6+)
-				string: navigator.userAgent,
-				subString: "Netscape",
-				identity: "Netscape"
-			},{
-				string: navigator.userAgent,
-				subString: "MSIE",
-				identity: "Explorer",
-				versionSearch: "MSIE"
-			},{
-				string: navigator.userAgent,
-				subString: "Gecko",
-				identity: "Mozilla",
-				versionSearch: "rv"
-			},{ 		
-				// for older Netscapes (4-)
-				string: navigator.userAgent,
-				subString: "Mozilla",
-				identity: "Netscape",
-				versionSearch: "Mozilla"
-			}
-		],
-		_dataOS: [{
-				string: navigator.platform,
-				subString: "Win",
-				identity: "Windows"
-			},{
-				string: navigator.platform,
-				subString: "Mac",
-				identity: "Mac"
-			},{
-				   string: navigator.userAgent,
-				   subString: "iPhone",
-				   identity: "iPhone/iPod"
-		    },{
-				string: navigator.platform,
-				subString: "Linux",
-				identity: "Linux"
-			}]
-	};
 });/**
  * 原生态js的OO框架抽象基类,默认不自动实例化对象
  * @date 2012-12-01
@@ -1089,165 +552,7 @@ perfmjs.plugin('browser', function($$) {
 		scope: 'singleton',
 		end: 0
 	};
-    if (perfmjs.utils.isAmdSupport()) {
-        define('base', function () {
-            return perfmjs.base;
-        });
-    }
-})(perfmjs); /**
- * 日志模块 FIXME 待完善, 目前仅供Node.js环境下使用
- * 1）允许定义日志等级 -- "error", "warn", "info", "debug", "log"
- * 2）在Firefox中通过firebug控制台输出日志，在IE中通过在url中添加debug=true参数，将日志显示在页面底部。
- * 3）线上模式的错误日志，将记录到draggon监控系统，触发报警。
- * @date 2012-11-30
- * import perfmjs.js
- */
-!(function($$){
-	/**
-	 * 	调试开发, 打开后将输出日志
-	 *  online模式下，异常信息将记录到draggon服务器上报警
-	 *  window.dmtrack 此变量只有online模式才存在，因此可以用于区分debug/online
-	 *  注意拷贝线上html源码时请将不需要的相关代码删除。
-	 */
-	DEBUG_MOD = false;
-	perfmjs.logger=function(){};
-	perfmjs.logger.level=4; 	//default level
-	//perfmjs.logger.errorUri="http://search.china.alibaba.com/rpc/dragoontrack/logError.json?msg="; 	//dragoon url
-	//perfmjs.logger.errorUri="http://s.no100.com/rpc/dragoontrack/logError.json?msg="; 	//dragoon url
-	perfmjs.logger.setLevel=function(level){//set logger level to filter the logger , so just show the logger level you focus.
-		perfmjs.logger.level=level;
-	};
-   
-	var prepared = false;
-	var methods = [ "error", "warn", "info", "debug", "log"];//0-4 level
-   
-	perfmjs.utils.extend(perfmjs.logger.prototype, {
-		level:perfmjs.logger.level,
-		setEnableLevel: function(level) {
-			if(level>4 || level<0) {
-				this.error(['wrong level setting. level should be 0-4, the int type,you set ',level,", so stupided."].join(''));
-			}
-			this.level=parseInt(level);
-		},
-		enabled: function(lev) {
-			if(lev>perfmjs.logger.level) {
-				return false;
-			}
-			return true;
-		},
-		name: function() {
-			return this._name;
-		},
-		log: function() {
-			this._log(4, arguments);
-		},
-		debug: function() {
-			this._log(3, arguments);
-		},
-		info: function() {
-			this._log(2, arguments);
-		},
-		warn: function() {
-			this._log(1, arguments);
-		},
-		error: function() {
-			this._log(0, arguments);
-		},
-		_handler: function(level, name, msg){
-            ////////////在此处返回/////////////////////////////
-            return;
-            /////////////////////////////////////////
-			var method=methods[level];
-			msg=[[method+"|"].join(" | ")].concat(Array.prototype.slice.call(msg));
-			   
-			if(self.console && !perfmjs.browser.msie()){
-			   if(console.log.apply){
-				  console[method].apply(console, msg);    	  
-			   }else{
-				  console[console[method]?method:'log'](msg);
-			   }
-			}else{
-				//在IE下，如果url中添加debug=true，则日志窗口将被添加在页面的底部，帮助调试。
-				if(perfmjs.browser.msie()) {
-					if(/debug=true/i.test(location.search)) {
-						!prepared && this._prepare();	
-						var msgBox = perfmjs.utils.getJQuery()('#DEBUG ol');
-						var color;
-						switch(method){
-							case "log":{
-								color="#FFFFFF";
-								break;
-							}
-							case "debug":{
-								color="#C0C0C0";
-								break;
-							}
-							case "info":{
-								color="#EBF5FF";
-								break;
-							}
-							case "warn":{
-								color="#FFFFC8";
-								break;
-							}
-							case "error":{
-								color="#FE6947";
-								break;
-							}
-							default:{
-								color="#FFFFFF";
-								break;
-							}
-						}
-						perfmjs.utils.getJQuery()('<li style="background-color:'+ color +';">').text('' + msg).appendTo(msgBox);
-					} 
-				}
-			}
-//			//online模式下需要报警
-//			if(!DEBUG_MOD){
-//				if(level == 0 || level == 1){
-//					(new Image()).src = perfmjs.logger.errorUri + this._getBrowserInfo() + msg;
-//				}
-//			}
-		},
-		_log: function(level, msg) {
-			if (this.enabled(level)) {
-				this._handler(level,this.name(),msg);
-			}
-		},
-		_getBrowserInfo:function(){
-			return perfmjs.browser.info();
-		},
-		_prepare:function() {
-			perfmjs.utils.getJQuery()('#DEBUG').remove();
-			//注意应该该js放在<head>标签内才有效果
-			perfmjs.utils.getJQuery()(document.head).before('<div id="DEBUG" style="margin-top:10px;padding:8px;border:dashed 1px #FF7300;background-color:#EEE;color:#000;"><ol></ol></div>');
-			prepared = true;
-		},
-		end:0
-	});
-   
-	var logs={};//logs  instance container
-	perfmjs.logger = function(name) {
-       if (!logs[name]) {
-           logs[name] = new perfmjs.logger(name);
-           logs[name]._name=name;
-       }
-       return logs[name];
-	}('perfmjs');
-	if(DEBUG_MOD){
-		perfmjs.logger.setEnableLevel(4);	
-	}else{
-		perfmjs.logger.setEnableLevel(2);
-	}
-	//try-catch 捕捉不到的异常使用onerror函数来记录日志
-	/* window.onerror = function(msg,url,line){
-		if(!DEBUG_MOD){
-			(new Image()).src = perfmjs.logger.errorUri + perfmjs.logger._getBrowserInfo() + msg + ' |url:' +url + ' |line:'+line;
-		}
-		return false;
-	}; */
-})(window);/*
+})(perfmjs);/*
  * JOQUERY 1.0.0
  * import utils.js
  */
@@ -1472,12 +777,651 @@ perfmjs.plugin('joquery', function($$) {
 		scope: 'prototype',
 		end: 0
 	};
-    if (perfmjs.utils.isAmdSupport()) {
-        define('joquery', function () {
-            return perfmjs.joquery;
+});/**
+ * async v1.0.0
+ * A minimal implementation of Promises/A+
+ * 参考：Tillthen（v0.3.4） https://github.com/biril/tillthen
+ * https://github.com/kriskowal/q
+ * https://github.com/promises-aplus/promises-spec
+ * https://github.com/chemdemo/chemdemo.github.io/issues/6
+ * https://www.promisejs.org/
+ * https://github.com/cujojs/when
+ * 在Node.js 中用 Q 实现Promise – Callbacks之外的另一种选择   http://www.ituring.com.cn/article/54547
+ */
+perfmjs.plugin('async', function($$) {
+    (function (createModule) {
+        "use strict";
+        if ($$.utils.isNodeJSSupport()) {
+            createModule(exports);
+        } else if ($$.utils.isAmdSupport()) {
+            define('async', function () {
+                return createModule();
+            });
+        } else if ($$.utils.isBrowserSupport()) {
+            $$.async = createModule();
+        }
+    }(function (async) {
+        "use strict";
+        var AsyncDeferred = function () {},
+            AsyncPromise = function () {},
+            resolveDeferred = function (deferred, x) {
+                var xThen = null;
+                if (deferred.promise === x) {
+                    return deferred.reject(new TypeError("Cannot resolve a promise with itself"));
+                }
+                if (x instanceof AsyncPromise) {
+                    if (x.state === "fulfilled") { return deferred.fulfill(x.result); }
+                    if (x.state === "rejected") { return deferred.reject(x.result); }
+                    return x.then(deferred.fulfill, deferred.reject);
+                }
+                try {
+                    if (!($$.utils.isObject(x) || $$.utils.isFunction(x)) || !$$.utils.isFunction(xThen = x.then)) {
+                        return deferred.fulfill(x);
+                    }
+                }
+                catch (error) { deferred.reject(error); }
+                xThen(function (value) {
+                    resolveDeferred(deferred, value);
+                }, function (reason) {
+                    deferred.reject(reason);
+                });
+            },
+            createEvaluator = function (onResulted, deferred) {
+                return function (result) {
+                    try { resolveDeferred(deferred, onResulted(result)); }
+                    catch (reason) { deferred.reject(reason); }
+                };
+            },
+            createDeferred = function () {
+                var
+                    state = "pending",
+                    result,
+                    fulfillQueue = [],
+                    rejectQueue = [],
+                    promise = new AsyncPromise(),
+                    deferred = null,
+                    queueForFulfillment = function (onFulfilled, dependantDeferred) {
+                        if (state === "rejected") { return; }
+                        $$.utils.isFunction(onFulfilled) || (onFulfilled = function (value) { return value; });
+                        var evaluator = createEvaluator(onFulfilled, dependantDeferred);
+                        state === "fulfilled" ? $$.utils.nextTick(evaluator, result) :
+                            fulfillQueue.push(evaluator);
+                    },
+                    queueForRejection = function (onRejected, dependantDeferred) {
+                        if (state === "fulfilled") { return; }
+                        $$.utils.isFunction(onRejected) || (onRejected = function (error) { throw error; });
+                        var evaluator = createEvaluator(onRejected, dependantDeferred);
+                        state === "rejected" ? $$.utils.nextTick(evaluator, result) :
+                            rejectQueue.push(evaluator);
+                    },
+                    fulfill = function (value) {
+                        if (state !== "pending") { return; }
+                        state = "fulfilled";
+                        for (var i = 0, l = fulfillQueue.length; i < l; ++i) { fulfillQueue[i](value); }
+                        fulfillQueue = [];
+                        result = value;
+                        return promise;
+                    },
+                    reject = function (reason) {
+                        if (state !== "pending") { return; }
+                        state = "rejected";
+                        for (var i = 0, l = rejectQueue.length; i < l; ++i) { rejectQueue[i](reason); }
+                        rejectQueue = [];
+                        result = reason;
+                        return promise;
+                    };
+                promise.then = function (onFulfilled, onRejected) {
+                    var dependantDeferred = createDeferred();
+                    queueForFulfillment(onFulfilled, dependantDeferred);
+                    queueForRejection(onRejected, dependantDeferred);
+                    return dependantDeferred.promise;
+                };
+                promise.state = state;
+                promise.result = result;
+                AsyncDeferred.prototype = promise;
+                deferred = new AsyncDeferred();
+                deferred.promise = promise;
+                deferred.fulfill = fulfill;
+                deferred.reject = reject;
+                deferred.resolve = function (result) { resolveDeferred(this, result);};
+                return deferred;
+            };
+        async = async || {};
+        async.defer = createDeferred;
+        async.version = "1.0.0";
+        return async;
+    }));
+});/** javascript AMD规范实现, 应注意避免模块间的循环依赖:被依赖的模块应放在依赖数组的靠前元素位置
+ * 参考列表:
+ * http://pilotjs.com/
+ * https://github.com/amdjs/amdjs-api
+ * http://requirejs.org/
+ * http://javascript.ruanyifeng.com/tool/requirejs.html
+ * http://addyosmani.com/writing-modular-js/
+ * http://msdn.microsoft.com/en-us/magazine/hh227261.aspx
+ * CMD 模块定义规范 #242  https://github.com/seajs/seajs/issues/242
+ * TODO: 1.getInstance的方式 2.打印错误信息 3.功能向require.js看齐
+ * Created by tony on 2014/8/11.
+ * @version v1.0
+ */
+perfmjs.plugin('amd', function($$) {
+    var commentRegExp = /(\/\*([\s\S]*?)\*\/|([^:]|^)\/\/(.*)$)/mg, cjsRequireRegExp = /[^.]\s*require\s*\(\s*["']([^'"\s]+)["']\s*\)/g;
+    var parsedRequireStack = {}; //e.g. {'foo':true, 'foo_1':true, 'foo_1_1':true} //用于消除死循环依赖
+    var defines = {}; //e.g. {'foo':{'id':'foo',deps:[],callback:function(){}}};
+    var exports = {
+        'require': {'id':'require', 'getInstance': function() {
+            return function (module) {
+                if (typeof module === 'string') {
+                    if (exports[module]) {
+                        return exports[module]['getInstance'];
+                    }
+                    throw new Error(module + ' has not been defined. Please include it as a dependency in define()');
+                    return;
+                }
+            };
+        }()},
+        'exports': {'id':'exports', 'getInstance': function() {
+            return exports;
+        }()},
+        'module': {'id':'module', 'getInstance': function() {
+            return function(context) {
+                return {
+                    id: context,
+                    uri: loader.toUrl(context)
+                }
+            };
+        }}
+    }; //e.g. {'foo':{'id':'foo','getInstance':function(){return callback.apply(null, args)}}}
+    var loader = {};
+    define = function(id, dependencies, factory) {
+        var argLen = arguments.length;
+        if (argLen === 1) {
+            factory = id;
+            dependencies = undefined;
+            id = undefined;
+        } else if (argLen === 2) {
+            if ({}.toString.call(id) === '[object Array]') {
+                factory = dependencies;
+                dependencies = id;
+                id = undefined;
+            } else {
+                factory = dependencies;
+                dependencies = undefined;
+            }
+        }
+        //在define方法里有require('xxx')的情况
+        if (!dependencies && (typeof factory === 'function')) {
+            dependencies = [];
+            if (factory.length) {
+                factory
+                    .toString()
+                    .replace(commentRegExp, '')
+                    .replace(cjsRequireRegExp, function (match, dep) {
+                        dependencies.push(dep);
+                    });
+                dependencies = (factory.length === 1 ? ['require'] : ['require', 'exports', 'module']).concat(dependencies);
+            }
+        }
+        if (id && !defines[id]) {
+            defines[id] = {'id':id, 'deps':dependencies || [], callback: factory};
+        }
+    };
+    require = function(modules, callback, context) {
+        var invokeStack = [], deferred = $$.async.defer();
+        if (typeof modules === 'string') {
+            return;
+        }
+        //将没有依赖或只有'require', 'exports', 'module'的依赖放在依赖列表的后面
+        loader.loadParsedRequireStack(modules, [], 0, deferred);
+        deferred.promise.then(function(result) {
+            loader.getDepsStack(modules, invokeStack);
+            invokeStack.sort(function(module1, module2) {
+                var deps1 = defines[module1]['deps'] || [], depsCount1 = 0;
+                var deps2 = defines[module2]['deps'] || [], depsCount2 = 0;
+                for (var i = 0; i < deps1.length; i++) {
+                    if (deps1[i] === 'require' || deps1[i] === 'exports' || deps1[i] === 'module') {
+                        continue;
+                    }
+                    depsCount1++;
+                }
+                for (var j = 0; j < deps2.length; j++) {
+                    if (deps2[j] === 'require' || deps2[j] === 'exports' || deps2[j] === 'module') {
+                        continue;
+                    }
+                    depsCount2++;
+                }
+                return depsCount2 - depsCount1;
+            });
+            for (var i = invokeStack.length - 1; i >= 0; i--) {
+                var thisExport = invokeStack[i];
+                if (!exports[thisExport]) {
+                    exports[thisExport] = {'id':thisExport, 'getInstance': (function() {
+                        var args = [], depsInstances = defines[thisExport]['deps'];
+                        for (var j = 0; j < depsInstances.length; j++) {
+                            if ((exports[depsInstances[j]]||{})['getInstance']) {
+                                args[args.length] = (exports[depsInstances[j]]||{})['getInstance'];
+                            }
+                        }
+                        return defines[thisExport]['callback'].apply(null, args);
+                    })()}
+                }
+            }
+            var loadedModules = [];
+            for (var x = 0; x < modules.length; x++) {
+                switch (modules[x]) {
+                    case 'require':
+                        loadedModules[x] = exports['require']['getInstance'];
+                        break;
+                    case 'exports':
+                        loadedModules[x] = exports['exports']['getInstance']('context');
+                        break;
+                    case 'module':
+                        loadedModules[x] = exports['module'].getInstance()('context');
+                        break;
+                    case exports[context] ? exports[context]['id'] : '':
+                        loadedModules[x] = exports[context].getInstance();
+                        break;
+                    default:
+                        loadedModules[x] = exports[modules[x]]['getInstance'];
+                };
+            }
+            callback && callback.apply(null, loadedModules);
         });
-    }
-});///#source 1 1 /src/1.0.0/load.js
+    };
+    define.config = {
+        'baseUrl': 'http://localhost:63342/perfmjs/lib/amd/',
+        'alias': {
+            'xxx': 'plugins/xxx.min'
+        },
+        'usingInclude': {
+            'default': true,
+            'module': {
+                'foo': false
+            }
+        },
+        'shim': {
+            'backbone': {
+                'deps': [
+                    'underscore',
+                    'jquery'
+                ],
+                'exports': 'Backbone'
+            }
+        }
+    };
+    define.amd = {'async':true};
+    loader.getDepsStack = function(modules, invokeStack, invokedModules) {
+        invokedModules = invokedModules || {};
+        if (typeof modules === 'string') {
+            modules = [modules];
+        }
+        for (var i = 0; i < modules.length; i++) {
+            var thisModule = modules[i];
+            if (thisModule === 'require' || thisModule === 'exports' || thisModule === 'module') {
+                continue;
+            }
+            if (defines[thisModule]) {
+                if (invokedModules[thisModule]) {
+                    continue;
+                }
+                invokedModules[thisModule] = true;  //消除死循环依赖
+                invokeStack[invokeStack.length] = thisModule;
+                var deps = defines[thisModule]['deps'] || [];
+                for (var j = deps.length - 1; j >= 0; j--) {
+                    //同级的依赖顺序应是：被依赖的赖块ID放在数组前面的元素位置
+                    loader.getDepsStack(deps[j] , invokeStack, invokedModules);
+                }
+            }
+        }
+    };
+    loader.loadParsedRequireStack = function(modules, needLoadModules, countdown, deferred) {
+        var needLoadResources = [];
+        needLoadModules = needLoadModules || [];
+        loader.parseRequireStack(modules, needLoadModules);
+        for (var i = 0; i < needLoadModules.length; i++) {
+            needLoadResources[needLoadResources.length] = loader.toUrl(needLoadModules[i]) + '.js';
+        }
+        if (countdown < 1 && needLoadResources.length < 1) {
+            deferred.resolve(modules);
+        }
+        if (needLoadResources.length > 0) {
+            countdown += needLoadResources.length;
+            $$.includeres.loadHeadRes(needLoadResources, function() {
+                countdown -= needLoadResources.length;
+                var depsNeedLoadResources = [];
+                for (var i = 0; i < needLoadModules.length; i++) {
+                    depsNeedLoadResources = depsNeedLoadResources.concat(defines[needLoadModules[i]]['deps']);
+                }
+                loader.loadParsedRequireStack(depsNeedLoadResources, [], countdown, deferred);
+            });
+        }
+    };
+    loader.parseRequireStack = function(modules, needLoadModules) {
+        if (typeof modules === 'string') {
+            modules = [modules];
+        }
+        needLoadModules = needLoadModules || [];
+        for (var x = 0; x < modules.length; x++) {
+            var thisModule = modules[x];
+            if (parsedRequireStack[thisModule]) {
+                continue;
+            }
+            parsedRequireStack[thisModule] = true;
+            switch (thisModule) {
+                case 'require':
+                    break;
+                case 'exports':
+                    break;
+                case 'module':
+                    break;
+                default:
+                    if (defines[thisModule]) {
+                        if (defines[thisModule]['deps'] && defines[thisModule]['deps'].length > 0) {
+                            loader.parseRequireStack(defines[thisModule]['deps'], needLoadModules);
+                        }
+                    } else {
+                        needLoadModules.splice(0,0,thisModule);
+                    }
+            }
+        }
+    };
+    loader.toUrl = function(id, context) {
+        var newContext, i, changed;
+        if (define.config.alias[id]) {
+            id = define.config.alias[id];
+        }
+        switch (id) {
+            case 'require':
+            case 'exports':
+            case 'module':
+                return id;
+        }
+        newContext = (context || define.config.baseUrl).split('/');
+        newContext.pop();
+        id = id.split('/');
+        i = id.length;
+        while (--i) {
+            switch (id[0]) {
+                case '..':
+                    newContext.pop();
+                case '.':
+                case '':
+                    id.shift();
+                    changed = true;
+            }
+        }
+        return newContext.join('/') + '/' + id.join('/');
+    };
+});/**
+ * Browser detect: http://www.quirksmode.org/js/detect.html
+ * A useful but often overrated JavaScript function is the browser detect. 
+ * Sometimes you want to give specific instructions or load a new page in case the viewer uses, for instance, Safari.
+ * import utils.js
+ */
+perfmjs.plugin('browser', function($$) {
+	$$.browser = {
+		init: function() {
+			this.browser = this._searchString(this._dataBrowser) || "An unknown browser";
+			this.version = this._searchVersion(navigator.userAgent) || this._searchVersion(navigator.appVersion) || "an unknown version";
+			this.os = this._searchString(this._dataOS) || "an unknown OS";
+			this.ok = true;
+		},
+		info: function() {
+			if (this.ok === undefined) this.init();
+			return this.browser + " " + this.version + " " + this.os; 
+		},
+		msie: function() {
+			if (this.ok === undefined) this.init();
+			return (this.browser === 'Explorer');
+		},
+		_searchString: function(data) {
+			for (var i=0;i<data.length;i++)	{
+				var dataString = data[i].string;
+				var dataProp = data[i].prop;
+				this.version_searchString = data[i].versionSearch || data[i].identity;
+				if (dataString) {
+					if (dataString.indexOf(data[i].subString) != -1) {
+						return data[i].identity;
+					}
+				} else if (dataProp) {
+					return data[i].identity;
+				}
+			}
+		},
+		_searchVersion: function(dataString) {
+			var index = dataString.indexOf(this.version_searchString);
+			if (index == -1) return;
+			return parseFloat(dataString.substring(index+this.version_searchString.length+1));
+		},
+		_dataBrowser: [{
+				string: navigator.userAgent,
+				subString: "Chrome",
+				identity: "Chrome"
+			},{
+				string: navigator.userAgent,
+				subString: "OmniWeb",
+				versionSearch: "OmniWeb/",
+				identity: "OmniWeb"
+			},{
+				string: navigator.vendor,
+				subString: "Apple",
+				identity: "Safari",
+				versionSearch: "Version"
+			},{
+				prop: window.opera,
+				identity: "Opera",
+				versionSearch: "Version"
+			},{
+				string: navigator.vendor,
+				subString: "iCab",
+				identity: "iCab"
+			},{
+				string: navigator.vendor,
+				subString: "KDE",
+				identity: "Konqueror"
+			},{
+				string: navigator.userAgent,
+				subString: "Firefox",
+				identity: "Firefox"
+			},{
+				string: navigator.vendor,
+				subString: "Camino",
+				identity: "Camino"
+			},{		
+				// for newer Netscapes (6+)
+				string: navigator.userAgent,
+				subString: "Netscape",
+				identity: "Netscape"
+			},{
+				string: navigator.userAgent,
+				subString: "MSIE",
+				identity: "Explorer",
+				versionSearch: "MSIE"
+			},{
+				string: navigator.userAgent,
+				subString: "Gecko",
+				identity: "Mozilla",
+				versionSearch: "rv"
+			},{ 		
+				// for older Netscapes (4-)
+				string: navigator.userAgent,
+				subString: "Mozilla",
+				identity: "Netscape",
+				versionSearch: "Mozilla"
+			}
+		],
+		_dataOS: [{
+				string: navigator.platform,
+				subString: "Win",
+				identity: "Windows"
+			},{
+				string: navigator.platform,
+				subString: "Mac",
+				identity: "Mac"
+			},{
+				   string: navigator.userAgent,
+				   subString: "iPhone",
+				   identity: "iPhone/iPod"
+		    },{
+				string: navigator.platform,
+				subString: "Linux",
+				identity: "Linux"
+			}]
+	};
+}); /**
+ * 日志模块 FIXME 待完善, 目前仅供Node.js环境下使用
+ * 1）允许定义日志等级 -- "error", "warn", "info", "debug", "log"
+ * 2）在Firefox中通过firebug控制台输出日志，在IE中通过在url中添加debug=true参数，将日志显示在页面底部。
+ * 3）线上模式的错误日志，将记录到draggon监控系统，触发报警。
+ * @date 2012-11-30
+ * import perfmjs.js
+ */
+!(function($$){
+	/**
+	 * 	调试开发, 打开后将输出日志
+	 *  online模式下，异常信息将记录到draggon服务器上报警
+	 *  window.dmtrack 此变量只有online模式才存在，因此可以用于区分debug/online
+	 *  注意拷贝线上html源码时请将不需要的相关代码删除。
+	 */
+	DEBUG_MOD = false;
+	perfmjs.logger=function(){};
+	perfmjs.logger.level=4; 	//default level
+	//perfmjs.logger.errorUri="http://search.china.alibaba.com/rpc/dragoontrack/logError.json?msg="; 	//dragoon url
+	//perfmjs.logger.errorUri="http://s.no100.com/rpc/dragoontrack/logError.json?msg="; 	//dragoon url
+	perfmjs.logger.setLevel=function(level){//set logger level to filter the logger , so just show the logger level you focus.
+		perfmjs.logger.level=level;
+	};
+   
+	var prepared = false;
+	var methods = [ "error", "warn", "info", "debug", "log"];//0-4 level
+   
+	perfmjs.utils.extend(perfmjs.logger.prototype, {
+		level:perfmjs.logger.level,
+		setEnableLevel: function(level) {
+			if(level>4 || level<0) {
+				this.error(['wrong level setting. level should be 0-4, the int type,you set ',level,", so stupided."].join(''));
+			}
+			this.level=parseInt(level);
+		},
+		enabled: function(lev) {
+			if(lev>perfmjs.logger.level) {
+				return false;
+			}
+			return true;
+		},
+		name: function() {
+			return this._name;
+		},
+		log: function() {
+			this._log(4, arguments);
+		},
+		debug: function() {
+			this._log(3, arguments);
+		},
+		info: function() {
+			this._log(2, arguments);
+		},
+		warn: function() {
+			this._log(1, arguments);
+		},
+		error: function() {
+			this._log(0, arguments);
+		},
+		_handler: function(level, name, msg){
+            ////////////在此处返回/////////////////////////////
+            return;
+            /////////////////////////////////////////
+			var method=methods[level];
+			msg=[[method+"|"].join(" | ")].concat(Array.prototype.slice.call(msg));
+			   
+			if(self.console && !perfmjs.browser.msie()){
+			   if(console.log.apply){
+				  console[method].apply(console, msg);    	  
+			   }else{
+				  console[console[method]?method:'log'](msg);
+			   }
+			}else{
+				//在IE下，如果url中添加debug=true，则日志窗口将被添加在页面的底部，帮助调试。
+				if(perfmjs.browser.msie()) {
+					if(/debug=true/i.test(location.search)) {
+						!prepared && this._prepare();	
+						var msgBox = perfmjs.utils.getJQuery()('#DEBUG ol');
+						var color;
+						switch(method){
+							case "log":{
+								color="#FFFFFF";
+								break;
+							}
+							case "debug":{
+								color="#C0C0C0";
+								break;
+							}
+							case "info":{
+								color="#EBF5FF";
+								break;
+							}
+							case "warn":{
+								color="#FFFFC8";
+								break;
+							}
+							case "error":{
+								color="#FE6947";
+								break;
+							}
+							default:{
+								color="#FFFFFF";
+								break;
+							}
+						}
+						perfmjs.utils.getJQuery()('<li style="background-color:'+ color +';">').text('' + msg).appendTo(msgBox);
+					} 
+				}
+			}
+//			//online模式下需要报警
+//			if(!DEBUG_MOD){
+//				if(level == 0 || level == 1){
+//					(new Image()).src = perfmjs.logger.errorUri + this._getBrowserInfo() + msg;
+//				}
+//			}
+		},
+		_log: function(level, msg) {
+			if (this.enabled(level)) {
+				this._handler(level,this.name(),msg);
+			}
+		},
+		_getBrowserInfo:function(){
+			return perfmjs.browser.info();
+		},
+		_prepare:function() {
+			perfmjs.utils.getJQuery()('#DEBUG').remove();
+			//注意应该该js放在<head>标签内才有效果
+			perfmjs.utils.getJQuery()(document.head).before('<div id="DEBUG" style="margin-top:10px;padding:8px;border:dashed 1px #FF7300;background-color:#EEE;color:#000;"><ol></ol></div>');
+			prepared = true;
+		},
+		end:0
+	});
+   
+	var logs={};//logs  instance container
+	perfmjs.logger = function(name) {
+       if (!logs[name]) {
+           logs[name] = new perfmjs.logger(name);
+           logs[name]._name=name;
+       }
+       return logs[name];
+	}('perfmjs');
+	if(DEBUG_MOD){
+		perfmjs.logger.setEnableLevel(4);	
+	}else{
+		perfmjs.logger.setEnableLevel(2);
+	}
+	//try-catch 捕捉不到的异常使用onerror函数来记录日志
+	/* window.onerror = function(msg,url,line){
+		if(!DEBUG_MOD){
+			(new Image()).src = perfmjs.logger.errorUri + perfmjs.logger._getBrowserInfo() + msg + ' |url:' +url + ' |line:'+line;
+		}
+		return false;
+	}; */
+})(window);///#source 1 1 /src/1.0.0/load.js
 /* head.load - v1.0.3 */
 /*
  * HeadJS     The only script in your <HEAD>
@@ -2381,9 +2325,34 @@ perfmjs.plugin('joquery', function($$) {
 			return this.sources;
 		}
 	};
+    //define所有的perfmjs模块
     if (perfmjs.utils.isAmdSupport()) {
+        define('perfmjs', function () {
+            return perfmjs;
+        });
+        define('utils', function () {
+            return perfmjs.utils;
+        });
+        define('joquery', function () {
+            return perfmjs.joquery;
+        });
+        define('async', function () {
+            return perfmjs.async;
+        });
+        define('base', function () {
+            return perfmjs.base;
+        });
         define('loader', function () {
             return perfmjs.includeres;
+        });
+        define('eventProxy', function () {
+            return perfmjs.eventProxy.newInstance();
+        });
+        define('fsm', function () {
+            return perfmjs.fsm;
+        });
+        define('app', function () {
+            return perfmjs.app.newInstance();
         });
     }
 	//立即解析includeres
@@ -2510,11 +2479,6 @@ perfmjs.plugin('eventProxy', function($$) {
 		scope: 'singleton',
 		end: 0
 	};
-    if (perfmjs.utils.isAmdSupport()) {
-        define('eventProxy', function () {
-            return perfmjs.eventProxy.newInstance();
-        });
-    }
 });/**
  * 有限状态机的javascript实现
  * Created by tony on 2014/4/11.
@@ -2616,11 +2580,6 @@ perfmjs.plugin('fsm', function($$) {
         scope: 'singleton',
         end: 0
     };
-    if (perfmjs.utils.isAmdSupport()) {
-        define('fsm', function () {
-            return perfmjs.fsm;
-        });
-    }
 });/**
  * app core 作用：
  * 1）控制各个模块的生命周期，创建及销毁
@@ -2865,9 +2824,4 @@ perfmjs.plugin('app', function($$) {
 		scope: 'singleton',
 		end: 0
 	};
-    if (perfmjs.utils.isAmdSupport()) {
-        define('app', function () {
-            return perfmjs.app.newInstance();
-        });
-    }
 });

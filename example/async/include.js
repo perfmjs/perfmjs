@@ -6,19 +6,26 @@
 require(['loader'], function(loader) {
     loader.loadModules({name: 'js-comm', type: 'js', mdCallback: function (source, module, combineUrls) {
         if (module === 'async') {
-//            combineUrls[combineUrls.length] = '111';
-//            combineUrls[combineUrls.length] = '/perfmjs/example/async/async.js';
+            //noop
         }
-    }, afterLoadedCallback: function () {
+    }, afterLoadedCallback: function() {
         require(['utils', 'async'], function(utils, async) {
             var deferred = async.defer();
             utils.nextTick(function() {
-                deferred.resolve('ok');
+                deferred.resolve('ok111');
             });
             deferred.promise.then(function(result) {
-                alert('result=' + result);
-            }, function(result) {
-                alert('error:' + result);
+                alert('result1=' + result);
+            }, function(error) {
+                alert('error1:' + result);
+            }).then(function(result) {
+                alert('result2=' + result);
+            }, function(error) {
+                alert('error2:' + result);
+            }).then(function(result) {
+                alert('result3=' + result);
+            }, function(error) {
+                alert('error2:' + result);
             });
         });
     }});

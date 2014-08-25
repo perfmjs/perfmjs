@@ -1,3 +1,8 @@
+1.3.5 / 2014-08-26
+==================
+ * fix: 修复amd.js中不能同步加载资源文件的问题
+ * improved: 优化promise/A+实现类async.js
+
 1.3.4 / 2014-08-22
 ==================
  * add: 在utils中增加方法：isBrowserSupport()和isNodeJSSupport()

@@ -11,8 +11,8 @@ require(['loader'], function(loader) {
             combineUrls[combineUrls.length] = '/perfmjs/example/amd/amd1/myModule2.js';
             combineUrls[combineUrls.length] = '/perfmjs/example/amd/main.js';
         } else if (module === 'foo') {
-            combineUrls[combineUrls.length] = '/perfmjs/example/amd/foo.js';
-            combineUrls[combineUrls.length] = '/perfmjs/example/amd/bar.js';
+//            combineUrls[combineUrls.length] = '/perfmjs/example/amd/bar.js';
+//            combineUrls[combineUrls.length] = '/perfmjs/example/amd/foo.js';
         }
     }, afterLoadedCallback: function () {
         if (typeof define === "function" && define.amd && define.amd['async']) {

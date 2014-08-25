@@ -2,7 +2,7 @@
  * 双色球-有限状态机
  * Created by Administrator on 2014/4/11.
  */
-require(['base','fsm'], function(base, fsm) {
+define('ssqfsm', ['base','fsm'], function(base, fsm) {
     base("fsm.ssqfsm", {
         init: function() {
             this._super('init');
@@ -17,4 +17,5 @@ require(['base','fsm'], function(base, fsm) {
         stateMap: {'changePlay': {'fushi': 'dantuo'}},
         end: 0
     };
+    return base.ssqfsm;
 });
