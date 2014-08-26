@@ -1,4 +1,4 @@
-﻿/**
+/**
  * perfmjs－高性能javascript v1.3.2
  * @date 2014-07-3
  */
@@ -447,12 +447,14 @@
             });
         }
     };
-})();perfmjs.plugin('sysconfig', function($$) {
+})();
+perfmjs.plugin('sysconfig', function($$) {
     $$.sysconfig.events = {
         moduleIsReady: 'perfmjs.ready',
         end:0
     };
-});/**
+});
+/**
  * 原生态js的OO框架抽象基类,默认不自动实例化对象
  * @date 2012-12-01
  */
@@ -552,7 +554,8 @@
 		scope: 'singleton',
 		end: 0
 	};
-})(perfmjs);/*
+})(perfmjs);
+/*
  * JOQUERY 1.0.0
  * import utils.js
  */
@@ -777,7 +780,8 @@ perfmjs.plugin('joquery', function($$) {
 		scope: 'prototype',
 		end: 0
 	};
-});/**
+});
+/**
  * async v1.0.0
  * A minimal implementation of Promises/A+
  * 参考：Tillthen（v0.3.4） https://github.com/biril/tillthen
@@ -891,7 +895,8 @@ perfmjs.plugin('async', function($$) {
         async.version = "1.0.0";
         return async;
     }));
-});/** javascript AMD规范实现, 应注意避免模块间的循环依赖:被依赖的模块应放在依赖数组的靠前元素位置
+});
+/** javascript AMD规范实现, 应注意避免模块间的循环依赖:被依赖的模块应放在依赖数组的靠前元素位置
  * 参考列表:
  * http://pilotjs.com/
  * https://github.com/amdjs/amdjs-api
@@ -1152,7 +1157,8 @@ perfmjs.plugin('amd', function($$) {
         }
         return newContext.join('/') + '/' + id.join('/');
     };
-});/**
+});
+/**
  * Browser detect: http://www.quirksmode.org/js/detect.html
  * A useful but often overrated JavaScript function is the browser detect. 
  * Sometimes you want to give specific instructions or load a new page in case the viewer uses, for instance, Safari.
@@ -1268,7 +1274,8 @@ perfmjs.plugin('browser', function($$) {
 				identity: "Linux"
 			}]
 	};
-}); /**
+});
+ /**
  * 日志模块 FIXME 待完善, 目前仅供Node.js环境下使用
  * 1）允许定义日志等级 -- "error", "warn", "info", "debug", "log"
  * 2）在Firefox中通过firebug控制台输出日志，在IE中通过在url中添加debug=true参数，将日志显示在页面底部。
@@ -1421,7 +1428,8 @@ perfmjs.plugin('browser', function($$) {
 		}
 		return false;
 	}; */
-})(window);///#source 1 1 /src/1.0.0/load.js
+})(window);
+///#source 1 1 /src/1.0.0/load.js
 /* head.load - v1.0.3 */
 /*
  * HeadJS     The only script in your <HEAD>
@@ -2133,6 +2141,7 @@ perfmjs.plugin('browser', function($$) {
     perfmjs.loadres = api;
     /*for perfmjs end*/
 }(window);
+
 /**
  * 解析加载资源文件的url.
  * TODO: 该类必须同时通过所有浏览器测试，包括ie6, ie7, ie8等浏览器
@@ -2357,7 +2366,8 @@ perfmjs.plugin('browser', function($$) {
     }
 	//立即解析includeres
 	perfmjs.includeres.load({isScript:true});
-})(window);/**
+})(window);
+/**
  * eventProxy
  * 单实例，实现模块间通信的代理类, 每个模块都有自己的 eventProxy，用来降低模块间耦合度，各模块只能直接和eventProxy打交道。
  * @date 2012-11-30
@@ -2479,7 +2489,8 @@ perfmjs.plugin('eventProxy', function($$) {
 		scope: 'singleton',
 		end: 0
 	};
-});/**
+});
+/**
  * 有限状态机的javascript实现
  * Created by tony on 2014/4/11.
  */
@@ -2520,7 +2531,6 @@ perfmjs.plugin('fsm', function($$) {
             }
 
             if (this.options['stateMap'][event][oldState] !== this.options['current']) {
-                alert('========' + this.options['stateMap'][event][oldState] + "/" + this.current());
                 return;
             }
 
@@ -2580,7 +2590,8 @@ perfmjs.plugin('fsm', function($$) {
         scope: 'singleton',
         end: 0
     };
-});/**
+});
+/**
  * app core 作用：
  * 1）控制各个模块的生命周期，创建及销毁
  * 2）允许模块间的通信

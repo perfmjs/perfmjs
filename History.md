@@ -2,6 +2,7 @@
 ==================
  * fix: 修复amd.js中不能同步加载资源文件的问题
  * improved: 优化promise/A+实现类async.js
+ * add: 增加gulp构建工具文件：gulpfile.js
 
 1.3.4 / 2014-08-22
 ==================
