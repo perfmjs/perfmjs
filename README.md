@@ -14,6 +14,8 @@ fast by default：高效，易用，易读
 
 实现了浏览器端的AMD（Asynchronous Module Definition）异步模块定义规范，功能类似require.js, 但比require.js更轻量
 
+实现了异步编程模块(Promises/A+)规范
+
 原生态支持面向对象(object-oriented)功能
 
 更高效的插件开发机制
@@ -34,6 +36,12 @@ Nodejs版的perfmjs框架请移步：https://github.com/perfmjs/perfmjs-node
 =======
 jQuery/zepto.js是该框架的可选部分。DOM操作,AJAX,CSS等功能可以使用jQuery及类似框架提供，perfmjs框架在这些功能上不重复发明轮子！
 
+
+代码质量与构建
+=======
+WebStorm, SlikSvn(svn命令行客户端), Node.js开发环境, gulp-uglify + gulp-jshint + gulp-jsdoc + 公司的代码规范文档, Jasmine
+
+
 TODO:
 =======
 增加资源文件自已更新缓存的功能（不需使用版本号）
@@ -41,8 +49,6 @@ TODO:
 支持Html5,支持移动Mobile
 
 支持lazyload,bigRender等高效功能（可选功能，默认不开启）
-
-GitHub上类似框架: Fdev4  https://github.com/swain/Fdev4
 
 
 How to use

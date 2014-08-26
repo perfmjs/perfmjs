@@ -92,6 +92,24 @@ describe("core核心", function() {
             expect(perfmjs.model.plan.multiple()).toEqual(20);
         });
     });
+
+    var asyncResult;
+    it("should load the AMD module", function(done) {
+        require(['utils', 'async'], function(utils, async) {
+            var deferred = async.defer();
+            deferred.promise.then(function(result) {
+                asyncResult = result;
+                done('sss');
+            }, function(error) {
+                //noop
+            });
+            deferred.resolve('ok');
+        });
+    });
+    it("应能测试通过async模块功能", function() {
+        expect(asyncResult).toEqual('ok');
+    });
+
     it("event应该能运行正常", function() {
         perfmjs.ready(function($$, app) {
             app.unregister('lottevent');
