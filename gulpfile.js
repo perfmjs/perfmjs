@@ -11,6 +11,7 @@ var del        = require('del');
 //var jsdoc   = require('gulp-jsdoc');
 
 var paths = {
+    "core.name": "core-1.3.5",
     scripts: [
         './lib/perfmjs/perfmjs.js',
         './lib/perfmjs/sysconfig.js',
@@ -33,10 +34,10 @@ gulp.task('clean', function(cb) {
 });
 gulp.task('concat', ['clean'], function () {
     gulp.src(paths.scripts)
-        .pipe(concat('core.js'))
+        .pipe(concat(paths['core.name'] + '.js'))
         .pipe(gulp.dest('build'))
         .pipe(uglify())
-        .pipe(concat('core.min.js'))
+        .pipe(concat(paths['core.name'] + '.min.js'))
         .pipe(gulp.dest('build'));
 });
 

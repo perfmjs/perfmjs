@@ -1,7 +1,8 @@
 /**
  * Created by Administrator on 2014/8/13.
  */
-define('foo', ['base'], function(base) {
+define('foo', function(require) {
+    var base = require('base');
     base("foo", {
         init: function(initParam) {
             return this;

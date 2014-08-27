@@ -113,7 +113,7 @@ describe("core核心", function() {
     it("event应该能运行正常", function() {
         perfmjs.ready(function($$, app) {
             app.unregister('lottevent');
-            app.register('lottevent', perfmjs.lottevent);
+            app.register($$.lottevent);
             app.startAll();
             $$.lottevent.instance.buy(999);
             expect($$.model.plan.multiple()).toEqual(999);
@@ -136,7 +136,7 @@ describe("core核心", function() {
     it("opera功能应该可以正常运行", function() {
         perfmjs.ready(function($$, app) {
             app.unregister('lottevent');
-            app.register('lottevent', $$.lottevent);
+            app.register($$.lottevent);
             app.startAll();
             $$.ssqopera.newInstance();
             expect($$.model.plan.multiple()).toEqual(888);
@@ -144,7 +144,7 @@ describe("core核心", function() {
     });
     it("fsm功能应该可以正常运行", function() {
         require(['app', 'ssqfsm'], function(app, ssqfsm) {
-            app.registerAndStart('ssqfsm', ssqfsm);
+            app.registerAndStart(ssqfsm);
             ssqfsm.instance.event('changePlay');
             expect(ssqfsm.instance.current()).toEqual('dantuo');
         });

@@ -12,20 +12,12 @@ require(['loader'], function(loader) {
         require(['utils', 'async'], function(utils, async) {
             var deferred = async.defer();
             utils.nextTick(function() {
-                deferred.resolve('ok111');
+                deferred.resolve('ok');
             });
             deferred.promise.then(function(result) {
-                alert('result1=' + result);
+                console.log('result=' + result);
             }, function(error) {
-                alert('error1:' + result);
-            }).then(function(result) {
-                alert('result2=' + result);
-            }, function(error) {
-                alert('error2:' + result);
-            }).then(function(result) {
-                alert('result3=' + result);
-            }, function(error) {
-                alert('error2:' + result);
+                console.log('error:' + result);
             });
         });
     }});

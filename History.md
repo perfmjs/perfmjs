@@ -1,3 +1,9 @@
+1.3.6 / 2014-08-27
+==================
+* improved: app.js 管理对象生命周期时，去掉moduleId入参
+* improved: base.js 增加getName()方法
+* improved:.includeres.js 增加对带版本号的（如：core-1.3.5-min.js）这种依赖文件的正则匹配
+
 1.3.5 / 2014-08-26
 ==================
  * fix: 修复amd.js中不能同步加载资源文件的问题

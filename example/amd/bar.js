@@ -1,9 +1,7 @@
 /**
  * Created by Administrator on 2014/8/13.
  */
-define('bar', function(require) {
-    var base = require('base');
-    require('foo');
+define('bar', ['base', 'foo'], function(base, foo) {
     base("foo.bar", {
         init: function(initParam) {
             return this;
@@ -11,7 +9,7 @@ define('bar', function(require) {
         sayHello: function(name) {
             var superName = this._super('sayHello', name);
             return 'call super:' + superName + ', call self: hello- '
-                        + name + "/foo:" + this.foo();
+                + name + "/foo:" + this.foo();
         },
         end: 0
     });

@@ -19,10 +19,10 @@ require(['loader'], function(loader) {
             define.config.baseUrl = 'http://localhost:63342/perfmjs/example/amd/';
             define.config.alias['jquery'] = 'plugins/jquery.min';
         }
-        require(['app', 'bar', 'myModule'], function (app, bar, myModule) {
-            app.registerAndStart('bar', bar);
-            alert(bar.instance.sayHello('bar'));
-            alert('main: ' + myModule.getFoo());
+        require(['app', 'bar'], function (app, bar, myModule) {
+            app.registerAndStart(bar);
+            console.log(bar.instance.sayHello('bar'));
+            //alert('main: ' + myModule.getFoo());
         });
     }});
 });
