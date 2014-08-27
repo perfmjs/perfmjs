@@ -88,8 +88,8 @@ describe("core核心", function() {
     });
     it("model应该能运行正常", function() {
         perfmjs.ready(function($$, app) {
-            perfmjs.model.plan.multiple(20);
-            expect(perfmjs.model.plan.multiple()).toEqual(20);
+            $$.model.plan.multiple(20);
+            expect($$.model.plan.multiple()).toEqual(20);
         });
     });
 
