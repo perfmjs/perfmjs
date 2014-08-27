@@ -14,7 +14,7 @@ var paths = {
     "core.name": "core-1.3.5",
     scripts: [
         './lib/perfmjs/perfmjs.js',
-        './lib/perfmjs/sysconfig.js',
+        './lib/perfmjs/sys-config.js',
         './lib/perfmjs/base.js',
         './lib/perfmjs/joquery.js',
         './lib/perfmjs/async.js',
@@ -22,7 +22,7 @@ var paths = {
         './lib/perfmjs/browser.js',
         './lib/perfmjs/logger.js',
         './lib/perfmjs/head.load.js',
-        './lib/perfmjs/includeres.js',
+        './lib/perfmjs/include-res.js',
         './lib/perfmjs/event-proxy.js',
         './lib/perfmjs/fsm.js',
         './lib/perfmjs/app.js'

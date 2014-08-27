@@ -13,7 +13,7 @@ perfmjs.plugin('unit.lottevent', function($$) {
         },
         buy: function(multiple) {
             //ajaxcall
-            perfmjs.eventProxy.instance.emit('lottevent/heartbeat', {multiple: multiple});
+            $$.eventProxy.instance.emit('lottevent/heartbeat', {multiple: multiple});
             //modify model
         },
         end: 0

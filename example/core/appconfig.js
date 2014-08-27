@@ -3,18 +3,18 @@
  * @overview:搜索环境和参数配置
  * @date: 2012-11-30
 */
-perfmjs.plugin('appconfig', function($) {
-	$.utils.namespace('perfmjs.appconfig');
-	$.appconfig.lazymodule = {
+perfmjs.plugin('appconfig', function($$) {
+	$$.utils.namespace('appconfig');
+	$$.appconfig.lazymodule = {
 		lazymodule1:{
 			js: ['lib/example/lazyloadmodule1.js'],
-			css:[$.currentDomain + '/perfmjs/css/app/search/v4.0/core/example/lazyloadmodule1.css']
+			css:[$$.currentDomain + '/perfmjs/css/app/search/v4.0/core/example/lazyloadmodule1.css']
 		},
 		//这里示例了一个延迟加载模块有多种展现模式时的文件定义方式（魔方项目）
 		lazymodule2:{
 			combine1:{
 				js: ['lib/example/lazyloadmodule2.js'],
-				css:[$.currentDomain + '/perfmjs/css/app/search/v4.0/core/example/lazyloadmodule21.css']
+				css:[$$.currentDomain + '/perfmjs/css/app/search/v4.0/core/example/lazyloadmodule21.css']
 			},
 			combine2:{
 				js: ['lib/example/lazyloadmodule2.js'],
@@ -41,7 +41,7 @@ perfmjs.plugin('appconfig', function($) {
 		},
 		end:0
 	};
-	$.appconfig.events = {
+	$$.appconfig.events = {
 		heartbeat: 'perfmjs/module/heartbeat',
 		end:0
 	};

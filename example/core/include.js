@@ -6,7 +6,7 @@
 require(['loader'], function(loader) {
     loader.loadModules({name:'js-comm', type:'js', mdCallback:function(source, module, combineUrls) {
 		if (module === 'jq') {
-			combineUrls[combineUrls.length] = '/perfmjs/lib/perfmjs/jquery/jquery-1.11.1.min.js';
+			combineUrls[combineUrls.length] = '/perfmjs/lib/third-part-libs/jquery/jquery-1.11.1.min.js';
 		} else if (module === 'ajax') {
             combineUrls[combineUrls.length] = '/perfmjs/lib/widget/ajax/ajaxcall.js';
         } else if (module === 'webdialog') {

@@ -4,7 +4,7 @@ perfmjs.plugin('module3', function($$) {
             this.option('eventProxy', eventProxy);
 			this.createHTML();
             this.options['eventProxy'].on($$.appconfig.events.heartbeat, this.create);
-            this.options['eventProxy'].on($$.sysconfig.events.moduleIsReady, function() {$$.logger.debug("module3 is ready!");});
+            this.options['eventProxy'].on($$.sysConfig.events.moduleIsReady, function() {$$.logger.debug("module3 is ready!");});
 			return this;
 		},
 		create: function(data) {

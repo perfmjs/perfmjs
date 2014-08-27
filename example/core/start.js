@@ -3,11 +3,11 @@
  */
 perfmjs.ready(function($$, app) {
     //注册启动业务对象实例
-    app.register("module1", $$.module1);
-    app.register("module2", $$.module2, {callback:function() {
+    app.register($$.module1);
+    app.register($$.module2, {callback:function() {
         //alert('started base.module2');
     }});
-    app.register("module3", $$.module3);
+    app.register($$.module3);
     app.startAll();
 
     //try jQuery功能
