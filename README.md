@@ -117,7 +117,7 @@ index.html
         }, afterLoadedCallback:function() {
             //应用入口函数
             require(['app', 'bar'], function (app, bar) {
-                app.registerAndStart('bar', bar);
+                app.registerAndStart(bar);
                 alert(bar.instance.sayHello('bar'));
             });
         }});
