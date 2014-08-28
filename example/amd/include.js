@@ -3,7 +3,7 @@
  * sources e.g. [{n:'common',f:'http://s.no100.com/perfmjs/js/core2/include-common.js',t:'js',m:'jq;dlt',d:'http://s.no100.com'}]
  * combineUrls e.g. []
  */
-require(['loader'], function(loader) {
+require(['utils', 'loader'], function(utils, loader) {
     loader.loadModules({name: 'js-comm', type: 'js', mdCallback: function (source, module, combineUrls) {
         if (module === 'amd') {
             //combineUrls[combineUrls.length] = 'http://code.jquery.com/jquery-1.11.0.min.js';
@@ -19,10 +19,10 @@ require(['loader'], function(loader) {
             define.config.baseUrl = 'http://localhost:63342/perfmjs/example/amd/';
             define.config.alias['jquery'] = 'plugins/jquery.min';
         }
-        require(['app', 'bar'], function (app, bar, myModule) {
+        require(['app', 'bar', 'myModule'], function (app, bar, myModule) {
             app.registerAndStart(bar);
             console.log(bar.instance.sayHello('bar'));
-            //alert('main: ' + myModule.getFoo());
+            console.log('main: ' + myModule.getFoo());
         });
     }});
 });

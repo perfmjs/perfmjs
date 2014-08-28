@@ -1,9 +1,9 @@
-define('./amd1/myModule3', function (require) {
-    alert('./amd1/myModule3 loaded');
-    var m2 = require('amd1/myModule2');
+define('amd1/myModule3', function (require) {
+    console.log('amd1/myModule3 loaded!');
+//    var m2 = require('amd1/myModule2');
     return {
         getFoo: function() {
-            return "./myModule3#foo3" + "/" + m2.getFoo();
+            return "amd1/myModule3#getFoo()/";
         }
     }
 });
