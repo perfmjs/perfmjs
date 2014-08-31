@@ -1,3 +1,7 @@
+1.3.7 / 2014-08-31
+==================
+* fix: 将perfmjs.utils#isH5Supported方法名改成isH5Support()
+
 1.3.7 / 2014-08-28
 ==================
 * improved: amd.js 增加错误处理
@@ -38,7 +42,7 @@
 
 1.2.5 / 2014-07-28
 ==================
- * fixed: fixed logic about perfmjs.utils.isH5Supported()
+ * fixed: fixed logic about perfmjs.utils.isH5Support()
 
 1.2.4 / 2014-07-23
 ==================
