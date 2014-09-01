@@ -1,4 +1,4 @@
-1.3.7 / 2014-08-31
+1.3.8 / 2014-9-1
 ==================
 * fix: 将perfmjs.utils#isH5Supported方法名改成isH5Support()
 
