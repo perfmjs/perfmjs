@@ -11,7 +11,7 @@ perfmjs.ready(function($$, app) {
     app.startAll();
 
     //try jQuery功能
-    if (!$$.utils.isJQueryLoaded()) {
+    if (typeof jQuery === 'undefined') {
         alert('如果想使用jQuery框架的功能，请加载jquery模块!');
         return;
     }

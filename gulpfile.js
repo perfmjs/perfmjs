@@ -19,7 +19,6 @@ var paths = {
         './lib/perfmjs/joquery.js',
         './lib/perfmjs/async.js',
         './lib/perfmjs/amd.js',
-        './lib/perfmjs/browser.js',
         './lib/perfmjs/logger.js',
         './lib/perfmjs/head.load.js',
         './lib/perfmjs/include-res.js',
