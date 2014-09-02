@@ -108,12 +108,9 @@ index.html
     <script type="text/javascript" src="build/core.js?v=20140813001"></script>
     <script>
     require(['loader'], function(loader) {
-        loader.load({src:"{n:'load-js',t:'js',m:'foo;'}"}
-        ).loadModules({name:'load-js', type:'js', mdCallback:function(source, module, combineUrls) {
-            if (module === 'foo') {
-                combineUrls[combineUrls.length] = 'foo.js';
-                combineUrls[combineUrls.length] = 'bar.js';
-            }
+        loader.loadModules({mdCallback:function(source, module, combineUrls) {
+            combineUrls[combineUrls.length] = 'foo.js';
+            combineUrls[combineUrls.length] = 'bar.js';
         }, afterLoadedCallback:function() {
             //应用入口函数
             require(['app', 'bar'], function (app, bar) {
