@@ -9,6 +9,19 @@ describe("core核心", function() {
             });
         });
     });
+    it("应能测试通过skyjs.utils.fastBind方法", function() {
+        perfmjs.ready(function($$, app) {
+            var fastBind = $$.utils._fastBind(function(arg) {
+                return 100 + arg;
+            }, null);
+
+            var fastBind2 = $$.utils._fastBind(function(arg1, arg2, arg3, arg4) {
+                return 100 + arg1 + arg2 + arg3 + arg4;
+            }, null, 100);
+            expect(fastBind(100)).toEqual(200);
+            expect(fastBind2(1, 2, 3)).toEqual(206);
+        });
+    });
     it("应能测试通过perfmjs.utils.isBrowserSupport方法", function() {
         perfmjs.ready(function($$, app) {
             expect($$.utils.isBrowserSupport()).toEqual(true);
