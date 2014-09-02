@@ -6,7 +6,6 @@
 require(['utils', 'loader'], function(utils, loader) {
     loader.loadModules({name: 'js-comm', type: 'js', mdCallback: function (source, module, combineUrls) {
         if (module === 'amd') {
-            //combineUrls[combineUrls.length] = 'http://code.jquery.com/jquery-1.11.0.min.js';
             combineUrls[combineUrls.length] = '/perfmjs/example/amd/amd1/myModule3.js';
             combineUrls[combineUrls.length] = '/perfmjs/example/amd/amd1/myModule2.js';
             combineUrls[combineUrls.length] = '/perfmjs/example/amd/main.js';

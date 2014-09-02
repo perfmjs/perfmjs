@@ -21,7 +21,7 @@
 			border:1px solid blue;
 		}
 	</style>
-	<script type="text/javascript" src="/perfmjs/build/core-1.34.53.js?v=20140813001^{n:'css-comm',f:'',t:'css',m:'fb;common;',d:'http://192.168.66.150:63342'}|{n:'js-comm',f:'/perfmjs/example/core/include.js',t:'js',m:'jq;ajax;form;app;',d:'http://192.168.66.150:63342'}"></script>
+	<script type="text/javascript" src="/perfmjs/build/core-1.3.5.js?^{n:'css-comm',f:'',t:'css',m:'fb;common;',d:'http://192.168.66.150:63342'}|{n:'js-default',f:'/perfmjs/example/core/include.js',t:'js',m:'jq12;ajax;form;app;',d:'http://192.168.66.150:63342'}"></script>
   </head>
   <!--页面上只应该有一个很小的js文件被放置在<script>标签中加载，其余都是无阻塞加载-->
   <body>
@@ -37,18 +37,19 @@
     </div>
     <script type="text/javascript">
      var loadJQuery = function() {
-         perfmjs.includeRes.load({src:"{n:'load-jquery-js',t:'js',m:'jquery;'}"}
-         ).loadModules({name:'load-jquery-js', type:'js', mdCallback:function(source, module, combineUrls) {
-             if (module === 'jquery') {
-                 combineUrls[combineUrls.length] = '/perfmjs/lib/third-part-libs/jquery/jquery-1.11.1.min.js';
-             }
-         }, afterLoadedCallback:function() {
-             alert("已成功加载jQuery框架");
-             $('#eventProxyBtn').unbind();
-             $('#eventProxyBtn').bind('click', function () {
-                 perfmjs.eventProxy.instance.emit(perfmjs.appconfig.events.heartbeat, {msg: "send from index.html"});
-             });
-         }});
+         require(['loader'], function(loader) {
+             loader.loadModules({mdCallback:function(source, module, combineUrls) {
+                 if (module === 'default') {
+                     combineUrls[combineUrls.length] = '/perfmjs/lib/third-part-libs/jquery/jquery-1.11.1.min.js';
+                 }
+             }, afterLoadedCallback:function() {
+                 alert("已成功加载jQuery框架");
+                 $('#eventProxyBtn').unbind();
+                 $('#eventProxyBtn').bind('click', function() {
+                     perfmjs.eventProxy.instance.emit(perfmjs.appconfig.events.heartbeat, {msg: "send from index.html"});
+                 });
+             }});
+         });
      };
     //第1种加载res方法为加载core.lib，如：/perfmjs/build/core.lib?v=2012120303^{n:'css-comm',f:'/perfmjs/lib/include-css.lib',t:'css',m:'fb;common;',d:'http://192.168.66.150:63342'}|{n:'lib-comm',f:'/perfmjs/lib/include.lib',t:'lib',m:'jq;ajax;form;app;',d:'http://192.168.66.150:63342'}
     //第2种res加载方法如下：

@@ -1,3 +1,7 @@
+1.3.9 / 2014-09-02
+==================
+* improved:简化includeRes#loadModules方法的使用
+
 1.3.8 / 2014-09-01
 ==================
 * fix: 将perfmjs.utils#isH5Supported方法名改成isH5Support()

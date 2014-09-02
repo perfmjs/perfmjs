@@ -4,7 +4,7 @@
  * combineUrls e.g. []
  */
 require(['loader'], function(loader) {
-    loader.loadModules({name:'js-comm', type:'js', mdCallback:function(source, module, combineUrls) {
+    loader.loadModules({name:'js-default', mdCallback:function(source, module, combineUrls) {
 		if (module === 'jq') {
 			combineUrls[combineUrls.length] = '/perfmjs/lib/third-part-libs/jquery/jquery-1.11.1.min.js';
 		} else if (module === 'ajax') {
@@ -23,7 +23,7 @@ require(['loader'], function(loader) {
 		}
 	}, afterLoadedCallback:function() {
         //alert('afterLoadedCallback');
-    }}).loadModules({name:'widget-comm', type:'js', mdCallback:function(source, module, combineUrls) {
+    }}).loadModules({name:'widget-comm', mdCallback:function(source, module, combineUrls) {
         if (module === 'dlt') {
             combineUrls[combineUrls.length] = 'http://r.aicaicdn.com/min/b=lib&f=plugins/webdialog/webDialog.js';
         }
