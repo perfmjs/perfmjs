@@ -14,7 +14,6 @@ describe("core核心", function() {
             var fastBind = $$.utils._fastBind(function(arg) {
                 return 100 + arg;
             }, null);
-
             var fastBind2 = $$.utils._fastBind(function(arg1, arg2, arg3, arg4) {
                 return 100 + arg1 + arg2 + arg3 + arg4;
             }, null, 100);

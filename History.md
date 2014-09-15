@@ -1,3 +1,8 @@
+1.3.10 / 2014-09-15
+==================
+* improved: 将app.js中error.message改为error.stack
+* fixed: 修复base.js的option方法的BUG
+
 1.3.9 / 2014-09-02
 ==================
 * improved:简化includeRes#loadModules方法的使用
