@@ -2,7 +2,7 @@
   "name": "perfmjs",
    "description":"perfmjs(high performance javascript framework)",
   "author": "tony",
-  "version": "1.3.9",
+  "version": "1.3.10",
   "private": false,
   "repository": {
      "type": "git",
