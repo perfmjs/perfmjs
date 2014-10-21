@@ -17,6 +17,7 @@ var paths = {
         './lib/perfmjs/sys-config.js',
         './lib/perfmjs/base.js',
         './lib/perfmjs/joquery.js',
+        './lib/perfmjs/app-config.js',
         './lib/perfmjs/async.js',
         './lib/perfmjs/amd.js',
         './lib/perfmjs/logger.js',

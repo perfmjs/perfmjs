@@ -1,3 +1,7 @@
+1.3.11 / 2014-10-21
+==================
+* add: 增加app-config.js
+
 1.3.10 / 2014-09-15
 ==================
 * improved: 将app.js中error.message改为error.stack

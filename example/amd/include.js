@@ -5,7 +5,9 @@
  */
 require(['utils', 'loader'], function(utils, loader) {
     loader.loadModules({name: 'js-comm', type: 'js', mdCallback: function (source, module, combineUrls) {
-        if (module === 'amd') {
+        if (module === 'config') {
+            combineUrls[combineUrls.length] = '/perfmjs/example/amd/user-config.js';
+        } else if (module === 'amd') {
             combineUrls[combineUrls.length] = '/perfmjs/example/amd/amd1/myModule3.js';
             combineUrls[combineUrls.length] = '/perfmjs/example/amd/amd1/myModule2.js';
             combineUrls[combineUrls.length] = '/perfmjs/example/amd/main.js';
