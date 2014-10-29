@@ -11,7 +11,7 @@ var del        = require('del');
 //var jsdoc   = require('gulp-jsdoc');
 
 var paths = {
-    "core.name": "core-1.3.10",
+    "core.name": "core-1.3.12",
     scripts: [
         './lib/perfmjs/perfmjs.js',
         './lib/perfmjs/sys-config.js',
