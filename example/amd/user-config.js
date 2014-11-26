@@ -6,7 +6,7 @@ perfmjs.plugin('userConfig', function($$) {
         }
     });
     $$.userConfig.defaults = {
-        'amd.baseUrl': 'http://localhost:63342/perfmjs/example/amd/',
+        'amd.baseUrl': '/perfmjs/example/amd/',
         'amd.app.modules': {
             'foo': {'alias': 'foo', version:'1.0', 'css': [], 'js': []},
             'bar1': {'alias': 'amd/bar', version:'2.0', 'css': [], 'js': []},
