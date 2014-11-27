@@ -6,10 +6,14 @@ perfmjs.plugin('userConfig', function($$) {
         }
     });
     $$.userConfig.defaults = {
-        'amd.baseUrl': '/perfmjs/example/amd/',
+        'amd.baseUrl': '/perfmjs/',
         'amd.app.modules': {
-            'foo': {'alias': 'foo', version:'1.0', 'css': [], 'js': []},
-            'bar1': {'alias': 'amd/bar', version:'2.0', 'css': [], 'js': []},
+            'jquery': {'alias': 'lib/third-part-libs/jquery/jquery-1.11.1.min','css':[],'js':[]},
+            'myModule': {'alias': 'example/amd/myModule', version:'20141127001', 'css': [], 'js': []},
+            'amd1/myModule2': {'alias': 'example/amd/amd1/myModule2', version:'20141127001', 'css': [], 'js': []},
+            'amd1/myModule3': {'alias': 'example/amd/amd1/myModule3', version:'20141127001', 'css': [], 'js': []},
+            'foo': {'alias': 'example/amd/foo', version:'20141127001', 'css': [], 'js': []},
+            'bar': {'alias': 'example/amd/bar', version:'20141127001', 'css': [], 'js': []},
             end: 0
         },
         end: 0
