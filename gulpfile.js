@@ -11,7 +11,8 @@ var del        = require('del');
 //var jsdoc   = require('gulp-jsdoc');
 
 var paths = {
-    "core.name": "core-1.3.12",
+   "core.name.snapshot": "core",
+   "core.name.release": "core-2.0.0",
     scripts: [
         './lib/perfmjs/perfmjs.js',
         './lib/perfmjs/sys-config.js',
@@ -33,11 +34,12 @@ gulp.task('clean', function(cb) {
     del(['./build'], cb);
 });
 gulp.task('concat', ['clean'], function () {
+    var coreName = "core.name.snapshot";
     gulp.src(paths.scripts)
-        .pipe(concat(paths['core.name'] + '.js'))
+        .pipe(concat(paths[coreName] + '.js'))
         .pipe(gulp.dest('build'))
         .pipe(uglify())
-        .pipe(concat(paths['core.name'] + '.min.js'))
+        .pipe(concat(paths[coreName] + '.min.js'))
         .pipe(gulp.dest('build'));
 });
 
