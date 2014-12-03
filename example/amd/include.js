@@ -13,8 +13,8 @@ require(['utils', 'loader'], function(utils, loader) {
             combineUrls[combineUrls.length] = '/perfmjs/example/amd/main.js';
         }
     }, afterLoadedCallback: function () {
-        require(['jquery', 'app', 'bar', 'myModule'], function ($, app, bar, myModule) {
-            console.log('Amd获取jQuery的版本：' + $.fn.jquery);
+        require(['jquery', 'utils', 'app', 'bar', 'myModule'], function ($, utils, app, bar, myModule) {
+            console.log('SKYJS版本/Amd获取jQuery的版本：' + utils.version + '/' + $.fn.jquery);
             app.registerAndStart(bar);
             console.log(bar.instance.sayHello('bar'));
             console.log('main: ' + myModule.getFoo());

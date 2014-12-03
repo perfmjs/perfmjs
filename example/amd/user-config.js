@@ -8,7 +8,6 @@ perfmjs.plugin('userConfig', function($$) {
     $$.userConfig.defaults = {
         'amd.baseUrl': '/perfmjs/',
         'amd.app.modules': {
-            'jquery': {'alias':'lib/third-part-libs/jquery/jquery-1.11.1.min','css':[],'js':[]},
             'myModule': {'alias':'example/amd/myModule',version:'20141127001','css':[],'js':[]},
             'amd1/myModule2': {'alias':'example/amd/amd1/myModule2',version:'20141127001','css':[],'js':[]},
             'amd1/myModule3': {'alias':'example/amd/amd1/myModule3',version:'20141127001','css':[],'js':[]},
