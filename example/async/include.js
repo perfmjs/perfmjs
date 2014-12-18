@@ -4,7 +4,7 @@
  * combineUrls e.g. []
  */
 require(['loader'], function(loader) {
-    loader.loadModules({name: 'js-comm', type: 'js', mdCallback: function (source, module, combineUrls) {
+    loader.loadModules({mdCallback: function (source, module, combineUrls) {
         if (module === 'async') {
             //noop
         }

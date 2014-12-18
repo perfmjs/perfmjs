@@ -3,7 +3,7 @@
  * sources e.g. [{n:'common',f:'http://s.no100.com/perfmjs/js/core2/include-common.js',t:'js',m:'jq;dlt',d:'http://s.no100.com'}]
  * combineUrls e.g. []
  */
-require(['utils', 'loader'], function(utils, loader) {
+require([ 'loader'], function(loader) {
     loader.loadModules({mdCallback: function (source, module, combineUrls) {
         if (module === 'common') {
             combineUrls[combineUrls.length] = '/perfmjs/example/amd/user-config.js';
