@@ -3,13 +3,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>dialog demo</title>
-<meta name="keywords" content="dialog" />
-<meta name="description" content="dialog" />
-<script type="text/javascript" src="webDialog.js"></script>
-<link id="webDialogSkin" href="skin/chrome/chrome.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="webdialog.css" />
+<script src="webdialog.js" type="text/javascript"></script>
 
-<link href="_demo/demo.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="_demo/demo.js"></script>
+<link rel="stylesheet" href="highlight/styles/magula.css" />
+<script src="highlight/highlight.pack.js"></script>
+<script src="highlight/languages/javascript.js"></script>
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+</script>
+
+<link href="demo/demo.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="demo/demo.js"></script>
 </head>
 <body>
 <div id="page">
@@ -18,69 +24,561 @@
     <div class="content">
 	<h3>配置参数</h3>
     <ul class="api">
-      <li><strong>content</strong>: {消息内容,支持HTML}</li>
-      <li><strong>title</strong>: {标题.默认:'提示'}</li>
-      <li><strong>lock</strong>: {是否锁定屏幕. 默认:false}</li>
+    <li><strong>content</strong>: {消息内容,支持HTML,<span class="red">支持传入节点(document.getElementById("x"))</span>,支持URL地址(content:"url:http://www.aicai.com")}</li>
+    <li><strong>title</strong>: {标题.默认:'提示',<span class="red">支持HTML</span>}</li>
+      <li><strong>lock</strong>: {是否锁定屏幕. 默认:true}</li>
       <li><strong>width</strong>: {宽度,支持em等单位. 默认:'auto'}</li>
       <li><strong>height</strong>: {高度,支持em等单位. 默认:'auto'}</li>
-      <li><strong>url</strong>: {iframe地址,存在content参数时候,此参数无效}</li>
-      <li><strong>left</strong>: {x坐标,可以使用关键字,如:left/right/center. 默认:'center'}</li>
-      <li><strong>top</strong>: {y坐标,可以使用关键字,如:top/bottom/center. 默认:'center'(并非绝对垂直居中，而是使用的黄金比例)}</li>
+      <li><strong class="delete">url</strong>: {<span class="delete">iframe地址,存在content参数时候,此参数无效</span>}</li>
+      <li><strong>left</strong>: {x坐标,支持百分比，支持数值. 默认:居中}</li>
+      <li><strong>top</strong>: {y坐标,支持百分比，支持数值. 默认:居中}</li>
       <li><strong>fixed</strong>: {是否启用静止定位. 默认:false}</li>
       <li><strong>time</strong>: {多少秒自动关闭}</li>
-      <li><strong>style</strong>: {对话框风格扩展参数,写入自定义className,详情见皮肤css文件的定义,多个用空格隔开}</li>
-      <li><strong>yesText</strong>: {确定按钮文本. 默认:'确定'}</li>
-      <li><strong>noText</strong>: {取消按钮文本. 默认:'取消'}</li>
-      <li><strong>id</strong>: {给对话框定义id,对话框未关闭就不再会有同名对话框弹出. 例如定义id为'my2'，则内容容器id为'my2Content'}</li>
-      <li><strong>parent</strong>: {是否在父页面弹出, 适用于框架页面, 如果父页面不存在则默认本页. 默认:false}</li>
+      <li><strong>style</strong>: {对话框风格扩展参数,写入自定义className,该名字会加在弹出节点顶层class中。}</li>
+      <li><strong class="delete">yesText</strong>: {<span class="delete">确定按钮文本. 默认:'确定'</span>}</li>
+      <li><strong class="delete">noText</strong>: {<span class="delete">取消按钮文本. 默认:'取消'</span>}</li>
+      <li><strong>id</strong>: {给对话框定义id,对话框未关闭就不再会有同名对话框弹出.该id不会加入节点中.}</li>
+      <li><strong class="delete">parent</strong>: {<span class="delete">是否在父页面弹出, 适用于框架页面, 如果父页面不存在则默认本页. 默认:false</span>}</li>
+      <li><strong class="red">icon</strong>: {<span class="red">对话框图标，有成功、警告、错误三种。默认:没有图标</span> }</li>
+      <li><strong class="red">button</strong>: {<span class="red">对话框自定义按钮。默认:没有按钮</span> }</li>
+      <li><strong class="red">ad</strong>: {<span class="red">对话框广告位。支持HTML，会显示在对话框底部。默认:没有广告</span> }</li>
+      <li><strong class="red">closeFn</strong>: {<span class="red">对话框关闭时回调函数。默认:无回调</span> }</li>
+      <li><strong class="red">init</strong>: {<span class="red">对话框加载时执行函数。默认:无</span> }</li>
+      <li><strong class="red">opacity</strong>: {<span class="red">设置锁屏时背景透明度，CSS2语法。默认:0.7</span> }</li>
+      <li><strong class="red">bg</strong>: {<span class="red">设置锁屏时背景颜色，CSS2语法。默认:#000</span> }</li>
+      <li><strong class="red">padding</strong>: {<span class="red">设置对话框与传入内容内边距，CSS2语法。默认:20px 25px</span> }</li>
+      <li><strong class="red">drag</strong>: {<span class="red">设置对话框是否允许拖拽。默认:允许</span> }</li>
+      <li><strong class="red">limit</strong>: {<span class="red">设置对话框是否允许拖出视口。默认:不允许</span> }</li>
+      <li><strong class="red">magnetic</strong>: {<span class="red">设置对话框是否开启磁性吸附。默认:不开启</span> }</li>
+      <li><strong class="red">autoMiddle</strong>: {<span class="red">设置对话框内容是否垂直居中。默认:垂直居中</span> }</li>
     </ul>
     <h3>形式</h3>
-    <p>webDialog({ 配置参数 }, function(){ 确定按钮回调函数 }, function(){ 取消按钮回调函数 }, function(){ 对话框关闭后的回调函数 }) 如:</p>
-<pre><code>webDialog(
-        {	
-            content:'欢迎你用爱彩弹出插件！',
-            lock:true,
-            style:'succeed noClose'
-        },
-        function(){
-            alert('好用');
-        },
-        function(){
-            alert('不好用');
-        }
-);</code></pre>
-    <p>(注：确定与取消按钮的回调函数可以不指定，但执行回调函数完成后会关闭对话框，你可以让回调函数返回false阻止其关闭)</p>
-    <div class="runCode">
-    	<pre><textarea rows="3" id="runCode">webDialog({content:'hello world!'})</textarea></pre>
-    	
-    </div>
+    <p>webDialog({ 配置参数 }) 如:</p>
+<pre><code>webDialog({
+	title:"警告",
+	content:"这是一个警告的提示。",
+	bg:"red",
+	opacity:0.7,
+	closeFn:function(){alert("警告")},
+	ad:'广告位',
+	icon:'warn',
+	fixed:true,
+	lock:true,
+	button:[
+			{
+				name:"确定",
+				id:"btn1",
+				callback:function(){
+					this.config.closeFn = function(){};
+					this.title('你同意了').time(5);
+                	return false;
+				}
+			},
+			{
+				name:"取消",
+				id:"btn2",
+				callback:function(){
+					this.title('取消没有毛用了').content('取消按钮点了也没有用').time(2);
+                	return false;
+				}
+			}],
+      closeFn:function(){
+        alert('关闭了');
+      }
+	});</code></pre> 
+  <br />  
+    <select name="" id=""><option value="5">此select用来测试IE6下对话框覆盖情况</option></select>
     </div>
   </fieldset>
 <fieldset>
     <legend id="d_demo">应用</legend>
-    <div class="content">
+    <div class="content" id="mouseEvent">
     <ul>
       <li>
-        <button id="web_btn1">图片</button>
+        <h3>标题 [title]</h3>
+        <p>只能接收字符串值，支持HTML。（默认值为：标题。如果只给title参数，content值默认为：内容）</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'只是标题'
+            });</code>
+        </pre>
+        <button>运行</button>
       </li>
       <li>
-        <button id="web_btn2">外部页面</button>
+        <h3>内容 [content]</h3>
+        <p>支持字符串(支持HTML)、节点、URL，默认值为：内容。当传入节点时，节点所绑定的事情会原样保留，关闭后节点会回到原来的位置</p>
+        <pre>
+          <code class="javascript">webAlert({
+          content:'这里是对话框内容，我支持HTML'
+          });</code>
+        </pre>
+        <button>运行(字符串)</button>
+        <div id="ele001" class="special"> 
+          <div onclick = "var b =document.getElementById('abb');b.style.display= b.style.display==='block'?'none':'block';">点我</div>
+          <div id="abb" style="height:100px; width:100px; background:red; display:none;"></div>
+          <pre>
+            <code class="javascript">webAlert({
+                  content:document.getElementById("ele001"),
+                  lock:false,
+                  button:[{
+                    name:"改变",
+                    callback:function(){
+                      this.content("被改了，2秒后关闭").time(2);
+                      return false;
+                    }
+                  }]
+            });</code>
+          </pre>
+        </div>
+        <button>运行(节点)</button>
+        <pre>
+          <code class="javascript">webAlert({
+          padding:0,
+          width:1200,
+          height:600,
+          content:'url:  http://www.aicai.com',
+          button:[{
+            name:"更换",
+            callback:function(){
+              this.content('url:http://www.baidu.com');
+              return false;
+            }
+          }]
+          });</code>
+        </pre>
+        <button>运行(URL)</button>
       </li>
       <li>
-        <button id="web_btn3">动画</button>
+        <h3>自定义按钮 [button]</h3>
+        <p>可以自定义按钮ID,CLASS,回调函数。标签为button。<br/>
+        1.定义的ID将设置为button的ID。如未定义则留空。<br/>
+        2.如未定义CLASS，则默认class为：md_dialog_default_btn。<br/>
+        3.回调函数如果返回false则阻止对话框关闭,更详细的说明请见：“高级应用”</p>
+        <pre>
+          <code class="javascript">webAlert({title:"自定义按钮",width:250,content:"下方是自定义按钮",button:[
+      {
+        name:"确定",
+        callback:function(){
+          this.config.closeFn = function(){};
+          this.title('你同意了').content('1秒后关闭').time(1);
+          return false;
+        }
+      },
+      {
+        name:"取消",
+        callback:function(){
+          this.title('你点了取消').content('2秒后关闭').time(2);
+          return false;
+        }
+      }]}
+      );</code>
+        </pre>
+        <button>运行</button>
       </li>
+
+
+
       <li>
-        <button id="web_btn4">询问</button>
+        <h3>定时关闭 [time]</h3>
+        <p>只能接收数值。定义对话框自动关闭秒数</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'定时关闭',
+            content:'3秒后关闭',
+            time:3
+            });</code>
+        </pre>
+        <button>运行</button>
       </li>
+
       <li>
-        <button id="web_btn5">警告</button>
+        <h3>防止重复弹出 [id]</h3>
+        <p>定义ID后对话框不会重复弹出(定义的id不会在结构中体现)</p>
+        <pre>
+          <code class="javascript">webAlert({
+            id:"id001",
+            title:'防止重复弹出',
+            content:'再次点击也只弹一个',
+            lock:false
+            });</code>
+        </pre>
+        <button>运行</button>
       </li>
+
+
       <li>
-        <button id="web_btn6">弹出菜单</button>
+        <h3>定义消息图标 [icon]</h3>
+        <p>定义对话框类型，目前只支持:警告、错误、成功 三种。默认：无</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'恭喜您',
+            content:'恭喜您！中了5000万！（多次点击会弹多个，不明白什么意思？看上面定义ID的示例）',
+            icon:"succeed",
+            width:200,
+            lock:false
+            });</code>
+        </pre>
+        <button>运行</button>
       </li>
+
       <li>
-        <button id="web_btn7">公告消息</button>
+        <h3>无title弹出 [title]</h3>
+        <p>定义对话框标题栏是否显示。一般用于简单提示，自动关闭。默认：显示</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:false,
+            content:'没有标题栏',
+            time:2,
+            lock:false
+            });</code>
+        </pre>
+        <button>运行</button>
       </li>
+
+
+      <li>
+        <h3>内边距 [padding]</h3>
+        <p>定义对话框与传入内容的距离，以满足一些特定场景。默认：padding:20px 25px;</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'去掉内边距',
+            content:'&lt;img width="490" height="200" alt="" src="http://r.aicaicdn.com/news/image/2014/9/4/201409041830000027.png"&gt;',
+            padding:0
+            });</code>
+        </pre>
+        <button>运行</button>
+      </li>
+
+      <li>
+        <h3>锁屏 [lock & bg & opacity]</h3>
+        <p>锁定背景，阻断操作，用于提示一些比较重要的信息，可以设置背景色(bg)和透明度(opacity)，CSS2.0语法。默认：锁定，bg:#000,opacity:0.3</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'锁屏',
+            content:'锁定背景，阻断操作。',
+            opacity:.5,
+            bg:"red"
+            });</code>
+        </pre>
+        <button>运行</button>
+      </li>
+
+      <li>
+        <h3>对话框位置 [left & top]</h3>
+        <p>可以改变对话框位置，left左边距离，top上边距离。支持百分比。默认：left:50%,top:40%。(百分百宽=浏览器窗口宽-对话框宽)</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'对话框位置',
+            content:'改变了对话框位置',
+            left:"99%",
+            top:"99%",
+            fixed:true,
+            lock:false
+            });</code>
+        </pre>
+        <button>运行</button>
+      </li>
+
+
+      <li>
+        <h3>设置大小  [width & height]</h3>
+        <p>定义对话框大小，支持百分比。无定义则跟据内容自适应。默认：自适应</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'设置大小',
+            content:'内容只一点点',
+            width:500,
+            height:300
+            });</code>
+        </pre>
+        <button>运行</button>
+      </li>
+
+
+
+      <li>
+        <h3>静止定位 [fixed]</h3>
+        <p>定义对话框是否始终在一个位置(不兼容IE6)。默认：不静止定位</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'静止定位',
+            content:'滚动一下试试',
+            fixed:true
+            });</code>
+        </pre>
+        <button>运行</button>
+      </li>
+
+
+      <li>
+        <h3>拖拽 [drag]</h3>
+        <p>定义对话框是否允许拖拽。默认：允许</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'拖拽',
+            content:'不能拖拽了',
+            drag:false
+            });</code>
+        </pre>
+        <button>运行</button>
+      </li>
+
+
+      <li>
+        <h3>广告 [ad]</h3>
+        <p>定义对话框是否带有广告，广告位置在最底部。默认：无广告</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'广告',
+            content:'下面是广告图片',
+            ad:'&lt;img width="402" height="70" src="http://r.aicaicdn.com/news/image/2014/6/23/201406231932000055.jpg"/&gt;'
+            });</code>
+        </pre>
+        <button>运行</button>
+      </li>
+
+      <li>
+        <h3>对话框风格 [style]</h3>
+        <p>定义对话框的风格，前提是CSS样式已经加入。sytle中的值最终会被加在对话框顶层class中，如:style:'redSkin',那么在顶层节点上会加上一个名叫：dialogSkin_redSkin的class。默认：蓝色经典</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'不同风格',
+            content:'不一样的style！不一样的button',
+            style:'redSkin',
+            button:[
+              {
+                name:'关闭'
+              }
+            ]
+            });</code>
+        </pre>
+        <button>运行</button>
+      </li>
+
+
+      <li>
+        <h3>范围限制 [limit]</h3>
+        <p>定义对话框是否可以拖出视口，默认：true(开启限制)</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'拖动范围限制',
+            content:'取消限制的方法是设置limit:false',
+            limit:false,
+            fixed:true
+            });</code>
+        </pre>
+        <button>运行</button>
+
+        <pre>
+          <code class="javascript">webAlert({
+            title:'拖动范围限制',
+            content:'取消限制的方法是设置limit:false,当fixed:false时',
+            limit:false
+            });</code>
+        </pre>
+        <button>运行</button>
+      </li>
+
+      <li>
+        <h3>磁性吸附 [magnetic]</h3>
+        <p>定义对话框到视口边缘时是否吸附，只支持数值参数，数值决定开始吸附的距离。注意：此功能只有在开启了范围限制才可用。默认：不吸附</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'磁性吸附',
+            content:'magnetic:50指对话框距边界50PX时开始吸附',
+            magnetic:50
+            });</code>
+        </pre>
+        <button>运行</button>
+      </li>
+
+      <li>
+        <h3>垂直居中 [autoMiddle]</h3>
+        <p>定义对话框内容是否垂直居中，默认：垂直居中(autoMiddle:true)。如果想取消，只要设为false值即可</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'垂直居中',
+            content:'取消垂直居中了',
+            width:500,
+            height:300,
+            autoMiddle:false
+            });</code>
+        </pre>
+        <button>运行</button>
+      </li>
+
+
+
+
+    </ul>
+    </div>
+  </fieldset>
+
+
+  <fieldset>
+    <legend id="d_demo">高级应用</legend>
+    <div class="content" id="mouseEvent2">
+    <ul>
+      <li>
+        <h3>自定义按钮回调函数 [callback]</h3>
+        <p>1.函数如果返回false，则对话框不关闭，函数中的this指向对话框，可以通过this链试调用该对话框内置方法。</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'回调函数',
+            content:'自定义按钮回调函数',
+            button:[
+              {
+                name:'变变变',
+                callback:function(){
+                  this.title('标题变了').content('改变了标题和内容,2秒后关闭').time(2);
+                  return false;
+                }
+              }
+            ]
+            });</code>
+        </pre>
+        <button>运行</button>
+        <p>2.可以只给name赋值，功能同右上角关闭按钮相同</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'关闭',
+            content:'自定义按钮回调函数',
+            button:[
+              {
+                name:'关闭'
+              }
+            ]
+            });</code>
+        </pre>
+        <button>运行</button>
+
+        <p>3.回调中再弹出新对话框,</p>
+        <pre>
+          <code class="javascript">var dialog001 = webAlert({
+            title:'再弹',
+            content:'再弹新窗口',
+            button:[
+              {
+                name:'再弹一个',
+                callback:function(){
+                  webAlert({
+                    title:'新对话框',
+                    content:'新内容',
+                    lock:false
+                  });
+                  return false;
+                }
+              }
+            ]
+            });</code>
+        </pre>
+        <button>运行</button>
+      </li>
+
+
+      <li>
+        <h3>对话框关闭回调函数 [closeFn]</h3>
+        <p>此回调与自定义按钮回调不一样，此回调只有在对话框关闭时才执行，不论何种方式关闭，自定义按钮回调会在关闭回调之前执行。如果返回false，则无法关闭对话框。默认：无回调</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'关闭回调函数',
+            content:'关闭时会执行回调',
+            closeFn:function(){
+              alert('对话框关闭了');
+            }
+            });</code>
+        </pre>
+        <button>运行</button>
+      </li>
+
+      <li>
+        <h3>对话框关闭的第二种方法</h3>
+        <p>定义一个变量接收对话框返回值，可以用于在其它时候用另一种方式关闭对话框。</p>
+        <pre>
+          <code class="javascript">var dialog001 = webAlert({
+            id:'d002',
+            title:'其它方法关闭',
+            content:'用别的元素关闭本对话框',
+            lock:false
+            });
+            document.getElementById('btn001').onclick=function(){
+              dialog001.content('我将被别的按钮关闭了').time(2);
+            }
+            document.getElementById('btn002').onclick=function(){
+              dialog001.close();
+            }
+            </code>
+        </pre>
+        <button>运行</button>&nbsp;<input type="button" id="btn001" value="点我延时关闭">&nbsp;<input type="button" id="btn002" value="点我立即关闭">
+      </li>
+
+
+      <li>
+        <h3>对话框关闭的第三种方法</h3>
+        <p>在closeFn中如果返回false，那么对话框就不能被关闭，可以通过自定义按钮回调去清除closeFn定义（this.config.closeFn=null）。</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'点X关不了',
+            content:'关不了就是关不了',
+            button:[
+              {
+                name:'点我才能关',
+                callback:function(){
+                  this.config.closeFn = null;
+                  this.close();
+                }
+              }
+            ],
+            closeFn:function(){
+              return false;
+            }
+            });</code>
+        </pre>
+        <button>运行</button>
+      </li>
+
+      <li>
+        <h3>对话框加载完毕后执行函数</h3>
+        <p>对话框加载完毕后执行可以执行一个函数，调用时给一个init属性。如：init:functioin(){ alert("对话框加载完了")}</p>
+        <pre>
+          <code class="javascript">webAlert({
+            title:'加载时执行',
+            content:'对话框加载完执行方法',
+            init:function(){
+              alert("我加载完了");
+            }
+            });</code>
+        </pre>
+        <button>运行</button>
+      </li>
+
+      <li>
+        <h3>一键关闭所有打开对话框（closeFn回调中return false的除外）</h3>
+        <p>应开发哥哥要求，增加批量关闭功能,主要是操作webAlert.list对象，该对象保存了当前所有打开的对话框接口</p>
+        <pre>
+          <code class="javascript">for(var i =0;i<10;i++){
+            webAlert({
+            title:'示例'+i,
+            content:'对话框样式随机'+i,
+            left:i*100,
+            top:i*30,
+            style:["redSkin",""][Math.round(Math.random() * 1)],
+            lock:false,
+            fixed:true
+            });
+          };
+          
+          document.getElementById("allCloseBtn").onclick = function(){
+            //遍历对象，关闭对话框
+            for(var k in webAlert.list){
+              webAlert.list[k].close()
+            }
+          }
+          </code>
+        </pre>
+        <button>运行</button> <input type="button" value="关闭" id="allCloseBtn" />
+      </li>
+      
     </ul>
     </div>
   </fieldset>
