@@ -1,8 +1,3 @@
-/**
- * 按模块加载加载应用所需的js和css文件
- * sources e.g. [{n:'common',f:'http://s.no100.com/perfmjs/js/core2/include-common.js',t:'js',m:'jq;dlt',d:'http://s.no100.com'}]
- * combineUrls e.g. []
- */
 require([ 'loader'], function(loader) {
     loader.loadModules({mdCallback: function (source, module, combineUrls) {
         if (module === 'common') {
@@ -13,7 +8,9 @@ require([ 'loader'], function(loader) {
             combineUrls[combineUrls.length] = '/perfmjs/example/amd/main.js';
         }
     }, afterLoadedCallback: function () {
-        require(['jquery', 'utils', 'app', 'bar', 'myModule'], function ($, utils, app, bar, myModule) {
+        require(['jquery', 'utils', 'app', 'bar', 'myModule', 'backbone', 'angular'], function ($, utils, app, bar, myModule, backbone, angular) {
+            console.log("backbone=" + Backbone.VERSION);
+            console.log("angular=" + angular);
             console.log('SKYJS版本/Amd获取jQuery的版本：' + utils.version + '/' + $.fn.jquery);
             app.registerAndStart(bar);
             console.log(bar.instance.sayHello('bar'));
