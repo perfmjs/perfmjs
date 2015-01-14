@@ -9,21 +9,17 @@ describe("core核心", function() {
             });
         });
     });
-    it("应能测试通过skyjs.utils.fastBind方法", function() {
+    it("应能测试通过perfmjs.utils.fastBind方法", function() {
         perfmjs.ready(function($$, app) {
             var fastBind = $$.utils._fastBind(function(arg) {
                 return 100 + arg;
             }, null);
+
             var fastBind2 = $$.utils._fastBind(function(arg1, arg2, arg3, arg4) {
                 return 100 + arg1 + arg2 + arg3 + arg4;
             }, null, 100);
             expect(fastBind(100)).toEqual(200);
             expect(fastBind2(1, 2, 3)).toEqual(206);
-        });
-    });
-    it("应能测试通过perfmjs.utils.isBrowserSupport方法", function() {
-        perfmjs.ready(function($$, app) {
-            expect($$.utils.isBrowserSupport()).toEqual(true);
         });
     });
     it("应能测试通过perfmjs.utils.fmtJSONMsg方法", function() {
@@ -43,22 +39,7 @@ describe("core核心", function() {
             expect($$.utils.type([1,2])).toEqual('array');
         });
     });
-    it("map-reduce功能应该可以正常运行", function() {
-        perfmjs.ready(function($$, app) {
-            var items = [], summary = 0, mapResult;
-            for (i = 0; i < 101; i++) {
-                items[items.length] = i;
-            }
-            mapResult = $$.utils.fastMap([items.slice(0,31), items.slice(31,61), items.slice(61,101)], function(subItems, subIndex) {
-                return $$.utils.fastReduce(subItems, function(result, item, index) {
-                    summary += item;
-                    return result + item;
-                }, 0);
-            });
-            expect(summary).toEqual(5050);
-        });
-    });
-    it("应能测试通过joquery.lib-updateOrInsert", function() {
+    it("应能测试通过joquery.lib-updateOrInsert", function () {
         perfmjs.ready(function($$, app) {
             var data = [
                 { ID: 1, firstName: "Chris", lastName: "Pearson", BookIDs: [1001, 1002, 1003] },
@@ -98,30 +79,6 @@ describe("core核心", function() {
             expect($$.utils.keys(jsonObj).length).toEqual(2);
         });
     });
-    it("model应该能运行正常", function() {
-        perfmjs.ready(function($$, app) {
-            $$.model.plan.multiple(20);
-            expect($$.model.plan.multiple()).toEqual(20);
-        });
-    });
-
-    var asyncResult;
-    it("should load the AMD module", function(done) {
-        require(['utils', 'async'], function(utils, async) {
-            var deferred = async.defer();
-            deferred.promise.then(function(result) {
-                asyncResult = result;
-                done('sss');
-            }, function(error) {
-                //noop
-            });
-            deferred.resolve('ok');
-        });
-    });
-    it("应能测试通过async模块功能", function() {
-        expect(asyncResult).toEqual('ok');
-    });
-
     it("event应该能运行正常", function() {
         perfmjs.ready(function($$, app) {
             app.unregister('lottevent');
@@ -133,35 +90,11 @@ describe("core核心", function() {
     });
     it("aop功能应该可以正常运行", function() {
         perfmjs.ready(function($$, app) {
-            var originalFunc = $$.model.plan.multiple;
-            $$.model.plan.multiple = $$.utils.aop(undefined, $$.model.plan.multiple, function() {
-                //noop
-                return 2;
-            }, function() {
-                //noop
-                return 3;
-            });
-            expect($$.model.plan.multiple()).toEqual(2);
-            $$.model.plan.multiple = originalFunc;
+            var aop = perfmjs.utils.aop(this, perfmjs.model.plan.multiple, function(){return 2}, function(){return 3});
+            perfmjs.model.plan.multiple = aop;
+            expect(perfmjs.model.plan.multiple()).toEqual(2);
         });
     });
-    it("opera功能应该可以正常运行", function() {
-        perfmjs.ready(function($$, app) {
-            app.unregister('lottevent');
-            app.register($$.lottevent);
-            app.startAll();
-            $$.ssqopera.newInstance();
-            expect($$.model.plan.multiple()).toEqual(888);
-        });
-    });
-    it("fsm功能应该可以正常运行", function() {
-        require(['app', 'ssqfsm'], function(app, ssqfsm) {
-            app.registerAndStart(ssqfsm);
-            ssqfsm.instance.event('changePlay');
-            expect(ssqfsm.instance.current()).toEqual('dantuo');
-        });
-    });
-
     it("没使用setTimeout的错误场景应该可以正常运行", function() {
         var getTryObj = function(callback) {
             callback();
@@ -209,36 +142,14 @@ describe("core核心", function() {
         expect(result).toEqual(1000);
     });
 
-    it("ajax功能应该可以正常运行", function() {
-        beforeEach(function() {
-            jasmine.Ajax.install();
+    it('应能正确运行async的功能', function(done) {
+        var deferred = perfmjs.async.defer();
+        deferred.promise.then(function(result) {
+            expect(result).toEqual('ok');
+            done();
         });
-        afterEach(function() {
-            jasmine.Ajax.uninstall();
-        });
-
-        it("allows use in a single spec", function() {
-            var doneFn = jasmine.createSpy('success');
-            jasmine.Ajax.withMock(function() {
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function(arguments) {
-                    if (this.readyState == this.DONE) {
-                        doneFn(this.responseText);
-                    }
-                };
-
-                xhr.open("GET", "/some/cool/url");
-                xhr.send();
-
-                expect(doneFn).not.toHaveBeenCalled();
-
-                jasmine.Ajax.requests.mostRecent().response({
-                    "status": 200,
-                    "responseText": 'in spec response'
-                });
-
-                expect(doneFn).toHaveBeenCalledWith('in spec response');
-            });
+        perfmjs.utils.nextTick(function() {
+            deferred.resolve('ok');
         });
     });
 });
