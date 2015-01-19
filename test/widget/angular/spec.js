@@ -1,4 +1,4 @@
-require(['utils', 'angular', 'angular-route', 'angular-mock', 'ng-app', 'ngServices', 'ngControllers', 'ng-model'], function (utils, angular, ngRoute, ngMock, ngApp, ngServices, ngControllers, ngModel) {
+define('angular-test-spec', ['utils', 'angular', 'ng-app', 'angular-mock', 'ng-model'], function (utils, angular, ngApp, ngMock, ngModel) {
     describe('测试angularJS框架的controllers和services', function() {
         beforeEach(module('ngApp'));
 
@@ -16,6 +16,19 @@ require(['utils', 'angular', 'angular-route', 'angular-mock', 'ng-app', 'ngServi
                 personService.changeName('tony123456');
                 expect(ngModel.firstName).toEqual('tony123456');
             }));
+        });
+        describe('测试ngDirectives功能', function() {
+            var $compile,  $rootScope;
+            beforeEach(inject(function(_$compile_, _$rootScope_){
+                $compile = _$compile_;
+                $rootScope = _$rootScope_;
+            }));
+
+            it('相应的内容就能置换成正确的标签元素', function() {
+                var element = $compile("<hello></hello>")($rootScope);
+                $rootScope.$digest();
+                expect(element.html()).toContain("Hi Hello指令");
+            });
         });
     });
 });

@@ -23,7 +23,7 @@ perfmjs.plugin('userConfig', function($$) {
                 }
             },
             'angular':{
-                'deps': ['jquery'],
+                'deps': [],
                 'init': function($) {
                     return angular;
                 }
