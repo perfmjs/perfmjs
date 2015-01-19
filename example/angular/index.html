@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <base href="/perfmjs/example/angular/"/>
+    <meta charset="UTF-8">
+    <title>Hello-AngularJS!</title>
+    <script type="text/javascript" src="/perfmjs/build/core.js?v=20141203001^{f:'/perfmjs/example/angular/include.js',m:'common;angular'}"></script>
+</head>
+<body>
+Hello AngularJS!
+<hello></hello>
+<hr>
+<div ng-controller="ngController1">
+    {{greeting}}
+    <button ng-click="chiliSpicy()">Click Me</button>
+</div>
+<div ng-controller="ngController1">
+    名： <input type="text" ng-model="person.firstName"><br>
+    姓： <input type="text" ng-model="person.lastName"><br>
+    <br>
+    姓名： {{person.fullName()}}
+</div>
+<button change-name-button>修改名字</button>
+<div>
+    <p>我的第一个表达式： {{5 + 5}}</p>
+</div>
+<div ng-view></div>
+</body>
+</html>
