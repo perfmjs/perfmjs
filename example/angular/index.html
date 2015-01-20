@@ -17,8 +17,8 @@ Hello AngularJS!
 <div ng-controller="ngController1">
     名： <input type="text" ng-model="person.firstName"><br>
     姓： <input type="text" ng-model="person.lastName"><br>
-    <br>
-    姓名： {{person.fullName()}}
+    姓名： {{person.fullName()}}<br>
+    Angular版本：{{person.getNgVersion()}}<br>
 </div>
 <button change-name-button>修改名字</button>
 <div>
