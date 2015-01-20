@@ -3,6 +3,7 @@ perfmjs.plugin('userConfig', function($$) {
     $$.userConfig.defaults = {
         'amd.baseUrl': '/perfmjs/',
         'amd.app.modules': {
+            'jquery': {'alias':'http://r.aicaicdn.com/js/skyjs/plugins/jquery/jquery-1.11.1.min.js','css':[],'js':[]},
             'angular': {'alias':'example/angular/angular'},
             'angular-route': {'alias':'example/angular/angular-route'},
             'ngResource': {'alias':'example/angular/angular-resource'},

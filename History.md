@@ -1,3 +1,8 @@
+2.1.1 / 2015-01-20
+==================
+* fixed: amd.js代码中依赖数组的insert顺序搞反了(splice),这个BUG导致错误地按依赖列表的反序来加载依赖js文件
+* improved: 将utils.version改为utils.VERSION
+
 2.1.0 / 2015-01-19
 ==================
 * add: 增加angular.js的例子及测试用例

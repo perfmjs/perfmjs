@@ -1,10 +1,10 @@
 require([ 'loader'], function(loader) {
     loader.loadModules({mdCallback: function (source, module, combineUrls) {
         if (module === 'common') {
-            combineUrls[combineUrls.length] = '/perfmjs/example/angular/user-config.js';
+            combineUrls[combineUrls.length] = '/perfmjs/example/bootstrap/user-config.js';
         }
     }, afterLoadedCallback: function() {
-        require(['ng-app'], function(angular) {
+        require(['utils', 'jquery', 'bootstrap'], function(utils, $, bootstrap) {
         });
     }});
 });

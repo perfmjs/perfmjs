@@ -5,6 +5,6 @@ require(['loader'], function(loader) {
         } else if (module === 'test') {
             combineUrls[combineUrls.length] = '/perfmjs/test/widget/webdialog/spec.js';
         }
-    }, afterLoadedCallback: function () {
+    }, afterLoadedCallback: function() {
     }});
 });

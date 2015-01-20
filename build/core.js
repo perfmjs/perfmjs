@@ -23,7 +23,7 @@
     //当前域名，全局只取唯一值 　e.g. http://www.no100.com/newuc
     perfmjs.currentDomain = "";
     perfmjs.utils = {
-        version: '2.1.0',
+        VERSION: '2.1.0',
     	namespace: _namespace,
         //Allow getting a global that is expressed in, dot notation, like 'a.b.c'.
         getGlobal: function(value) {
@@ -1154,7 +1154,7 @@ perfmjs.plugin('amd', function($$) {
                             loader.parseRequireStack(defines[thisModule]['deps'], needLoadModules);
                         }
                     } else {
-                        needLoadModules.splice(0,0,thisModule);
+                        needLoadModules.splice(needLoadModules.length,0,thisModule);
                     }
             }
         }

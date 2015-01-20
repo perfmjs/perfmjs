@@ -12,7 +12,7 @@ require([ 'loader'], function(loader) {
         require(['jquery', 'utils', 'app', 'bar', 'myModule', 'backbone', 'angular'], function ($, utils, app, bar, myModule, backbone, angular) {
             console.log("backbone.version=" + Backbone.VERSION);
             console.log("angular=" + angular);
-            console.log('SKYJS版本/Amd获取jQuery的版本：' + utils.version + '/' + $.fn.jquery);
+            console.log('SKYJS版本/Amd获取jQuery的版本：' + utils.VERSION + '/' + $.fn.jquery);
             app.registerAndStart(bar);
             console.log(bar.instance.sayHello('bar'));
             console.log('main: ' + myModule.getFoo());
