@@ -11,9 +11,10 @@ perfmjs.plugin('userConfig', function($$) {
             //具体业务类
             'ng-app': {'alias':'example/angular/ng-app'},
             'ng-model': {'alias':'example/angular/ng-model'},
-            'ngServices': {'alias':'example/angular/services/service'},
-            'ngDirectives': {'alias':'example/angular/directives/directive'},
-            'ngControllers': {'alias':'example/angular/controllers/controller'},
+            'ng-service': {'alias':'example/angular/services/service'},
+            'ng-directive': {'alias':'example/angular/directives/directive'},
+            'ng-controller': {'alias':'example/angular/controllers/controller'},
+            'ng-directive-money': {'alias':'example/angular/directives/money'},
             end: 0
         },
         'amd.app.shim': {
@@ -36,12 +37,12 @@ perfmjs.plugin('userConfig', function($$) {
                 }
             },
             'ngResource': {
-                deps: ['angular'],
-                exports: 'angularRoute'
+                'deps': ['angular'],
+                'exports': 'angularRoute'
             },
             'ngCookies': {
-                deps: ['angular'],
-                exports: 'angular'
+                'deps': ['angular'],
+                'exports': 'angular'
             },
             end: 0
         },

@@ -14,8 +14,6 @@ perfmjs.plugin('userConfig', function($$) {
             'ngDirectives': {'alias':'example/angular/directives/directive'},
             'ngControllers': {'alias':'example/angular/controllers/controller'},
             'angular-mock': {'alias':'test/widget/angular/angular-mocks'},
-            //测试类
-            'angular-test-spec': {'alias':'test/widget/angular/spec'},
             end: 0
         },
         'amd.app.shim': {

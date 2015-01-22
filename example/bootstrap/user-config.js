@@ -4,7 +4,7 @@ perfmjs.plugin('userConfig', function($$) {
         'amd.baseUrl': '/perfmjs/',
         'amd.app.modules': {
             'jquery': {'alias':'http://r.aicaicdn.com/js/skyjs/plugins/jquery/jquery-1.11.1.min.js','css':[],'js':[]},
-            'bootstrap': {'alias':'example/bootstrap/bootstrap','css':['example/bootstrap/bootstrap.css', 'example/bootstrap/bootstrap-theme.css']},
+            'bootstrap': {'alias':'example/bootstrap/bootstrap','css':[],'js':[]},
             end: 0
         },
         'amd.app.shim': {

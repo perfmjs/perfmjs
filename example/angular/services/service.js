@@ -1,9 +1,10 @@
-define('ngServices', ['ng-model'], function(ngModel) {
+define('ng-service', ['ng-model'], function(ngModel) {
     return function(ngApp) {
         ngApp.service('personService', ['$rootScope', function($rootScope) {
             var service = {
                 changeName: function (newName) {
                     ngModel.firstName = newName;
+                    ngModel.age = 2000000;
                     $rootScope.$broadcast('personService.update');
                 }
             }

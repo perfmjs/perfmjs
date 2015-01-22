@@ -1,4 +1,4 @@
-require(['utils', 'webdialog'], function (utils, webdialog) {
+define('webdialog-test-spec', ['utils', 'webdialog'], function (utils, webdialog) {
     describe("测试webdialog功能", function() {
         beforeEach(function() {
         });

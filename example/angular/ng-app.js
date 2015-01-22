@@ -1,9 +1,16 @@
-define('ng-app', ['angular', 'angular-route', 'ngServices', 'ngDirectives', 'ngControllers'], function (angular, ngRoute, ngServices, ngDirectives, ngControllers) {
+define('ng-app', function (require) {
     'use strict';
+    var angular = require('angular');
+    var ngRoute = require('angular-route');
+    var ngServices = require('ng-service');
+    var ngDirectives = require('ng-directive');
+    var ngControllers = require('ng-controller');
+    var ngDirectiveMoney = require('ng-directive-money');
     var ngApp = angular.module('ngApp', ['ngRoute']);
     ngServices(ngApp);
     ngDirectives(ngApp);
     ngControllers(ngApp);
+    ngDirectiveMoney(ngApp);
 
     ngApp.config(['$routeProvider','$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
         $routeProvider

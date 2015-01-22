@@ -5,9 +5,12 @@
     <meta charset="UTF-8">
     <title>Hello-AngularJS!</title>
     <script type="text/javascript" src="/perfmjs/build/core.js?v=20141203001^{f:'/perfmjs/example/angular/include.js',m:'common'}"></script>
+    <!--<script type="text/javascript" src="http://g.aicaicdn.com/common/skyjs/core-2.1.1.js?v=20141203001^{f:'/perfmjs/example/angular/include.js',m:'common'}"></script>-->
 </head>
 <body>
-Hello AngularJS!
+Hello AngularJS! 教程：http://www.w3cschool.cc/angularjs/angularjs-http.html
+<br>
+angular开发 创建自定义指令：http://www.html-js.com/article/1561
 <hello></hello>
 <hr>
 <div ng-controller="ngController1">
@@ -18,6 +21,7 @@ Hello AngularJS!
     名： <input type="text" ng-model="person.firstName"><br>
     姓： <input type="text" ng-model="person.lastName"><br>
     姓名： {{person.fullName()}}<br>
+    年龄：{{person.age}}<br>
     Angular版本：{{person.getNgVersion()}}<br>
 </div>
 <button change-name-button>修改名字</button>
@@ -25,5 +29,6 @@ Hello AngularJS!
     <p>我的第一个表达式： {{5 + 5}}</p>
 </div>
 <div ng-view></div>
+<input type="text" ng-model="person.age" money>
 </body>
 </html>

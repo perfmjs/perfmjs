@@ -1,4 +1,4 @@
-define('ngDirectives', ['utils', 'ng-model'],  function(utils, ngModel) {
+define('ng-directive', ['utils', 'ng-model'],  function(utils, ngModel) {
     return function(ngApp) {
         ngApp.directive("changeNameButton", function(personService) {
             return {
@@ -15,6 +15,10 @@ define('ngDirectives', ['utils', 'ng-model'],  function(utils, ngModel) {
                 template: '<div>Hi Hello指令</div>',
                 replace: true
             };
-        });;
+        }).directive('myCustomer', function() {
+            return {
+                templateUrl: 'my-customer.html'
+            };
+        });
     };
 });
