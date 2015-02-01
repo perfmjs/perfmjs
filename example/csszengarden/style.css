@@ -1,0 +1,227 @@
+body {
+    text-align: center;
+    /*background: #669999 url(cinqueterre.jpg) no-repeat 0px 1px;*/
+    /*font: small "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;*/
+    /*font :12px "trebuchet ms", arial, helvetica, sans-serif;*/
+    font: 12px/16px Geneva, Arial, Tahoma, sans-serif;
+    color: #9F927F;
+    margin: 0px;
+    padding: 0px;
+    background: #fbfbf2 url(butterfly.jpg) no-repeat fixed;
+}
+ul {
+    display: none;
+}
+li {
+    margin: 0;
+    padding: 3px;
+    border-bottom: 1px solid #887;
+}
+#menu:hover ul {
+    display: block;
+    border: 1px solid #776;
+    margin: 5px;
+    padding: 5px;
+    width: 175px;
+    list-style-type: none;
+}
+a:link, a:visited {
+    font-weight: bold;
+    text-decoration: none;
+    color: #998;
+}
+a:hover {
+    color: #887;
+    text-decoration:  underline;
+}
+#quickSummary p:nth-child(2) {
+    color:red;
+}
+
+#quickSummary h3 {
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 300px;
+}
+
+#preamble h3 {
+    background: transparent url(cinqueterre.jpg) no-repeat top left;
+    width: 291px;
+    height: 250px;
+    /*float: left;*/
+    margin-bottom: 10px;
+    padding: 0;
+}
+
+#trygreat > span {
+    font:10px;
+    color: blue;
+}
+
+#wrapper {
+    width: 750px;
+    margin: 0 auto;
+    text-align: left;
+    position:  relative;
+    top: 100px;
+}
+#contentArea {
+    width: 450px;
+    float: left;
+}
+
+#leftPanel {
+    width: 150px;
+    float: left;
+}
+
+#rightPanel {
+    width: 150px;
+    float: left;
+}
+
+#footer {
+    clear: both;
+}
+
+#container-center2 {
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid red;
+    width: 222px;
+    text-align: left;
+}
+
+#container-center {
+    background: #ffc transparent url(butterfly.jpg) repeat-y center;
+    position: absolute;
+    left: 50%;
+    width: 760px;
+    margin-left: -380px;
+}
+
+div#static-image {
+    background-image: url(butterfly.jpg);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 594px !important;
+    height /**/:25px;
+    width: 205px;
+    z-index: 2;
+}
+
+#header {
+    padding:25px 0 0 0;
+    overflow: hidden;
+    background-image:  url(butterfly.jpg);
+    background-repeat: no-repeat;
+    height: 300px !important;
+    height /**/:25px;
+}
+
+h3 {
+    color: blue !important;
+}
+
+#linkList h3 {
+    border: solid 10px red;
+    color: yellow;
+    z-index: 10;
+    position: absolute;
+}
+
+#linkList ul {
+    z-index: 20;
+    position: absolute;
+}
+
+div#warning p + p {
+    color: brown;
+}
+
+#extraDiv2 {
+    background-image: url(cinqueterre.jpg);
+    background-repeat: repeat-x;
+    position: fixed;
+    bottom: 0;
+    left: 100%;
+    width: 100%;
+    height: 250px;
+    margin-left: -500px;
+}
+
+button {
+    margin-left: 0;
+    transition: margin-left .25s ease-out;
+}
+button:hover {
+    margin-left: 10px;
+}
+
+div.circle {
+    background:#ffff00;
+    border-radius:50%;
+    -webkit-animation:circleGrow 800ms ease-in-out infinite alternate both;
+    -moz-animation:circleGrow 800ms ease-in-out infinite alternate both;
+    -o-animation:circleGrow 800ms ease-in-out infinite alternate both;
+    animation:circleGrow 800ms ease-in-out infinite alternate both;
+}
+@-webkit-keyframes circleGrow {
+    0% {
+        height:2px;
+        width:2px;
+    }
+    50% {
+        height:40px;
+        width:40px;
+    }
+    100% {
+        height:34px;
+        width:34px;
+    }
+}
+@-moz-keyframes circleGrow {
+    0% {
+        height:2px;
+        width:2px;
+    }
+    50% {
+        height:40px;
+        width:40px;
+    }
+    100% {
+        height:34px;
+        width:34px;
+    }
+}
+@-o-keyframes circleGrow {
+    0% {
+        height:2px;
+        width:2px;
+    }
+    50% {
+        height:40px;
+        width:40px;
+    }
+    100% {
+        height:34px;
+        width:34px;
+    }
+}
+@keyframes circleGrow {
+    0% {
+        height: 2px;
+        width: 2px;
+    }
+    50% {
+        height: 40px;
+        width: 40px;
+    }
+    100% {
+        height: 34px;
+        width: 34px;
+    }
+}

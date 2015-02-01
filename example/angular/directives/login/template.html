@@ -1,0 +1,64 @@
+<div>
+  <ul class="nav nav-tabs" id="loginFormTab">
+    <li ng-class="{active:mode=='login'}"><a href="#" ng-click="setmode('login')">登录</a></li>
+    <li ng-hide="loginonly" ng-class="{active:mode=='register'}"><a href="#" ng-click="setmode('register')">创建账号</a></li>
+  </ul>
+  <div id="myTabContent" class="tab-content">
+    <div ng-class="{active:mode=='login', in:mode=='login', fade:mode!='login'}" class="tab-pane" id="login" style="margin-top:20px;">
+      <form class="form-horizontal" name="loginForm" role="form">
+        <div class="form-group" ng-class="{error: showloginvalidate && loginForm.username.$invalid}">
+          <label for="inputEmail1" class="col-md-2 control-label">邮箱</label>
+          <div class="col-md-8">
+            <input type="text" class="form-control" id="username" name="username" placeholder="Email" ng-model="login.username" required>
+          </div>
+        </div>
+        <div class="form-group" ng-class="{error: showloginvalidate && loginForm.password.$invalid}">
+          <label for="inputPassword1" class="col-md-2 control-label">密码</label>
+          <div class="col-md-8">
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" ng-model="login.password" required>
+          </div>
+        </div>
+        <div ng-show="loginmessage" class="help-inline" style="margin-bottom:10px;"><div class="label label-danger">{{ loginmessage }}</div></div>
+        <div ng-show="postregistermessage" class="help-inline" style="margin-bottom:10px;"><div class="label label-info">{{ postregistermessage }}</div></div>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-8">
+            <button type="submit" class="btn btn-default" ng-click="loginSubmit();">登录</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div ng-hide="loginonly" ng-class="{active:mode=='register', in:mode=='register', fade:mode!='register'}" class="tab-pane" id="create" style="margin-top:20px;">
+      <form class="form-horizontal" name="registerForm" role="form">
+          <div class="form-group" ng-class="{error: showregistervalidate && registerForm.username.$invalid}">
+            <!-- Email -->
+            <label class="col-md-2 control-label"  for="username">邮箱</label>
+            <div class="col-md-8">
+              <input type="email" class="form-control" id="username" name="username" placeholder="Email" ng-model="register.username" required>
+            </div>
+          </div>
+          <div class="form-group" ng-class="{error: showregistervalidate && registerForm.password.$invalid}">
+            <!-- Password -->
+            <label class="col-md-2 control-label"  for="password">密码</label>
+            <div class="col-md-8">
+              <input type="password" class="form-control" id="password" name="password" placeholder="Password" ng-model="register.password" required>
+            </div>
+          </div>
+          <div class="form-group" ng-class="{error: showregistervalidate && registerForm.password.$invalid}">
+            <!-- Password -->
+            <label class="col-md-2 control-label"  for="password2">确认密码</label>
+            <div class="col-md-8">
+              <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm Password" ng-model="register.password2" required>
+            </div>
+          </div>
+          <div ng-show="registermessage" class="help-inline"><span class="label label-danger">{{ registermessage }}</span></div>
+          <div class="form-group">
+            <!-- Button -->
+            <div class="col-md-offset-2 col-md-8">
+              <button class="btn btn-default" ng-class="{disabled:isactive}" ng-click="registerSubmit();">创建账号</button>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</div>

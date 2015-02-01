@@ -8,10 +8,16 @@
     <!--<script type="text/javascript" src="http://g.aicaicdn.com/common/skyjs/core-2.1.1.js?v=20141203001^{f:'/perfmjs/example/angular/include.js',m:'common'}"></script>-->
 </head>
 <body>
-Hello AngularJS! 教程：http://www.w3cschool.cc/angularjs/angularjs-http.html
+<a target="_blank" href="http://www.w3cschool.cc/angularjs/angularjs-http.html">Hello AngularJS! 教程</a>
 <br>
-angular开发 创建自定义指令：http://www.html-js.com/article/1561
+<a target="_blank" href="http://www.html-js.com/article/1561">angular开发 创建自定义指令</a>
+<br>
+<a target="_blank" href="https://docs.angularjs.org/api/">AngularJS API Docs</a>
+<br>
+<a target="_blank" href="http://bubkoo.com/tags/AngularJS/">AngularJS ui-router</a>
 <hello></hello>
+<hr>
+<login-directive></login-directive>
 <hr>
 <div ng-controller="ngController1">
     {{greeting}}
@@ -26,9 +32,16 @@ angular开发 创建自定义指令：http://www.html-js.com/article/1561
 </div>
 <button change-name-button>修改名字</button>
 <div>
-    <p>我的第一个表达式： {{5 + 5}}</p>
-</div>
+    <p ng-if="1===1">我的第一个表达式： {{5 + 5}}</p>
+</div><hr>
+ng-view<hr>
 <div ng-view></div>
 <input type="text" ng-model="person.age" money>
+下拉刷新<hr>
+<div ng-controller='demoController'>
+    <div infinite-scroll='loadMore()' infinite-scroll-distance='5'>
+        <img ng-repeat='image in images' ng-src='http://placehold.it/225x250&text={{image}}'>
+    </div>
+</div>
 </body>
 </html>

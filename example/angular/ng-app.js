@@ -6,11 +6,15 @@ define('ng-app', function (require) {
     var ngDirectives = require('ng-directive');
     var ngControllers = require('ng-controller');
     var ngDirectiveMoney = require('ng-directive-money');
+    var ngDirectiveLogin = require('ng-directive-login');
+    var ngInfiniteScroll = require('ng-infinite-scroll');
     var ngApp = angular.module('ngApp', ['ngRoute']);
     ngServices(ngApp);
     ngDirectives(ngApp);
     ngControllers(ngApp);
     ngDirectiveMoney(ngApp);
+    ngDirectiveLogin(ngApp);
+    ngInfiniteScroll(ngApp);
 
     ngApp.config(['$routeProvider','$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
         $routeProvider

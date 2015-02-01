@@ -1,6 +1,6 @@
 define('ng-directive', ['utils', 'ng-model'],  function(utils, ngModel) {
     return function(ngApp) {
-        ngApp.directive("changeNameButton", function(personService) {
+        ngApp.directive("changeNameButton", ['personService', function(personService) {
             return {
                 restrict: "A",
                 link: function (scope, element, attrs) {
@@ -9,7 +9,7 @@ define('ng-directive', ['utils', 'ng-model'],  function(utils, ngModel) {
                     });
                 }
             }
-        }).directive('hello', function() {
+        }]).directive('hello', function() {
             return {
                 restrict: 'E',
                 template: '<div>Hi Hello指令</div>',

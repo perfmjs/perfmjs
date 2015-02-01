@@ -8,7 +8,6 @@ perfmjs.plugin('userConfig', function($$) {
             'angular-route': {'alias':'example/angular/angular-route'},
             'ngResource': {'alias':'example/angular/angular-resource'},
             'ngCookies': {'alias':'example/angular/angular-cookies'},
-            'ng-infinite-scroll': {'alias':'example/angular/ng-infinite-scroll'},
             //具体业务类
             'ng-app': {'alias':'example/angular/ng-app'},
             'ng-model': {'alias':'example/angular/ng-model'},
