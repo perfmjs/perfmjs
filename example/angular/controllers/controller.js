@@ -25,6 +25,15 @@ define('ng-controller', ['ng-model'],  function(ngModel) {
                     $scope.images.push(last + i);
                 }
             };
+        }]).controller('12306', ['$scope', '$http', function($scope, $http) {
+            var httpUrl = 'https://kyfw.12306.cn/otn/lcxxcx/query?purpose_codes=ADULT&queryDate=2015-02-13&from_station=SZQ&to_station=JJG';
+            $http.jsonp(httpUrl)
+                .success(function(response) {
+                    console.log('succ:' + response);
+                    $scope.greeting = response;
+                }).error(function(response) {
+                    console.log('error:' + response);
+                });
         }]);
     };
 });

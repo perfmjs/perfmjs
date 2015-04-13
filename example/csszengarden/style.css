@@ -225,3 +225,12 @@ div.circle {
         width: 34px;
     }
 }
+
+.striped_box
+{
+    width: 100px;
+    height: 100px;
+    background-image: url("data:image/gif;base64,R0lGODlhAwADAIAAAP///8zMzCH5BAAAAAAALAAAAAADAAMAAAIEBHIJBQA7");
+    border: 1px solid gray;
+    padding: 10px;
+}
