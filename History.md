@@ -1,3 +1,8 @@
+2.1.2 / 2015-04-20
+==================
+* improved: 将系统所有公共的插件配置统一放到一个global-config.js文件中管理
+* improved: improved jasmine from 2.1.3 to 2.2.1
+
 2.1.1 / 2015-01-20
 ==================
 * fixed: amd.js代码中依赖数组的insert顺序搞反了(splice),这个BUG导致错误地按依赖列表的反序来加载依赖js文件

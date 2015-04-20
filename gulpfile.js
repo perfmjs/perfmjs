@@ -12,7 +12,7 @@ var del        = require('del');
 
 var paths = {
    "core.name.snapshot": "core",
-   "core.name.release": "core-2.0.0",
+   "core.name.release": "core-2.1.2",
     scripts: [
         './lib/perfmjs/perfmjs.js',
         './lib/perfmjs/sys-config.js',

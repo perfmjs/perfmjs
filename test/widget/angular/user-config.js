@@ -3,17 +3,20 @@ perfmjs.plugin('userConfig', function($$) {
     $$.userConfig.defaults = {
         'amd.baseUrl': '/perfmjs/',
         'amd.app.modules': {
-            'ng-model': {'alias':'example/angular/ng-model'},
             'angular-route': {'alias':'example/angular/angular-route'},
             'ngResource': {'alias':'example/angular/angular-resource'},
             'ngCookies': {'alias':'example/angular/angular-cookies'},
+            'angular-mock': {'alias':'test/widget/angular/angular-mocks'},
+            'ng-infinite-scroll': {'alias':'example/angular/ng-infinite-scroll'},
             //具体业务类
             'angular': {'alias':'example/angular/angular'},
             'ng-app': {'alias':'example/angular/ng-app'},
-            'ngServices': {'alias':'example/angular/services/service'},
-            'ngDirectives': {'alias':'example/angular/directives/directive'},
-            'ngControllers': {'alias':'example/angular/controllers/controller'},
-            'angular-mock': {'alias':'test/widget/angular/angular-mocks'},
+            'ng-model': {'alias':'example/angular/ng-model'},
+            'ng-service': {'alias':'example/angular/services/service'},
+            'ng-directive': {'alias':'example/angular/directives/directive'},
+            'ng-controller': {'alias':'example/angular/controllers/controller'},
+            'ng-directive-money': {'alias':'example/angular/directives/money'},
+            'ng-directive-login': {'alias':'example/angular/directives/login/login'},
             end: 0
         },
         'amd.app.shim': {
