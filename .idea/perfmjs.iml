@@ -6,6 +6,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="perfmjs node_modules" level="project" />
     <orderEntry type="library" name="perfmjs node_modules" level="project" />
+    <orderEntry type="library" name="Dart SDK" level="application" />
   </component>
 </module>
-

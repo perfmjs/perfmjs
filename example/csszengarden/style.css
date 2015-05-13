@@ -138,7 +138,7 @@ h3 {
     position: absolute;
 }
 
-div#warning p + p {
+div#warning1 p + p {
     color: brown;
 }
 

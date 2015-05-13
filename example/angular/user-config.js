@@ -1,5 +1,5 @@
 perfmjs.plugin('userConfig', function($$) {
-    $$.base("appConfig.userConfig", {});
+    $$.base("appConfig.userConfig");
     $$.userConfig.defaults = {
         'amd.baseUrl': '/perfmjs/',
         'amd.app.modules': {
