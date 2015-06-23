@@ -7,5 +7,7 @@
     <orderEntry type="library" name="perfmjs node_modules" level="project" />
     <orderEntry type="library" name="perfmjs node_modules" level="project" />
     <orderEntry type="library" name="Dart SDK" level="application" />
+    <orderEntry type="library" name="Node.js v0.12.4 Core Modules" level="application" />
+    <orderEntry type="library" name="perfmjs node_modules" level="project" />
   </component>
 </module>

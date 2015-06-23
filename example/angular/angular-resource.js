@@ -90,7 +90,7 @@ function shallowClearAndCopy(src, dst) {
      }]);
  * ```
  *
- * @param {string} url A parametrized URL template with parameters prefixed by `:` as in
+ * @param {string} url A parametrized URL templates with parameters prefixed by `:` as in
  *   `/user/:username`. If you are using a URL with a port number (e.g.
  *   `http://example.com:8080/api`), it will be respected.
  *
@@ -105,10 +105,10 @@ function shallowClearAndCopy(src, dst) {
  *   `actions` methods. If any of the parameter value is a function, it will be executed every time
  *   when a param value needs to be obtained for a request (unless the param was overridden).
  *
- *   Each key value in the parameter object is first bound to url template if present and then any
+ *   Each key value in the parameter object is first bound to url templates if present and then any
  *   excess keys are appended to the url search query after the `?`.
  *
- *   Given a template `/path/:verb` and parameter `{verb:'greet', salutation:'Hello'}` results in
+ *   Given a templates `/path/:verb` and parameter `{verb:'greet', salutation:'Hello'}` results in
  *   URL `/path/greet?salutation=Hello`.
  *
  *   If the parameter value is prefixed with `@` then the value for that parameter will be extracted
@@ -281,7 +281,7 @@ function shallowClearAndCopy(src, dst) {
  * The object returned from this function execution is a resource "class" which has "static" method
  * for each action in the definition.
  *
- * Calling these methods invoke `$http` on the `url` template with the given `method`, `params` and
+ * Calling these methods invoke `$http` on the `url` templates with the given `method`, `params` and
  * `headers`.
  * When the data is returned from the server then the object is an instance of the resource type and
  * all of the non-GET methods are available with `$` prefix. This allows you to easily support CRUD
