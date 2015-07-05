@@ -8,7 +8,7 @@ import {FriendService} from '../services/FriendService';
 
 @Component({
     selector: 'router-app',
-    injectables: [FriendService]
+    appInjector: [routerInjectables, FriendService]
 })
 @View({
     templateUrl: 'templates/app.html',
@@ -20,7 +20,7 @@ export class RouterApp {
     names: Array<String>;
     router: Router;
 
-    constructor(@Inject(Router) router: Router, friendService: FriendService) {
+    constructor(@Inject(Router) router: Router, @Inject(FriendService) friendService: FriendService) {
         this.myName = 'AngularJS2@爱彩';
         this.names = friendService.names;
         this.router = router;

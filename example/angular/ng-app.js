@@ -16,7 +16,7 @@ define('ng-app', function (require) {
     ngDirectiveLogin(ngApp);
     ngInfiniteScroll(ngApp);
 
-    ngApp.config(['$routeProvider','$locationProvider', '$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
+    ngApp.config(['$routeProvider','$locationProvider','$httpProvider', function($routeProvider, $locationProvider, $httpProvider) {
         $routeProvider
             .when('/index.html', {
                 templateUrl: 'partials/list.html',

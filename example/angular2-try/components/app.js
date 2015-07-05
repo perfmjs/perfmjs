@@ -15,35 +15,34 @@ if (typeof __param !== "function") __param = function (paramIndex, decorator) {
 var angular2_1 = require('angular2/angular2');
 var di_1 = require('angular2/di');
 var router_1 = require('angular2/router');
-var zippy_1 = require('./zippy');
+var login_1 = require('./login');
 var start_1 = require('./start');
-var FriendService_1 = require('../services/FriendService');
-var RouterApp = (function () {
-    function RouterApp(router, friendService) {
-        this.myName = 'AngularJS2@爱彩';
-        this.names = friendService.names;
+var common_service_1 = require('../services/common-service');
+var App = (function () {
+    function App(router, commonService) {
         this.router = router;
-        this.router.config([
-            { path: '/start', component: start_1.Start, as: 'start' }
-        ]);
+        this.commonService = commonService;
+        this.commonService.setRootRouter(this.router);
+        this.router.navigate('/login');
     }
-    RouterApp.prototype.myCtrlMethod = function (inputStr) {
-        alert('call myControllerMethod:' + inputStr);
-        this.router.navigate('/start');
-    };
-    RouterApp = __decorate([
+    App = __decorate([
         angular2_1.Component({
-            selector: 'router-app',
-            appInjector: [router_1.routerInjectables, FriendService_1.FriendService]
+            selector: 'app',
+            appInjector: [router_1.routerInjectables, common_service_1.CommonService]
         }),
         angular2_1.View({
-            templateUrl: 'templates/app.html',
-            directives: [angular2_1.NgFor, angular2_1.NgIf, router_1.RouterOutlet, router_1.RouterLink, zippy_1.Zippy]
+            template: "\n    <router-outlet>\n        <a router-link=\"start\">start</a>\n        <a router-link=\"login\">login</a>\n    </router-outlet>",
+            directives: [router_1.RouterOutlet, router_1.RouterLink]
         }),
+        router_1.RouteConfig([
+            { path: '/11', as: 'foo', component: login_1.Login },
+            { path: '/login', as: 'login', component: login_1.Login },
+            { path: '/start', as: 'start', component: start_1.Start }
+        ]),
         __param(0, di_1.Inject(router_1.Router)),
-        __param(1, di_1.Inject(FriendService_1.FriendService)), 
-        __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object, FriendService_1.FriendService])
-    ], RouterApp);
-    return RouterApp;
+        __param(1, di_1.Inject(common_service_1.CommonService)), 
+        __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object, common_service_1.CommonService])
+    ], App);
+    return App;
 })();
-exports.RouterApp = RouterApp;
+exports.App = App;

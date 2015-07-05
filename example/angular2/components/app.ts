@@ -27,7 +27,6 @@ import {Start} from 'start';
     templateUrl: '../templates/app.html',
     directives: [For, If, Zippy]
 })
-
 class DisplayComponent {
     myName: string;
     names: Array<String>;

@@ -42,7 +42,7 @@ var DisplayComponent = (function () {
     return DisplayComponent;
 })();
 //@RouteConfig([
-//    { path: '/index', component: Start }
+//    {path: '/start', components: {start: Start}, as: 'start'}
 //])
 var FriendsService = (function () {
     function FriendsService() {
