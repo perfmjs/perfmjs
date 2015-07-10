@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>css layout</title>
+    <style type="text/css">
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        #main {
+            background-color: #18ffff;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .simple {
+            background-color: #1565c0;
+            width: 500px;
+            margin: 20px auto;
+        }
+        .fancy {
+            background-color: #2aabd2;
+            width: 500px;
+            margin: 20px auto;
+            padding: 50px;
+            border-width: 10px;
+        }
+        .static {
+            background-color: #be7ed2;
+            position: static;
+        }
+        .relative1 {
+            position: relative;
+            background-color: #33ff5f;
+        }
+        .relative2 {
+            position: relative;
+            top: -20px;
+            left: 20px;
+            background-color: #29b7ff;
+            width: 500px;
+        }
+        .fixed {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 200px;
+            background-color: #ffcd4d;
+        }
+        .relative {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            background-color: #36d22c;
+        }
+        .absolute {
+            position: absolute;
+            top: 120px;
+            right: 0;
+            width: 300px;
+            height: 200px;
+            background-color: #ac2ad2;
+        }
+        .container {
+            position: relative;
+        }
+        nav {
+            float: left;
+            width: 10%;
+        }
+        section {
+            margin-left: 60%;
+            background-color: #2aabd2;
+        }
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 70px;
+            background-color: #ffcbe0;
+            width: 100%;
+        }
+        body {
+            margin-bottom: 120px;
+        }
+        .box {
+            float: left;
+            width: 200px;
+            height: 100px;
+            margin: 1em;
+        }
+        .after-box {
+            clear: left;
+        }
+        @media screen and (min-width: 600px) {
+            nav {
+                float: left;
+                width: 25%;
+            }
+            section {
+                margin-left: 25%;
+            }
+        }
+        @media screen and (max-width: 599px) {
+            nav li {
+                display: inline;
+            }
+        }
+        .box2 {
+            display: inline-block;
+            width: 200px;
+            height: 100px;
+            margin: 1em;
+            background-color: #006600;
+        }
+    </style>
+</head>
+<body>
+<h>参考：学习CSS布局  http://zh.learnlayout.com/</h>
+<!--<div id="main">呜呜呜呜</div>-->
+<!--<div class="simple">我小一些</div>-->
+<!--<div class="fancy">我大一些</div>-->
+<!--<div class="static">static content</div>-->
+<!--<div class="relative1">relative1</div>-->
+<!--<div class="relative2">relative2</div>-->
+<!--<div class="fixed">-->
+    <!--Hello！暂时不要太关注我哦。-->
+<!--</div>-->
+<!--<div class="relative">-->
+    <!--这个元素是相对定位的。如果它是 position: static; ，那么它的绝对定位子元素会跳过它直接相对于body元素定位。-->
+<!--</div>-->
+<!--<div class="absolute">-->
+    <!--这个元素是绝对定位的。它相对于它的父元素定位。-->
+<!--</div>-->
+<div class="container">
+    <nav>
+        <ul>
+            <li>
+                <a href="position-example.html">Home</a>
+            </li>
+            <li>
+                <a href="position-example.html">Taco Menu</a>
+            </li>
+            <li>
+                <a href="position-example.html">Draft List</a>
+            </li>
+            <li>
+                <a href="position-example.html">Hours</a>
+            </li>
+            <li>
+                <a href="position-example.html">Directions</a>
+            </li>
+            <li>
+                <a href="position-example.html">Contact</a>
+            </li>
+        </ul>
+    </nav>
+    <section>
+        section s的 margin-left 样式确保了有足够的空间容纳 nav 元素。
+    </section>
+    <section>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae massa. Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu, lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui eget tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta. Cras ac leo purus.
+    </section>
+    <footer>
+        如果你使用了一个固定定位的页眉或页脚，确保有足够的空间来显示它们！我在 body 上面加了 margin-bottom 。
+    </footer>
+    <div class="box">
+        我感觉好像我在漂浮
+    </div>
+    <section class="after-box">
+        使用 clear 我们就可以将这个段落移动到浮动元素 div 下面。你需要用 left 值才能清除元素的向左浮动。你还可以用 right 或 both 来清除向右浮动或同时清除向左向右浮动。
+    </section>
+    <div class="box2">
+        我是一个行内快！
+    </div>
+    <div class="box2">
+        我是一个行内快！
+    </div>
+    <div class="box2">
+        我是一个行内快！
+    </div>
+    <div class="box2">
+        我是一个行内快！
+    </div>
+    <div class="box2">
+        我是一个行内快！
+    </div>
+    <div class="box2">
+        我是一个行内快！
+    </div>
+    <div class="box2">
+        我是一个行内快！
+    </div>
+    <section>
+        这次我可没有用 clear 。太棒了！
+    </section>
+</div>
+</body>
+</html>
