@@ -9,18 +9,35 @@ if (typeof __decorate !== "function") __decorate = function (decorators, target,
 if (typeof __metadata !== "function") __metadata = function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+if (typeof __param !== "function") __param = function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 var angular2_1 = require('angular2/angular2');
+var di_1 = require('angular2/di');
+var router_1 = require('angular2/router');
+var common_service_1 = require('../services/common-service');
+var zippy_1 = require('./zippy');
 var Start = (function () {
-    function Start() {
+    function Start(router, commonService) {
+        this.myName = 'AngularJS2@爱彩';
+        this.names = commonService.names;
+        this.router = router;
     }
+    Start.prototype.myCtrlMethod = function (inputStr) {
+        alert('call myControllerMethod:' + inputStr);
+        this.router.navigate('/start');
+    };
     Start = __decorate([
         angular2_1.Component({
-            selector: 'start'
+            selector: 'start',
+            appInjector: [router_1.routerInjectables, common_service_1.CommonService]
         }),
         angular2_1.View({
-            template: '<h1>Start</h1>'
-        }), 
-        __metadata('design:paramtypes', [])
+            templateUrl: 'templates/start.html',
+            directives: [angular2_1.coreDirectives, router_1.RouterOutlet, router_1.RouterLink, zippy_1.Zippy]
+        }),
+        __param(0, di_1.Inject(router_1.Router)), 
+        __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object, common_service_1.CommonService])
     ], Start);
     return Start;
 })();

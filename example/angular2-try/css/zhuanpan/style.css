@@ -1,0 +1,61 @@
+@charset "utf-8";
+/* CSS Document */
+body,div,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,iframe,input,textarea { font-size:100%;margin: 0;padding: 0}
+body {font-size:12px;font-family:"Microsoft Yahei","ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3"; background:#fdeee9; color:#666}
+textarea {resize: none}
+iframe,img {border: 0}
+ul,ol {list-style: none}
+i{ font-style:normal}
+.fl{ float:left;}
+.fr{ float:right}
+.login:after,.doubleList:after,.access:after{content:"";display:block;clear:both}
+input,select,textarea {outline: 0;-webkit-user-modify: read-write-plaintext-only}
+input {-webkit-appearance: none}
+a {text-decoration:none; color:#4a4a4a; }
+.banner{ max-width:480px; position:relative; margin:0 auto; text-align:center}
+.banner img{ width:100%; max-width:480px; height:auto; display:block; margin:0 auto}
+.top{ margin:0 auto;max-width:480px; background:#ee3931; height:34px; line-height:34px; color:#fff; text-align:center}
+.top .userName{ color:#ffee2b}
+.top a{ display:inline-block; background:#ffee2b; color:#eb542e; font-weight:bold; height:24px; line-height:24px; width:65px; text-align:center}
+.layout{width:320px; margin:0 auto}
+.msg{ margin:10px 0 5px; padding-left:30px; font-size:13px; border:1px solid #f1820e; background:#fffae4 url(../../images/zhuanpan/msgIcon.gif) 5px center no-repeat; color:#bd6507; line-height:28px; height:28px;}
+.msgInfo .prize{ color:#ff0000}
+.turntableCon{ background:#fff; padding:10px;}
+.turntableCon .tips{ line-height:24px}
+.turntableBg{width:263px; height:263px; margin:20px auto; background:url(../../images/zhuanpan/Turntable.png) no-repeat; position:relative}
+.turntableBg .Pointer{position:absolute; top:55px; left:116px; z-index:2;width:29px; height:49px; background:url(../../images/zhuanpan/Pointer.png) no-repeat}
+.turntableBg .pointer_a{width:111px; height:132px; position:absolute; top:70px; left:80px}
+.pointer_a a{display: block;}
+.turntableBg .round{ position:absolute; top:90px; left:95px;width:75px;height:75px; background:#fff; border:1px solid #d3d3d3; box-shadow:0 2px 3px #bababa;border-radius:50px; -webkit-border-radius:50px; z-index:1 }
+.turntableBg .btn{ position:absolute;top:99px; left:103px;width:60px;height:52px; font-size:16px; color:#fff; border-radius:30px; -webkit-border-radius:30px; background:#ef4141; text-align:center; padding-top:8px; z-index:3}
+.txt{ background:#ee3931;  padding:8px; line-height:24px; color:#fff; font-size:14px}
+.txt a{ background:#b7190d; border-radius:5px; border:1px solid #a8170d; padding:1px 15px; color:#fff;}
+.txt2 { padding:10px;}
+.Instructions{ padding:0 0 10px 10px}
+.Instructions h3{ font-family:"宋体"; color:#34aadc; font-size:14px; font-weight:bold}
+.Instructions h3 .down{ line-height:10px;-moz-transform: rotate(90deg);transform: rotate(90deg); display:inline-block; -o-transform: rotate(90deg);-webkit-transform: rotate(90deg); font-size:10px;}
+.Instructions .rule{ display:none; padding:10px; line-height:20px}
+.Instructions .rule p{ text-indent:-20px; padding-left:20px;}
+.fwb{ font-weight:bold}
+.example{ line-height:24px; height:175px; overflow-y:auto;  margin-bottom:20px}
+.red{ color:red}
+.example .red{ word-spacing:20px}
+.example::-webkit-scrollbar {width:20px;height:170px;}
+.example::-webkit-scrollbar-button    {background-color:#fff;}
+.example::-webkit-scrollbar-track     {background:#fff;}
+.example::-webkit-scrollbar-thumb{background:#e0dfdb;border-radius:4px;}
+.example::-webkit-scrollbar-corner {background:#fff;}
+.example::-webkit-scrollbar-resizer  {background:#fff;}
+
+.layerBoxCon{ background:rgba(0,0,0,.5); width:100%; height:100%; position:fixed; top:0; left:0; display: table; z-index:9999; font-size:14px}
+.layerBox {display: table-cell;vertical-align: middle}
+.layerBox .pop{ width:300px; color:#444; margin:0 auto; padding-bottom:10px; background:#fff; z-index:99999; position:relative}
+.layerBox .pop .close{ position:absolute; top:0; right:10px; font-size:20px}
+.layerBox .pop .title{ font-size:14px; height:40px; line-height:40px; background:#eee; color:#434343; text-align:center}
+.layerBox .txttips{ padding:15px; line-height:22px }
+a.disabled{
+    cursor: wait;
+    pointer-events: none;
+}
+#winningInfo{ overflow:hidden;}
+#winningInfo ul li ,#winningInfo ul li div{ float:left;}

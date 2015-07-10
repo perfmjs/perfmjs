@@ -1,0 +1,201 @@
+@charset "utf-8";
+/* CSS Document */
+body,div,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,iframe,input,textarea,select,label,article,aside,footer,header,menu,nav,section,time,audio,video {margin: 0;padding: 0}
+article,aside,footer,header,hgroup,nav,section,audio,canvas,video {display: block}
+body {font-size:14px;font-family:"Microsoft Yahei","ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Hiragino Sans GB","Hiragino Sans GB W3"; background:#fff7c6;}
+textarea {resize: none}
+iframe,img {border: 0}
+ul,ol {list-style: none}
+i{ font-style:normal}
+.fl{ float:left;}
+.fr{ float:right}
+.login:after,.clearfix:after,.remainred:after,.awardList1:after,.penalhelp ul:after,.msg ul li:after{content:"";display:block;clear:both}
+input,select,textarea {outline: 0;-webkit-user-modify: read-write-plaintext-only}
+input {-webkit-appearance: none}
+a {text-decoration:none; color:#4a4a4a}
+.banner img{ width:100%; max-width:480px; height:auto; display:block; margin:0 auto}
+.loginCon{ height:28px;padding-top:4px; background:#eb542e; width:100%; font-size:13px; color:#fff; max-width:480px; margin:0 auto}
+.loginCon .login{ width:300px;padding:0 10px; margin:0 auto;}
+.loginCon .loginBtn{ display:inline-block; width:60px; height:24px; line-height:24px; background:#ffee2b; color:#eb542e; font-weight:bold; text-align:center;}
+.loginCon .fr a{line-height:24px; margin-left:2px; background:#bb2a05; color:#fff; display:inline-block; height:24px;padding:0 10px;}
+.layout{ margin:0 auto; width:320px}
+.layout2{ margin:0 auto; width:310px}
+.timeCon{padding:15px 0 15px 15px; color:#ff572a;}
+.timeCon .fr{ position:relative;padding-left:31px; width:90px; height:31px;}
+.timeCon .clock{ position:absolute; top:-4px; left:2px;width:29px;height:31px; background:url(../../images/dianqiu/clock.png) no-repeat}
+.timeCon a{ display:block;width:72px;height:24px; line-height:24px; text-align:center; color:#fff4b0; background:#eb542e; font-family:"宋体"; border-top-right-radius:3px;border-bottom-right-radius:3px}
+.Countdown{ margin:0 auto;border-top-right-radius:5px;border-top-left-radius:5px;padding:3px 10px; width:260px; height:60px; background:#eb542e; border:2px solid #bb2a05; color:#fff26f}
+.Countdown .num{ padding-top:10px; text-align:center;}
+.Countdown .num span{ vertical-align:middle; margin-left:5px; display:inline-block; padding:0 3px; height:27px; line-height:27px; background:#8c2205; color:#fff; font-size:22px; font-family:Arial, Helvetica, sans-serif; text-align:center}
+.remain{ width:280px; margin:0 auto; background:#fff4b0; border:3px solid #f2e9b1; border-bottom-right-radius:6px;border-bottom-left-radius:6px;border-top:none; padding-top:5px; color:#444}
+.red{ color:#e2001a;}
+.remain .remainred{ padding:0 10px}
+.remain .tips{ color:#787562;padding:5px 0; text-align:center}
+.remain .winners{border-top:3px solid #f2e9b1; height:24px; overflow:hidden}
+.remain .winners li{ text-align:center; color:#bd6507; height:24px; line-height:24px; font-weight:bold;}
+.lotteryBg{ margin:20px auto 10px;padding-top:98px; width:301px; height:134px; text-align:center; background:url(../../images/dianqiu/grabBg.png) no-repeat}
+.lotteryBg .lotterBtn,.lotteryBg .lotterBtn-gray{ font-size:18px; display:inline-block; background:#ffd700; font-weight:bold; border-radius:3px; width:110px; height:30px; line-height:30px; color:#444}
+.lotteryBg .lotterBtn-gray{ background:#666; color:#999}
+.lotteryBg .txt{ padding-top:10px; font-size:12px; color:#ffcbbc}
+@-webkit-keyframes btneffect {
+0%, 40%, 42.5%, 45%, 47.5%, 50%, 90%, 92.5%, 95%, 97.5%, 100% { -webkit-transform: translateY(0px); }
+41.25%, 46.25% { -webkit-transform: translateY(-10px); }
+43.75%, 48.75% { -webkit-transform: translateY(10px); }
+91.25%, 96.25% { -webkit-transform: translateX(-10px); }
+93.75%, 98.75% { -webkit-transform: translateX(10px); }
+}
+.anim-btnshake {
+-webkit-animation: btneffect 4.5s ease-out infinite;
+}
+.myred{height:32px; margin:0 10px; background:#ec4c00; text-indent:-9999em; overflow:hidden;background:#ec4c00 url(../../images/dianqiu/qtitle.png) left top no-repeat}
+.myred a{ display:block;height:32px; width:280px;position:relative}
+.myred a:after{content: ' '; position:absolute; top:12px; right:0; width:8px;height:8px; background:#ec4c00; border-right:2px solid #fff;border-top:2px solid #fff;transform: rotate(45deg);-webkit-transform: rotate(45deg);}
+.tabtitle{ background:#fff;margin:10px 10px 0; height:34px; border-bottom:1px solid #dfdfdf}
+.tabtitle li{ background:url(../../images/dianqiu/grabredIcons.png) no-repeat; float:left;border-right:1px solid #dfdfdf;padding-left:15px;border-bottom:2px solid #fff; width:83px; height:32px; text-align:center; line-height:32px;}
+.tabtitle .i1{ background-position:8px 9px}
+.tabtitle .i2{ background-position:8px -34px}
+.tabtitle .i3{ background-position:8px -79px}
+.tabtitle .select{border-bottom:2px solid #ec4c00}
+
+.tabtitle li:last-child{border-right:none;}
+.tabCon,.redrule{ margin:0 10px; background:#fff; padding:15px 10px; font-family:"SimSun";}
+.tabCon .txt,.redrule p{ color:#999; line-height:22px;padding-bottom:10px; font-size:12px;}
+.tabCon table{ font-size:12px; color:#bd6507; text-align:center; border-collapse:collapse;}
+.tabCon table td{ border:1px solid #fff; padding:5px; background:#fbedaa}
+.tabCon table th{ background:#ffe5b9; height:33px;border:1px solid #fff;}
+.tabCon table .textleft{ text-align:left; line-height:20px}
+.redrule p,.penaRule p{ padding-left:15px; text-indent:-15px; padding-bottom:0}
+.mlr10{ margin:0 10px}
+
+/*---领券---*/
+.award,.coupon .title,.ernie .ernieBtn{ background:url(../../images/dianqiu/couponsIcons.png) no-repeat}
+.award{ width:220px;padding:6px 0 0 85px;height:100px; overflow:hidden; font-size:12px; margin:10px auto}
+.award ul{ width:210px; height:82px; overflow:hidden}
+.award ul li{ width:210px; height:22px; overflow:hidden; line-height:22px; color:#ff5a00}
+.award ul li .time{color:#ac8671;}
+.coupon{ width:305px; margin:0 auto; position:relative}
+.coupon .title{ width:305px; height:32px;background-color:#d44820; background-position:10px -116px; overflow:hidden; text-indent:-9999em;}
+.coupCon{ background:#fffae4; font-size:12px; padding:10px 10px 15px; color:#545454}
+.coupCon .txt{ height:30px;}
+.couponBg{ margin:10px 0; width:236px; overflow:hidden; height:65px;  border:1px solid #7d0900; background:#ff6e41; border-radius:2px; -webkit-border-radius:2px;}
+.couponBg #indemo,#coup1,#coup2{ float:left}
+.couponBg #indemo,.coupon .show ul{ width:800%}
+.couponBg #coup1,.coupon .show ul{ margin-left:-46px;}
+.coupon .show{ display:none; position:absolute; top:83px; left:11px; width:236px; height:65px; overflow:hidden;background:#ff6e41;}
+.couponBg #coup1 li,.coupon .show li,#coup2 li{ width:108px; text-align:center; padding-top:10px; height:53px; float:left; border-top:3px solid #f0683d;border-bottom:3px solid #f0683d}
+.coupon .show li{ height:49px;}
+.coupon .show .select,.couponBg #coup1 .select{ border:1px solid #ba0d00; background:#d44820; border-top:3px solid #c8441e;border-bottom:3px solid #c8441e}
+.coupon .arrow{ position:absolute; top:77px; left:122px;width:12px; height:18px; background:url(../../images/dianqiu/top.png) -6px -88px no-repeat; z-index:999}
+.ernie{ position:relative;padding:0 5px; width:145px; margin-left:85px; height:27px; background:#ec5f37; color:#fff; line-height:27px;}
+.ernie span{ font-size:14px;padding:0 3px; background:#363636; margin-left:1px}
+.ernie .ernieBtn{ position:absolute;right:-55px; top:-16px; width:55px; height:88px; background-position:0 -177px;}
+.ernie .ernieBtn .btn,.ernie .ernieBtn .btngray{ width:46px;height:43px;padding-top:3px; background:#da4c24; color:#fff; text-align:center; border-radius:25px; line-height:18px; font-size:14px; position:absolute; top:-45px; right:0}
+.ernie .ernieBtn .btngray{ background:#999; padding:3px 0 0 0; color:#dbdbdb}
+.col{ color:#ffff00}
+.couRule{ color:#ac8671; margin:10px; font-size:12px; font-family:"宋体"; line-height:22px}
+.couRule h2{ font-size:14px; margin-bottom:5px}
+.couRule p{ text-indent:-12px; padding-left:12px;}
+.upCon{ display:none; width:50px; height:110px; position:fixed;right:10px; z-index:999; left:50%; margin-left:100px; bottom:20px;}
+.upCon a{ display:inline-block;margin-top:3px; width:45px;height:45px; background:#000 url(../../images/dianqiu/top.png) 8px 3px no-repeat; opacity:0.6}
+.upCon .top{ background-position:8px -38px}
+
+.layerBoxCon{ background:rgba(0,0,0,.5); width:100%; height:100%; position:fixed; top:0; left:0; display: table; z-index:9999}
+.layerBox {display: table-cell;vertical-align: middle}
+.layerBox .pop{ width:260px; color:#444; margin:0 auto; background:#fff; z-index:99999; padding:20px; position:relative}
+.layerBox .pop .close{ position:absolute; top:0; right:10px; font-size:20px}
+.layerBox .pop .txt{ padding-bottom:10px; min-height:50px; text-align:center}
+.layerBox .pop .loginBtn,.layerBox .pop .regisBtn{ display:block; top:; left:0; background:#ff2d55; color:#fff; height:38px; line-height:38px; text-align:center;}
+.layerBox .pop .regisBtn{ background:#fff; border:1px solid #d2d2d2; color:#666; margin-top:10px;}
+
+/*---点球大赛---*/
+.penaltiesBg{margin:0 auto;padding:10px 0; background:url(../../images/dianqiu/dqBg.jpg) center top repeat-y}
+.penalties{ margin:10px auto; width:295px; position:relative; height:160px; background:url(../../images/dianqiu/field.png) no-repeat}
+.penalties .goalkeeper,.penalties .footballer,.penalties .football{position:absolute;overflow:hidden; z-index:2}
+.penalties .goalkeeper{ z-index:9;top:30px;left:120px; width:55px;height:50px; background:url(../../images/dianqiu/goalkeeper.png) no-repeat; background-size:auto 50px }
+.penalties .goal-shou{ background-position:0 0}
+.penalties .goal-up{ background-position:-60px 0}
+.penalties .goal-right{ background-position:-60px 0;-webkit-transform: rotate(90deg);transform: rotate(90deg);}
+.penalties .goal-left{ background-position:-60px 0;-webkit-transform: rotate(-90deg);transform: rotate(-90deg);}
+.penalties .goal-cur{background-position:-128px 25px;width:60px}
+.penalties .goal-cur-left{background-position:-128px 0;width:60px;-webkit-transform: rotate(180deg);transform: rotate(180deg);-moz-transform: rotate(180deg);}
+.penalties .footballer{width:48px;height:83px; background:url(../../images/dianqiu/sheshou.png) 0 0 no-repeat; background-size:auto 83px;top:60px; left:83px; z-index:99}
+.penalties .footballer1{ background-position:2px 0}
+.penalties .footballer2{ background-position:-46px 0}
+.penalties .footballer3{ background-position:-106px 0}
+.penalties .footballer4{ background-position:-156px 0}
+.penalties .football{left:137px; top:122px;}
+.penalties .twinkle,.penalties .area{ position:absolute; z-index:9; top:5px; left:55px; width:180px; height:70px; background:#009ee0; opaciyt:0.2;}
+.twinkle{ z-index:1;-webkit-animation: shan 1s ease-out infinite;-moz-animation: shan 1s ease-out infinite;animation: shan 1s ease-out infinite; opacity:0.2;display: none;}
+@keyframes shan{0%,25% {opacity:0}25%,50% {opacity:0.2}50%,75% {opacity:0}75%,100% {opacity:0.2}}
+@-webkit-keyframes shan{0%,25% {opacity:0}25%,50% {opacity:0.2}50%,75% {opacity:0}75%,100% {opacity:0.2}}
+@-moz-keyframes shan{0%,25% {opacity:0}25%,50% {opacity:0.2}50%,75% {opacity:0}75%,100% {opacity:0.2}}
+@-o-keyframes shan{0%,25% {opacity:0}25%,50% {opacity:0.2}50%,75% {opacity:0}75%,100% {opacity:0.2}}
+.cursor-pointer{ cursor: pointer;}
+.penalties .area{ background:none; z-index:10; display: none;}
+.penalties .area span{ position:absolute; width:64px; height:35px;}
+.penalties .area .areaLeftTop{ top:0;left:0;}
+.penalties .area .areaLeftBottom{ top:35px;left:0;}
+.penalties .area .areaCenter{ top:0;left:64px;width:52px;height:70px;}
+.penalties .area .areaRightTop{ top:0;left:116px;}
+.penalties .area .areaRightBottom{ top:35px;left:116px;}
+
+.penalties .tips{ position:absolute; left:80px; top:-16px; font-size:12px; padding:0 3px; display:none; background:#009ee0; color:#fff; z-index:9;}
+.penalties .tips .arrow{ position:absolute; width:5px; height:5px; bottom:-2px;left:50%; background:#009ee0;-webkit-transform: rotate(45deg);transform: rotate(45deg); }
+@media screen and (min-width: 320px){.penaltiesBg{width:100%}}
+@media screen and (min-width: 480px){.penaltiesBg{width:480px}}
+.residue{ text-align:center; color:#ffe421;}
+.startBtn{ display:block;width:160px;height:44px; background:url(../../images/dianqiu/penaltiesBtn.png) no-repeat; background-size:auto 42px; overflow:hidden; text-indent:-9999em; margin:10px auto}
+.penasTips{ color:#70d568;}
+.msg{ margin:20px 0;height:28px; line-height:30px; color:#bd6507; padding:0 10px 0 25px; background:#fffae4 url(../../images/dianqiu/msgIcon.png) 5px 8px no-repeat; background-size:18px auto; border:1px solid #f1820e; font-size:12px}
+.msg ul{ height:28px; overflow:hidden}
+.msg span{ float:right; color:#ff0000}
+.penaltiesBg h2{ height:32px; background:#009ee0 url(../../images/dianqiu/titles.png) no-repeat; line-height:1000px; overflow:hidden; position:relative}
+.penaltiesBg .title2{ position:relative; background-position:0 -32px}
+.penaltiesBg h2 .more{ position:absolute; top:8px; color:#fff;right:10px; line-height:30px; font:12px "SimSun";}
+.penaltiesBg .title3{background-position:0 -64px}
+.awardList1{ background:#fffae4; color:#bc690d; text-align:center}
+.awardList1 li{ float:left;width:76px; height:94px; border-right:1px solid #f5eec5;border-bottom:1px solid #f5eec5; font-size:12px }
+.awardList1 li .pic{ height:55px; padding-top:5px;}
+.mt10{ margin-top:10px}
+.rankingList,.penalhelp{ font-size:12px; padding:10px; background:#fffae4; color:#bd6507}
+.rankingList dt{ height:32px; background:#fbedaa;}
+.rankingList span{ display:inline-block;height:32px; line-height:32px;width:92px; text-align:center;}
+.red{ color:#ff0000}
+.rankingList b{ line-height:19px; vertical-align:middle; display:inline-block;width:19px;height:19px; background:#c72a30; color:#fff;}
+.rankingList .numbg2{ background:#ec7c03}
+.rankingList .numbg3{ background:#0798d4}
+.penalhelp ul{ margin:10px 0}
+.penalhelp .txt{ line-height:20px;text-indent:-30px; padding-left:30px}
+.penalhelp li{ background:#fbedaa; text-align:center; line-height:33px; float:left;width:61px;height:33px; margin:1px 0 0 1px}
+.penalhelp .w1{width:98px}
+.penaRule{padding:10px; color:#0e420a; font:12px "SimSun"; line-height:20px}
+.penaRule h3{ font-size:14px; color:#ffd700}
+.penasLayer .pop{padding:0 0 20px; font-family:"SimSun";width:300px;}
+.penasLayer .pop .title{ height:40px; line-height:40px; background:#eee; color:#434343; text-align:center}
+.penasLayer .close{ margin:0 10px 0 0; float:right; color:#888b90; font-weight:bold; font-size:18px;}
+.penasLayer .txttips{ font-size:16px; color:#ff2d55; font-weight:bold; text-align:center; padding:15px 0}
+.penasLayer .pop .txt{min-height:25px;font-size:12px; color:#999; line-height:20px;padding:0 15px; text-align:left}
+.penasLayer .pop .center{ text-align:center}
+.penasLayer .pop .inp{ display:block; font-family:microsoft yahei; margin:5px auto; width:260px; height:44px; border:1px solid #d2d2d2; line-height:44px; text-align:center; font-size:16px;}
+.penasLayer .loginBtn{ margin:10px 20px 0}
+.penasLayer .rankingList{ background:#fff; padding-bottom:0}
+.penasLayer .rankingList span,.penasLayer .rankingList dt{ height:28px; line-height:28px;}
+
+/*---我的红包---*/
+.myredTitle{margin:15px 10px 0; height:32px; line-height:32px; color:#fff; background:#ec4c00; text-align:center; font-weight:bold; position:relative}
+.myredTitle .back{ position:absolute; color:#fff; left:10px; top:-1px; font-weight:normal;}
+.myredTitle .back:before{ content:""; display:inline-block; vertical-align:middle; margin-right:5px; width:8px; height:8px; border-bottom:2px solid #fff;border-left:2px solid #fff;-webkit-transform: rotate(45deg);transform: rotate(45deg);}
+.redList{ margin:0 10px}
+.redList li{ padding:15px 10px; min-height:40px; background:#fff; border-bottom:1px solid #fdede5; position:relative}
+.redList li img{ vertical-align:middle}
+.redList li .txt{ margin-left:5px; display:inline-block; color:#666; vertical-align:middle}
+.redList li .num{ color:#999; font-size:12px}
+.redList li .see{ color:#34aadc; position:absolute; top:25px;right:10px}
+.redNone{ background:#fff; padding:10px 10px 50px;}
+.redNone .txt{line-height:28px; color:#7f7f7f;}
+.redNone h2{ font-size:18px; color:#ec4c00; font-weight:normal; padding:10px 0 15px; text-align:center}
+.redNone .btns a{ display:inline-block; width:85px;margin:0 4px; text-align:center; background:#009944; color:#fff; height:28px; line-height:28px}
+a.disabled{
+    cursor: wait;
+    pointer-events: none;
+}

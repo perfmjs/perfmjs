@@ -1,0 +1,232 @@
+<link href="css/dianqiu/style.css" type="text/css" rel="stylesheet" />
+<div class="banner">
+	<img src="images/dianqiu/dqBanner01.jpg" />
+    <img src="images/dianqiu/dqBanner02.jpg" />
+</div>
+<div class="loginCon">
+	<div class="login">
+       <span class="fl">请先登录    <a href="###" class="loginBtn">登 录</a></span>
+       <!--登录后-->
+       <span class="fl" style=" display:none">ankailuo9   </span>
+       
+       <span class="fr"> 
+            <a href="###">快速投注</a><a href="###">我的世界杯</a>
+       </span>
+    </div>
+</div>
+
+<div class="penaltiesBg">
+	<div class="penalties" id="playArea">
+    	<!--提示文字-->
+        <div class="tips" id="playTips">点击门框区域开始射门 <i class="arrow"></i></div>
+        <!--点击区域-->
+        <div class="area" id="playTargetArea">
+        	<span class="areaLeftTop targetShootPoint"></span>
+            <span class="areaLeftBottom targetShootPoint"></span>
+            <span class="areaCenter targetShootPoint"></span>
+            <span class="areaRightTop targetShootPoint"></span>
+            <span class="areaRightBottom targetShootPoint"></span>
+        </div>
+    	<!--闪动-->
+    	<div class="twinkle" id="playTwinkle"></div>
+        
+    	<span class="goalkeeper goal-shou" id="goalkeeperPer"></span>
+        <span class="footballer footballer1" id="footballerPer"></span>
+        <span class="football" id="footballPlay"><img src="images/dianqiu/football.png"></span>
+    </div>
+    <div class="layout2">
+    	<p class="residue">剩余点球机会：5 次</p>
+		<a href="###" class="startBtn" id="startPlayBall">开始挑战</a>
+        <p class="penasTips">
+        	会员完成指定任务即可获得点球机会，成功罚进点球即有机会赢取奖励
+        </p>
+        <div class="msg">
+        	<ul id="jsfoot01">
+                <li><span>赢取5元彩金卡</span> 恭喜XXX刚刚罚进一记精彩的点球</li>
+                <li><span>赢取5元彩金卡</span> 恭喜XXX刚刚罚进一记精彩的点球</li>
+                <li><span>赢取5元彩金卡</span> 恭喜XXX刚刚罚进一记精彩的点球</li>
+                <li><span>赢取5元彩金卡</span> 恭喜XXX刚刚罚进一记精彩的点球</li>
+            </ul>
+        </div>
+        <h2>罚进点球即有机会赢取以下奖励：<a href="###" class="more">我的奖品 >></a></h2>
+        <div class="awardList1">
+        	<ul>
+            	<li>
+                	<div class="pic"><img src="images/dianqiu/prize1.jpg"></div>
+                    <p>IPHONE 5S</p>
+                </li>
+                <li>
+                	<div class="pic"><img src="images/dianqiu/prize2.jpg"></div>
+                    <p>世界杯球衣</p>
+                </li>
+                <li>
+                	<div class="pic"><img src="images/dianqiu/prize3.jpg"></div>
+                    <p>世界杯官方用球</p>
+                </li>
+                <li>
+                	<div class="pic"><img src="images/dianqiu/prize4.jpg"></div>
+                    <p>50元电话费</p>
+                </li>
+                <li>
+                	<div class="pic"><img src="images/dianqiu/prize5.jpg"></div>
+                    <p>充200送20元优惠卡</p>
+                </li>
+                <li>
+                	<div class="pic"><img src="images/dianqiu/prize6.jpg"></div>
+                    <p>10元彩金卡</p>
+                </li>
+                <li>
+                	<div class="pic"><img src="images/dianqiu/prize7.jpg"></div>
+                    <p>5元抵扣券</p>
+                </li>
+                <li>
+                	<div class="pic"><img src="images/dianqiu/prize8.jpg"></div>
+                    <p>2元抵扣券</p>
+                </li>
+                <li>
+                	<div class="pic"><img src="images/dianqiu/prize9.jpg"></div>
+                    <p>1元彩金卡</p>
+                </li>
+                <li>
+                	<div class="pic"><img src="images/dianqiu/prize10.jpg"></div>
+                    <p>财富值</p>
+                </li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <h2 class="title2 mt10">射手榜：<a href="###" class="more">更多排名 >></a></h2>
+        <dl class="rankingList">
+            <dt><span>排名</span><span>用户名</span><span>进球数</span></dt>
+            <dd>
+                <span><b>1</b></span><span>ankailuo***</span><span class="red">120</span>
+            </dd>
+            <dd>
+                <span><b class="numbg2">2</b></span><span>ankailuo***</span><span class="red">120</span>
+            </dd>
+            <dd>
+                <span><b class="numbg3">3</b></span><span>ankailuo***</span><span class="red">120</span>
+            </dd>
+            <dd>
+                <span>4</span><span>ankailuo***</span><span class="red">120</span>
+            </dd>
+            <dd>
+                <span>5</span><span>ankailuo***</span><span class="red">120</span>
+            </dd>
+        </dl>
+        <!--更多排名弹出层 开始-->
+        <div class="layerBoxCon penasLayer j_rank" style="display:none">
+            <div class="layerBox">
+            	<div class="pop">
+            	<div class="title"><a href="###" class="close">×</a>中奖啦</div>
+                    <dl class="rankingList">
+                        <dt><span>排名</span><span>用户名</span><span>进球数</span></dt>
+                        <dd>
+                            <span><b>1</b></span><span>ankailuo***</span><span class="red">120</span>
+                        </dd>
+                        <dd>
+                            <span><b class="numbg2">2</b></span><span>ankailuo***</span><span class="red">120</span>
+                        </dd>
+                        <dd>
+                            <span><b class="numbg3">3</b></span><span>ankailuo***</span><span class="red">120</span>
+                        </dd>
+                        <dd>
+                            <span>4</span><span>ankailuo***</span><span class="red">120</span>
+                        </dd>
+                        <dd>
+                            <span>5</span><span>ankailuo***</span><span class="red">120</span>
+                        </dd>
+                        <dd>
+                            <span>6</span><span>ankailuo***</span><span class="red">120</span>
+                        </dd>
+                        <dd>
+                            <span>7</span><span>ankailuo***</span><span class="red">120</span>
+                        </dd>
+                        <dd>
+                            <span>8</span><span>ankailuo***</span><span class="red">120</span>
+                        </dd>
+                        <dd>
+                            <span>9</span><span>ankailuo***</span><span class="red">120</span>
+                        </dd>
+                        <dd>
+                            <span>10</span><span>ankailuo***</span><span class="red">120</span>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <!--更多排名弹出层 结束-->
+        
+        <h2 class="title3 mt10">如何获得点球机会：</h2>
+        <div class="penalhelp">
+        	<p class="txt">
+            	（1）会员代购任意金额竞技彩票即可获得1次点球机会,
+     会员等级越高,每日可获点球机会越多;
+     具体如下：
+            </p>
+            <ul>
+            	<li class="w1">会员等级</li><li>V0-V2</li><li>V3-V4</li><li>V5-V6</li>
+                <li class="w1">每日可获幸运星</li><li><span class="red">5</span> 颗</li><li><span class="red">10</span> 颗</li><li><span class="red">15</span> 颗</li>
+            </ul>
+            <p class="txt">（2）会员登录客户端:1次/天；</p>
+        </div>
+        <div class="penaRule">
+        	<h3>活动规则</h3>
+            <p>1.本次活动仅限爱彩会员参加，如果您是非会员，请先认证会员；</p>
+            <p>2.会员每日完成指定任务即可获得点球机会，点球机
+               会可累积，在活动期间内均有效；</p>
+            <p>3.若成功罚进点球则可随机赢取奖励一份，若将球打
+               飞或被门将扑住则代表未进球，将无法赢球奖品；</p>
+            <p>4.活动所得彩金卡或充值优惠卡有效期为１个月，有
+               效期过后自动失效，成功赢取的彩金卡或充值优惠
+               卡可进入礼品中心查看和使用；</p>
+            <p>5.若用户成功赢取实物奖品，工作人员会及时联系您，
+               并在5个工作日内寄出；</p>
+            <p>6.本活动最终解释权归新浪爱彩网所有，如有疑问，
+               请致电:400-6688-848.</p>
+        </div>
+    </div>
+</div>
+
+
+<!--弹框-->
+<div class="layerBoxCon penasLayer" style="display:none">
+	<div class="layerBox">
+        <!--中奖啦-->
+        <div class="pop" >
+        	<div class="title"><a href="###" class="close">×</a>中奖啦</div>
+            <p class="txttips">恭喜您获得iPhone5s一台！</p>
+            <p class="txt">温馨提示：工作人员会及时联系您，并在5个工作日
+内寄出，详情也可主动咨询客服电话：400-6688-848</p>
+            <a href="###" class="loginBtn">确定</a>
+        </div>
+        <!--获得充值卡-->
+        <div class="pop" style="display:none">
+        	<div class="title"><a href="###" class="close">×</a>中奖啦</div>
+            <p class="txttips">恭喜您获得50元手机充值卡！</p>
+            <p><input type="text" class="inp" placeholder="请输入您要充值的手机号"></p>
+            <p class="txt">
+            温馨提示：请准确无误的输入您要充值的手机号，并确认提交，工作人员会在2个工作日内充值到账，注意查收！如有疑问，请咨询客服：400-6688-848<p>
+            <a href="###" class="loginBtn">确认提交</a>
+        </div>
+        <!--获得充200送20优惠卡-->
+        <div class="pop" style="display:none">
+        	<div class="title"><a href="###" class="close">×</a>中奖啦</div>
+            <p class="txttips">恭喜您获得充200送20优惠卡</p>
+            <p class="txt center">温馨提示：充值时可以使用优惠卡，祝君好运！<p>
+            <a href="###" class="loginBtn">确定</a>
+        </div>
+        <!--谢谢参与-->
+        <div class="pop" style="display:none">
+        	<div class="title"><a href="###" class="close">×</a>谢谢参与</div>
+            <p class="txt mt10">很遗憾，你未获得具体奖励送您10点财富值祝君下次点球好运！<p>
+            <a href="###" class="loginBtn">确定</a>
+        </div>
+    </div>
+</div>
+
+<!--返回顶部-->
+<div class="upCon">
+	<a href="###" class="home"></a>
+    <a href="###" class="top"></a>
+</div>
