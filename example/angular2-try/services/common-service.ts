@@ -1,11 +1,15 @@
+import {Injectable} from 'angular2/di';
 import {Router} from 'angular2/router';
 import {Perfmjs} from 'perfmjs/core';
 
+@Injectable()
 export class CommonService {
     rootRouter: Router;
+    names: Array<String>;
 
     constructor() {
         this.rootRouter = Perfmjs.globalRef.newInstance().option('rootRouter');
+        this.names = ["Aarav2", "Martin1", "Shannon1", "Ariana1", "Kai33"];
     }
 
     getRootRouter() {

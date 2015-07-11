@@ -1,9 +1,11 @@
-import {Component, View, Directive, bootstrap} from 'angular2/angular2';
+import {Component, View} from 'angular2/angular2';
 import {Inject} from 'angular2/di';
 import {RouteConfig, Router, RouterOutlet, RouterLink, routerInjectables} from 'angular2/router';
 
 import {Login} from './login';
 import {Start} from './start';
+import {Zhuanpan} from './zhuanpan';
+import {Dianqiu} from './dianqiu';
 import {CommonService} from '../services/common-service';
 
 
@@ -14,26 +16,29 @@ import {CommonService} from '../services/common-service';
 @View({
     template: `
     <router-outlet>
-        <a router-link="start">start</a>
-        <a router-link="login">login</a>
+        <a [router-link]="['/start']">首页</a>
+        <a [router-link]="['/login']">登录</a>
+        <a [router-link]="['/zhuanpan']">转盘</a>
+        <a [router-link]="['/dianqiu']">点球</a>
     </router-outlet>`,
     directives: [RouterOutlet, RouterLink]
 })
 @RouteConfig([
-    {path: '/11',    as: 'foo',   component: Login},
+    //{path: '/',    as: 'start',   component: Start},
     {path: '/login', as: 'login', component: Login},
-    {path: '/start', as: 'start', component: Start}
-    //{path: '/xx', as: 'xx', redirectTo: 'welcome'}
+    {path: '/start', as: 'start', component: Start},
+    {path: '/zhuanpan', as: 'zhuanpan', component: Zhuanpan},
+    {path: '/dianqiu', as: 'dianqiu', component: Dianqiu}
 ])
 export class App {
     router: Router;
     commonService: CommonService;
 
-    constructor(@Inject(Router) router: Router, @Inject(CommonService) commonService: CommonService) {
+    constructor(@Inject(Router) router: Router, commonService: CommonService) {
         this.router = router;
         this.commonService = commonService;
         this.commonService.setRootRouter(this.router);
-        this.router.navigate('/login');
+        this.router.navigate('/start');
     }
 
 }

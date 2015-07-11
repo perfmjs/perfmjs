@@ -17,6 +17,7 @@ var di_1 = require('angular2/di');
 var router_1 = require('angular2/router');
 var forms_1 = require('angular2/forms');
 var common_service_1 = require('../services/common-service');
+var greeter_1 = require('../directives/greeter');
 var Login = (function () {
     function Login(router, commonService) {
         this.loginControl = new LoginControl();
@@ -26,11 +27,10 @@ var Login = (function () {
     Login.prototype.login = function (loginControl) {
         if (loginControl.passwd.value === '123') {
             console.log("登录成功！");
-            this.commonService.getRootRouter().navigate('/start');
+            this.router.navigate('/zhuanpan');
         }
         else {
             console.log("请输入正确的密码！");
-            this.router.navigate('/start');
         }
     };
     Login.prototype.reset = function () {
@@ -39,14 +39,14 @@ var Login = (function () {
     Login = __decorate([
         angular2_1.Component({
             selector: 'login',
-            appInjector: [router_1.routerInjectables]
+            appInjector: [router_1.routerInjectables],
+            viewInjector: [greeter_1.Greeter]
         }),
         angular2_1.View({
             templateUrl: 'templates/login.html',
-            directives: [angular2_1.NgFor, angular2_1.NgIf, router_1.RouterOutlet, router_1.RouterLink, forms_1.formDirectives]
+            directives: [angular2_1.coreDirectives, router_1.RouterOutlet, router_1.RouterLink, forms_1.formDirectives, greeter_1.NeedsGreeter, greeter_1.Tooltip]
         }),
-        __param(0, di_1.Inject(router_1.Router)),
-        __param(1, di_1.Inject(common_service_1.CommonService)), 
+        __param(0, di_1.Inject(router_1.Router)), 
         __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object, common_service_1.CommonService])
     ], Login);
     return Login;
