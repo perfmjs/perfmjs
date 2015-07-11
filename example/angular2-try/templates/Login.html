@@ -1,4 +1,8 @@
-<router-outlet>＝＝＝login＝＝＝</router-outlet>
+<link rel="stylesheet" href="css/supersized.css">
+<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<!--<router-outlet>＝＝＝login＝＝＝</router-outlet>-->
+<needs-greeter></needs-greeter>
 <div class="page-container">
     <div class="main_box">
         <div class="login_box">
@@ -9,7 +13,7 @@
             <div class="login_form">
                 <form>
                     <div class="form-group">
-                        <label class="t">邮　箱：</label>
+                        <label class="t" tooltip="12456">邮　箱：</label>
                         <input [ng-form-control]='loginControl.email' type="text" class="form-control x319 in" autocomplete="off">
                     </div>
                     <div class="form-group">
