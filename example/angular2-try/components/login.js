@@ -43,7 +43,7 @@ var Login = (function () {
             viewInjector: [greeter_1.Greeter]
         }),
         angular2_1.View({
-            templateUrl: 'templates/Login.html',
+            templateUrl: 'templates/login.html',
             directives: [angular2_1.coreDirectives, router_1.RouterOutlet, router_1.RouterLink, forms_1.formDirectives, greeter_1.NeedsGreeter, greeter_1.Tooltip]
         }),
         __param(0, di_1.Inject(router_1.Router)), 
