@@ -11,10 +11,44 @@ if (typeof __metadata !== "function") __metadata = function (k, v) {
 };
 var angular2_1 = require('angular2/angular2');
 var di_1 = require('angular2/di');
-//@Directive({selector: 'red'})
-//export class RedDec {
-//    constructor(el: ElementRef) { el.domElement.style.color = 'red'; }
-//}
+var Highlight = (function () {
+    function Highlight(element) {
+        this.element = element;
+    }
+    Highlight.prototype.onMouseEnter = function () {
+        this.outline('#f00 solid 1px');
+    };
+    Highlight.prototype.onMouseLeave = function () {
+        this.outline();
+    };
+    Highlight.prototype.outline = function (outline) {
+        if (outline === void 0) { outline = ""; }
+        this.element.domElement.style.outline = outline;
+    };
+    Highlight = __decorate([
+        angular2_1.Directive({
+            selector: 'hightlight',
+            hostListeners: {
+                'mouseenter': 'onMouseEnter()',
+                'mouseleave': 'onMouseLeave()'
+            }
+        }), 
+        __metadata('design:paramtypes', [(typeof ElementRef !== 'undefined' && ElementRef) || Object])
+    ], Highlight);
+    return Highlight;
+})();
+exports.Highlight = Highlight;
+var RedDec = (function () {
+    function RedDec(el) {
+        el.domElement.style.color = 'red';
+    }
+    RedDec = __decorate([
+        angular2_1.Directive({ selector: 'red' }), 
+        __metadata('design:paramtypes', [(typeof ElementRef !== 'undefined' && ElementRef) || Object])
+    ], RedDec);
+    return RedDec;
+})();
+exports.RedDec = RedDec;
 var Tooltip = (function () {
     function Tooltip() {
     }

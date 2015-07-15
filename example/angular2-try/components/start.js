@@ -24,7 +24,7 @@ var Start = (function () {
         this.router = router;
     }
     Start.prototype.myCtrlMethod = function (inputStr) {
-        alert('call myControllerMethod:' + inputStr);
+        console.log('call myControllerMethod:' + inputStr);
         this.router.navigate('/start');
     };
     Start = __decorate([

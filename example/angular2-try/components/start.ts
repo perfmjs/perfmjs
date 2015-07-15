@@ -24,7 +24,7 @@ export class Start {
         this.router = router;
     }
     myCtrlMethod(inputStr: String) {
-        alert('call myControllerMethod:' + inputStr);
+        console.log('call myControllerMethod:' + inputStr);
         this.router.navigate('/start');
     }
 }

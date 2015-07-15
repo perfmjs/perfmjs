@@ -5,7 +5,7 @@ import {FormBuilder, Validators, formDirectives, ControlGroup, Control} from 'an
 
 import {Start} from './start';
 import {CommonService} from '../services/common-service';
-import {NeedsGreeter, Greeter, Tooltip} from '../directives/greeter';
+import {NeedsGreeter, Greeter, Tooltip, RedDec} from '../directives/greeter';
 
 @Component({
     selector: 'login',

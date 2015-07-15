@@ -1,10 +1,38 @@
 import {Directive, ElementRef} from 'angular2/angular2';
 import {Injectable} from 'angular2/di';
 
-//@Directive({selector: 'red'})
-//export class RedDec {
-//    constructor(el: ElementRef) { el.domElement.style.color = 'red'; }
-//}
+
+@Directive({
+    selector: 'hightlight',
+    hostListeners: {
+        'mouseenter': 'onMouseEnter()',
+        'mouseleave': 'onMouseLeave()'
+    }
+})
+export class Highlight {
+
+    constructor(private element:ElementRef) {
+    }
+
+    onMouseEnter() {
+        this.outline('#f00 solid 1px');
+    }
+
+    onMouseLeave() {
+        this.outline();
+    }
+
+    private outline(outline:string = "") {
+        this.element.domElement.style.outline = outline;
+    }
+}
+
+@Directive({selector: 'red'})
+export class RedDec {
+    constructor(el: ElementRef) {
+        el.domElement.style.color = 'red';
+    }
+}
 
 @Directive({
     selector: '[tooltip]',

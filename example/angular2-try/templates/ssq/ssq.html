@@ -1,0 +1,87 @@
+<style>
+	@import "../../css/ssq/media10px.css";
+	@import "../../css/ssq/rem-base.css";
+	@import "../../css/ssq/toutiao-index.css";
+</style>
+<ul class="k-tabs-hd aequilatus">
+	<li class="active">标准投注</li>
+	<li>走势工具</li>
+</ul>
+<div class="k-tabs" style="bottom:5rem;" id="Jq_swipe">
+	<div class="k-tabs-con">
+		<div class="lot-history">
+			<p class="lot-history-tit">当前奖池：<span class="red">649,899,998</span>元<span class="ml25">投30倍可掏空</span></p>
+			<ul class="lot-history-list">
+				<li class="justify">
+					<p>
+						<span class="tit">第2015017期</span>
+						<i class="red">02</i>
+						<i class="red">12</i>
+						<i class="red">16</i>
+						<i class="red">19</i>
+						<i class="red">27</i>
+						<i class="red">30</i>
+						<i class="blue">11</i>
+					</p>
+					<span>幸运蓝球：<i class="blue">11</i></span>
+				</li>
+				<li class="justify">
+					<p>
+						<span class="tit">第2015017期</span>
+						<i class="red">02</i>
+						<i class="red">12</i>
+						<i class="red">16</i>
+						<i class="red">19</i>
+						<i class="red">27</i>
+						<i class="red">30</i>
+						<i class="blue">11</i>
+					</p>
+					<span>幸运蓝球：<i class="blue">11</i></span>
+				</li>
+				<li class="justify">
+					<p>
+						<span class="tit">第2015017期</span>
+						<i class="red">02</i>
+						<i class="red">12</i>
+						<i class="red">16</i>
+						<i class="red">19</i>
+						<i class="red">27</i>
+						<i class="red">30</i>
+						<i class="blue">11</i>
+					</p>
+					<span>幸运蓝球：<i class="blue">11</i></span>
+				</li>
+			</ul>
+		</div>
+		<div class="lot-date justify">
+			<p class="i-report">2015001期 <span class="red-better">周二21:30开奖</span></p>
+			<span id="jq_spread_link" class="link">点击展开往期开奖<i class="arrow-top on">↑</i></span>
+			<!-- arrow-top 箭头向下 -->
+		</div>
+		<div class="bet-box">
+			<ul class="ball-con red-balls clearfix" id="normal_redball_area">
+				<li *ng-for="#code of redCodes">
+					<span class="flex-center" (click)="xuanhao($event,'red')">{{code}}</span><i class="gray">{{code==='01'?2:code==='02'?5:code==='03'?12:code==='04'?4:code==='05'?1:9}}</i>
+				</li>
+			</ul>
+			<ul class="ball-con blue-balls clearfix" id="normal_blueball_area">
+				<li *ng-for="#code of blueCodes">
+					<span class="flex-center" (click)="xuanhao($event,'blue')">{{code}}</span><i class="gray">9</i>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="pick-area">
+	<div class="pick-toolbar">
+		<div class="tc-btn-group" id="Jq_stateBarA">
+			<a id="Jq_random" href="javascript:void(0);" class="tc-btn tc-btn-random i-shake">随机一注</a>
+			<a href="javascript:void(0);" class="tc-btn tc-btn-large tc-btn-primary">至少选择6个红球+1个蓝球</a>
+		</div>
+		<div class="tc-btn-group" id="Jq_stateBarB" style="display:none;">
+			<a id="Jq_clearBall" href="javascript:void(0);" class="tc-btn tc-btn-info">清 空</a>
+			<a href="javascript:void(0);" class="tc-btn tc-btn-large tc-btn-primary">共<span id="Jq_zhushu">0</span>注，下一步</a>
+		</div>
+	</div>
+</div>

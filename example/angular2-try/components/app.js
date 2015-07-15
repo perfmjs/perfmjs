@@ -15,17 +15,18 @@ if (typeof __param !== "function") __param = function (paramIndex, decorator) {
 var angular2_1 = require('angular2/angular2');
 var di_1 = require('angular2/di');
 var router_1 = require('angular2/router');
+var common_service_1 = require('../services/common-service');
 var login_1 = require('./login');
 var start_1 = require('./start');
 var zhuanpan_1 = require('./zhuanpan');
 var dianqiu_1 = require('./dianqiu');
-var common_service_1 = require('../services/common-service');
+var ssq_1 = require('./ssq');
 var App = (function () {
     function App(router, commonService) {
         this.router = router;
         this.commonService = commonService;
         this.commonService.setRootRouter(this.router);
-        this.router.navigate('/start');
+        this.router.navigate('/ssq');
     }
     App = __decorate([
         angular2_1.Component({
@@ -33,7 +34,7 @@ var App = (function () {
             appInjector: [router_1.routerInjectables, common_service_1.CommonService]
         }),
         angular2_1.View({
-            template: "\n    <router-outlet>\n        <a [router-link]=\"['/start']\">\u9996\u9875</a>\n        <a [router-link]=\"['/login']\">\u767B\u5F55</a>\n        <a [router-link]=\"['/zhuanpan']\">\u8F6C\u76D8</a>\n        <a [router-link]=\"['/dianqiu']\">\u70B9\u7403</a>\n    </router-outlet>",
+            template: "\n    <a [router-link]=\"['/start']\">\u9996\u9875</a>\n    <a [router-link]=\"['/login']\">\u767B\u5F55</a>\n    <a [router-link]=\"['/zhuanpan']\">\u8F6C\u76D8</a>\n    <a [router-link]=\"['/dianqiu']\">\u70B9\u7403</a>\n    <a [router-link]=\"['/ssq']\">\u53CC\u8272\u7403</a>\n    <router-outlet>\n    </router-outlet>",
             directives: [router_1.RouterOutlet, router_1.RouterLink]
         }),
         router_1.RouteConfig([
@@ -41,7 +42,8 @@ var App = (function () {
             { path: '/login', as: 'login', component: login_1.Login },
             { path: '/start', as: 'start', component: start_1.Start },
             { path: '/zhuanpan', as: 'zhuanpan', component: zhuanpan_1.Zhuanpan },
-            { path: '/dianqiu', as: 'dianqiu', component: dianqiu_1.Dianqiu }
+            { path: '/dianqiu', as: 'dianqiu', component: dianqiu_1.Dianqiu },
+            { path: '/ssq', as: 'ssq', component: ssq_1.Ssq }
         ]),
         __param(0, di_1.Inject(router_1.Router)), 
         __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object, common_service_1.CommonService])

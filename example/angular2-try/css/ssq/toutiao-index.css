@@ -396,7 +396,7 @@ body, a, img, label, button, input, textarea, select {
 }
 .i-report {
     padding-left: 1.5rem;
-    background: url(../images/icon_report.png) no-repeat left center;
+    background: url(../../images/ssq/icon_report.png) no-repeat left center;
     background-size: 1rem;
 }
 
@@ -443,7 +443,7 @@ body, a, img, label, button, input, textarea, select {
     box-flex: 0!important;
 }
 .i-shake {
-    background: url(../images/icon_shake.png) no-repeat center .4rem;
+    background: url(../../images/ssq/icon_shake.png) no-repeat center .4rem;
     background-size: 1.45rem;
 }
 .tc-btn-primary {
@@ -510,7 +510,7 @@ body, a, img, label, button, input, textarea, select {
     height:100%;
     overflow: hidden;
     margin: 0 auto;
-    background: url(../images/bets_hd.png) no-repeat center top;    
+    background: url(../../images/ssq/bets_hd.png) no-repeat center top;    
     background-size: 30.7rem;
 }
 .dragWrap{
@@ -534,7 +534,7 @@ body, a, img, label, button, input, textarea, select {
     left: 0;
     width: 100%;
     height: .5rem;
-    background: url(../images/bets_ft.png) no-repeat center bottom;
+    background: url(../../images/ssq/bets_ft.png) no-repeat center bottom;
     background-size: 100% auto;
 }
 
@@ -636,6 +636,6 @@ body, a, img, label, button, input, textarea, select {
     margin: 1rem auto;
     width: 6.45rem;
     height: 1.15rem;
-    background: url(../images/refresh.png) no-repeat center center;
+    background: url(../../images/ssq/refresh.png) no-repeat center center;
     background-size: cover;
 }
