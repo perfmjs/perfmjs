@@ -1,0 +1,641 @@
+@charset "utf-8";
+/*
+ *  基础样式 
+ */
+body, a, img, label, button, input, textarea, select {
+    outline: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+/*==== k-公用 ====*/
+.red { color: #cb4e16;}
+.red-better { color: #e04342;}
+.blue { color: #005ca7;}
+.gray { color: #999;}
+.c666 { color: #666;}
+.link, .link:hover{ color: #0079ff;}
+.ml25{ margin-left: 2.5rem;}
+.mt10{ margin-top: 1rem;}
+.tac { text-align: center;}
+
+.justify, .flex-center, .aequilatus {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+.justify {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+.flex-center {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.scrollable { display: -webkit-box; display: box;}
+.aequilatus li { 
+    -webkit-box-flex: 1; 
+    -ms-flex: 1; 
+    -webkit-flex: 1; 
+    flex: 1;
+}
+/* k-tabs 选项卡样式 */
+.k-tabs-hd {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    height: 4.4rem;
+    line-height: 4.4rem;
+    text-align: center;
+    font-size: 1.6rem;
+    color: #4a4a4a;
+    background-color: #fff;
+    box-shadow: 0 -1px 0 #ddd inset;
+    overflow-x:auto;
+    box-sizing: border-box;
+}
+.k-tabs-hd li { 
+    position: relative; 
+    width: 10rem;
+    box-shadow: 0 1px 0 #ff2d55;
+}
+.k-tabs-hd li:after { 
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    height: 1.4rem;
+    border-right: 1px solid #ddd;
+    -webkit-transform: translate(0,-50%);
+}
+.k-tabs-hd li:last-child:after { 
+    border-right: 0;
+}
+.k-tabs-hd li a { 
+    display: block; 
+    color: #666;
+}
+.k-tabs-hd .active {
+    color: #e63629;
+	box-shadow: 0 -.2rem 0 #ff2d55 inset;
+}
+.k-tabs-hd .active a { 
+    color: #e63629;
+}
+.k-tabs {
+    position: absolute; 
+    top: 4.4rem; 
+    bottom: 5rem;
+    left: 0; 
+    width: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background-color: #fafafa;
+}
+.k-tabs-con {
+}
+/* lot-history 历史开奖记录  */
+.lot-history {
+    height:0rem;
+    font-size: 1.2rem;
+    background-color: #efefef;
+    border-bottom: 1px solid #ddd;
+    color: #666;
+    overflow: hidden;
+    -webkit-transition:height 0.5s;
+}
+
+.lot-history-tit {
+    padding:.5rem 1rem;
+}
+.lot-history-list {
+    line-height: 2;
+}
+.lot-history-list li {
+    padding: 0 1rem;
+}
+.lot-history-list li:nth-child(even) {
+    background-color: #e6e6e6;
+}
+.lot-history-list .tit {
+    position: relative;
+    display: inline-block;
+    padding-right: 1rem;
+    margin-right: .5rem;
+    border-right: 1px solid #d4d4d4;
+}
+.lot-history-list .tit:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -3px;
+    width: 6px;
+    height: 6px;
+    background-color: #d4d4d4;
+    border-radius: 50%;
+    -webkit-transform: translate(0, -50%);
+}
+.lot-history-list i {
+    font-style: normal;
+}
+.lot-history.on{
+    height:10rem;
+}
+
+.arrow-top{
+    display: inline-block;
+    margin-left: .2rem;
+    vertical-align: middle;
+    font-size: 1.2rem;
+    font-style: normal;
+}
+.on.arrow-top {
+    display: inline-block;
+    margin-left: .2rem;
+    vertical-align: middle;
+    font-size: 1.2rem;
+    font-style: normal;
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+/*  lot-date 开奖日期  */
+.lot-date { 
+    padding: 0 1rem;
+    line-height: 3rem;
+    color: #808080;
+}
+
+/*  bet-area 号码投注区域  */
+.bet-box { padding-left: 1rem;}
+
+.ball-con li {
+    float: left;
+    width: 3.5rem;
+    margin-right: .9rem;
+    margin-bottom: .8rem;
+    text-align: center;
+}
+.ball-con li span {
+    display: block;
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 1.7rem;
+    line-height: 3.5rem;
+    border-radius: 50%;
+    background-color: #fff;
+    text-align: center;
+    color: #cb4e16;
+    box-shadow: 0 0 0 1px #e8e8e8 inset;
+    background-clip: padding-box;
+    -webkit-background-clip: padding-box;
+}
+.ball-con li i{ 
+    font-style: normal; 
+    display: inline-block; 
+    vertical-align: top; 
+    display: none;
+}
+.blue-balls li span { 
+    color: #005ca7;
+}
+.ball-con li .active{
+    box-shadow: 0 0 0 1px #bf3c29 inset;
+    background-color: #ec4d35;
+    color: #fff;
+    position: relative;
+    z-index: 10;
+    -webkit-animation:ballScale 0.2s 1;
+            animation:ballScale 0.2s 1;
+}
+@-webkit-keyframes ballScale
+{
+    0%   {transform: scale(1);}
+    50%  {transform: scale(1.2);}
+    100%  {transform: scale(1);}
+}
+@keyframes ballScale
+{
+    0%   {transform: scale(1);}
+    50%  {transform: scale(1.2);}
+    100%  {transform: scale(1);}
+}
+.blue-balls li .active{
+    box-shadow: 0 0 0 1px #185f9f inset;
+    background-color: #1a76cc;
+    color: #fff;
+}
+
+/*  pick-area 底部区域  */
+.pick-area {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 96;
+    width: 100%;
+    background-color: #fff;
+}
+.pick-toolbar {
+    position: relative;
+    padding: .5rem 1rem;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+
+/* options 底部确定区域 */
+.pick-bets-toolbar{
+    background: #fff;
+    text-align: center;
+    font-size: 1.2rem;
+    box-shadow: 1px 0 2px #ccc;
+}
+.pick-bets-con {
+    padding: .5rem 1rem;
+}
+.layout-col {
+    display: block;
+    width: 50%;
+    padding: .5rem 1rem;
+    border: 1px solid #ddd;
+    border-right: 0;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.layout-col:first-child {
+    border-left: none;
+}
+.bets-amounts {
+    line-height: 3.6rem;
+    text-align: center;
+}
+
+/* 加减号 */
+.pick-number-label {
+    position: relative;
+    display: block;
+    height: 3.4rem;
+    margin: 0 2rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    color: #808080;
+}
+.pick-number-label .txt-l, .pick-number-label .txt-r {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    line-height: 3.4rem;
+}
+.pick-number-label .txt-l {
+    left: -2rem;
+}
+.pick-number-label .txt-r {
+    right: -2rem;
+}
+.pick-number-label input {
+    display: block;
+    width: 100%;
+    height: 3.4rem;
+    padding: .6rem 3.4rem;
+    background: #fff;
+    border: 0;
+    text-align: center;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.pick-number-label .add, .pick-number-label .reduce {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: block;
+    width: 3.2rem;
+    background: #fff;
+    text-align: center;
+    overflow: hidden;
+}
+.pick-number-label .add i, .pick-number-label .reduce i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: #666;
+    overflow: hidden;
+}
+.pick-number-label .reduce {
+    left: 0;
+    border-right: 1px solid #ddd;
+    border-radius: .4rem 0 0 .4rem;
+}
+
+.pick-number-label .add {
+    right: 0;
+    border-left: 1px solid #ddd;
+    border-radius: 0 .4rem .4rem 0;
+}
+.pick-number-label .h {
+    width: 1rem;
+    height: .2rem;
+    margin-left: -.5rem;
+    margin-top: -.1rem;
+}
+.pick-number-label .add .v {
+    width: .2rem;
+    height: 1rem;
+    margin-left: -.1rem;
+    margin-top: -.5rem;
+}
+
+/* 同意协议 */
+.pick-agree-rule {
+    display: block;
+    padding-top: 5px;
+}
+.pick-agree-rule a {
+    color: #666;
+}
+.pick-agree-rule a:visited {
+    color: #666669;
+}
+.tc-checkbox {
+    display: inline-block;
+    vertical-align: middle;
+    width: 1.2rem;
+    height: 1.2rem;
+}
+
+.i-quest {
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;;
+    margin-right: .2rem;
+    border-radius: 50%;
+    vertical-align: 0;
+    background: #0079ff;
+    color: #fff;
+    text-align: center;
+    font-style: normal;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+}
+.h-line {
+    border-top: 1px solid #ddd;
+}
+.i-report {
+    padding-left: 1.5rem;
+    background: url(../images/icon_report.png) no-repeat left center;
+    background-size: 1rem;
+}
+
+
+
+/*==== btn 按钮  ====*/
+
+.tc-btn-group {
+    margin: 0 -.5rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: box;
+}
+.tc-btn-group .tc-btn {
+    display: block;
+    margin: 0 .5rem;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    box-flex: 1;
+}
+.tc-btn {
+    display: inline-block;
+    padding: .8rem 0;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: .3rem;
+    font-size: 1.4rem;
+    line-height: 2;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.tc-btn-random {
+    position: relative;
+    width: 25%;
+    height: 4rem;
+    padding: 1.6rem 0 .4rem 0;
+    border: 1px solid #ddd;
+    font-size: 1.2rem;
+    color: #e04241;
+    background: #fff;
+    -webkit-box-flex: 0!important;
+    -ms-flex: none!important;
+    box-flex: 0!important;
+}
+.i-shake {
+    background: url(../images/icon_shake.png) no-repeat center .4rem;
+    background-size: 1.45rem;
+}
+.tc-btn-primary {
+    border-color: #bd2625;
+    color: #fff;
+    background: #e04241;
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#e04241),color-stop(100%,#e04241));
+    background: -webkit-linear-gradient(top,#e04241 0,#e04241 100%);
+    background: linear-gradient(to bottom,#e04241 0,#e04241 100%);
+}
+.tc-btn-info {
+    position: relative;
+    width: 25%;
+    height: 4rem;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    background: #fff;
+    color: #666;
+    border: 1px solid #ddd;
+    -webkit-box-flex: 0!important;
+    -ms-flex: none!important;
+    box-flex: 0!important;
+}
+.tc-btn-large {
+    height: 4rem;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+}
+
+/*== icon plus 加减号 ==*/
+.tc-icon-plus {
+    position: relative;
+    display: inline-block;
+    width: 1.4rem;
+    height: 1.4rem;
+    margin-right: .7rem;
+    vertical-align: -1px;
+}
+.tc-icon-plus:before, .tc-icon-plus:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background: #888;
+}
+.tc-icon-plus:before {
+    width: 1.4rem;
+    height: .2rem;
+    margin-top: -1px;
+    margin-left: -.7rem;
+}
+.tc-icon-plus:after {
+    width: .2rem;
+    height: 1.4rem;
+    margin-top: -.7rem;
+    margin-left: -1px;
+}
+
+/*==== bets-box 投注号码列表 ====*/
+.bets-box {
+    position: relative;
+    font-size: 1.6rem;
+    width: 30.7rem;
+    height:100%;
+    overflow: hidden;
+    margin: 0 auto;
+    background: url(../images/bets_hd.png) no-repeat center top;    
+    background-size: 30.7rem;
+}
+.dragWrap{
+    position: relative;
+    width: 28.35rem;
+    margin: 0 auto;   
+}
+
+.dragCore{
+    position: relative;
+    background: #fff; 
+    margin-top:0.7rem; 
+    border-top:1px solid #d5d5d5;
+    box-shadow:inset 0 -2px 2px #d5d5d5;
+    overflow: hidden;
+}
+.dragCore:after {
+    content: '';
+    position: absolute;
+    bottom: 0rem;
+    left: 0;
+    width: 100%;
+    height: .5rem;
+    background: url(../images/bets_ft.png) no-repeat center bottom;
+    background-size: 100% auto;
+}
+
+.bets-list {
+    position: relative;
+    width: 28.35rem;
+    min-height: 5rem;
+    padding: 0 .6rem 1rem;
+    margin: 0 auto;
+    background: #fff;
+    border:1px solid #f1f1f1;
+    border-bottom: 0;
+    box-sizing: border-box;
+    border-top: 0;
+}
+.bets-list li {
+    position: relative;
+    border-bottom: 1px dotted #d6d6d6;
+	opacity: 1;
+    -webkit-transition:opacity 0.3s;
+}
+.bets-list li:last-child {
+    border-bottom: 0;
+}
+
+.bets-list li.transLi{
+    opacity: 0;
+    
+}
+.bets-con {
+	word-spacing: .4rem;
+	padding: .4rem 3rem .4rem .5rem;
+	line-height: 3rem;
+	font-size: 1.8rem;
+}
+.bets-con .red{
+    padding-right: 1rem;
+}
+.bets-txt { 
+    font-size: 1.4rem;
+}
+.bets-delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 3rem;
+    text-align: center;
+}
+.bets-delete span {
+    display: inline-block;
+    width: 2.5rem;
+    height: 2.5rem;
+    line-height: 1;
+    vertical-align: middle;
+    font-size: 2.5rem;
+    color: #c5c5c5;
+}
+
+/*==== k-tabs-btn 手动选号，机选5注  ====*/
+.k-tabs-btn {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    height: 3.9rem;
+    line-height: 3.9rem;
+    text-align: center;
+    font-size: 1.4rem;
+    color: #4a4a4a;
+    background-color: #fff;
+    box-shadow: 0 -1px 0 #ddd inset;
+    overflow-x:auto;
+    box-sizing: border-box;
+}
+.k-tabs-btn li { 
+    position: relative; 
+    width: 10rem;
+    box-shadow: 0 1px 0 #ff2d55;
+}
+.k-tabs-btn li:after { 
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 0;
+    height: 1.4rem;
+    border-right: 1px solid #ddd;
+    -webkit-transform: translate(0,-50%);
+}
+.k-tabs-btn li:last-child:after { 
+    border-right: 0;
+}
+.k-tabs-btn li a { 
+    display: block; 
+    color: #666;
+}
+
+.icon-refresh{
+    margin: 1rem auto;
+    width: 6.45rem;
+    height: 1.15rem;
+    background: url(../images/refresh.png) no-repeat center center;
+    background-size: cover;
+}
