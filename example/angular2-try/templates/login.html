@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="css/login/supersized.css">
+<link rel="stylesheet" href="css/login/login.css">
+<link rel="stylesheet" href="css/login/bootstrap.min.css">
+<!--<router-outlet>＝＝＝login＝＝＝</router-outlet>-->
+<needs-greeter></needs-greeter>
+<div class="page-container">
+    <div class="main_box">
+        <div class="login_box">
+            <div class="login_logo">
+                登录
+            </div>
+
+            <div class="login_form">
+                <form>
+                    <div class="form-group">
+                        <label class="t" tooltip="12456">邮　箱：</label>
+                        <input [ng-form-control]='loginControl.email' type="text" class="form-control x319 in" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label class="t">密　码：</label>
+                        <input [ng-form-control]='loginControl.passwd' type="password" class="password form-control x319 in">
+                    </div>
+                    <div class="form-group">
+                        <label class="t">验证码：</label>
+                        <input [ng-form-control]='loginControl.checkCode' type="text" class="form-control x164 in">
+                        <img id="captcha_img" alt="点击更换" title="点击更换" src="images/login/captcha.jpeg" class="m">
+                    </div>
+                    <div class="form-group">
+                        <label class="t"></label>
+                        <label class="m">
+                            <input [ng-form-control]='loginControl.rememberMe' type="checkbox">&nbsp;记住登录账号!</label>
+                    </div>
+                    <div class="form-group space">
+                        <label class="t"></label>　　　
+                        <button type="button"  id="submit_btn"
+                                class="btn btn-primary btn-lg" (click)="login(loginControl)">&nbsp;登&nbsp;录&nbsp </button>
+                        <input type="button" value="&nbsp;重&nbsp;置&nbsp;" (click)="reset()" class="btn btn-default btn-lg">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
