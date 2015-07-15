@@ -13,7 +13,7 @@ import {NeedsGreeter, Greeter, Tooltip} from '../directives/greeter';
     viewInjector: [Greeter]
 })
 @View({
-    templateUrl: 'templates/Login.html',
+    templateUrl: 'templates/Login.html?v=' + (new Date()),
     directives: [coreDirectives, RouterOutlet, RouterLink, formDirectives, NeedsGreeter, Tooltip]
 })
 export class Login {
