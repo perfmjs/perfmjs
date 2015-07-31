@@ -1,3 +1,7 @@
+3.0.0/ 2015-07-31
+==================
+* add: perfmjs3.0.0
+
 3.0.0-alpha.1/ 2015-07-29
 ==================
 * init: perfmjs3.0.0-alpha.1, write using TypeScript

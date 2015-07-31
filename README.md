@@ -1,6 +1,6 @@
 perfmjs
 =======
-high performance javascript framework  V2.1.3
+high performance javascript framework  V3.0.0
 
 为什么使用perfmjs?　
 =======
