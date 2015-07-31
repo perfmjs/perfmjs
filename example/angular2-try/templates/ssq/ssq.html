@@ -60,13 +60,13 @@
 		</div>
 		<div class="bet-box">
 			<ul class="ball-con red-balls clearfix" id="normal_redball_area">
-				<li *ng-for="#code of redCodes">
-					<span class="flex-center" (click)="xuanhao($event,'red')">{{code}}</span><i class="gray">{{code==='01'?2:code==='02'?5:code==='03'?12:code==='04'?4:code==='05'?1:9}}</i>
+				<li *ng-for="#code of redCodeMap">
+					<span [class]="{'flex-center':true,'active':code.selected}" (click)="xuanhao(code)">{{code.code}}</span><i class="gray">9</i>
 				</li>
 			</ul>
 			<ul class="ball-con blue-balls clearfix" id="normal_blueball_area">
-				<li *ng-for="#code of blueCodes">
-					<span class="flex-center" (click)="xuanhao($event,'blue')">{{code}}</span><i class="gray">9</i>
+				<li *ng-for="#code of blueCodeMap">
+					<span [class]="{'flex-center':true,'active':code.selected}" (click)="xuanhao(code)">{{code.code}}</span><i class="gray">9</i>
 				</li>
 			</ul>
 		</div>

@@ -1225,7 +1225,7 @@ perfmjs.plugin('amd', function($$) {
  * 2）在Firefox中通过firebug控制台输出日志，在IE中通过在url中添加debug=true参数，将日志显示在页面底部。
  * 3）线上模式的错误日志，将记录到draggon监控系统，触发报警。
  * @date 2012-11-30
- * import perfmjs.js
+ * import core.js
  */
 !(function($$){
 	/**

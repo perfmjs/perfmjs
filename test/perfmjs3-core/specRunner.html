@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Jasmine Spec Runner v2.2.1(建议使用Firefox运行测试用例)</title>
+  <link rel="shortcut icon" type="image/png" href="../lib/jasmine-2.2.1/jasmine_favicon.png">
+  <link rel="stylesheet" type="text/css" href="../lib/jasmine-2.2.1/jasmine.css">
+
+  <script type="text/javascript" src="./traceur-runtime@0.0.90.js"></script>
+  <script type="text/javascript" src="./system@0.16.11.js"></script>
+  <script type="text/javascript" src="../lib/jasmine-2.2.1/jasmine.js"></script>
+  <script type="text/javascript" src="../lib/jasmine-2.2.1/jasmine-html.js"></script>
+  <script type="text/javascript" src="../lib/jasmine-2.2.1/boot.js"></script>
+  <script type="text/javascript" src="/perfmjs/dist/js/core.dev@3.0.0-alpha.1.js"></script>
+  <!--<script type="text/javascript" src="/perfmjs/test/perfmjs3-core/spec.js"></script>-->
+  <script>
+    System.config({
+        "baseURL": "/perfmjs",
+//        "defaultJSExtensions": true,
+//        "transpiler": "traceur", //traceur|typescript
+        "paths": {
+            "*":"*"
+        }
+    });
+    System.import('test/perfmjs3-core/spec.js');
+  </script>
+</head>
+<body>
+</body>
+</html>

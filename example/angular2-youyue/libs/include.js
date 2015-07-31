@@ -2,7 +2,7 @@
     perfmjs.includeRes.loadModules({mdCallback:function(source, module, combineUrls) {
         //按模块加载资源文件
         if (module === 'common') {
-            combineUrls[combineUrls.length] = 'libs/global-ref.js';
+            combineUrls[combineUrls.length] = 'libs/global.ref.ts';
         }
     }, afterLoadedCallback:function() {
         perfmjs.ready(function($$, app) {

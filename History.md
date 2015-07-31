@@ -1,3 +1,7 @@
+3.0.0-alpha.1/ 2015-07-29
+==================
+* init: perfmjs3.0.0-alpha.1
+
 2.1.4-rc4/ 2015-07-15
 ==================
 * add: 增加ssq的angular2-try例子
@@ -75,7 +79,7 @@
 
 1.3.3 / 2014-08-19
 ==================
- * add: 给perfmjs#utils, joquery.js, event-proxy.js, fsm.js, base.js增加AMD模块化规范并在README.md中增加使用例子
+ * add: 给perfmjs#utils, joquery.js, event.proxy.js, fsm.js, base.js增加AMD模块化规范并在README.md中增加使用例子
 
 1.3.2 / 2014-08-14
 ==================
@@ -140,4 +144,4 @@
  * fix: fix some bugs
  * add: perfmjs.utils#toNumber, perfmjs.utils#toBoolean
 
-说明：修改类型为: improved(改善功能)/add(新增功能)/remove(移除功能)/modify(修复功能内容)/fix(修改BUG)
+说明：修改类型为: init(初始化项目)/improved(改善功能)/add(新增功能)/remove(移除功能)/modify(修复功能内容)/fix(修改BUG)

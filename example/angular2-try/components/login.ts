@@ -4,12 +4,11 @@ import {RouteConfig, Router, RouterOutlet, RouterLink, routerInjectables} from '
 import {FormBuilder, Validators, formDirectives, ControlGroup, Control} from 'angular2/forms';
 
 import {Start} from './start';
-import {CommonService} from '../services/common-service';
+import {CommonService} from '../services/common.service';
 import {NeedsGreeter, Greeter, Tooltip, RedDec} from '../directives/greeter';
 
 @Component({
     selector: 'login',
-    appInjector: [routerInjectables],
     viewInjector: [Greeter]
 })
 @View({
@@ -17,14 +16,12 @@ import {NeedsGreeter, Greeter, Tooltip, RedDec} from '../directives/greeter';
     directives: [coreDirectives, RouterOutlet, RouterLink, formDirectives, NeedsGreeter, Tooltip]
 })
 export class Login {
-    router: Router;
-    loginControl: LoginControl;
-    commonService: CommonService;
+    router:Router;
+    loginControl:LoginControl;
 
     constructor(@Inject(Router) router: Router, commonService: CommonService) {
         this.loginControl = new LoginControl();
         this.router = router;
-        this.commonService = commonService;
     }
 
     login(loginControl: LoginControl) {

@@ -1,6 +1,8 @@
+import {Injectable} from 'angular2/di';
 import {Router} from 'angular2/router';
 import {Perfmjs} from 'perfmjs/core';
 
+@Injectable()
 export class CommonService {
     globalRef: any;
 

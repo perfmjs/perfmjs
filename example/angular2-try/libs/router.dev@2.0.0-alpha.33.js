@@ -95,10 +95,12 @@ System.register("angular2/src/router/instruction", ["angular2/src/facade/collect
       Instruction = (function() {
         function Instruction(component, capturedUrl, _recognizer) {
           var child = arguments[3] !== (void 0) ? arguments[3] : null;
+          var _params = arguments[4] !== (void 0) ? arguments[4] : null;
           this.component = component;
           this.capturedUrl = capturedUrl;
           this._recognizer = _recognizer;
           this.child = child;
+          this._params = _params;
           this.reuse = false;
           this.accumulatedUrl = capturedUrl;
           this.specificity = _recognizer.specificity;
@@ -188,6 +190,34 @@ System.register("angular2/src/router/location_strategy", ["angular2/src/facade/l
   };
 });
 
+System.register("angular2/src/router/helpers", ["angular2/src/facade/lang"], function($__export) {
+  "use strict";
+  var __moduleName = "angular2/src/router/helpers";
+  var isPresent;
+  function parseAndAssignParamString(splitToken, paramString, keyValueMap) {
+    var first = paramString[0];
+    if (first == '?' || first == ';') {
+      paramString = paramString.substring(1);
+    }
+    paramString.split(splitToken).forEach((function(entry) {
+      var tuple = entry.split('=');
+      var key = tuple[0];
+      if (!isPresent(keyValueMap[key])) {
+        var value = tuple.length > 1 ? tuple[1] : true;
+        keyValueMap[key] = value;
+      }
+    }));
+  }
+  $__export("parseAndAssignParamString", parseAndAssignParamString);
+  return {
+    setters: [function($__m) {
+      isPresent = $__m.isPresent;
+    }],
+    execute: function() {
+    }
+  };
+});
+
 System.register("angular2/src/router/url", ["angular2/src/facade/lang"], function($__export) {
   "use strict";
   var __moduleName = "angular2/src/router/url";
@@ -209,6 +239,84 @@ System.register("angular2/src/router/url", ["angular2/src/facade/lang"], functio
     execute: function() {
       specialCharacters = ['/', '.', '*', '+', '?', '|', '(', ')', '[', ']', '{', '}', '\\'];
       escapeRe = RegExpWrapper.create('(\\' + specialCharacters.join('|\\') + ')', 'g');
+    }
+  };
+});
+
+System.register("angular2/src/router/route_config_impl", ["angular2/src/facade/lang"], function($__export) {
+  "use strict";
+  var __moduleName = "angular2/src/router/route_config_impl";
+  var __decorate,
+      __metadata,
+      CONST,
+      RouteConfig,
+      Route,
+      AsyncRoute,
+      Redirect;
+  return {
+    setters: [function($__m) {
+      CONST = $__m.CONST;
+    }],
+    execute: function() {
+      __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
+          return Reflect.decorate(decorators, target, key, desc);
+        switch (arguments.length) {
+          case 2:
+            return decorators.reduceRight(function(o, d) {
+              return (d && d(o)) || o;
+            }, target);
+          case 3:
+            return decorators.reduceRight(function(o, d) {
+              return (d && d(target, key)), void 0;
+            }, void 0);
+          case 4:
+            return decorators.reduceRight(function(o, d) {
+              return (d && d(target, key, o)) || o;
+            }, desc);
+        }
+      };
+      __metadata = (this && this.__metadata) || function(k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
+          return Reflect.metadata(k, v);
+      };
+      RouteConfig = (($traceurRuntime.createClass)(function(configs) {
+        this.configs = configs;
+      }, {}, {}));
+      $__export("RouteConfig", RouteConfig);
+      $__export("RouteConfig", RouteConfig = __decorate([CONST(), __metadata('design:paramtypes', [Object])], RouteConfig));
+      Route = (($traceurRuntime.createClass)(function($__2) {
+        var $__3 = $__2,
+            path = $__3.path,
+            component = $__3.component,
+            as = $__3.as;
+        this.path = path;
+        this.component = component;
+        this.as = as;
+      }, {}, {}));
+      $__export("Route", Route);
+      $__export("Route", Route = __decorate([CONST(), __metadata('design:paramtypes', [Object])], Route));
+      AsyncRoute = (($traceurRuntime.createClass)(function($__2) {
+        var $__3 = $__2,
+            path = $__3.path,
+            loader = $__3.loader,
+            as = $__3.as;
+        this.path = path;
+        this.loader = loader;
+        this.as = as;
+      }, {}, {}));
+      $__export("AsyncRoute", AsyncRoute);
+      $__export("AsyncRoute", AsyncRoute = __decorate([CONST(), __metadata('design:paramtypes', [Object])], AsyncRoute));
+      Redirect = (($traceurRuntime.createClass)(function($__2) {
+        var $__3 = $__2,
+            path = $__3.path,
+            redirectTo = $__3.redirectTo;
+        this.as = null;
+        this.path = path;
+        this.redirectTo = redirectTo;
+      }, {}, {}));
+      $__export("Redirect", Redirect);
+      $__export("Redirect", Redirect = __decorate([CONST(), __metadata('design:paramtypes', [Object])], Redirect));
     }
   };
 });
@@ -269,45 +377,24 @@ System.register("angular2/src/router/sync_route_handler", ["angular2/src/facade/
   };
 });
 
-System.register("angular2/src/router/route_config_impl", ["angular2/src/facade/lang"], function($__export) {
+System.register("angular2/src/router/route_config_decorator", ["angular2/src/router/route_config_impl", "angular2/src/util/decorators"], function($__export) {
   "use strict";
-  var __moduleName = "angular2/src/router/route_config_impl";
-  var __decorate,
-      __metadata,
-      CONST,
+  var __moduleName = "angular2/src/router/route_config_decorator";
+  var RouteConfigAnnotation,
+      makeDecorator,
       RouteConfig;
   return {
     setters: [function($__m) {
-      CONST = $__m.CONST;
+      RouteConfigAnnotation = $__m.RouteConfig;
+      $__export("Route", $__m.Route);
+      $__export("Redirect", $__m.Redirect);
+      $__export("AsyncRoute", $__m.AsyncRoute);
+    }, function($__m) {
+      makeDecorator = $__m.makeDecorator;
     }],
     execute: function() {
-      __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function")
-          return Reflect.decorate(decorators, target, key, desc);
-        switch (arguments.length) {
-          case 2:
-            return decorators.reduceRight(function(o, d) {
-              return (d && d(o)) || o;
-            }, target);
-          case 3:
-            return decorators.reduceRight(function(o, d) {
-              return (d && d(target, key)), void 0;
-            }, void 0);
-          case 4:
-            return decorators.reduceRight(function(o, d) {
-              return (d && d(target, key, o)) || o;
-            }, desc);
-        }
-      };
-      __metadata = (this && this.__metadata) || function(k, v) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function")
-          return Reflect.metadata(k, v);
-      };
-      RouteConfig = (($traceurRuntime.createClass)(function(configs) {
-        this.configs = configs;
-      }, {}, {}));
+      RouteConfig = makeDecorator(RouteConfigAnnotation);
       $__export("RouteConfig", RouteConfig);
-      $__export("RouteConfig", RouteConfig = __decorate([CONST(), __metadata('design:paramtypes', [Object])], RouteConfig));
     }
   };
 });
@@ -521,25 +608,6 @@ System.register("angular2/src/router/pipeline", ["angular2/src/facade/async", "a
   };
 });
 
-System.register("angular2/src/router/route_config_decorator", ["angular2/src/router/route_config_impl", "angular2/src/util/decorators"], function($__export) {
-  "use strict";
-  var __moduleName = "angular2/src/router/route_config_decorator";
-  var RouteConfigAnnotation,
-      makeDecorator,
-      RouteConfig;
-  return {
-    setters: [function($__m) {
-      RouteConfigAnnotation = $__m.RouteConfig;
-    }, function($__m) {
-      makeDecorator = $__m.makeDecorator;
-    }],
-    execute: function() {
-      RouteConfig = makeDecorator(RouteConfigAnnotation);
-      $__export("RouteConfig", RouteConfig);
-    }
-  };
-});
-
 System.register("angular2/src/router/location", ["angular2/src/router/location_strategy", "angular2/src/facade/lang", "angular2/src/facade/async", "angular2/di"], function($__export) {
   "use strict";
   var __moduleName = "angular2/src/router/location";
@@ -551,6 +619,8 @@ System.register("angular2/src/router/location", ["angular2/src/router/location_s
       CONST_EXPR,
       EventEmitter,
       ObservableWrapper,
+      BaseException,
+      isBlank,
       OpaqueToken,
       Injectable,
       Optional,
@@ -575,6 +645,8 @@ System.register("angular2/src/router/location", ["angular2/src/router/location_s
     }, function($__m) {
       isPresent = $__m.isPresent;
       CONST_EXPR = $__m.CONST_EXPR;
+      BaseException = $__m.BaseException;
+      isBlank = $__m.isBlank;
     }, function($__m) {
       EventEmitter = $__m.EventEmitter;
       ObservableWrapper = $__m.ObservableWrapper;
@@ -618,7 +690,11 @@ System.register("angular2/src/router/location", ["angular2/src/router/location_s
         var $__0 = this;
         this._platformStrategy = _platformStrategy;
         this._subject = new EventEmitter();
-        this._baseHref = stripTrailingSlash(stripIndexHtml(isPresent(href) ? href : this._platformStrategy.getBaseHref()));
+        var browserBaseHref = isPresent(href) ? href : this._platformStrategy.getBaseHref();
+        if (isBlank(browserBaseHref)) {
+          throw new BaseException("No base href set. Either provide a binding to \"appBaseHrefToken\" or add a base element.");
+        }
+        this._baseHref = stripTrailingSlash(stripIndexHtml(browserBaseHref));
         this._platformStrategy.onPopState((function(_) {
           return $__0._onPopState(_);
         }));
@@ -672,7 +748,7 @@ System.register("angular2/src/router/location", ["angular2/src/router/location_s
   };
 });
 
-System.register("angular2/src/router/path_recognizer", ["angular2/src/facade/lang", "angular2/src/facade/collection", "angular2/src/router/url"], function($__export) {
+System.register("angular2/src/router/path_recognizer", ["angular2/src/facade/lang", "angular2/src/facade/collection", "angular2/src/router/helpers", "angular2/src/router/url"], function($__export) {
   "use strict";
   var __moduleName = "angular2/src/router/path_recognizer";
   var __decorate,
@@ -685,6 +761,7 @@ System.register("angular2/src/router/path_recognizer", ["angular2/src/facade/lan
       StringMapWrapper,
       ListWrapper,
       IMPLEMENTS,
+      parseAndAssignParamString,
       escapeRegex,
       Segment,
       TouchMap,
@@ -694,6 +771,7 @@ System.register("angular2/src/router/path_recognizer", ["angular2/src/facade/lan
       StarSegment,
       paramMatcher,
       wildcardMatcher,
+      RESERVED_CHARS,
       PathRecognizer;
   function normalizeString(obj) {
     if (isBlank(obj)) {
@@ -701,17 +779,6 @@ System.register("angular2/src/router/path_recognizer", ["angular2/src/facade/lan
     } else {
       return obj.toString();
     }
-  }
-  function parseAndAssignMatrixParams(keyValueMap, matrixString) {
-    if (matrixString[0] == ';') {
-      matrixString = matrixString.substring(1);
-    }
-    matrixString.split(';').forEach((function(entry) {
-      var tuple = entry.split('=');
-      var key = tuple[0];
-      var value = tuple.length > 1 ? tuple[1] : true;
-      keyValueMap[key] = value;
-    }));
   }
   function parsePathString(route) {
     if (StringWrapper.startsWith(route, "/")) {
@@ -750,6 +817,15 @@ System.register("angular2/src/router/path_recognizer", ["angular2/src/facade/lan
   function splitBySlash(url) {
     return url.split('/');
   }
+  function assertPath(path) {
+    if (StringWrapper.contains(path, '#')) {
+      throw new BaseException(("Path \"" + path + "\" should not include \"#\". Use \"HashLocationStrategy\" instead."));
+    }
+    var illegalCharacter = RegExpWrapper.firstMatch(RESERVED_CHARS, path);
+    if (isPresent(illegalCharacter)) {
+      throw new BaseException(("Path \"" + path + "\" contains \"" + illegalCharacter[0] + "\" which is not allowed in a route config."));
+    }
+  }
   return {
     setters: [function($__m) {
       RegExpWrapper = $__m.RegExpWrapper;
@@ -761,6 +837,8 @@ System.register("angular2/src/router/path_recognizer", ["angular2/src/facade/lan
     }, function($__m) {
       StringMapWrapper = $__m.StringMapWrapper;
       ListWrapper = $__m.ListWrapper;
+    }, function($__m) {
+      parseAndAssignParamString = $__m.parseAndAssignParamString;
     }, function($__m) {
       escapeRegex = $__m.escapeRegex;
     }],
@@ -861,12 +939,16 @@ System.register("angular2/src/router/path_recognizer", ["angular2/src/facade/lan
       }());
       paramMatcher = /^:([^\/]+)$/g;
       wildcardMatcher = /^\*([^\/]+)$/g;
+      RESERVED_CHARS = RegExpWrapper.create('//|\\(|\\)|;|\\?|=');
       PathRecognizer = (function() {
         function PathRecognizer(path, handler) {
+          var isRoot = arguments[2] !== (void 0) ? arguments[2] : false;
           var $__0 = this;
           this.path = path;
           this.handler = handler;
+          this.isRoot = isRoot;
           this.terminal = true;
+          assertPath(path);
           var parsed = parsePathString(path);
           var specificity = parsed['specificity'];
           var segments = parsed['segments'];
@@ -889,14 +971,15 @@ System.register("angular2/src/router/path_recognizer", ["angular2/src/facade/lan
           parseParams: function(url) {
             var segmentsLimit = this.segments.length - 1;
             var containsStarSegment = segmentsLimit >= 0 && this.segments[segmentsLimit] instanceof StarSegment;
-            var matrixString;
+            var paramsString,
+                useQueryString = this.isRoot && this.terminal;
             if (!containsStarSegment) {
-              var matches = RegExpWrapper.firstMatch(RegExpWrapper.create('^(.*\/[^\/]+?)(;[^\/]+)?\/?$'), url);
+              var matches = RegExpWrapper.firstMatch(useQueryString ? PathRecognizer.queryRegex : PathRecognizer.matrixRegex, url);
               if (isPresent(matches)) {
                 url = matches[1];
-                matrixString = matches[2];
+                paramsString = matches[2];
               }
-              url = StringWrapper.replaceAll(url, /(;[^\/]+)(?=(\/|\Z))/g, '');
+              url = StringWrapper.replaceAll(url, /(;[^\/]+)(?=(\/|$))/g, '');
             }
             var params = StringMapWrapper.create();
             var urlPart = url;
@@ -911,14 +994,18 @@ System.register("angular2/src/router/path_recognizer", ["angular2/src/facade/lan
                 params[segment.name] = match[1];
               }
             }
-            if (isPresent(matrixString) && matrixString.length > 0 && matrixString[0] == ';') {
-              parseAndAssignMatrixParams(params, matrixString);
+            if (isPresent(paramsString) && paramsString.length > 0) {
+              var expectedStartingValue = useQueryString ? '?' : ';';
+              if (paramsString[0] == expectedStartingValue) {
+                parseAndAssignParamString(expectedStartingValue, paramsString, params);
+              }
             }
             return params;
           },
           generate: function(params) {
             var paramTokens = new TouchMap(params);
             var applyLeadingSlash = false;
+            var useQueryString = this.isRoot && this.terminal;
             var url = '';
             for (var i = 0; i < this.segments.length; i++) {
               var segment = this.segments[i];
@@ -929,12 +1016,23 @@ System.register("angular2/src/router/path_recognizer", ["angular2/src/facade/lan
               }
             }
             var unusedParams = paramTokens.getUnused();
-            StringMapWrapper.forEach(unusedParams, (function(value, key) {
-              url += ';' + key;
-              if (isPresent(value)) {
-                url += '=' + value;
-              }
-            }));
+            if (!StringMapWrapper.isEmpty(unusedParams)) {
+              url += useQueryString ? '?' : ';';
+              var paramToken = useQueryString ? '&' : ';';
+              var i = 0;
+              StringMapWrapper.forEach(unusedParams, (function(value, key) {
+                if (i++ > 0) {
+                  url += paramToken;
+                }
+                url += key;
+                if (!isPresent(value) && useQueryString) {
+                  value = 'true';
+                }
+                if (isPresent(value)) {
+                  url += '=' + value;
+                }
+              }));
+            }
             if (applyLeadingSlash) {
               url += '/';
             }
@@ -946,6 +1044,65 @@ System.register("angular2/src/router/path_recognizer", ["angular2/src/facade/lan
         }, {});
       }());
       $__export("PathRecognizer", PathRecognizer);
+      PathRecognizer.matrixRegex = RegExpWrapper.create('^(.*\/[^\/]+?)(;[^\/]+)?\/?$');
+      PathRecognizer.queryRegex = RegExpWrapper.create('^(.*\/[^\/]+?)(\\?[^\/]+)?$');
+    }
+  };
+});
+
+System.register("angular2/src/router/route_config_nomalizer", ["angular2/src/router/route_config_decorator", "angular2/src/facade/lang"], function($__export) {
+  "use strict";
+  var __moduleName = "angular2/src/router/route_config_nomalizer";
+  var AsyncRoute,
+      Route,
+      Redirect,
+      BaseException;
+  function normalizeRouteConfig(config) {
+    if (config instanceof Route || config instanceof Redirect || config instanceof AsyncRoute) {
+      return config;
+    }
+    if ((!config.component) == (!config.redirectTo)) {
+      throw new BaseException("Route config should contain exactly one 'component', or 'redirectTo' property");
+    }
+    if (config.component) {
+      if (typeof config.component == 'object') {
+        var componentDefinitionObject = config.component;
+        if (componentDefinitionObject.type == 'constructor') {
+          return new Route({
+            path: config.path,
+            component: componentDefinitionObject.constructor,
+            as: config.as
+          });
+        } else if (componentDefinitionObject.type == 'loader') {
+          return new AsyncRoute({
+            path: config.path,
+            loader: componentDefinitionObject.loader,
+            as: config.as
+          });
+        } else {
+          throw new BaseException(("Invalid component type '" + componentDefinitionObject.type + "'. Valid types are \"constructor\" and \"loader\"."));
+        }
+      }
+      return new Route(config);
+    }
+    if (config.redirectTo) {
+      return new Redirect({
+        path: config.path,
+        redirectTo: config.redirectTo
+      });
+    }
+    return config;
+  }
+  $__export("normalizeRouteConfig", normalizeRouteConfig);
+  return {
+    setters: [function($__m) {
+      AsyncRoute = $__m.AsyncRoute;
+      Route = $__m.Route;
+      Redirect = $__m.Redirect;
+    }, function($__m) {
+      BaseException = $__m.BaseException;
+    }],
+    execute: function() {
     }
   };
 });
@@ -1053,7 +1210,7 @@ System.register("angular2/src/router/router_link", ["angular2/src/core/annotatio
   };
 });
 
-System.register("angular2/src/router/route_recognizer", ["angular2/src/facade/lang", "angular2/src/facade/collection", "angular2/src/router/path_recognizer", "angular2/src/router/async_route_handler", "angular2/src/router/sync_route_handler"], function($__export) {
+System.register("angular2/src/router/route_recognizer", ["angular2/src/facade/lang", "angular2/src/facade/collection", "angular2/src/router/path_recognizer", "angular2/src/router/route_config_impl", "angular2/src/router/async_route_handler", "angular2/src/router/sync_route_handler", "angular2/src/router/helpers"], function($__export) {
   "use strict";
   var __moduleName = "angular2/src/router/route_recognizer";
   var RegExpWrapper,
@@ -1064,9 +1221,14 @@ System.register("angular2/src/router/route_recognizer", ["angular2/src/facade/la
       BaseException,
       Map,
       MapWrapper,
+      StringMapWrapper,
       PathRecognizer,
+      Route,
+      AsyncRoute,
+      Redirect,
       AsyncRouteHandler,
       SyncRouteHandler,
+      parseAndAssignParamString,
       RouteRecognizer,
       RouteMatch;
   function configObjToHandler(config) {
@@ -1098,39 +1260,50 @@ System.register("angular2/src/router/route_recognizer", ["angular2/src/facade/la
     }, function($__m) {
       Map = $__m.Map;
       MapWrapper = $__m.MapWrapper;
+      StringMapWrapper = $__m.StringMapWrapper;
     }, function($__m) {
       PathRecognizer = $__m.PathRecognizer;
+    }, function($__m) {
+      Route = $__m.Route;
+      AsyncRoute = $__m.AsyncRoute;
+      Redirect = $__m.Redirect;
     }, function($__m) {
       AsyncRouteHandler = $__m.AsyncRouteHandler;
     }, function($__m) {
       SyncRouteHandler = $__m.SyncRouteHandler;
+    }, function($__m) {
+      parseAndAssignParamString = $__m.parseAndAssignParamString;
     }],
     execute: function() {
       RouteRecognizer = (function() {
         function RouteRecognizer() {
+          var isRoot = arguments[0] !== (void 0) ? arguments[0] : false;
+          this.isRoot = isRoot;
           this.names = new Map();
           this.redirects = new Map();
           this.matchers = new Map();
         }
         return ($traceurRuntime.createClass)(RouteRecognizer, {
-          addRedirect: function(path, target) {
-            if (path == '/') {
-              path = '';
+          config: function(config) {
+            var handler;
+            if (config instanceof Redirect) {
+              var path = config.path == '/' ? '' : config.path;
+              this.redirects.set(path, config.redirectTo);
+              return true;
+            } else if (config instanceof Route) {
+              handler = new SyncRouteHandler(config.component);
+            } else if (config instanceof AsyncRoute) {
+              handler = new AsyncRouteHandler(config.loader);
             }
-            this.redirects.set(path, target);
-          },
-          addConfig: function(path, handlerObj) {
-            var alias = arguments[2] !== (void 0) ? arguments[2] : null;
-            var handler = configObjToHandler(handlerObj['component']);
-            var recognizer = new PathRecognizer(path, handler);
+            var recognizer = new PathRecognizer(config.path, handler, this.isRoot);
             MapWrapper.forEach(this.matchers, (function(matcher, _) {
               if (recognizer.regex.toString() == matcher.regex.toString()) {
-                throw new BaseException(("Configuration '" + path + "' conflicts with existing route '" + matcher.path + "'"));
+                throw new BaseException(("Configuration '" + config.path + "' conflicts with existing route '" + matcher.path + "'"));
               }
             }));
             this.matchers.set(recognizer.regex, recognizer);
-            if (isPresent(alias)) {
-              this.names.set(alias, recognizer);
+            if (isPresent(config.as)) {
+              this.names.set(config.as, recognizer);
             }
             return recognizer.terminal;
           },
@@ -1148,6 +1321,16 @@ System.register("angular2/src/router/route_recognizer", ["angular2/src/facade/la
                 url = target + url.substring(path.length);
               }
             }));
+            var queryParams = StringMapWrapper.create();
+            var queryString = '';
+            var queryIndex = url.indexOf('?');
+            if (queryIndex >= 0) {
+              queryString = url.substring(queryIndex + 1);
+              url = url.substring(0, queryIndex);
+            }
+            if (this.isRoot && queryString.length > 0) {
+              parseAndAssignParamString('&', queryString, queryParams);
+            }
             MapWrapper.forEach(this.matchers, (function(pathRecognizer, regex) {
               var match;
               if (isPresent(match = RegExpWrapper.firstMatch(regex, url))) {
@@ -1157,7 +1340,12 @@ System.register("angular2/src/router/route_recognizer", ["angular2/src/facade/la
                   matchedUrl = match[0];
                   unmatchedUrl = url.substring(match[0].length);
                 }
-                solutions.push(new RouteMatch(pathRecognizer, matchedUrl, unmatchedUrl));
+                var params = null;
+                if (pathRecognizer.terminal && !StringMapWrapper.isEmpty(queryParams)) {
+                  params = queryParams;
+                  matchedUrl += '?' + queryString;
+                }
+                solutions.push(new RouteMatch(pathRecognizer, matchedUrl, unmatchedUrl, params));
               }
             }));
             return solutions;
@@ -1181,12 +1369,22 @@ System.register("angular2/src/router/route_recognizer", ["angular2/src/facade/la
       $__export("RouteRecognizer", RouteRecognizer);
       RouteMatch = (function() {
         function RouteMatch(recognizer, matchedUrl, unmatchedUrl) {
+          var p = arguments[3] !== (void 0) ? arguments[3] : null;
           this.recognizer = recognizer;
           this.matchedUrl = matchedUrl;
           this.unmatchedUrl = unmatchedUrl;
+          this._paramsParsed = false;
+          this._params = isPresent(p) ? p : StringMapWrapper.create();
         }
         return ($traceurRuntime.createClass)(RouteMatch, {params: function() {
-            return this.recognizer.parseParams(this.matchedUrl);
+            var $__0 = this;
+            if (!this._paramsParsed) {
+              this._paramsParsed = true;
+              StringMapWrapper.forEach(this.recognizer.parseParams(this.matchedUrl), (function(value, key) {
+                StringMapWrapper.set($__0._params, key, value);
+              }));
+            }
+            return this._params;
           }}, {});
       }());
       $__export("RouteMatch", RouteMatch);
@@ -1205,7 +1403,6 @@ System.register("angular2/src/router/router", ["angular2/src/facade/async", "ang
       isString,
       StringWrapper,
       isPresent,
-      isArray,
       BaseException,
       getCanActivateHook,
       _resolveToTrue,
@@ -1254,7 +1451,6 @@ System.register("angular2/src/router/router", ["angular2/src/facade/async", "ang
       isString = $__m.isString;
       StringWrapper = $__m.StringWrapper;
       isPresent = $__m.isPresent;
-      isArray = $__m.isArray;
       BaseException = $__m.BaseException;
     }, function($__m) {
       getCanActivateHook = $__m.getCanActivateHook;
@@ -1285,15 +1481,11 @@ System.register("angular2/src/router/router", ["angular2/src/facade/async", "ang
             }
             return _resolveToTrue;
           },
-          config: function(config) {
+          config: function(definitions) {
             var $__0 = this;
-            if (isArray(config)) {
-              config.forEach((function(configObject) {
-                $__0.registry.config($__0.hostComponent, configObject);
-              }));
-            } else {
-              this.registry.config(this.hostComponent, config);
-            }
+            definitions.forEach((function(routeDefinition) {
+              $__0.registry.config($__0.hostComponent, routeDefinition, $__0 instanceof RootRouter);
+            }));
             return this.renavigate();
           },
           navigate: function(url) {
@@ -1447,7 +1639,7 @@ System.register("angular2/src/router/router", ["angular2/src/facade/async", "ang
           this._location.subscribe(($__0 = this, function(change) {
             return $__0.navigate(change['url']);
           }));
-          this.registry.configFromComponent(hostComponent);
+          this.registry.configFromComponent(hostComponent, true);
           this.navigate(location.path());
         }
         return ($traceurRuntime.createClass)(RootRouter, {commit: function(instruction) {
@@ -1472,7 +1664,7 @@ System.register("angular2/src/router/router", ["angular2/src/facade/async", "ang
   };
 });
 
-System.register("angular2/src/router/route_registry", ["angular2/src/router/route_recognizer", "angular2/src/router/instruction", "angular2/src/facade/collection", "angular2/src/facade/async", "angular2/src/facade/lang", "angular2/src/router/route_config_impl", "angular2/src/reflection/reflection", "angular2/di"], function($__export) {
+System.register("angular2/src/router/route_registry", ["angular2/src/router/route_recognizer", "angular2/src/router/instruction", "angular2/src/facade/collection", "angular2/src/facade/async", "angular2/src/facade/lang", "angular2/src/router/route_config_impl", "angular2/src/reflection/reflection", "angular2/di", "angular2/src/router/route_config_nomalizer"], function($__export) {
   "use strict";
   var __moduleName = "angular2/src/router/route_registry";
   var __decorate,
@@ -1481,7 +1673,6 @@ System.register("angular2/src/router/route_registry", ["angular2/src/router/rout
       Instruction,
       ListWrapper,
       Map,
-      StringMapWrapper,
       PromiseWrapper,
       isPresent,
       isBlank,
@@ -1489,45 +1680,13 @@ System.register("angular2/src/router/route_registry", ["angular2/src/router/rout
       isString,
       isStringMap,
       BaseException,
+      getTypeNameForDebugging,
       RouteConfig,
+      Route,
       reflector,
       Injectable,
-      RouteRegistry,
-      ALLOWED_TARGETS,
-      VALID_COMPONENT_TYPES;
-  function assertValidConfig(config) {
-    if (!StringMapWrapper.contains(config, 'path')) {
-      throw new BaseException("Route config should contain a \"path\" property");
-    }
-    var targets = 0;
-    ListWrapper.forEach(ALLOWED_TARGETS, (function(target) {
-      if (StringMapWrapper.contains(config, target)) {
-        targets += 1;
-      }
-    }));
-    if (targets != 1) {
-      throw new BaseException("Route config should contain exactly one 'component', or 'redirectTo' property");
-    }
-  }
-  function normalizeComponentDeclaration(config) {
-    if (isType(config)) {
-      return {
-        'constructor': config,
-        'type': 'constructor'
-      };
-    } else if (isStringMap(config)) {
-      if (isBlank(config['type'])) {
-        throw new BaseException("Component declaration when provided as a map should include a 'type' property");
-      }
-      var componentType = config['type'];
-      if (!ListWrapper.contains(VALID_COMPONENT_TYPES, componentType)) {
-        throw new BaseException(("Invalid component type '" + componentType + "'"));
-      }
-      return config;
-    } else {
-      throw new BaseException("Component declaration should be either a Map or a Type");
-    }
-  }
+      normalizeRouteConfig,
+      RouteRegistry;
   function mostSpecific(instructions) {
     var mostSpecificSolution = instructions[0];
     for (var solutionIndex = 1; solutionIndex < instructions.length; solutionIndex++) {
@@ -1560,7 +1719,6 @@ System.register("angular2/src/router/route_registry", ["angular2/src/router/rout
     }, function($__m) {
       ListWrapper = $__m.ListWrapper;
       Map = $__m.Map;
-      StringMapWrapper = $__m.StringMapWrapper;
     }, function($__m) {
       PromiseWrapper = $__m.PromiseWrapper;
     }, function($__m) {
@@ -1570,12 +1728,16 @@ System.register("angular2/src/router/route_registry", ["angular2/src/router/rout
       isString = $__m.isString;
       isStringMap = $__m.isStringMap;
       BaseException = $__m.BaseException;
+      getTypeNameForDebugging = $__m.getTypeNameForDebugging;
     }, function($__m) {
       RouteConfig = $__m.RouteConfig;
+      Route = $__m.Route;
     }, function($__m) {
       reflector = $__m.reflector;
     }, function($__m) {
       Injectable = $__m.Injectable;
+    }, function($__m) {
+      normalizeRouteConfig = $__m.normalizeRouteConfig;
     }],
     execute: function() {
       __decorate = (this && this.__decorate) || function(decorators, target, key, desc) {
@@ -1604,28 +1766,24 @@ System.register("angular2/src/router/route_registry", ["angular2/src/router/rout
         this._rules = new Map();
       }, {
         config: function(parentComponent, config) {
-          assertValidConfig(config);
+          var isRootLevelRoute = arguments[2] !== (void 0) ? arguments[2] : false;
+          config = normalizeRouteConfig(config);
           var recognizer = this._rules.get(parentComponent);
           if (isBlank(recognizer)) {
-            recognizer = new RouteRecognizer();
+            recognizer = new RouteRecognizer(isRootLevelRoute);
             this._rules.set(parentComponent, recognizer);
           }
-          if (StringMapWrapper.contains(config, 'redirectTo')) {
-            recognizer.addRedirect(config['path'], config['redirectTo']);
-            return ;
-          }
-          config = StringMapWrapper.merge(config, {'component': normalizeComponentDeclaration(config['component'])});
-          var component = config['component'];
-          var terminal = recognizer.addConfig(config['path'], config, config['as']);
-          if (component['type'] == 'constructor') {
+          var terminal = recognizer.config(config);
+          if (config instanceof Route) {
             if (terminal) {
-              assertTerminalComponent(component['constructor'], config['path']);
+              assertTerminalComponent(config.component, config.path);
             } else {
-              this.configFromComponent(component['constructor']);
+              this.configFromComponent(config.component);
             }
           }
         },
         configFromComponent: function(component) {
+          var isRootComponent = arguments[1] !== (void 0) ? arguments[1] : false;
           var $__0 = this;
           if (!isType(component)) {
             return ;
@@ -1639,7 +1797,7 @@ System.register("angular2/src/router/route_registry", ["angular2/src/router/rout
               var annotation = annotations[i];
               if (annotation instanceof RouteConfig) {
                 ListWrapper.forEach(annotation.configs, (function(config) {
-                  return $__0.config(component, config);
+                  return $__0.config(component, config, isRootComponent);
                 }));
               }
             }
@@ -1673,7 +1831,7 @@ System.register("angular2/src/router/route_registry", ["angular2/src/router/rout
             $__0.configFromComponent(componentType);
             if (partialMatch.unmatchedUrl.length == 0) {
               if (recognizer.terminal) {
-                return new Instruction(componentType, partialMatch.matchedUrl, recognizer);
+                return new Instruction(componentType, partialMatch.matchedUrl, recognizer, null, partialMatch.params());
               } else {
                 return null;
               }
@@ -1692,6 +1850,9 @@ System.register("angular2/src/router/route_registry", ["angular2/src/router/rout
           var componentCursor = parentComponent;
           for (var i = 0; i < linkParams.length; i += 1) {
             var segment = linkParams[i];
+            if (isBlank(componentCursor)) {
+              throw new BaseException(("Could not find route named \"" + segment + "\"."));
+            }
             if (!isString(segment)) {
               throw new BaseException(("Unexpected segment \"" + segment + "\" in link DSL. Expected a string."));
             } else if (segment == '' || segment == '.' || segment == '..') {
@@ -1707,9 +1868,12 @@ System.register("angular2/src/router/route_registry", ["angular2/src/router/rout
             }
             var componentRecognizer = this._rules.get(componentCursor);
             if (isBlank(componentRecognizer)) {
-              throw new BaseException(("Could not find route config for \"" + segment + "\"."));
+              throw new BaseException(("Component \"" + getTypeNameForDebugging(componentCursor) + "\" has no route config."));
             }
             var response = componentRecognizer.generate(segment, params);
+            if (isBlank(response)) {
+              throw new BaseException(("Component \"" + getTypeNameForDebugging(componentCursor) + "\" has no route named \"" + segment + "\"."));
+            }
             url += response['url'];
             componentCursor = response['nextComponent'];
           }
@@ -1718,8 +1882,6 @@ System.register("angular2/src/router/route_registry", ["angular2/src/router/rout
       }, {}));
       $__export("RouteRegistry", RouteRegistry);
       $__export("RouteRegistry", RouteRegistry = __decorate([Injectable(), __metadata('design:paramtypes', [])], RouteRegistry));
-      ALLOWED_TARGETS = ['component', 'redirectTo'];
-      VALID_COMPONENT_TYPES = ['constructor', 'loader'];
     }
   };
 });
@@ -1966,4 +2128,4 @@ System.register("angular2/router", ["angular2/src/router/router", "angular2/src/
   };
 });
 
-//# sourceMappingURL=router.dev@2.0.0-alpha.31.js.map
+//# sourceMappingURL=router.dev@2.0.0-alpha.33.js.map
