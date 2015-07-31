@@ -1,6 +1,6 @@
 3.0.0-alpha.1/ 2015-07-29
 ==================
-* init: perfmjs3.0.0-alpha.1
+* init: perfmjs3.0.0-alpha.1, write using TypeScript
 
 2.1.4-rc4/ 2015-07-15
 ==================
