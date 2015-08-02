@@ -8,7 +8,7 @@ import {CommonService} from '../services/common.service';
 import {utils} from 'perfmjs/utils';
 import {joquery} from 'perfmjs/joquery';
 import {CommonPipeFactory} from '../pipes/commonPipe';
-import {betBaseSuanfa} from '../arithmetic/betBaseSuanfa';
+import {betBaseSuanfa} from './betBaseSuanfa';
 import {SsqBobao} from './SsqBobao';
 
 //build pipe
