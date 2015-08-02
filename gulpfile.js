@@ -16,7 +16,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var paths = {
     "core.name.snapshot": "core",
     "core.name.release": "core-2.1.2",
-    "core.ts.snapshot": "core-3.0.0",
+    "core.ts.snapshot": "core-3.0.1",
     scripts: [
         './lib/perfmjs/core.js',
         './lib/perfmjs/sys-config.js',

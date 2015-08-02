@@ -6,7 +6,7 @@ high performance javascript framework  V3.0.0
 =======
 面对复杂的WEB前端业务开发，有了这个“外壳”框架，开发人员就可以立即高效地编写业务上的javascript 代码了！
 
-Features(for V2.X):
+Features(for v2.X):
 =======
 fast by default：高效，易用，易读
 
