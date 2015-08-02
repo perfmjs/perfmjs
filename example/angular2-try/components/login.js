@@ -11,9 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', 'angular2/forms', '../services/common.service', '../directives/greeter'], function(exports_1) {
-    var angular2_1, di_1, router_1, forms_1, common_service_1, greeter_1;
-    var Login, LoginControl;
+};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', 'angular2/forms', '../services/common.service'], function(exports_1) {
+    var angular2_1, di_1, router_1, forms_1, common_service_1;
+    var RedDec, Login, LoginControl;
     return {
         setters:[
             function (_angular2_1) {
@@ -30,11 +30,20 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             },
             function (_common_service_1) {
                 common_service_1 = _common_service_1;
-            },
-            function (_greeter_1) {
-                greeter_1 = _greeter_1;
             }],
         execute: function() {
+            RedDec = (function () {
+                function RedDec(el, renderer) {
+                    renderer.setElementStyle(el, 'color', 'blue');
+                }
+                RedDec = __decorate([
+                    angular2_1.Directive({ selector: '[red]' }),
+                    __param(0, di_1.Inject(angular2_1.ElementRef)),
+                    __param(1, di_1.Inject(angular2_1.Renderer)), 
+                    __metadata('design:paramtypes', [(typeof ElementRef !== 'undefined' && ElementRef) || Object, (typeof Renderer !== 'undefined' && Renderer) || Object])
+                ], RedDec);
+                return RedDec;
+            })();
             Login = (function () {
                 function Login(router, commonService) {
                     this.loginControl = new LoginControl();
@@ -54,12 +63,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                 };
                 Login = __decorate([
                     angular2_1.Component({
-                        selector: 'login',
-                        viewInjector: [greeter_1.Greeter]
+                        selector: 'login'
                     }),
                     angular2_1.View({
                         templateUrl: 'templates/login.html',
-                        directives: [angular2_1.coreDirectives, router_1.RouterOutlet, router_1.RouterLink, forms_1.formDirectives, greeter_1.NeedsGreeter, greeter_1.Tooltip]
+                        directives: [angular2_1.coreDirectives, router_1.RouterOutlet, router_1.RouterLink, forms_1.formDirectives, RedDec]
                     }),
                     __param(0, di_1.Inject(router_1.Router)), 
                     __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object, common_service_1.CommonService])

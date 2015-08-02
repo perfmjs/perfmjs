@@ -166,6 +166,12 @@ $$.loader = {
         return this.sources;
     }
 };
-//$$.loader.load();
 export var loader = $$.loader;
 export var perfmjs = $$;
+////调用例子, 在xxx.html里
+//<script type="text/javascript" src="/perfmjs/dist/js/core-3.0.0.js?^{f:'./libs/include.js',m:'common;jquery;zhuanpan;dianqiu'}"></script>
+//<script>
+//System.import("perfmjs/loader").then(function(module) {
+//    module.loader.load();
+//});
+//</script>

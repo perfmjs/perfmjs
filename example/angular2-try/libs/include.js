@@ -13,7 +13,6 @@
         }
     }, afterLoadedCallback:function() {
         perfmjs.utils.ready(function($$, app) {
-            //app.registerAndStart($$.globalRef);
             if (typeof $ !== 'undefined') {
                 System.register('perfmjs/jquery', [], function ($__export) {
                     var JQuery;
@@ -31,15 +30,6 @@
                     };
                 });
             }
-            //System.config({
-            //    "baseURL": "/perfmjs/example/angular2-try/",
-            //    "defaultJSExtensions": true,
-            //    "transpiler": "typescript",
-            //    "paths": {
-            //        "github:*": "jspm_packages/github/*",
-            //        "npm:*": "jspm_packages/npm/*"
-            //    }
-            //});
             System.import('./components/index');
         });
     }});

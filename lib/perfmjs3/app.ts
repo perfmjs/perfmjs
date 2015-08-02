@@ -2,14 +2,11 @@ import {base, perfmjs as $$} from 'perfmjs/base';
 import {eventProxy} from 'perfmjs/event.proxy';
 
 /**
- * app core 作用：
+ * app作用：
  * 1）控制各个模块的生命周期，创建及销毁
  * 2）允许模块间的通信
  * 3）负责对系统错误的处理
- * @date 2012-11-30
- * import logger.js
- * import eventProxy.js
- * import base.js
+ * @date 2015-07-31
  */
 base("app", {
     init: function(arg) {

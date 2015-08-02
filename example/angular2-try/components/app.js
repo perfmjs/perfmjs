@@ -47,19 +47,18 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             App = (function () {
                 function App(router, commonService) {
                     this.router = router;
-                    commonService.serviceName = "app-aaaa";
-                    this.router.navigate('/ssq');
+                    this.router.navigate('/');
                 }
                 App = __decorate([
                     angular2_1.Component({
                         selector: 'app'
                     }),
                     angular2_1.View({
-                        template: "\n    <a [router-link]=\"['/start']\">\u9996\u9875</a>\n    <a [router-link]=\"['/login']\">\u767B\u5F55</a>\n    <a [router-link]=\"['/zhuanpan']\">\u8F6C\u76D8</a>\n    <a [router-link]=\"['/dianqiu']\">\u70B9\u7403</a>\n    <a [router-link]=\"['/ssq']\">\u53CC\u8272\u7403</a>\n    <router-outlet>\n    </router-outlet>",
+                        template: "\n    <router-outlet>\n    </router-outlet>",
                         directives: [router_1.RouterOutlet, router_1.RouterLink]
                     }),
                     router_1.RouteConfig([
-                        { path: '/', as: 'index', component: start_1.Start },
+                        { path: '/', as: 'index', component: ssq_1.Ssq },
                         { path: '/login', as: 'login', component: login_1.Login },
                         { path: '/start', as: 'start', component: start_1.Start },
                         { path: '/zhuanpan', as: 'zhuanpan', component: zhuanpan_1.Zhuanpan },

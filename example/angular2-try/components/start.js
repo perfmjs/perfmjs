@@ -35,7 +35,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             Start = (function () {
                 function Start(router, commonService) {
                     this.myName = 'AngularJS2@爱彩';
-                    commonService.serviceName = "app-bbb";
                     this.names = commonService.names;
                     this.router = router;
                 }

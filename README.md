@@ -6,7 +6,7 @@ high performance javascript framework  V3.0.0
 =======
 面对复杂的WEB前端业务开发，有了这个“外壳”框架，开发人员就可以立即高效地编写业务上的javascript 代码了！
 
-Features:
+Features(for V2.X):
 =======
 fast by default：高效，易用，易读
 
@@ -46,12 +46,10 @@ TODO:
 =======
 增加资源文件自已更新缓存的功能（不需使用版本号）
 
-支持Html5,支持移动Mobile
-
-支持lazyload,bigRender等高效功能（可选功能，默认不开启）
+去掉namespace，拥抱angular2的趋势
 
 
-How to use
+How to use(for v2.x)
 -------
 foo.js
 ```js

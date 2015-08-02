@@ -1,11 +1,14 @@
-<style>
-	@import "../../css/ssq/media10px.css";
-	@import "../../css/ssq/rem-base.css";
-	@import "../../css/ssq/toutiao-index.css";
-</style>
+<!--<style>-->
+	<!--@import "../../css/ssq/media10px.css";-->
+	<!--@import "../../css/ssq/rem-base.css";-->
+	<!--@import "../../css/ssq/toutiao-index.css";-->
+<!--</style>-->
+<link href="css/ssq/media10px.css" type="text/css" rel="stylesheet" />
+<link href="css/ssq/rem-base.css" type="text/css" rel="stylesheet" />
+<link href="css/ssq/toutiao-index.css" type="text/css" rel="stylesheet" />
 <ul class="k-tabs-hd aequilatus">
 	<li class="active">标准投注</li>
-	<li>走势工具</li>
+	<li>走势工具{{ jsonValue | jsonPipe }}</li>
 </ul>
 <div class="k-tabs" style="bottom:5rem;" id="Jq_swipe">
 	<div class="k-tabs-con">
@@ -60,12 +63,12 @@
 		</div>
 		<div class="bet-box">
 			<ul class="ball-con red-balls clearfix" id="normal_redball_area">
-				<li *ng-for="#code of redCodeMap">
+				<li *ng-for="#code of redCodeMap.values() | filterPipe">
 					<span [class]="{'flex-center':true,'active':code.selected}" (click)="xuanhao(code)">{{code.code}}</span><i class="gray">9</i>
 				</li>
 			</ul>
 			<ul class="ball-con blue-balls clearfix" id="normal_blueball_area">
-				<li *ng-for="#code of blueCodeMap">
+				<li *ng-for="#code of blueCodeMap.values()">
 					<span [class]="{'flex-center':true,'active':code.selected}" (click)="xuanhao(code)">{{code.code}}</span><i class="gray">9</i>
 				</li>
 			</ul>

@@ -9,23 +9,17 @@ import {Zhuanpan} from './zhuanpan';
 import {Dianqiu} from './dianqiu';
 import {Ssq} from './ssq';
 
-
 @Component({
     selector: 'app'
 })
 @View({
     template: `
-    <a [router-link]="['/start']">首页</a>
-    <a [router-link]="['/login']">登录</a>
-    <a [router-link]="['/zhuanpan']">转盘</a>
-    <a [router-link]="['/dianqiu']">点球</a>
-    <a [router-link]="['/ssq']">双色球</a>
     <router-outlet>
     </router-outlet>`,
     directives: [RouterOutlet, RouterLink]
 })
 @RouteConfig([
-    {path: '/',    as: 'index',   component: Start},
+    {path: '/',    as: 'index',   component: Ssq},
     {path: '/login', as: 'login', component: Login},
     {path: '/start', as: 'start', component: Start},
     {path: '/zhuanpan', as: 'zhuanpan', component: Zhuanpan},
@@ -37,8 +31,7 @@ export class App {
 
     constructor(@Inject(Router) router:Router, commonService: CommonService) {
         this.router = router;
-        commonService.serviceName = "app-aaaa";
-        this.router.navigate('/ssq');
+        this.router.navigate('/');
     }
 
 }

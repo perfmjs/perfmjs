@@ -1,3 +1,8 @@
+3.0.1/ 2015-08-02
+==================
+* add: gulp.js增加perfmjs3的build，使用`gulp perfmjs3`
+* add: angular2-try正增加jsonPipe, filterPipe的功能
+
 3.0.0/ 2015-07-31
 ==================
 * add: perfmjs3.0.0

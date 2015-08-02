@@ -1,19 +1,24 @@
-import {Component, View, coreDirectives} from 'angular2/angular2';
+import {Component, View, Injectable, coreDirectives, ElementRef, Renderer, Directive} from 'angular2/angular2';
 import {Inject} from 'angular2/di';
 import {RouteConfig, Router, RouterOutlet, RouterLink, routerInjectables} from 'angular2/router';
 import {FormBuilder, Validators, formDirectives, ControlGroup, Control} from 'angular2/forms';
 
 import {Start} from './start';
 import {CommonService} from '../services/common.service';
-import {NeedsGreeter, Greeter, Tooltip, RedDec} from '../directives/greeter';
+
+@Directive({selector: '[red]'})
+class RedDec {
+    constructor(@Inject(ElementRef) el: ElementRef, @Inject(Renderer) renderer: Renderer) {
+        renderer.setElementStyle(el, 'color', 'blue');
+    }
+}
 
 @Component({
-    selector: 'login',
-    viewInjector: [Greeter]
+    selector: 'login'
 })
 @View({
     templateUrl: 'templates/login.html',
-    directives: [coreDirectives, RouterOutlet, RouterLink, formDirectives, NeedsGreeter, Tooltip]
+    directives: [coreDirectives, RouterOutlet, RouterLink, formDirectives, RedDec]
 })
 export class Login {
     router:Router;

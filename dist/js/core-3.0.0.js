@@ -11,14 +11,11 @@ System.register("perfmjs/app", ['perfmjs/base', 'perfmjs/event.proxy'], function
             }],
         execute: function() {
             /**
-             * app core 作用：
+             * app作用：
              * 1）控制各个模块的生命周期，创建及销毁
              * 2）允许模块间的通信
              * 3）负责对系统错误的处理
-             * @date 2012-11-30
-             * import logger.js
-             * import eventProxy.js
-             * import base.js
+             * @date 2015-07-31
              */
             base_1.base("app", {
                 init: function (arg) {
@@ -493,28 +490,22 @@ System.register("perfmjs/base", ['perfmjs/utils'], function(exports_1) {
     }
 });
 
-System.register("perfmjs/core", ['perfmjs/utils', 'perfmjs/base', 'perfmjs/app', 'perfmjs/loader'], function(exports_1) {
-    var utils_1, base_1, app_1, loader_1;
+System.register("perfmjs/core", ['perfmjs/utils'], function(exports_1) {
+    var utils_1;
     var _perfmjs, perfmjs;
     return {
         setters:[
             function (_utils_1) {
                 utils_1 = _utils_1;
-            },
-            function (_base_1) {
-                base_1 = _base_1;
-            },
-            function (_app_1) {
-                app_1 = _app_1;
-            },
-            function (_loader_1) {
-                loader_1 = _loader_1;
             }],
         execute: function() {
+            //import {base} from 'perfmjs/base';
+            //import {app} from 'perfmjs/app';
+            //import {loader} from 'perfmjs/loader';
             _perfmjs = utils_1.utils.root;
-            _perfmjs.base = base_1.base;
-            _perfmjs.app = app_1.app;
-            _perfmjs.loader = loader_1.loader;
+            //_perfmjs.base = base;
+            //_perfmjs.app = app;
+            //_perfmjs.loader = loader;
             exports_1("perfmjs", perfmjs = _perfmjs);
         }
     }
@@ -1276,6 +1267,19 @@ System.register("perfmjs/joquery", ['perfmjs/base'], function(exports_1) {
                 },
                 toArray: function () { return this.items; },
                 /**
+                 * 过滤元素
+                 * @param clause(item)
+                 * @returns {filter}
+                 */
+                filter: function (clause) {
+                    if (this.items.filter) {
+                        return base_1.base.joquery.newInstance(this.items.filter(function (item) {
+                            return clause(item);
+                        }));
+                    }
+                    return this;
+                },
+                /**
                  * where条件
                  * @param clause 条件表达式
                  * @param lazySearch： true-找到一个符合条件的记录后不再往后找，false-一直找到最后
@@ -1684,12 +1688,18 @@ System.register("perfmjs/loader", ['perfmjs/utils', 'perfmjs/joquery', 'perfmjs/
                     return this.sources;
                 }
             };
-            //$$.loader.load();
             exports_1("loader", loader = utils_1.perfmjs.loader);
             exports_1("perfmjs", perfmjs = utils_1.perfmjs);
         }
     }
 });
+////调用例子, 在xxx.html里
+//<script type="text/javascript" src="/perfmjs/dist/js/core-3.0.0.js?^{f:'./libs/include.js',m:'common;jquery;zhuanpan;dianqiu'}"></script>
+//<script>
+//System.import("perfmjs/loader").then(function(module) {
+//    module.loader.load();
+//});
+//</script> 
 
 System.register("perfmjs/utils", [], function(exports_1) {
     var _utils, __utils, utils, perfmjs;
@@ -1748,7 +1758,7 @@ System.register("perfmjs/utils", [], function(exports_1) {
                     return '__proto__' in {};
                 };
                 Utils.prototype.toNumber = function (obj) {
-                    return ~~obj; //int型数字本身或0: "null,undefined,false,0,'',NaN,非数字的字符串"
+                    return ~~obj; //int型数字本身或0: "null,undefined,false,0,'',NaN,非数字的字符串",注意，超过int最大的数字后就始终是最大那个数
                 };
                 Utils.prototype.toBoolean = function (obj) {
                     return !!obj; //these is false: "null,undefined,false,0,'',NaN"
@@ -1933,7 +1943,7 @@ System.register("perfmjs/utils", [], function(exports_1) {
                     if (typeof (JSON) === 'object' && JSON.stringify) {
                         return JSON.stringify(o);
                     }
-                    return "null";
+                    return "{}";
                 };
                 Utils.prototype.aop = function (context, orig, before, after) {
                     var _self = this, aopFunc = function () {
@@ -1975,9 +1985,15 @@ System.register("perfmjs/utils", [], function(exports_1) {
                 Utils.prototype.keys = function (obj) {
                     if (!this.isObject(obj))
                         return [];
+                    var keys = [];
+                    if (obj.forEach) {
+                        obj.forEach(function (value, key) {
+                            keys[keys.length] = key;
+                        });
+                        return keys;
+                    }
                     if (Object.keys)
                         return Object.keys(obj);
-                    var keys = [];
                     for (var key in obj) {
                         if (obj.hasOwnProperty(key)) {
                             keys[keys.length] = key;
@@ -1986,15 +2002,33 @@ System.register("perfmjs/utils", [], function(exports_1) {
                     return keys;
                 };
                 /**
+                 * 将map或set转化为array
+                 * e.g. var m = new Map(); utils.toArray(m.values());
+                 * @param likeMap和迭代对象
+                 * @returns {any}
+                 */
+                Utils.prototype.toArray = function (likeMap) {
+                    if (Array.hasOwnProperty('from')) {
+                        return Array.from(likeMap);
+                    }
+                    return [];
+                };
+                /**
                  * # For Each 有参考https://github.com/codemix/fast.js的代码实现
                  *
                  * A fast `.forEach()` implementation.
                  *
-                 * @param  {Array}    subject     The array (or array-like) to iterate over.
+                 * @param  {Array}    subject     The array (or array-like: Map, Set) to iterate over.
                  * @param  {Function} fn          The visitor function.
                  * @param  {Object}   thisContext The context for the visitor.
                  */
                 Utils.prototype.forEach = function (subject, fn, thisContext) {
+                    if (subject.forEach) {
+                        subject.forEach(function (value, key, forEachObj) {
+                            fn(value, key, forEachObj);
+                        });
+                        return;
+                    }
                     var length = subject.length, i = 0, iterator = arguments.length > 2 ? this._fastBind(fn, thisContext) : fn;
                     for (; i < length; i++) {
                         iterator(subject[i], i, subject);

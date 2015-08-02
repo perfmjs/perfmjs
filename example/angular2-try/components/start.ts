@@ -19,7 +19,6 @@ export class Start {
 
     constructor(@Inject(Router) router: Router, commonService: CommonService) {
         this.myName = 'AngularJS2@爱彩';
-        commonService.serviceName = "app-bbb";
         this.names = commonService.names;
         this.router = router;
     }

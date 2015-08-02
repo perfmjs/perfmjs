@@ -58,7 +58,7 @@ var _utils = class Utils {
     }
 
     toNumber(obj:any) {
-        return ~~obj; //int型数字本身或0: "null,undefined,false,0,'',NaN,非数字的字符串"
+        return ~~obj; //int型数字本身或0: "null,undefined,false,0,'',NaN,非数字的字符串",注意，超过int最大的数字后就始终是最大那个数
     }
 
     toBoolean(obj:any) {
@@ -253,7 +253,7 @@ var _utils = class Utils {
         if (typeof(JSON) === 'object' && JSON.stringify) {
             return JSON.stringify(o);
         }
-        return "null";
+        return "{}";
     }
 
     aop(context:any, orig:any, before:any, after:any) {
@@ -296,8 +296,14 @@ var _utils = class Utils {
 
     keys(obj:any) {
         if (!this.isObject(obj)) return [];
-        if (Object.keys) return Object.keys(obj);
         var keys:any = [];
+        if (obj.forEach) {
+            obj.forEach(function(value,key){
+                keys[keys.length] = key;
+            });
+            return keys;
+        }
+        if (Object.keys) return Object.keys(obj);
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
                 keys[keys.length] = key;
@@ -307,18 +313,37 @@ var _utils = class Utils {
     }
 
     /**
+     * 将map或set转化为array
+     * e.g. var m = new Map(); utils.toArray(m.values());
+     * @param likeMap和迭代对象
+     * @returns {any}
+     */
+    toArray(likeMap:any) {
+        if (Array.hasOwnProperty('from')) {
+            return Array.from(likeMap);
+        }
+        return [];
+    }
+
+    /**
      * # For Each 有参考https://github.com/codemix/fast.js的代码实现
      *
      * A fast `.forEach()` implementation.
      *
-     * @param  {Array}    subject     The array (or array-like) to iterate over.
+     * @param  {Array}    subject     The array (or array-like: Map, Set) to iterate over.
      * @param  {Function} fn          The visitor function.
      * @param  {Object}   thisContext The context for the visitor.
      */
     forEach(subject:any, fn:any, thisContext:any) {
+        if (subject.forEach) {
+            subject.forEach(function(value, key, forEachObj) {
+                fn(value, key, forEachObj);
+            });
+            return;
+        }
         var length = subject.length, i:number = 0,
             iterator = arguments.length > 2 ? this._fastBind(fn, thisContext) : fn;
-        for (; i < length; i++) {
+        for (;i < length; i++) {
             iterator(subject[i], i, subject);
         }
     }

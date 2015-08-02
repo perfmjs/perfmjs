@@ -20,6 +20,19 @@ base("joquery", {
     },
     toArray: function() {return this.items;},
     /**
+     * 过滤元素
+     * @param clause(item)
+     * @returns {filter}
+     */
+    filter: function(clause) {
+        if (this.items.filter) {
+            return base.joquery.newInstance(this.items.filter(function(item){
+                return clause(item);
+            }));
+        }
+        return this;
+    },
+    /**
      * where条件
      * @param clause 条件表达式
      * @param lazySearch： true-找到一个符合条件的记录后不再往后找，false-一直找到最后

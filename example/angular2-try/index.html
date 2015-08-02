@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>Angular 2 Quickstart - https://angular.io/</title>
     <script type="text/javascript" src="libs/traceur-runtime@0.0.90.js"></script>
+    <script type="text/javascript" src="libs/es6-module-loader@0.16.6.js"></script>
     <!--<script type="text/javascript" src="libs/system.src@0.18.4.js"></script>-->
-    <script type="text/javascript" src="libs/system@0.16.11.js"></script>
-    <script type="text/javascript" src="libs/angular2.dev@2.0.0-alpha.32.js"></script>
-    <script type="text/javascript" src="libs/router.dev@2.0.0-alpha.32.js"></script>
+    <script type="text/javascript" src="libs/system.src@0.16.11.js"></script>
+    <script type="text/javascript" src="libs/angular2.dev@2.0.0-alpha.33.js"></script>
+    <script type="text/javascript" src="libs/router.dev@2.0.0-alpha.33.js"></script>
     <script type="text/javascript" src="/perfmjs/dist/js/core-3.0.0.js?^{f:'./libs/include.js',m:'common;jquery;zhuanpan;dianqiu'}"></script>
-    <!--<script type="text/javascript" src="/perfmjs/dist/js/core.dev@3.0.0-alpha.1.js"></script>-->
     <!--<script src="https://github.jspm.io/jmcriffey/bower-traceur-runtime@0.0.90/traceur-runtime.js"></script>-->
     <!--<script src="https://jspm.io/system@0.16.11.js"></script>-->
     <!--<script src="https://code.angularjs.org/2.0.0-alpha.30/angular2.dev@2.0.0-alpha.32.js"></script>-->
@@ -20,15 +20,20 @@
     $ npm install -g tsd@^0.6.0
     $ tsd install angular2 es6-promise rx rx-lite
     $ touch app.ts index.html
-    $ npm install -g typescript@^1.5.0-beta
+    $ npm install -g typescript@^1.5.3
     $ tsc --watch -m commonjs -t es5 --emitDecoratorMetadata app.ts
-    cd /Users/tony/WebstormProjects/perfmjs/example/angular2; tsc --watch -m commonjs -t es5 --emitDecoratorMetadata *.ts
+    cd /Users/tony/WebstormProjects/perfmjs/example/angular2; tsc --watch -m system -t es5 --emitDecoratorMetadata --experimentalDecorators *.ts
 </div>
 <script>
-//    System.config({
-//        "defaultJSExtensions": true,
-//        "defaultExtension": ""
-//    });
+    System.config({
+        defaultJSExtensions: true,
+        defaultExtension: false,
+        paths: {
+            "*":"*.js",
+            "angular2/*":"angular2/*",
+            "perfmjs/*":"perfmjs/*"
+        }
+    });
     System.import("perfmjs/loader").then(function(module) {
         module.loader.load();
     });
