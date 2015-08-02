@@ -46,7 +46,7 @@ TODO:
 =======
 增加资源文件自已更新缓存的功能（不需使用版本号）
 
-去掉namespace，拥抱angular2的趋势
+去掉namespace(保留base的单例模式)，拥抱angular2的趋势
 
 
 How to use(for v2.x)

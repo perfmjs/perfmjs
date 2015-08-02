@@ -256,6 +256,19 @@ var _utils = class Utils {
         return "{}";
     }
 
+    /**
+     * AOP
+     * e.g. filterPipeObj.transform = utils.aop(this, filterPipeObj.transform, function(value, args) {
+            return joquery.newInstance(utils.toArray(value)).filter(function(item){
+                return utils.toNumber(item.code) >= 2;
+            }).toArray();
+        });
+     * @param context
+     * @param orig (function)
+     * @param before
+     * @param after
+     * @returns {function(): (any|any)}
+     */
     aop(context:any, orig:any, before:any, after:any) {
         var _self = this, aopFunc = function () {
             var args:any, result:any;
@@ -326,11 +339,24 @@ var _utils = class Utils {
     }
 
     /**
+     * e.g. contain([1,2,33], 33) will return true;
+     * @param arr
+     * @param element
+     * @returns {boolean}
+     */
+    contain(arr:any, element:any) {
+        if (this.isArray(arr)) {
+            return arr.indexOf(element) >= 0;
+        }
+        return false;
+    }
+
+    /**
      * # For Each 有参考https://github.com/codemix/fast.js的代码实现
      *
      * A fast `.forEach()` implementation.
      *
-     * @param  {Array}    subject     The array (or array-like: Map, Set) to iterate over.
+     * @param  {Array|Map|Set}    subject     The array (or array-like: Map, Set) to iterate over.
      * @param  {Function} fn          The visitor function.
      * @param  {Object}   thisContext The context for the visitor.
      */
