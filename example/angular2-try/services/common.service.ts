@@ -50,16 +50,16 @@ base("commonService", {
 base.commonService.defaults = {
     names: [],
     serviceName: 'fooo',
-    betPlanContent: {},
+    betPlanContent: {}, //e.g. {red:[], blue:[], betCount:0}
     scope: 'singleton',
     end: 0
 };
 
-class BetPlanContent {
+export class BetPlanContent {
 
     private _lottery:string = '';
     private _content:any = [];
-    private _betCount:number = 0;
+    private _totalBetCount:number = 0;
     private _betAmount:number = 0;
     private _multiple:number = 1; //倍数
     private _chaseItemCount:number = 1; //追号期数
@@ -70,7 +70,7 @@ class BetPlanContent {
     init() {
         this._lottery = '';
         this._content = [];
-        this._betCount = 0;
+        this._totalBetCount = 0;
         this._betAmount = 0;
         this._multiple = 1;
         this._chaseItemCount = 1;
@@ -85,11 +85,17 @@ class BetPlanContent {
     get content() {
        return this._content;
     }
-    get betCount():number {
-        return this._betCount;
+    get totalBetCount():number {
+        return this._totalBetCount;
+    }
+    set totalBetCount(totalBetCount:number) {
+        this._totalBetCount = totalBetCount;
     }
     get betAmount():number {
         return this._betAmount;
+    }
+    set betAmount(betAmount:number) {
+        this._betAmount = betAmount;
     }
     get multiple():number {
         return this._multiple;
@@ -105,6 +111,17 @@ class BetPlanContent {
     }
     get unitPrice():number {
         return 2; //注意：dlt可以追加到3元
+    }
+
+    /**
+     * FIXME 算法待完善
+     * @returns {number}
+     */
+    calcTotalAmount() {
+        return this._totalBetCount
+        * this.unitPrice
+        * this._multiple
+        * this._chaseItemCount
     }
 
 }

@@ -1,4 +1,5 @@
-import {Component, View} from 'angular2/angular2';
+import {Component, View, ElementRef, Renderer} from 'angular2/angular2';
+import {Inject, bind} from 'angular2/di';
 
 @Component({
     selector: 'zippy',
@@ -7,11 +8,10 @@ import {Component, View} from 'angular2/angular2';
 @View({
     templateUrl: 'templates/zippy.html'
 })
-
 export class Zippy {
     visible: boolean;
 
-    constructor() {
+    constructor(@Inject(ElementRef) ref: ElementRef, @Inject(Renderer) renderer: Renderer) {
         this.visible = true;
     }
 

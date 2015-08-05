@@ -2,9 +2,10 @@
     perfmjs.loader.loadModules({mdCallback:function(source, module, combineUrls) {
         //按模块加载资源文件
         if (module === 'common') {
-            //currently no common libs
+            //do nothing
         } else if (module === 'jquery') {
             combineUrls[combineUrls.length] = 'js/zhuanpan/jquery.min.js';
+            combineUrls[combineUrls.length] = 'js/ssqConfirm/jquery.kModal.js';
         } else if (module === 'zhuanpan') {
             combineUrls[combineUrls.length] = 'js/zhuanpan/jquery.rotate.min.js';
             combineUrls[combineUrls.length] = 'js/zhuanpan/jcMarquee.js';

@@ -1,3 +1,7 @@
+3.0.2/ 2015-08-05
+==================
+* add: angular2-try增加Modal指令,MessageEvent功能
+
 3.0.1/ 2015-08-02
 ==================
 * add: gulp.js增加perfmjs3的build，使用`gulp perfmjs3`

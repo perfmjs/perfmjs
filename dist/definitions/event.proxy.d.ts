@@ -1,1 +1,1 @@
-export declare var exventProxy: any;
+export declare var eventProxy: any;

@@ -11,6 +11,7 @@ import {CommonPipeFactory} from '../pipes/commonPipe';
 import {betBaseSuanfa} from './betBaseSuanfa';
 import {SsqBobao} from './SsqBobao';
 
+
 //build pipe
 var betCountPipeObj = new CommonPipeFactory();
 betCountPipeObj.transform = utils.aop(this, betCountPipeObj.transform, function(value, args) {
@@ -45,6 +46,7 @@ betInfoPipeObj.transform = utils.aop(this, betInfoPipeObj.transform, function(va
 })
 export class Ssq {
     router: Router;
+    commonService:CommonService;
     redCodes: Array<String> = ["01","02","03","04","05","06","07","08","09","10",
                                 "11","12","13","14","15","16","17","18","19","20","21","22","23",
                                 "24","25","26","27","28","29","30","31","32","33"];
@@ -54,6 +56,7 @@ export class Ssq {
 
     constructor(@Inject(Router) router: Router, commonService: CommonService) {
         this.router = router;
+        this.commonService = commonService;
         this.betInfo.set('red', new Map());
         this.betInfo.set('blue', new Map());
         this.betInfo.set('betCount', 0);
@@ -101,5 +104,48 @@ export class Ssq {
             value.selected = false;
         });
         this.betInfo.set('betCount', 0);
+    }
+
+    betConfirm() {
+        var betPlanContent = this.commonService.betPlanContent;
+        betPlanContent.lottery = 'ssq';
+
+        if (this.betInfo.get('betCount') < 1) {
+            this.router.navigate('/ssqBetConfirm');
+            return;
+        }
+
+        var selectedRedCode = [];
+        joquery.newInstance(utils.toArray(this.betInfo.get('red').values())).filter(function(item) {
+            if (item.selected) {
+                selectedRedCode[selectedRedCode.length] = item.code
+            }
+        }).toArray();
+
+        var selectedBlueCode = [];
+        joquery.newInstance(utils.toArray(this.betInfo.get('blue').values())).filter(function(item) {
+            if (item.selected) {
+                selectedBlueCode[selectedBlueCode.length] = item.code
+            }
+        }).toArray();
+
+        betPlanContent.content[betPlanContent.content.length] = {
+            'red':selectedRedCode,
+            'blue':selectedBlueCode,
+            'betCount': this.betInfo.get('betCount')
+        };
+
+        var totalBetCount = 0;
+        utils.forEach(betPlanContent.content, function(item, index) {
+            totalBetCount = totalBetCount + utils.toNumber(item.betAccount);
+        });
+        betPlanContent.content.totalBetCount = totalBetCount;
+        betPlanContent.content.betAmount = betPlanContent.calcTotalAmount();
+
+        this.router.navigate('/ssqBetConfirm');
+    }
+
+    messageEventCompleted(event) {
+        event.emit('SSQ#CALL BACK!');
     }
 }

@@ -11,9 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/di', 'angular2/src/directives/class'], function(exports_1) {
-    var angular2_1, di_1, class_1;
-    var RedDec, SsqBobao;
+};System.register(['angular2/angular2', 'angular2/di', 'angular2/src/directives/class', '../directives/MessageEvent'], function(exports_1) {
+    var angular2_1, di_1, class_1, MessageEvent_1;
+    var MyDirective, RedDec, SsqBobao;
     return {
         setters:[
             function (_angular2_1) {
@@ -24,14 +24,41 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             },
             function (_class_1) {
                 class_1 = _class_1;
+            },
+            function (_MessageEvent_1) {
+                MessageEvent_1 = _MessageEvent_1;
             }],
         execute: function() {
+            MyDirective = (function () {
+                function MyDirective(elem, renderer) {
+                }
+                MyDirective.prototype.onMousedown = function () {
+                    console.log("MyDirective#onMousedown" + this.text);
+                };
+                MyDirective = __decorate([
+                    angular2_1.Directive({
+                        selector: 'my-directive',
+                        properties: [
+                            'text: message'
+                        ],
+                        host: {
+                            '(^mouseover)': 'onMousedown()'
+                        }
+                    }),
+                    __param(0, di_1.Inject(angular2_1.ElementRef)),
+                    __param(1, di_1.Inject(angular2_1.Renderer)), 
+                    __metadata('design:paramtypes', [(typeof ElementRef !== 'undefined' && ElementRef) || Object, (typeof Renderer !== 'undefined' && Renderer) || Object])
+                ], MyDirective);
+                return MyDirective;
+            })();
             RedDec = (function () {
                 function RedDec(el, renderer) {
                     renderer.setElementAttribute(el, 'class', 'red-better');
                 }
                 RedDec = __decorate([
-                    angular2_1.Directive({ selector: '[red-better]' }),
+                    angular2_1.Directive({
+                        selector: '[red-better]'
+                    }),
                     __param(0, di_1.Inject(angular2_1.ElementRef)),
                     __param(1, di_1.Inject(angular2_1.Renderer)), 
                     __metadata('design:paramtypes', [(typeof ElementRef !== 'undefined' && ElementRef) || Object, (typeof Renderer !== 'undefined' && Renderer) || Object])
@@ -40,14 +67,21 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             })();
             SsqBobao = (function () {
                 function SsqBobao() {
+                    this.messageEvent = new MessageEvent_1.MessageEvent(this);
+                    this.text = '';
+                    this.text = '123456';
                 }
+                SsqBobao.prototype.onMessage = function (message) {
+                    console.log('SsqBobao#callback=' + message);
+                };
                 SsqBobao = __decorate([
                     angular2_1.Component({
-                        selector: 'ssq-bobao'
+                        selector: 'ssqbobao',
+                        events: ['messageEvent']
                     }),
                     angular2_1.View({
-                        template: "\n    <p class=\"i-report\">2015001\u671F <span red-better>\u5468\u4E8C21:30\u5F00\u5956</span></p>\n    ",
-                        directives: [angular2_1.coreDirectives, class_1.CSSClass, RedDec]
+                        template: "\n    <my-directive message=\"MediterraneaJS\">\n        <p class=\"i-report\">2015001\u671F <span red-better>\u5468\u4E8C21:30\u5F00\u5956{{text}}</span></p>\n    </my-directive>\n    ",
+                        directives: [angular2_1.coreDirectives, class_1.CSSClass, RedDec, MyDirective]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], SsqBobao);

@@ -92,8 +92,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                         }
                     });
                 };
-                Zhuanpan.prototype.gotoLogin = function () {
-                    this.router.navigate('/login');
+                Zhuanpan.prototype.goto = function (page) {
+                    this.router.navigate(page);
                 };
                 Zhuanpan = __decorate([
                     angular2_1.Component({

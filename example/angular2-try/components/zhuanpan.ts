@@ -77,7 +77,8 @@ export class Zhuanpan {
         });
     }
 
-    gotoLogin() {
-        this.router.navigate('/login');
+    goto(page) {
+        this.router.navigate(page);
     }
+
 }

@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', '../services/common.service', './login', './start', './zhuanpan', './dianqiu', './ssq'], function(exports_1) {
-    var angular2_1, di_1, router_1, common_service_1, login_1, start_1, zhuanpan_1, dianqiu_1, ssq_1;
+};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', '../services/common.service', './login', './start', './zhuanpan', './dianqiu', './ssq', './SsqBetConfirm'], function(exports_1) {
+    var angular2_1, di_1, router_1, common_service_1, login_1, start_1, zhuanpan_1, dianqiu_1, ssq_1, SsqBetConfirm_1;
     var App;
     return {
         setters:[
@@ -42,6 +42,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             },
             function (_ssq_1) {
                 ssq_1 = _ssq_1;
+            },
+            function (_SsqBetConfirm_1) {
+                SsqBetConfirm_1 = _SsqBetConfirm_1;
             }],
         execute: function() {
             App = (function () {
@@ -58,12 +61,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                         directives: [router_1.RouterOutlet, router_1.RouterLink]
                     }),
                     router_1.RouteConfig([
-                        { path: '/', as: 'index', component: ssq_1.Ssq },
+                        { path: '/', as: 'index', component: start_1.Start },
                         { path: '/login', as: 'login', component: login_1.Login },
                         { path: '/start', as: 'start', component: start_1.Start },
                         { path: '/zhuanpan', as: 'zhuanpan', component: zhuanpan_1.Zhuanpan },
                         { path: '/dianqiu', as: 'dianqiu', component: dianqiu_1.Dianqiu },
-                        { path: '/ssq', as: 'ssq', component: ssq_1.Ssq }
+                        { path: '/ssq', as: 'ssq', component: ssq_1.Ssq },
+                        { path: '/ssqBetConfirm', as: 'ssqBetConfirm', component: SsqBetConfirm_1.SsqBetConfirm }
                     ]),
                     __param(0, di_1.Inject(router_1.Router)), 
                     __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object, common_service_1.CommonService])

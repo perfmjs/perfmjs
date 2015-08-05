@@ -77,6 +77,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                     this.betInfo = new Map();
                     this.page = 'bet';
                     this.router = router;
+                    this.commonService = commonService;
                     this.betInfo.set('red', new Map());
                     this.betInfo.set('blue', new Map());
                     this.betInfo.set('betCount', 0);
@@ -123,6 +124,41 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                         value.selected = false;
                     });
                     this.betInfo.set('betCount', 0);
+                };
+                Ssq.prototype.betConfirm = function () {
+                    var betPlanContent = this.commonService.betPlanContent;
+                    betPlanContent.lottery = 'ssq';
+                    if (this.betInfo.get('betCount') < 1) {
+                        this.router.navigate('/ssqBetConfirm');
+                        return;
+                    }
+                    var selectedRedCode = [];
+                    joquery_1.joquery.newInstance(utils_1.utils.toArray(this.betInfo.get('red').values())).filter(function (item) {
+                        if (item.selected) {
+                            selectedRedCode[selectedRedCode.length] = item.code;
+                        }
+                    }).toArray();
+                    var selectedBlueCode = [];
+                    joquery_1.joquery.newInstance(utils_1.utils.toArray(this.betInfo.get('blue').values())).filter(function (item) {
+                        if (item.selected) {
+                            selectedBlueCode[selectedBlueCode.length] = item.code;
+                        }
+                    }).toArray();
+                    betPlanContent.content[betPlanContent.content.length] = {
+                        'red': selectedRedCode,
+                        'blue': selectedBlueCode,
+                        'betCount': this.betInfo.get('betCount')
+                    };
+                    var totalBetCount = 0;
+                    utils_1.utils.forEach(betPlanContent.content, function (item, index) {
+                        totalBetCount = totalBetCount + utils_1.utils.toNumber(item.betAccount);
+                    });
+                    betPlanContent.content.totalBetCount = totalBetCount;
+                    betPlanContent.content.betAmount = betPlanContent.calcTotalAmount();
+                    this.router.navigate('/ssqBetConfirm');
+                };
+                Ssq.prototype.messageEventCompleted = function (event) {
+                    event.emit('SSQ#CALL BACK!');
                 };
                 Ssq = __decorate([
                     angular2_1.Component({

@@ -1,4 +1,3 @@
-import {base} from 'perfmjs/base';
 import {utils} from 'perfmjs/utils';
 
 /**

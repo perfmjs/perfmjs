@@ -8,17 +8,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};System.register(['angular2/angular2'], function(exports_1) {
-    var angular2_1;
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};System.register(['angular2/angular2', 'angular2/di'], function(exports_1) {
+    var angular2_1, di_1;
     var Zippy;
     return {
         setters:[
             function (_angular2_1) {
                 angular2_1 = _angular2_1;
+            },
+            function (_di_1) {
+                di_1 = _di_1;
             }],
         execute: function() {
             Zippy = (function () {
-                function Zippy() {
+                function Zippy(ref, renderer) {
                     this.visible = true;
                 }
                 Zippy.prototype.toggle = function () {
@@ -31,8 +37,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
                     }),
                     angular2_1.View({
                         templateUrl: 'templates/zippy.html'
-                    }), 
-                    __metadata('design:paramtypes', [])
+                    }),
+                    __param(0, di_1.Inject(angular2_1.ElementRef)),
+                    __param(1, di_1.Inject(angular2_1.Renderer)), 
+                    __metadata('design:paramtypes', [(typeof ElementRef !== 'undefined' && ElementRef) || Object, (typeof Renderer !== 'undefined' && Renderer) || Object])
                 ], Zippy);
                 return Zippy;
             })();

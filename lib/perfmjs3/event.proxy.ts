@@ -31,7 +31,7 @@ base("eventProxy", {
                 _results.push(this.subscribe(id, fn, context));
             }
             return _results;
-        }else {
+        } else {
             subscription = {
                 context: context,
                 callback: fn
@@ -121,4 +121,4 @@ base.eventProxy.defaults = {
     scope: 'singleton',
     end: 0
 };
-export var exventProxy = base.eventProxy.newInstance();
+export var eventProxy = base.eventProxy.newInstance();

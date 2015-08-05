@@ -1,6 +1,6 @@
-<link href="css/ssq/media10px.css" type="text/css" rel="stylesheet" />
-<link href="css/ssq/rem-base.css" type="text/css" rel="stylesheet" />
-<link href="css/ssq/toutiao-index.css" type="text/css" rel="stylesheet" />
+<link href="/perfmjs/example/angular2-try/css/ssq/media10px.css" type="text/css" rel="stylesheet" />
+<link href="/perfmjs/example/angular2-try/css/ssq/rem-base.css" type="text/css" rel="stylesheet" />
+<link href="/perfmjs/example/angular2-try/css/ssq/toutiao-index.css" type="text/css" rel="stylesheet" />
 <div [ng-switch]="page">
 <template [ng-switch-when]="'bet'">
 	<ul class="k-tabs-hd aequilatus">
@@ -54,7 +54,7 @@
 				</ul>
 			</div>
 			<div class="lot-date justify">
-				<ssq-bobao></ssq-bobao>
+				<ssqbobao (message-event)="messageEventCompleted($event)"></ssqbobao>
 				<span id="jq_spread_link" class="link">点击展开往期开奖<i class="arrow-top on">↑</i></span>
 				<!-- arrow-top 箭头向下 -->
 			</div>
@@ -75,13 +75,9 @@
 
 	<div class="pick-area">
 		<div class="pick-toolbar">
-			<div class="tc-btn-group" id="Jq_stateBarA">
-				<a id="Jq_random" href="javascript:void(0);" [class]="{'tc-btn':true,'tc-btn-random':betInfo.get('betCount')<1, 'tc-btn-info':betInfo.get('betCount')>0, 'i-shake':true}"  (click)="randomCode()">{{(betInfo | betCountPipe)>0?'清空':'随机一注'}}</a>
-				<a href="javascript:void(0);" class="tc-btn tc-btn-large tc-btn-primary">{{betInfo.get('betCount') | betInfoPipe}}</a>
-			</div>
-			<div class="tc-btn-group" id="Jq_stateBarB" style="display:none;">
-				<a id="Jq_clearBall" href="javascript:void(0);" class="tc-btn tc-btn-info">清 空</a>
-				<a href="javascript:void(0);" class="tc-btn tc-btn-large tc-btn-primary">共<span id="Jq_zhushu">0</span>注，下一步</a>
+			<div class="tc-btn-group">
+				<a href="javascript:void(0);" [class]="{'tc-btn':true,'tc-btn-random':betInfo.get('betCount')<1, 'tc-btn-info':betInfo.get('betCount')>0, 'i-shake':true}"  (click)="randomCode()">{{(betInfo | betCountPipe)>0?'清空':'随机一注'}}</a>
+				<a href="javascript:void(0);" class="tc-btn tc-btn-large tc-btn-primary" (click)="betConfirm()">{{betInfo.get('betCount') | betInfoPipe}}</a>
 			</div>
 		</div>
 	</div>
@@ -93,7 +89,7 @@
 	</ul>
 	<div class="k-tabs" style="bottom: 5rem; -webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); touch-action: none;" id="Jq_swipe"><div class="xscroll-container" style="height: 100%; width: 100%; overflow: hidden;">
 		<div class="trend-content tac gray fs24" style="display: block;">
-			<img src="angular2-try/images/ssq/trend.png?vt=5" alt="">
+			<img src="/perfmjs/example/angular2-try/images/ssq/trend.png?vt=5" alt="">
 			<p class="mt20">走势图等相关工具欢迎下载客户端体验</p>
 			<div class="tc-btn-group mt10">
 				<a href="http://s0.pstatp.com/site/download/app/apk/other/acp_jrtc_v2_0_3-2334610.apk" class="tc-btn tc-btn-large tc-btn-primary" style="-webkit-user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); touch-action: none;">客户端下载</a>

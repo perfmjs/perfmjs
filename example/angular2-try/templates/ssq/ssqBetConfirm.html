@@ -1,0 +1,60 @@
+<link href="/perfmjs/example/angular2-try/css/ssq/media10px.css" type="text/css" rel="stylesheet" />
+<link href="/perfmjs/example/angular2-try/css/ssq/kmodal.css" type="text/css" rel="stylesheet" />
+<link href="/perfmjs/example/angular2-try/css/ssq/rem-base.css" type="text/css" rel="stylesheet" />
+<link href="/perfmjs/example/angular2-try/css/ssq/toutiao-index.css" type="text/css" rel="stylesheet" />
+<ul class="k-tabs-btn aequilatus">
+    <li (^click)="gotoBetPage()"><i class="tc-icon tc-icon-plus"></i>手动选号</li>
+    <li (^click)="random5zhu()"><i class="tc-icon tc-icon-plus"></i>机选5注</li>
+</ul>
+<div class="k-tabs mt10" style="bottom:11.6rem; top:3.9rem;">
+    <div class="bets-box">
+        <div class="dragWrap" id="Jq_touchWrapParent">
+            <div class="dragCore">
+                <ul class="bets-list" id="Jq_touchWrap">
+                    <li *ng-for="#code of betPlanContent.content;#idx=index">
+                        <div class="bets-con">
+                            <span class="red">{{code.red.join(' ')}}</span>
+                            <span class="blue">{{code.blue.join(' ')}}</span>
+                        </div>
+                        <a class="bets-delete flex-center"><span mark="delete" (click)="delSelectedCode(idx)">&times;</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="icon-refresh"></div>
+    </div>
+</div>
+<div class="pick-area">
+    <!-- 投注选项 -->
+    <ul class="aequilatus">
+        <li class="layout-col">
+            <label class="pick-number-label">
+                <span class="txt-l">追</span>
+                <a href="javascript:void(0);" class="reduce" (^click)="adjustChaseItemCount('reduce')"><i class="h"></i></a>
+                <input type="tel" value="{{betPlanContent.chaseItemCount}}" id="Jq_qishuEle" readonly>
+                <a href="javascript:void(0);" class="add" (^click)="adjustChaseItemCount('add')"><i class="h"></i><i class="v"></i></a>
+                <span class="txt-r">期</span>
+            </label>
+        </li>
+        <li class="layout-col bets-amounts">
+            <label class="pick-number-label">
+                <span class="txt-l">投</span>
+                <a href="javascript:void(0);" class="reduce" (^click)="adjustMultiple('reduce')"><i class="h"></i></a>
+                <input type="tel" value="{{betPlanContent.multiple}}" max="99" id="Jq_beishuEle" readonly>
+                <a href="javascript:void(0);" class="add" (^click)="adjustMultiple('add')"><i class="h"></i><i class="v"></i></a> <span class="txt-r">倍</span>
+            </label>
+        </li>
+        <li class="layout-col bets-amounts" style="display:none;">
+            共<span>5</span>注，<span class="pick-red">2</span>元
+        </li>
+    </ul>
+    <div class="pick-bets-con">
+        <div class="tc-btn-group">
+            <a href="javascript:void(0);" class="tc-btn tc-btn-large tc-btn-primary" (click)="payNow()">立即付款&nbsp;&nbsp;<span>{{(betPlanContent | betPlanPipe).betAmount}}</span>元</a>
+        </div>
+        <div class="pick-agree-rule tac gray">
+            <input type="checkbox" [ng-form-control]="readedProtocolControl" class="tc-checkbox">   我已阅读并同意《<a href="#">服务协议</a>》和《<a href="#">免密协议</a>》
+        </div>
+    </div>
+</div>
+<modal (message-event)="messageEventCompleted($event)"></modal>

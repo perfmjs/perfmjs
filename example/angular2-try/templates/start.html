@@ -9,7 +9,7 @@
 <p *ng-if="names.length > 4">You have many friends!</p>
 <div>keyname: <input #keyname (keyup)></div>
 <p>{{keyname.value}}</p>
-<div>myControllerMethod: <input (keyup)="myCtrlMethod(keyname.value)"><div>
+<div>myControllerMethod: <input (keyup)="myCtrlMethod(keyname.value)"></div>
 <button (click)="myCtrlMethod('just a try')">login</button>
 <h1></h1>
 <zippy zippy-title="Details">

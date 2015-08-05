@@ -8,6 +8,7 @@ import {Start} from './start';
 import {Zhuanpan} from './zhuanpan';
 import {Dianqiu} from './dianqiu';
 import {Ssq} from './ssq';
+import {SsqBetConfirm} from './SsqBetConfirm';
 
 @Component({
     selector: 'app'
@@ -19,12 +20,13 @@ import {Ssq} from './ssq';
     directives: [RouterOutlet, RouterLink]
 })
 @RouteConfig([
-    {path: '/',    as: 'index',   component: Ssq},
-    {path: '/login', as: 'login', component: Login},
-    {path: '/start', as: 'start', component: Start},
-    {path: '/zhuanpan', as: 'zhuanpan', component: Zhuanpan},
-    {path: '/dianqiu', as: 'dianqiu', component: Dianqiu},
-    {path: '/ssq', as: 'ssq', component: Ssq}
+    {path: '/', as:'index', component:Start},
+    {path: '/login', as:'login', component:Login},
+    {path: '/start', as:'start', component:Start},
+    {path: '/zhuanpan', as: 'zhuanpan', component:Zhuanpan},
+    {path: '/dianqiu', as: 'dianqiu', component:Dianqiu},
+    {path: '/ssq', as: 'ssq', component:Ssq},
+    {path: '/ssqBetConfirm', as:'ssqBetConfirm', component:SsqBetConfirm}
 ])
 export class App {
     router: Router;

@@ -91,7 +91,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
                 function BetPlanContent() {
                     this._lottery = '';
                     this._content = [];
-                    this._betCount = 0;
+                    this._totalBetCount = 0;
                     this._betAmount = 0;
                     this._multiple = 1; //倍数
                     this._chaseItemCount = 1; //追号期数
@@ -99,7 +99,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
                 BetPlanContent.prototype.init = function () {
                     this._lottery = '';
                     this._content = [];
-                    this._betCount = 0;
+                    this._totalBetCount = 0;
                     this._betAmount = 0;
                     this._multiple = 1;
                     this._chaseItemCount = 1;
@@ -121,9 +121,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
                     enumerable: true,
                     configurable: true
                 });
-                Object.defineProperty(BetPlanContent.prototype, "betCount", {
+                Object.defineProperty(BetPlanContent.prototype, "totalBetCount", {
                     get: function () {
-                        return this._betCount;
+                        return this._totalBetCount;
+                    },
+                    set: function (totalBetCount) {
+                        this._totalBetCount = totalBetCount;
                     },
                     enumerable: true,
                     configurable: true
@@ -131,6 +134,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
                 Object.defineProperty(BetPlanContent.prototype, "betAmount", {
                     get: function () {
                         return this._betAmount;
+                    },
+                    set: function (betAmount) {
+                        this._betAmount = betAmount;
                     },
                     enumerable: true,
                     configurable: true
@@ -162,8 +168,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
                     enumerable: true,
                     configurable: true
                 });
+                /**
+                 * FIXME 算法待完善
+                 * @returns {number}
+                 */
+                BetPlanContent.prototype.calcTotalAmount = function () {
+                    return this._totalBetCount
+                        * this.unitPrice
+                        * this._multiple
+                        * this._chaseItemCount;
+                };
                 return BetPlanContent;
             })();
+            exports_1("BetPlanContent", BetPlanContent);
         }
     }
 });
