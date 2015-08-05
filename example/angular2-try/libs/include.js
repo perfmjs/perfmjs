@@ -5,7 +5,6 @@
             //do nothing
         } else if (module === 'jquery') {
             combineUrls[combineUrls.length] = 'js/zhuanpan/jquery.min.js';
-            combineUrls[combineUrls.length] = 'js/ssqConfirm/jquery.kModal.js';
         } else if (module === 'zhuanpan') {
             combineUrls[combineUrls.length] = 'js/zhuanpan/jquery.rotate.min.js';
             combineUrls[combineUrls.length] = 'js/zhuanpan/jcMarquee.js';

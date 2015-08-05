@@ -35,7 +35,7 @@ import {MessageEvent} from './MessageEvent';
                         <p class="tac pan_span"><span class="icon_danger"></span><span>{{dialogInfo.info1}}</span></p><p class="fs36 tac mt10">{{dialogInfo.info2}}</p><p class="mt10 c666">{{dialogInfo.tips}}</p>
                     </div>
                     <div id="jq_km_ft" [class]="{'k-modal-footer':kmodalfooterClass}">
-                        <ul class="flex_equal"><li><button class="k-btn k-btn-default k-btn-block k-jq_closeModal">{{dialogInfo.cancel}}</button></li><li class="ml10"><button class="k-btn k-btn-success k-btn-block">{{dialogInfo.ok}}</button></li></ul>
+                        <ul class="flex_equal"><li><button class="k-btn k-btn-default k-btn-block k-jq_closeModal" (click)="closeHandler($event)">{{dialogInfo.cancel}}</button></li><li class="ml10"><button class="k-btn k-btn-success k-btn-block" (click)="closeHandler($event,'ok')">{{dialogInfo.ok}}</button></li></ul>
                     </div>
                 </template>
                 <template [ng-switch-when]="'success'">
@@ -75,7 +75,6 @@ import {MessageEvent} from './MessageEvent';
     </div>
 </div>
     `,
-    //templateUrl: './directives/modal.html',
     directives: [coreDirectives, CSSClass]
 })
 export class Modal {
@@ -122,7 +121,7 @@ export class Modal {
     }
 
     onMessage(message) {
-        this.modal(message.modal);
+        this.modal(message.modalParam);
     }
 
     modal(options) {
@@ -158,7 +157,7 @@ export class Modal {
     }
 
     //关闭事件以及取消绑定事件和清除样式
-    closeHandler(event) {
+    closeHandler(event, data) {
         this.showModal = false;
         this.kmodaloverlayClass = false;
         this.kmodaladsorbClass = false;
@@ -170,7 +169,7 @@ export class Modal {
             this.showModalHeader = true;
         }
         if (this.params.callbackFunc) {
-            this.params.callbackFunc();
+            this.params.callbackFunc(data);
         }
     }
 

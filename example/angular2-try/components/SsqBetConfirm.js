@@ -131,16 +131,16 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                  */
                 SsqBetConfirm.prototype.payNow = function () {
                     var self = this, agree = this.readedProtocolControl.value;
-                    if (!agree) {
+                    if (!agree || this.betPlanContent.totalBetCount < 1) {
                         var agreeModalParam = {
                             type: "",
                             dialogTitle: "",
                             dialogHead: false,
                             dialogInfo: {
                                 'dialogType': 'fail',
-                                'info1': '查看记录',
-                                'info2': '分享',
-                                'tips': '投注前请先阅读并选中投注协议！',
+                                'info1': '',
+                                'info2': '',
+                                'tips': '投注前请先阅读并选中投注协议，并至少有1个投注！！',
                                 'cancel': '',
                                 'ok': '继续投注'
                             },
@@ -151,7 +151,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                                 console.log('回调函数接口');
                             }
                         };
-                        this.event.emit({ 'modal': agreeModalParam });
+                        this.event.emit({ 'modalParam': agreeModalParam });
                         return;
                     }
                     var confirmModalParam = {
@@ -160,18 +160,21 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                         dialogHead: true,
                         dialogInfo: {
                             'dialogType': 'confirm',
-                            'info1': '金额为' + self.betPlanContent.betAmount,
-                            'info2': '是否继续投注？',
-                            'tips': '默认投注所有让分值',
+                            'info1': '金额为' + self.betPlanContent.betAmount + '元，是否继续投注？',
+                            'info2': '',
+                            'tips': '',
                             'cancel': '放弃投注',
                             'ok': '确认投注'
                         },
                         beforeFunc: function () {
                             console.log('beforeFunc');
                         },
-                        callbackFunc: function () {
-                            console.log('回调函数接口');
-                            self.event.emit({ 'modal': successModalParam });
+                        callbackFunc: function (data) {
+                            console.log('回调函数接口:' + data);
+                            if (data === 'ok') {
+                                self.betPlanContent.init();
+                                self.event.emit({ 'modalParam': successModalParam });
+                            }
                         }
                     };
                     var successModalParam = {
@@ -189,16 +192,17 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                         beforeFunc: function () {
                             console.log('beforeFunc');
                         },
-                        callbackFunc: function () {
-                            console.log('回调函数接口');
+                        callbackFunc: function (data) {
+                            console.log('回调函数接口-success:' + data);
+                            self.gotoBetPage();
                         }
                     };
-                    var tipModalParam = {
+                    var tipsModalParam = {
                         type: "overlay",
                         dialogTitle: "提示3",
                         dialogHead: true,
                         dialogInfo: {
-                            'dialogType': 'tip',
+                            'dialogType': 'tips',
                             'info1': '',
                             'info2': '',
                             'tips': '',
@@ -250,7 +254,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                             console.log('回调函数接口');
                         }
                     };
-                    this.event.emit({ 'modal': confirmModalParam });
+                    this.event.emit({ 'modalParam': confirmModalParam });
                 };
                 SsqBetConfirm.prototype.messageEventCompleted = function (event) {
                     this.event = event;
