@@ -1,3 +1,7 @@
+3.0.3/ 2015-08-08
+==================
+* improved: angular2-try提升angular2的依赖from 2.0.0-alpha.33 to 2.0.0-alpha.34
+
 3.0.2/ 2015-08-05
 ==================
 * add: angular2-try增加Modal指令,MessageEvent功能

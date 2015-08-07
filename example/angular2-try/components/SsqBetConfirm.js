@@ -262,7 +262,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                 SsqBetConfirm = __decorate([
                     angular2_1.Component({
                         selector: 'ssqBetConfirm',
-                        viewInjector: [
+                        viewBindings: [
                             change_detection_1.Pipes.extend({
                                 'betPlanPipe': commonPipe_1.CommonPipeFactory.toPipe(betPlanPipeObj)
                             })

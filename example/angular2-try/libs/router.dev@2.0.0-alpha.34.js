@@ -1,4 +1,10 @@
 "format register";
+System.register("angular2/src/router/route_definition", [], false, function(__require, __exports, __module) {
+  System.get("@@global-helpers").prepareGlobal(__module.id, []);
+  (function() {}).call(System.global);
+  return System.get("@@global-helpers").retrieveGlobal(__module.id, false);
+});
+
 System.register("angular2/src/router/lifecycle_annotations_impl", ["angular2/src/facade/lang"], function($__export) {
   "use strict";
   var __moduleName = "angular2/src/router/lifecycle_annotations_impl";
@@ -293,6 +299,8 @@ System.register("angular2/src/router/route_config_impl", ["angular2/src/facade/l
         this.path = path;
         this.component = component;
         this.as = as;
+        this.loader = null;
+        this.redirectTo = null;
       }, {}, {}));
       $__export("Route", Route);
       $__export("Route", Route = __decorate([CONST(), __metadata('design:paramtypes', [Object])], Route));
@@ -700,7 +708,10 @@ System.register("angular2/src/router/location", ["angular2/src/router/location_s
         }));
       }, {
         _onPopState: function(_) {
-          ObservableWrapper.callNext(this._subject, {'url': this.path()});
+          ObservableWrapper.callNext(this._subject, {
+            'url': this.path(),
+            'pop': true
+          });
         },
         path: function() {
           return this.normalize(this._platformStrategy.path());
@@ -1489,6 +1500,7 @@ System.register("angular2/src/router/router", ["angular2/src/facade/async", "ang
             return this.renavigate();
           },
           navigate: function(url) {
+            var _skipLocationChange = arguments[1] !== (void 0) ? arguments[1] : false;
             var $__0 = this;
             return this._currentNavigation = this._currentNavigation.then((function(_) {
               $__0.lastNavigationAttempt = url;
@@ -1505,7 +1517,7 @@ System.register("angular2/src/router/router", ["angular2/src/facade/async", "ang
                   }
                   return $__0._canDeactivate(matchedInstruction).then((function(result) {
                     if (result) {
-                      return $__0.commit(matchedInstruction).then((function(_) {
+                      return $__0.commit(matchedInstruction, _skipLocationChange).then((function(_) {
                         $__0._emitNavigationFinish(matchedInstruction.accumulatedUrl);
                         return true;
                       }));
@@ -1564,6 +1576,7 @@ System.register("angular2/src/router/router", ["angular2/src/facade/async", "ang
             }));
           },
           commit: function(instruction) {
+            var _skipLocationChange = arguments[1] !== (void 0) ? arguments[1] : false;
             this._currentInstruction = instruction;
             if (isPresent(this._outlet)) {
               return this._outlet.commit(instruction);
@@ -1637,16 +1650,21 @@ System.register("angular2/src/router/router", ["angular2/src/facade/async", "ang
           $traceurRuntime.superConstructor(RootRouter).call(this, registry, pipeline, null, hostComponent);
           this._location = location;
           this._location.subscribe(($__0 = this, function(change) {
-            return $__0.navigate(change['url']);
+            return $__0.navigate(change['url'], isPresent(change['pop']));
           }));
           this.registry.configFromComponent(hostComponent, true);
           this.navigate(location.path());
         }
         return ($traceurRuntime.createClass)(RootRouter, {commit: function(instruction) {
+            var _skipLocationChange = arguments[1] !== (void 0) ? arguments[1] : false;
             var $__0 = this;
-            return $traceurRuntime.superGet(this, RootRouter.prototype, "commit").call(this, instruction).then((function(_) {
-              $__0._location.go(instruction.accumulatedUrl);
-            }));
+            var promise = $traceurRuntime.superGet(this, RootRouter.prototype, "commit").call(this, instruction);
+            if (!_skipLocationChange) {
+              promise = promise.then((function(_) {
+                $__0._location.go(instruction.accumulatedUrl);
+              }));
+            }
+            return promise;
           }}, {}, $__super);
       }(Router));
       $__export("RootRouter", RootRouter);
@@ -1656,7 +1674,8 @@ System.register("angular2/src/router/router", ["angular2/src/facade/async", "ang
           this.parent = parent;
         }
         return ($traceurRuntime.createClass)(ChildRouter, {navigate: function(url) {
-            return this.parent.navigate(url);
+            var _skipLocationChange = arguments[1] !== (void 0) ? arguments[1] : false;
+            return this.parent.navigate(url, _skipLocationChange);
           }}, {}, $__super);
       }(Router));
       SLASH = new RegExp('/');
@@ -2049,7 +2068,7 @@ System.register("angular2/src/router/router_outlet", ["angular2/src/facade/async
   };
 });
 
-System.register("angular2/router", ["angular2/src/router/router", "angular2/src/router/router_outlet", "angular2/src/router/router_link", "angular2/src/router/instruction", "angular2/src/router/route_registry", "angular2/src/router/location_strategy", "angular2/src/router/hash_location_strategy", "angular2/src/router/html5_location_strategy", "angular2/src/router/location", "angular2/src/router/pipeline", "angular2/src/router/route_config_decorator", "angular2/src/router/lifecycle_annotations", "angular2/src/core/application_tokens", "angular2/di", "angular2/src/facade/lang"], function($__export) {
+System.register("angular2/router", ["angular2/src/router/router", "angular2/src/router/router_outlet", "angular2/src/router/router_link", "angular2/src/router/instruction", "angular2/src/router/route_registry", "angular2/src/router/location_strategy", "angular2/src/router/hash_location_strategy", "angular2/src/router/html5_location_strategy", "angular2/src/router/location", "angular2/src/router/pipeline", "angular2/src/router/route_config_decorator", "angular2/src/router/route_definition", "angular2/src/router/lifecycle_annotations", "angular2/src/core/application_tokens", "angular2/di", "angular2/src/facade/lang"], function($__export) {
   "use strict";
   var __moduleName = "angular2/router";
   var LocationStrategy,
@@ -2071,6 +2090,11 @@ System.register("angular2/router", ["angular2/src/router/router", "angular2/src/
     routerInjectables: true,
     undefined: true
   };
+  var $__exportNames = {
+    routerDirectives: true,
+    routerInjectables: true,
+    undefined: true
+  };
   return {
     setters: [function($__m) {
       Router = $__m.Router;
@@ -2085,6 +2109,7 @@ System.register("angular2/router", ["angular2/src/router/router", "angular2/src/
       $__export("RouterLink", $__m.RouterLink);
     }, function($__m) {
       $__export("RouteParams", $__m.RouteParams);
+      $__export("Instruction", $__m.Instruction);
     }, function($__m) {
       RouteRegistry = $__m.RouteRegistry;
       $__export("RouteRegistry", $__m.RouteRegistry);
@@ -2103,6 +2128,11 @@ System.register("angular2/router", ["angular2/src/router/router", "angular2/src/
     }, function($__m) {
       Pipeline = $__m.Pipeline;
       $__export("Pipeline", $__m.Pipeline);
+    }, function($__m) {
+      Object.keys($__m).forEach(function(p) {
+        if (!$__exportNames[p])
+          $__export(p, $__m[p]);
+      });
     }, function($__m) {
       Object.keys($__m).forEach(function(p) {
         if (!$__exportNames[p])
@@ -2128,4 +2158,4 @@ System.register("angular2/router", ["angular2/src/router/router", "angular2/src/
   };
 });
 
-//# sourceMappingURL=router.dev@2.0.0-alpha.33.js.map
+//# sourceMappingURL=router.dev@2.0.0-alpha.34.js.map

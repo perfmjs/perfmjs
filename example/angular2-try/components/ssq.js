@@ -163,7 +163,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                 Ssq = __decorate([
                     angular2_1.Component({
                         selector: 'ssq',
-                        viewInjector: [
+                        viewBindings: [
                             change_detection_1.Pipes.extend({
                                 'betInfoPipe': commonPipe_1.CommonPipeFactory.toPipe(betInfoPipeObj),
                                 'betCountPipe': commonPipe_1.CommonPipeFactory.toPipe(betCountPipeObj)

@@ -27,7 +27,7 @@ betPlanPipeObj.transform = utils.aop(this, betPlanPipeObj.transform, function(va
 
 @Component({
     selector: 'ssqBetConfirm',
-    viewInjector: [
+    viewBindings: [
         Pipes.extend({
             'betPlanPipe': CommonPipeFactory.toPipe(betPlanPipeObj)
         })

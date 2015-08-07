@@ -2,7 +2,7 @@ import {Component, View, Injectable, coreDirectives, Directive, ElementRef, Rend
 import {Inject, bind} from 'angular2/di';
 import {Router, RouterOutlet, RouterLink, routerInjectables} from 'angular2/router';
 import {CSSClass} from 'angular2/src/directives/class';
-import {Pipes} from 'angular2/src/change_detection/change_detection';
+import {Pipes, defaultPipes} from 'angular2/src/change_detection/change_detection';
 
 import {CommonService} from '../services/common.service';
 import {utils} from 'perfmjs/utils';
@@ -33,10 +33,10 @@ betInfoPipeObj.transform = utils.aop(this, betInfoPipeObj.transform, function(va
 
 @Component({
     selector: 'ssq',
-    viewInjector: [
+    viewBindings: [
         Pipes.extend({
             'betInfoPipe': CommonPipeFactory.toPipe(betInfoPipeObj),
-            'betCountPipe':CommonPipeFactory.toPipe(betCountPipeObj)
+            'betCountPipe': CommonPipeFactory.toPipe(betCountPipeObj)
         })
     ]
 })

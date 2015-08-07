@@ -1,5 +1,5 @@
 import {Component, View} from 'angular2/angular2';
-import {Inject,bind} from 'angular2/di';
+import {Inject, bind} from 'angular2/di';
 import {RouteConfig, Router, RouterOutlet, RouterLink, routerInjectables} from 'angular2/router';
 
 import {CommonService} from '../services/common.service';
@@ -20,7 +20,7 @@ import {SsqBetConfirm} from './SsqBetConfirm';
     directives: [RouterOutlet, RouterLink]
 })
 @RouteConfig([
-    {path: '/', as:'index', component:Start},
+    {path: '/', as:'index', component:Ssq},
     {path: '/login', as:'login', component:Login},
     {path: '/start', as:'start', component:Start},
     {path: '/zhuanpan', as: 'zhuanpan', component:Zhuanpan},
