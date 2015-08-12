@@ -149,12 +149,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                         'blue': selectedBlueCode,
                         'betCount': this.betInfo.get('betCount')
                     };
-                    var totalBetCount = 0;
-                    utils_1.utils.forEach(betPlanContent.content, function (item, index) {
-                        totalBetCount = totalBetCount + utils_1.utils.toNumber(item.betAccount);
-                    });
-                    betPlanContent.content.totalBetCount = totalBetCount;
-                    betPlanContent.content.betAmount = betPlanContent.calcTotalAmount();
                     this.router.navigate('/ssqBetConfirm');
                 };
                 Ssq.prototype.messageEventCompleted = function (event) {

@@ -5,10 +5,10 @@ import {RouteConfig, Router, RouterOutlet, RouterLink, routerInjectables} from '
 import {CommonService} from '../services/common-service';
 import {Main} from './main';
 import {Detail} from './detail';
+import {ToutiaoIndex} from './ToutiaoIndex';
 
 @Component({
-    selector: 'app',
-    appInjector: [routerInjectables, CommonService]
+    selector: 'app'
 })
 @View({
     template: `
@@ -17,17 +17,18 @@ import {Detail} from './detail';
     directives: [RouterOutlet, RouterLink]
 })
 @RouteConfig([
+    {path: '/', as: 'index', component: ToutiaoIndex},
     {path: '/index', as: 'main', component: Main},
-    {path: '/detail', as: 'detail', component: Detail}
+    {path: '/detail', as: 'detail', component: Detail},
+    {path: '/toutiaoIndex', as: 'toutiaoIndex', component: ToutiaoIndex}
 ])
 export class App {
     router: Router;
     commonService: CommonService;
 
-    constructor(@Inject(Router) router: Router, @Inject(CommonService) commonService: CommonService) {
+    constructor(@Inject(Router) router: Router, commonService: CommonService) {
         this.router = router;
         this.commonService = commonService;
-        this.commonService.setRootRouter(this.router);
-        this.router.navigate('/index');
+        this.router.navigate('/');
     }
 }

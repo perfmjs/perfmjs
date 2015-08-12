@@ -9,14 +9,11 @@ var del       = require('del');
 //below for typescript compile
 var ts = require('gulp-typescript');
 var merge = require('merge2');
-//below for typescript traceur
-var gulpTraceur = require('gulp-traceur');
-var sourcemaps = require('gulp-sourcemaps');
 
 var paths = {
     "core.name.snapshot": "core",
     "core.name.release": "core-2.1.2",
-    "core.ts.snapshot": "core-3.0.1",
+    "core.ts.snapshot": "core-3.0.4",
     scripts: [
         './lib/perfmjs/core.js',
         './lib/perfmjs/sys-config.js',
@@ -90,23 +87,4 @@ gulp.task('perfmjs3', ['clean-dist'], function () {
 //watch perfmjs3
 gulp.task('watch', ['perfmjs3'], function() {
     gulp.watch(paths.tsScripts, {ignoreInitial: true}, ['perfmjs3']);
-});
-
-//typescript traceur, 参考：http://stackoverflow.com/questions/30813006/angular-2-typescript-require-not-found
-gulp.task('compile-not-used', ['perfmjs3'], function() {
-    return gulp.src("./lib/perfmjs3/**/*.js") //dist/js/*.es6.js
-        .pipe(sourcemaps.init())
-        .pipe(gulpTraceur({
-            sourceMaps: true,
-            outputLanguage: 'es5',
-            annotations: true, // parse annotations
-            types: true, // parse types
-            script: false, // parse as a module
-            memberVariables: true, // parse class fields
-            modules: 'instantiate', //modules: amd|register|instantiate|inline
-            moduleName: true
-        }))
-        .pipe(concat(paths['core.ts.snapshot'] + '.js'))
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('dist/js'));
 });

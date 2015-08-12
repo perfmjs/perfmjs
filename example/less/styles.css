@@ -1,9 +1,57 @@
-.box {
-  color: #fe33ac;
-  border-color: #fdcdea;
+p,
+a,
+ul,
+li {
+  border-top: 2px dotted #366;
 }
-.box div {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+p + p,
+p + a,
+p + ul,
+p + li,
+a + p,
+a + a,
+a + ul,
+a + li,
+ul + p,
+ul + a,
+ul + ul,
+ul + li,
+li + p,
+li + a,
+li + ul,
+li + li {
+  border-top: 0;
+}
+/*===============*/
+.animal,
+.bear {
+  background-color: black;
+  color: white;
+}
+.bear {
+  background-color: brown;
+}
+.less-bordered {
+  border-top: dotted 1px black;
+  border-bottom: solid 2px black;
+}
+#header {
+  color: #36bdf9;
+}
+#header a {
+  color: #36bdf9;
+  border-top: dotted 1px black;
+  border-bottom: solid 2px black;
+}
+.clearfix {
+  display: block;
+  zoom: 1;
+}
+.clearfix:after {
+  content: " ";
+  display: block;
+  font-size: 0;
+  height: 0;
+  clear: both;
+  visibility: hidden;
 }

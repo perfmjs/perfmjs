@@ -256,7 +256,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                     };
                     this.event.emit({ 'modalParam': confirmModalParam });
                 };
-                SsqBetConfirm.prototype.messageEventCompleted = function (event) {
+                SsqBetConfirm.prototype.modalCompleted = function (event) {
                     this.event = event;
                 };
                 SsqBetConfirm = __decorate([

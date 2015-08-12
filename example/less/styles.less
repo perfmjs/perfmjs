@@ -1,15 +1,40 @@
-@base: #f938ab;
+p, a, ul, li {
+  border-top: 2px dotted #366;
+  & + & {
+    border-top: 0;
+  }
+}
+/*===============*/
+.animal {
+  background-color: black;
+  color: white;
+}
+.bear {
+  &:extend(.animal);
+  background-color: brown;
+}
+@base: #36bdf9;
+.less-bordered {
+    border-top: dotted 1px black;
+    border-bottom: solid 2px black;
+}
+#header {
+    color: @base;
+    a {
+      color: @base;
+      .less-bordered;
+    }
+}
+.clearfix {
+  display: block;
+  zoom: 1;
 
-.box-shadow(@style, @c) when (iscolor(@c)) {
-  box-shadow:         @style @c;
-  -webkit-box-shadow: @style @c;
-  -moz-box-shadow:    @style @c;
-}
-.box-shadow(@style, @alpha: 50%) when (isnumber(@alpha)) {
-  .box-shadow(@style, rgba(0, 0, 0, @alpha));
-}
-.box {
-  color: saturate(@base, 5%);
-  border-color: lighten(@base, 30%);
-  div { .box-shadow(0 0 5px, 30%) }
+  &:after {
+    content: " ";
+    display: block;
+    font-size: 0;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
 }

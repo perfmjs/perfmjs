@@ -1,0 +1,399 @@
+body.withHeader {
+    padding-top: 80px;
+}
+body {
+    position: relative;
+}
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, a, code, em, img, q, small, strong, dd, dl, dt, li, ol, ul, fieldset, form, label, table, tbody, tr, th, td, input {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+html {
+    font-family: "Microsoft Yahei",arial,helvetica,sans-serif;
+    -webkit-text-size-adjust: none;
+    word-break: break-word;
+}
+/*header*/
+header {
+    display: block;
+    z-index: 999;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.top_bar .abs_l, .top_bar .abs_m, .top_bar .abs_r {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 44px;
+    height: 44px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+.top_bar .msg-box {
+    background: url(http://s0.pstatp.com/resource/toutiao_wap/static/image/message_box_086b2f5.png) no-repeat;
+    background-size: contain;
+    width: 32px;
+    height: 25px;
+    margin-left: 12px;
+    margin-top: 6px;
+    display: block;
+    position: relative;
+}
+.top_bar .refresh_title {
+    background: url(http://s0.pstatp.com/resource/toutiao_wap/static/image/toutiao_4370d0f.png) no-repeat right center;
+    width: 83px;
+    background-size: 83px;
+    padding-left: 15px;
+}
+.top_bar .refresh_btn, .top_bar .refresh_title, .top_bar .back, .top_bar .comment_count, .top_bar .user, .top_bar .app, .top_bar .cancel, .top_bar .submit {
+    display: inline-block;
+    height: 44px;
+}
+.top_bar .refresh_btn {
+    background: url(http://s2.pstatp.com/resource/toutiao_wap/static/image/btn_refresh@2x_aac2c97.png) no-repeat center center;
+    width: 25px;
+    background-size: 15px;
+}
+
+.top_bar {
+    height: 44px;
+    position: relative;
+    background: #d43d3d;
+}
+.top_bar .abs_m {
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 700;
+    line-height: 44px;
+}
+
+.top_bar .abs_r {
+    left: auto;
+    right: 0;
+    z-index: 100;
+    width: auto;
+}
+.top_bar .search {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    padding: 10px;
+    background: url(http://s2.pstatp.com/resource/toutiao_wap/static/image/btn_discovery@2x_49a1914.png) no-repeat center;
+    background-size: 21px;
+}
+/*top menu bar*/
+.top_menu_list {
+    white-space: nowrap;
+}
+.top_menu_bar {
+    background: rgba(255,255,255,.95);
+    height: 37px;
+    box-sizing: border-box;
+}
+.top_menu_bar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-image: -webkit-linear-gradient(top,transparent,transparent 40%,#ddd 40%);
+    background-size: 100% 1px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+.top_menu_more {
+    float: right;
+    position: relative;
+}
+.top_menu_more .list_shadow {
+    position: absolute;
+    width: 10px;
+    height: 37px;
+    left: -10px;
+    background: url('/perfmjs/example/angular2-youyue/images/toutiao/list_shadow.png') no-repeat center right;
+    /*background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAABXCAQAAACjUt0DAAAAAmJLR…AwtDMDRwAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAAASUVORK5CYII=) no-repeat center right;*/
+    background-size: contain;
+}
+.top_menu_more .more_btn {
+    background: url('/perfmjs/example/angular2-youyue/images/toutiao/more_btn.png') no-repeat center center;
+    /*background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAKCAYAAADGmhxQAAAACXBIW…JEYeuOVFCDou8UEE8A6t1JhF4bIFUCxDZoBfUGUEENEGAACqlzBi4U6TgAAAAASUVORK5CYII=) no-repeat center center;*/
+    display: block;
+    width: 45px;
+    height: 37px;
+    background-size: 20px;
+}
+.top_menu {
+    overflow: hidden;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+.top_menu::-webkit-scrollbar {
+    display: none;
+}
+div {
+    display: block;
+}
+.top_menu_list .btn {
+    white-space: nowrap;
+    display: inline-block;
+    padding: 0 10px;
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 26px;
+    height: 26px;
+    margin: 5px 0 5px 5px;
+    -webkit-tap-highlight-color: rgba(0,0,0,.3);
+}
+a:visited {
+    color: #999;
+}
+/*content*/
+content {
+    display: block;
+    position: relative;
+}
+.list_content {
+    background: #eee;
+    -webkit-margin-after-collapse: separate;
+    -webkit-margin-before-collapse: discard;
+    -webkit-user-select: none;
+}
+.list_content {
+    -webkit-user-select: none;
+}
+.iphone section {
+    padding: 0;
+}
+section {
+    position: relative;
+    background-color: #fff;
+}
+.iphone section .article_link, .iphone section .media_link {
+}
+section .article_link, section .media_link {
+    display: block;
+    padding: 12px 10px;
+    text-decoration: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    -webkit-touch-callout: none;
+}
+section a:visited h3, section a.visited h3, section a:visited p, section a.visited p {
+    color: #aaa;
+}
+.iphone section h3, .iphone section p {
+    font-weight: 700;
+}
+@media screen and (min-width: 400px) {
+    section h3, section p {
+        font-size: 21px;
+    }
+}
+@media screen and (min-width: 360px) {
+    section h3, section p {
+        font-size: 19px;
+    }
+}
+h3 {
+    display: block;
+    font-size: 1.17em;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
+
+.line3 {
+    -webkit-line-clamp: 3;
+}
+.line1, .line2, .line3, .line4 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+section h3, section p {
+    color: #464646;
+    font-size: 17px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    line-height: 1.2em;
+    text-align: justify;
+}
+section .list_image, section .list_img_holder_large {
+    margin-top: 5px;
+}
+.list_img_holder_large_fix {
+    padding-bottom: 40%;
+    height: 0;
+}
+.list_img_holder_large {
+    background: url('/perfmjs/example/angular2-youyue/images/toutiao/bg_toutiao.png') #efefef no-repeat center center;
+    /*background: url(data:image/gif;base64,R0lGODlh7AA5AIAAAOHh4f///yH5BAEAAAEALAAAAADsADkAAAL/j…KeOsLC45S5cWljXJBWuGaWugxmqZdsEuqGipxJ6qmZM/5paqCdohFbrMAgGWuttt6Ka2wFAAA7) #efefef no-repeat center center;*/
+    background-size: 108px;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+.list_img_holder_large_fix img {
+    position: absolute;
+}
+.list_img_holder_large img {
+    border: 0;
+    display: block;
+    width: 100%;
+    pointer-events: none;
+}
+.item_info {
+    font-size: 11px;
+    line-height: 11px;
+    height: 11px;
+    margin-top: 10px;
+    color: #999;
+    position: relative;
+}
+.item_info .space {
+    margin-right: 5px;
+}
+.subject_label, .hot_label {
+    background: #f05b5b;
+    vertical-align: middle;
+}
+.subject_label, .hot_label, .recommend_label, .fav_label, .ad_label, .video_label {
+    color: #fff;
+    background: #aaa;
+    font-size: 10px;
+    padding: 2px;
+    display: inline-block;
+    margin-top: -2px;
+}
+.item_info .cmt {
+    background: url('/perfmjs/example/angular2-youyue/images/toutiao/cmt.png') no-repeat left center;
+    /*background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAGXRFW…+pZgEWi6SAWBWbBQwgCyjFM2fOdADiA9jkGGndbAEIMABUsMVtdZLV6wAAAABJRU5ErkJggg==) no-repeat left center;*/
+    background-size: 12px;
+    padding-left: 16px;
+}
+.fr {
+    float: right;
+}
+section .list_image, section .list_img_holder_large {
+    margin-top: 5px;
+}
+.list_image ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.list_image ul li {
+    display: inline-block;
+    float: left;
+    overflow: hidden;
+    width: 33.3%;
+}
+.list_image ul li:first-child .list_img_holder {
+    float: left;
+}
+.list_image ul li .list_img_holder {
+    margin: 0 auto;
+}
+.list_img_holder {
+    width: 95%;
+    padding-bottom: 66%;
+    position: relative;
+}
+.list_img_holder {
+    background: url('/perfmjs/example/angular2-youyue/images/toutiao/bg_toutiao.png') #efefef no-repeat center center;
+    /*background: url(data:image/gif;base64,R0lGODlh7AA5AIAAAOHh4f///yH5BAEAAAEALAAAAADsADkAAAL/j…KeOsLC45S5cWljXJBWuGaWugxmqZdsEuqGipxJ6qmZM/5paqCdohFbrMAgGWuttt6Ka2wFAAA7) #efefef no-repeat center center;*/
+    background-size: 54px;
+}
+.list_img_holder img {
+    border: 0;
+    display: block;
+    position: absolute;
+    width: 100%;
+    -webkit-transition: opacity 300ms ease;
+    -moz-transition: opacity ease .3s;
+    pointer-events: none;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-user-select: none;
+    text-decoration: none;
+}
+#app, form, .btn, .control, .top_bar .btn, .list_action, .list_content .swipe_bg, .list_img_holder img, .top_menu_list, .top_menu, .closeBtn, .top_menu_more .more_btn {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-user-select: none;
+    text-decoration: none;
+}
+@media screen and (min-width: 400px){
+    section.middle_mode .list_img_holder {
+        margin-top: 0;
+    }
+}
+@media screen and (min-width: 360px) {
+    section.middle_mode .list_img_holder {
+        width: 26%;
+        padding-bottom: 18%;
+    }
+}
+section.middle_mode .list_img_holder {
+    float: right;
+    overflow: hidden;
+    width: 30%;
+    padding-bottom: 20%;
+    margin-left: 10px;
+    margin-top: 2px;
+}
+section.middle_mode .item_info .canhide {
+    display: none;
+}
+section .line {
+    margin: 0 10px;
+    padding: 0;
+    overflow: hidden;
+    background-image: -webkit-linear-gradient(top,#ddd,#ddd 60%,transparent 60%);
+    background-size: 100% 1px;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    height: 1px;
+}
+@media screen and (min-width: 400px) {
+    .video_btn {
+        background-size: 40px 40px;
+    }
+}
+@media screen and (min-width: 360px) {
+    .video_btn {
+        background-size: 34px 34px;
+    }
+}
+.video_btn {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: url(http://s2.pstatp.com/image/toutiao_mobile/video_day.png) no-repeat center center;
+    background-size: 27px 27px;
+}
+/*clearfix*/
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+

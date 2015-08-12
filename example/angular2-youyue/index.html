@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
     <title>悠阅空间 - 你要的知识和经验，才是头条！</title>
-    <script type="text/javascript" src="libs/core-no-amd.js?^{f:'./libs/include.js',m:'common;'}"></script>
-    <script src="libs/traceur-runtime@0.0.90.js"></script>
-    <script src="libs/system@0.16.11.js"></script>
-    <script src="libs/angular2.dev@2.0.0-alpha.32.js"></script>
-    <script src="libs/router.dev@2.0.0-alpha.32.js"></script>
+    <meta charset="UTF-8">
+    <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
+    <link type="text/css" rel="stylesheet" href="styles/toutiao/index.css">
+    <!--<link type="text/css" rel="stylesheet" href="http://s0.pstatp.com/resource/toutiao_wap/static/style/common/wap_2d3a581.css">-->
+    <!--<link type="text/css" rel="stylesheet" href="http://s2.pstatp.com/resource/toutiao_wap/static/style/wap_flow_36ff4a6.css">-->
+    <!--<link type="text/css" rel="stylesheet" href="http://s0.pstatp.com/resource/toutiao_wap/static/style/common/wap2app_abtest_27cae87.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="http://s2.pstatp.com/resource/toutiao_wap/pagelet/popup_banner/banner_496c047.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="http://s2.pstatp.com/resource/toutiao_wap/pagelet/index_bottom_banner/banner_261b3a4.css">-->
+    <script type="text/javascript" src="libs/traceur-runtime@0.0.90.js"></script>
+    <script type="text/javascript" src="libs/es6-module-loader@0.16.6.js"></script>
+    <script type="text/javascript" src="libs/system.src@0.16.11.js"></script>
+    <script type="text/javascript" src="libs/angular2.dev@2.0.0-alpha.34.js"></script>
+    <script type="text/javascript" src="libs/router.dev@2.0.0-alpha.34.js"></script>
+    <script type="text/javascript" src="/perfmjs/dist/js/core-3.0.4.js"></script>
 </head>
-<body>
+<body class="toutiao iphone withHeader article utms-toutiao utmm-None utmc-None">
 <base href="">
 <app></app>
+<script>
+    System.config({
+        defaultJSExtensions: true,
+        defaultExtension: false,
+        paths: {
+            "*":"*.js",
+            "angular2/*":"angular2/*",
+            "perfmjs/*":"perfmjs/*"
+        }
+    });
+    System.import("./components/index");
+</script>
 </body>
 </html>

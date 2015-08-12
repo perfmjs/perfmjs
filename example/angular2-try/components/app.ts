@@ -20,7 +20,7 @@ import {SsqBetConfirm} from './SsqBetConfirm';
     directives: [RouterOutlet, RouterLink]
 })
 @RouteConfig([
-    {path: '/', as:'index', component:Ssq},
+    {path: '/', as:'index', component:Start},
     {path: '/login', as:'login', component:Login},
     {path: '/start', as:'start', component:Start},
     {path: '/zhuanpan', as: 'zhuanpan', component:Zhuanpan},

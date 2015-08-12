@@ -15,7 +15,6 @@
 <zippy zippy-title="Details">
     <p>This is some content.</p>
 </zippy>
-
 <nav>
     <ul>
         <li><a [router-link]="['/start']">Start</a></li>
@@ -23,3 +22,5 @@
         <li><a>Contact</a></li>
     </ul>
 </nav>
+<ng2ckeditor (message-event)="ng2ckeditorCompleted($event)"></ng2ckeditor>
+<button (click)="printCKEditorHtml()">getCKEditorHtml</button>

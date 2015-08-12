@@ -3,24 +3,24 @@ import {Inject, bind} from 'angular2/di';
 import {utils} from 'perfmjs/utils';
 import {CSSClass} from 'angular2/src/directives/class';
 import {BrowserDomAdapter} from 'angular2/src/dom/browser_adapter';
-import {MessageEvent} from './MessageEvent';
+import {MessageEvent} from './message.event';
 
 
 /**
  * from jquery.kmodal.js
- * 指令使用方法：<modal (message-event)="messageEventCompleted($event)"></modal>
+ * 指令使用方法：<modal (message-event)="modalCompleted($event)"></modal>
  */
 @Component({
     selector: 'modal',
     events: ['messageEvent'] //ref to: SsqBetConfirm.ts and ssqBetConfirm.html
 })
 @View({
+    styles: [`
+        .ng-showKModal {
+            display:block;
+        }
+    `],
     template:`
-<style>
-    .ng-showKModal {
-        display:block;
-    }
-</style>
 <div [class]="{'k-modal':true,'k-modal-overlay':kmodaloverlayClass,'k-modal-adsorb':kmodaladsorbClass,'ng-showKModal':true}" id="jq_modal" *ng-if="showModal">
     <div [class]="{'k-modal-backdrop':kmodalbackdropClass}" *ng-if="showBackdrop"></div>
     <div class="k-modal-dialog">
@@ -172,5 +172,4 @@ export class Modal {
             this.params.callbackFunc(data);
         }
     }
-
 }

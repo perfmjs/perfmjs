@@ -240,7 +240,7 @@ export class SsqBetConfirm {
         this.event.emit({'modalParam': confirmModalParam});
     }
 
-    messageEventCompleted(event) {
+    modalCompleted(event) {
         this.event = event;
     }
 

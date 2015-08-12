@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', '../services/common.service', './zippy'], function(exports_1) {
-    var angular2_1, di_1, router_1, common_service_1, zippy_1;
+};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', '../services/common.service', './zippy', '../directives/ckeditor'], function(exports_1) {
+    var angular2_1, di_1, router_1, common_service_1, zippy_1, ckeditor_1;
     var Start;
     return {
         setters:[
@@ -30,6 +30,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             },
             function (_zippy_1) {
                 zippy_1 = _zippy_1;
+            },
+            function (_ckeditor_1) {
+                ckeditor_1 = _ckeditor_1;
             }],
         execute: function() {
             Start = (function () {
@@ -42,13 +45,20 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                     console.log('call myControllerMethod:' + inputStr);
                     this.router.navigate('/login');
                 };
+                Start.prototype.ng2ckeditorCompleted = function (event) {
+                    this.event = event;
+                    console.log('CKEditor comming...');
+                };
+                Start.prototype.printCKEditorHtml = function () {
+                    console.log('ckedit html:' + this.event.source.getData());
+                };
                 Start = __decorate([
                     angular2_1.Component({
                         selector: 'start'
                     }),
                     angular2_1.View({
                         templateUrl: 'templates/start.html',
-                        directives: [angular2_1.coreDirectives, router_1.RouterOutlet, router_1.RouterLink, zippy_1.Zippy]
+                        directives: [angular2_1.coreDirectives, router_1.RouterOutlet, router_1.RouterLink, zippy_1.Zippy, ckeditor_1.CKEditor]
                     }),
                     __param(0, di_1.Inject(router_1.Router)), 
                     __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object, common_service_1.CommonService])

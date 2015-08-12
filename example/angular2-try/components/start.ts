@@ -4,18 +4,20 @@ import {Router, RouterOutlet, RouterLink, routerInjectables} from 'angular2/rout
 
 import {CommonService} from '../services/common.service';
 import {Zippy} from './zippy';
+import {CKEditor} from '../directives/ckeditor';
 
 @Component({
     selector: 'start'
 })
 @View({
     templateUrl: 'templates/start.html',
-    directives: [coreDirectives, RouterOutlet, RouterLink, Zippy]
+    directives: [coreDirectives, RouterOutlet, RouterLink, Zippy, CKEditor]
 })
 export class Start {
     myName: string;
     names: Array<String>;
     router: Router;
+    event:any;
 
     constructor(@Inject(Router) router: Router, commonService: CommonService) {
         this.myName = 'AngularJS2@爱彩';
@@ -25,5 +27,12 @@ export class Start {
     myCtrlMethod(inputStr: String) {
         console.log('call myControllerMethod:' + inputStr);
         this.router.navigate('/login');
+    }
+    ng2ckeditorCompleted(event) {
+        this.event = event;
+        console.log('CKEditor comming...');
+    }
+    printCKEditorHtml() {
+        console.log('ckedit html:' + this.event.source.getData());
     }
 }

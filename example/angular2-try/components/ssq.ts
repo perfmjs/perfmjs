@@ -135,13 +135,6 @@ export class Ssq {
             'betCount': this.betInfo.get('betCount')
         };
 
-        var totalBetCount = 0;
-        utils.forEach(betPlanContent.content, function(item, index) {
-            totalBetCount = totalBetCount + utils.toNumber(item.betAccount);
-        });
-        betPlanContent.content.totalBetCount = totalBetCount;
-        betPlanContent.content.betAmount = betPlanContent.calcTotalAmount();
-
         this.router.navigate('/ssqBetConfirm');
     }
 

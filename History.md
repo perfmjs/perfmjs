@@ -1,3 +1,7 @@
+3.0.4/ 2015-08-12
+==================
+* improved: improve perfmjs3 to 3.0.4
+
 3.0.3/ 2015-08-08
 ==================
 * improved: angular2-try提升angular2的依赖from 2.0.0-alpha.33 to 2.0.0-alpha.34

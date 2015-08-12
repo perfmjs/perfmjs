@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/di', 'angular2/src/directives/class', '../directives/MessageEvent'], function(exports_1) {
-    var angular2_1, di_1, class_1, MessageEvent_1;
+};System.register(['angular2/angular2', 'angular2/di', 'angular2/src/directives/class', '../directives/message.event'], function(exports_1) {
+    var angular2_1, di_1, class_1, message_event_1;
     var MyDirective, RedDec, SsqBobao;
     return {
         setters:[
@@ -25,8 +25,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             function (_class_1) {
                 class_1 = _class_1;
             },
-            function (_MessageEvent_1) {
-                MessageEvent_1 = _MessageEvent_1;
+            function (_message_event_1) {
+                message_event_1 = _message_event_1;
             }],
         execute: function() {
             MyDirective = (function () {
@@ -67,7 +67,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             })();
             SsqBobao = (function () {
                 function SsqBobao() {
-                    this.messageEvent = new MessageEvent_1.MessageEvent(this);
+                    this.messageEvent = new message_event_1.MessageEvent(this);
                     this.text = '';
                     this.text = '123456';
                 }
