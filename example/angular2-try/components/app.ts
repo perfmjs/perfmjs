@@ -9,6 +9,8 @@ import {Zhuanpan} from './zhuanpan';
 import {Dianqiu} from './dianqiu';
 import {Ssq} from './ssq';
 import {SsqBetConfirm} from './SsqBetConfirm';
+import {CommonLogin} from '../directives/common.login';
+
 
 @Component({
     selector: 'app'
@@ -26,7 +28,8 @@ import {SsqBetConfirm} from './SsqBetConfirm';
     {path: '/zhuanpan', as: 'zhuanpan', component:Zhuanpan},
     {path: '/dianqiu', as: 'dianqiu', component:Dianqiu},
     {path: '/ssq', as: 'ssq', component:Ssq},
-    {path: '/ssqBetConfirm', as:'ssqBetConfirm', component:SsqBetConfirm}
+    {path: '/ssqBetConfirm', as:'ssqBetConfirm', component:SsqBetConfirm},
+    {path: '/commonLogin', as:'commonLogin', component:CommonLogin}
 ])
 export class App {
     router: Router;

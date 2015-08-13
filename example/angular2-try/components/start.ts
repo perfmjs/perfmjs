@@ -5,13 +5,15 @@ import {Router, RouterOutlet, RouterLink, routerInjectables} from 'angular2/rout
 import {CommonService} from '../services/common.service';
 import {Zippy} from './zippy';
 import {CKEditor} from '../directives/ckeditor';
+import {CommonLogin} from '../directives/common.login';
+
 
 @Component({
     selector: 'start'
 })
 @View({
     templateUrl: 'templates/start.html',
-    directives: [coreDirectives, RouterOutlet, RouterLink, Zippy, CKEditor]
+    directives: [coreDirectives, RouterOutlet, RouterLink, Zippy, CKEditor, CommonLogin]
 })
 export class Start {
     myName: string;

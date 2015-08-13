@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', '../services/common-service', './main', './detail', './ToutiaoIndex'], function(exports_1) {
-    var angular2_1, di_1, router_1, common_service_1, main_1, detail_1, ToutiaoIndex_1;
+};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', '../services/common-service', './main', './detail', './ToutiaoIndex', './ToutiaoDetail'], function(exports_1) {
+    var angular2_1, di_1, router_1, common_service_1, main_1, detail_1, ToutiaoIndex_1, ToutiaoDetail_1;
     var App;
     return {
         setters:[
@@ -36,6 +36,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             },
             function (_ToutiaoIndex_1) {
                 ToutiaoIndex_1 = _ToutiaoIndex_1;
+            },
+            function (_ToutiaoDetail_1) {
+                ToutiaoDetail_1 = _ToutiaoDetail_1;
             }],
         execute: function() {
             App = (function () {
@@ -56,7 +59,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                         { path: '/', as: 'index', component: ToutiaoIndex_1.ToutiaoIndex },
                         { path: '/index', as: 'main', component: main_1.Main },
                         { path: '/detail', as: 'detail', component: detail_1.Detail },
-                        { path: '/toutiaoIndex', as: 'toutiaoIndex', component: ToutiaoIndex_1.ToutiaoIndex }
+                        { path: '/toutiaoIndex', as: 'toutiaoIndex', component: ToutiaoIndex_1.ToutiaoIndex },
+                        { path: '/toutiaoDetail', as: 'toutiaoDetail', component: ToutiaoDetail_1.ToutiaoDetail }
                     ]),
                     __param(0, di_1.Inject(router_1.Router)), 
                     __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object, common_service_1.CommonService])

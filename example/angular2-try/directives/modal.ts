@@ -81,7 +81,7 @@ export class Modal {
     messageEvent:MessageEvent = new MessageEvent(this);
     elem:ElementRef;
     renderer:Renderer;
-    dom: BrowserDomAdapter = new BrowserDomAdapter();
+    dom:BrowserDomAdapter = new BrowserDomAdapter();
     params:any = {
         type: "modal",	//弹窗类型(modal为默认，overlay)
         dialogTitle: "默认头部",	//弹窗标题

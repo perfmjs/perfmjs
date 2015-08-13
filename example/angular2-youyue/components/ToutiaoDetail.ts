@@ -4,12 +4,12 @@ import {RouteConfig, Router, RouterOutlet, RouterLink, routerInjectables} from '
 
 
 @Component({
-    selector: 'toutiao-index'
+    selector: 'toutiao-detail'
 })
 @View({
-    templateUrl: `templates/toutiao/index.html`
+    templateUrl: `templates/toutiao/detail.html`
 })
-export class ToutiaoIndex {
+export class ToutiaoDetail {
     router: Router;
 
     constructor(@Inject(Router) router: Router) {
@@ -17,6 +17,6 @@ export class ToutiaoIndex {
     }
 
     goto(page:string) {
-        this.router.navigate("/toutiaoDetail");
+        //this.router.navigate("/toutiaoDetail");
     }
 }

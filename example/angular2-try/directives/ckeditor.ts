@@ -36,7 +36,6 @@ export class CKEditor {
         this.elem = elem;
         this.renderer = renderer;
 
-
         CKEDITOR.config.height = 150;
         CKEDITOR.config.width = 'auto';
         if (CKEDITOR.revision == ('%RE' + 'V%' ) || !!CKEDITOR.plugins.get('wysiwygarea')) {

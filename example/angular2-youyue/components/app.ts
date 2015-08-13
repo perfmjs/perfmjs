@@ -6,6 +6,7 @@ import {CommonService} from '../services/common-service';
 import {Main} from './main';
 import {Detail} from './detail';
 import {ToutiaoIndex} from './ToutiaoIndex';
+import {ToutiaoDetail} from './ToutiaoDetail';
 
 @Component({
     selector: 'app'
@@ -20,7 +21,8 @@ import {ToutiaoIndex} from './ToutiaoIndex';
     {path: '/', as: 'index', component: ToutiaoIndex},
     {path: '/index', as: 'main', component: Main},
     {path: '/detail', as: 'detail', component: Detail},
-    {path: '/toutiaoIndex', as: 'toutiaoIndex', component: ToutiaoIndex}
+    {path: '/toutiaoIndex', as: 'toutiaoIndex', component: ToutiaoIndex},
+    {path: '/toutiaoDetail', as: 'toutiaoDetail', component: ToutiaoDetail}
 ])
 export class App {
     router: Router;

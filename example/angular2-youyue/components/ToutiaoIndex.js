@@ -8,26 +8,40 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};System.register(['angular2/angular2'], function(exports_1) {
-    var angular2_1;
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};System.register(['angular2/angular2', 'angular2/di', 'angular2/router'], function(exports_1) {
+    var angular2_1, di_1, router_1;
     var ToutiaoIndex;
     return {
         setters:[
             function (_angular2_1) {
                 angular2_1 = _angular2_1;
+            },
+            function (_di_1) {
+                di_1 = _di_1;
+            },
+            function (_router_1) {
+                router_1 = _router_1;
             }],
         execute: function() {
             ToutiaoIndex = (function () {
-                function ToutiaoIndex() {
+                function ToutiaoIndex(router) {
+                    this.router = router;
                 }
+                ToutiaoIndex.prototype.goto = function (page) {
+                    this.router.navigate("/toutiaoDetail");
+                };
                 ToutiaoIndex = __decorate([
                     angular2_1.Component({
                         selector: 'toutiao-index'
                     }),
                     angular2_1.View({
                         templateUrl: "templates/toutiao/index.html"
-                    }), 
-                    __metadata('design:paramtypes', [])
+                    }),
+                    __param(0, di_1.Inject(router_1.Router)), 
+                    __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object])
                 ], ToutiaoIndex);
                 return ToutiaoIndex;
             })();

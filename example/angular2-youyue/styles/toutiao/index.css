@@ -396,4 +396,435 @@ section .line {
     clear: both;
     height: 0;
 }
+/*detail*/
+#pageletArticleContent.box {
+    position: relative;
+    padding: 0 1.062rem;
+    overflow: hidden;
+}
+#pageletArticleContent.box .article-detail {
+    position: relative;
+}
+@media only screen and (min-width: 828px) {
+    #pageletArticleContent.box .article-detail .title {
+        font-size: 1.44rem !important;
+        padding: 1.75rem 0 0;
+    }
+}
+#pageletArticleContent.box .article-detail .title {
+    font-size: 1.25rem!important;
+    padding: 1rem 0 0;
+    font-weight: bolder;
+    color: #3A3A3A;
+}
+#pageletArticleContent.box .article-detail .pgc-bar-top {
+    margin: .725rem 0 0;
+}
+#pageletArticleContent.box .article-detail .pgc-bar-top a.avatar-link {
+    display: block;
+    float: left;
+}
+a.avatar-link.vwo-media-profile {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+a {
+    text-decoration: none;
+    color: #131313;
+}
+@media only screen and (min-width: 640px) {
+    html, body {
+        font-size: 32px;
+    }
+}
+#pageletArticleContent.box .article-detail .pgc-bar-top .avatar {
+    height: 2rem;
+    width: 2rem;
+    border: 0;
+    border-radius: 2rem;
+}
+#pageletArticleContent.box .article-detail .pgc-bar-top .subtitle {
+    padding-left: .5rem;
+    padding-top: .03rem;
+    float: left;
+}
+#pageletArticleContent.box .article-detail .pgc-bar-top .name {
+    line-height: 1rem;
+    font-size: .75rem;
+}
+p {
+    color: #333;
+    line-height: 1.125rem;
+    border: 0;
+    outline: 0;
+}
+#pageletArticleContent.box .article-detail .pgc-bar-top .name a {
+    color: #406599;
+}
+#pageletArticleContent.box .article-detail .pgc-bar-top .subtitle a {
+    color: #333;
+}
+#pageletArticleContent.box .article-detail .pgc-bar-top .name img {
+    padding-left: .31rem;
+    height: 1rem;
+    margin-bottom: -.2rem;
+}
+#pageletArticleContent.box .article-detail .pgc-bar-top .time {
+    font-size: .675rem;
+}
+#pageletArticleContent.box .article-detail .pgc-bar-top .time span a {
+    color: #999;
+}
+#pageletArticleContent.box .article-detail .article-content {
+    margin-bottom: 1.45rem;
+    position: relative;
+    overflow: hidden;
+    clear: both;
+}
+@media only screen and (min-width: 828px) {
+    #pageletArticleContent.box .article-detail .article-content p, #pageletArticleContent.box .article-detail .article-content div {
+        font-size: 1.19rem;
+        line-height: 1.875rem;
+    }
+}
+@media only screen and (min-width: 828px) {
+    #pageletArticleContent.box .article-detail .article-content p {
+        margin-top: 1.75rem;
+    }
+}
+#pageletArticleContent.box .article-detail .article-content p, #pageletArticleContent.box .article-detail .article-content div {
+    word-wrap: break-word;
+    font-size: 1.0625rem;
+    line-height: 1.75rem;
+    color: #333;
+}
+#pageletArticleContent.box .article-detail .article-content p {
+    margin-top: 1.5rem;
+}
 
+#pageletArticleContent.box .article-detail .article-content img {
+    max-width: 100%;
+    display: block;
+    margin: -.25rem auto -.25rem;
+}
+@media only screen and (min-width: 828px) {
+    #pageletArticleContent.box .article-detail .article-content img.mt12 {
+        margin: -1rem auto -.25rem;
+    }
+}
+#pageletArticleContent.box .article-detail .banner-bg {
+    background: url("/perfmjs/example/angular2-youyue/images/toutiao/shadown_86fe40a.png");
+    height: 1.375rem;
+    background-size: cover;
+    margin: -2.81rem 0 .94rem -1.062rem;
+    width: 112%;
+    position: relative;
+}
+#pageletArticleContent.box .article-detail .unfold-field {
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    text-align: center;
+    margin-bottom: 0;
+    display: none;
+    position: relative;
+    margin-top: -1.2rem;
+    color: #54a0dc;
+}
+#pageletArticleContent.box .article-detail .unfold-field .text-link {
+    cursor: pointer;
+    display: inline-block;
+    line-height: 1.375rem;
+    border-radius: 1.81rem;
+    font-size: .875rem;
+}
+#pageletArticleContent.box .text-link {
+    color: #5784df;
+    display: inline;
+}
+#pageletArticleContent.box .article-detail .unfold-field .text-link p {
+    display: block;
+    line-height: .2rem;
+    width: 4.44rem;
+    font-style: normal;
+    text-align: center;
+    color: #406599;
+}
+#pageletArticleContent.box .article-detail .unfold-field .text-link p span {
+    background: url("/perfmjs/example/angular2-youyue/images/toutiao/unfold_d42906b.png") no-repeat;
+    background-size: contain;
+    float: right;
+    width: .5625rem;
+    height: .375rem;
+}
+/*点赞*/
+#pagelet-like {
+    margin-top: 50px;
+}
+#pagelet-like .ctn {
+    margin: 0 auto;
+    width: 260px;
+}
+#pagelet-like .digg {
+    background: url("/perfmjs/example/angular2-youyue/images/toutiao/like.png") no-repeat;
+}
+#pagelet-like a {
+    float: left;
+    height: 80px;
+    width: 80px;
+    margin: 0 23px;
+}
+#pagelet-like .bury {
+    background: url("/perfmjs/example/angular2-youyue/images/toutiao/dislike.png") no-repeat;
+}
+#pagelet-like span.count {
+    float: left;
+    width: 50%;
+    text-align: center;
+    line-height: 24px;
+    color: #5d5d5d;
+    font-size: 14px;
+}
+/*评论*/
+#pageletCommentsShare.comments {
+    margin-top: .3125rem;
+}
+#pageletCommentsShare .box-content {
+    padding: .3125rem 0 0;
+    background-color: #f4f5f6;
+}
+#pageletCommentsShare .comment-share-container {
+    background: #f4f5f6;
+    padding: 1rem .9375rem;
+    position: relative;
+    margin-top: 0;
+}
+#pageletCommentsShare .comment-share-container:after, #pageletCommentsShare .comment-share-container:before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    margin-left: -.25rem;
+    width: 0;
+    height: 0;
+    z-index: 101;
+    bottom: -.5rem;
+}
+@media only screen and (min-width: 828px)｛
+    #pageletCommentsShare .comment-share-container h2 {
+        font-size: 1.0625rem;
+    }
+}
+#pageletCommentsShare .comment-share-container h2 {
+    font-size: 1rem;
+    display: inline-block;
+    color: #505050;
+    padding-bottom: .5rem;
+    font-weight: 400;
+}
+#pageletCommentsShare .comment-share-container .comment-content {
+    padding: 1rem 0;
+}
+#pageletCommentsShare .comment-content {
+    position: relative;
+    word-wrap: break-word;
+    border-top: 1px solid rgba(221,221,221,.6);
+}
+#pageletCommentsShare .comment-content .avatar {
+    border: 0;
+    position: absolute;
+    left: 0;
+    border-radius: 64px;
+    overflow: hidden;
+}
+.btn {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-user-select: none;
+}
+a {
+    text-decoration: none;
+    color: #131313;
+}
+#pageletCommentsShare .comment-content .avatar img {
+    width: 2rem;
+    height: 2rem;
+    display: block;
+    background: url("/perfmjs/example/angular2-youyue/images/toutiao/2x.png") #fff no-repeat center center;
+    background-size: 100% 100%;
+    overflow: hidden;
+    border: 0;
+}
+#pageletCommentsShare .comment-content .time, #pageletCommentsShare .comment-content .name, #pageletCommentsShare .comment-content .content a {
+    padding-left: 2.625rem;
+}
+@media only screen and (min-width: 828px) {
+    #pageletCommentsShare .comment-content .name a {
+        font-size: .9375rem;
+    }
+}
+#pageletCommentsShare .comment-content .name a {
+    color: #999;
+    font-size: .875rem;
+    display: inline-block;
+    max-width: 170px;
+}
+#pageletCommentsShare .comment-content .content {
+    padding-top: .3125rem;
+}
+@media only screen and (min-width: 828px) {
+    #pageletCommentsShare .comment-content .content a {
+        font-size: 1.0625rem;
+    }
+}
+#pageletCommentsShare .no-action .comment-content .action_pane {
+    right: 0;
+}
+#pageletCommentsShare .comment-content .action_pane {
+    position: absolute;
+    right: .3125rem;
+    text-align: left;
+    top: .5rem;
+}
+#pageletCommentsShare .comment-content .digg {
+    color: #999;
+    background: url("/perfmjs/example/angular2-youyue/images/toutiao/digg.png") no-repeat 0 0;
+    background-size: 1rem;
+    background-position: 0 .375rem;
+}
+@media only screen and (min-width: 720px) {
+    #pageletCommentsShare .comment-content .digg, #pageletCommentsShare .comment-content .digged {
+        font-size: .75rem;
+    }
+}
+#pageletCommentsShare .comment-content .digg, #pageletCommentsShare .comment-content .digged {
+    display: inline-block;
+    padding-left: 1.325rem;
+    font-size: .6875rem;
+    line-height: 2rem;
+    min-width: 1.5rem;
+    -webkit-transition: background-position 400ms ease;
+    -moz-transition: background-position 400ms ease;
+}
+#pageletCommentsShare .no-action .comment-content .list_action {
+    display: none;
+}
+#pageletCommentsShare .comment-content .list_action {
+    display: inline-block;
+    border-left: 1px solid #ddd;
+    height: .9375rem;
+    width: 2.1875rem;
+    background-position: right center;
+}
+/**写评论**/
+#pagelet-comment {
+    margin-top: 56px;
+}
+#pagelet-comment .top {
+    margin-bottom: 18px;
+}
+#pagelet-comment .top h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #4f5157;
+    float: left;
+}
+#pagelet-comment .top .cc {
+    float: right;
+    color: #9e9e9e;
+    font-size: 16px;
+    line-height: 24px;
+}
+#pagelet-comment .middle .profile {
+    float: left;
+    width: 54px;
+}
+#pagelet-comment .middle .profile img {
+    border-radius: 25px;
+    width: 45px;
+    height: 45px;
+}
+#pagelet-comment .middle .input {
+    height: 200px;
+    border: 1px solid #efefef;
+    margin-left: 54px;
+    border-radius: 6px;
+    background: #fff;
+    overflow: hidden;
+    height: 210px;
+}
+#pagelet-comment .middle .input textarea:focus, #pagelet-comment .middle .input textarea:active {
+    outline: 0;
+}
+#pagelet-comment .middle .input textarea {
+    width: 644px;
+    height: 145px;
+    border: 0;
+    overflow: hidden;
+    resize: none;
+    padding: 5px;
+    font-size: 14px;
+    font-family: Arial;
+}
+#pagelet-comment .middle .bottom {
+    height: 50px;
+    border-top: 1px solid #efefef;
+    background: #fafafa;
+}
+#pagelet-comment .sns-label {
+    float: left;
+    line-height: 50px;
+    margin-left: 10px;
+    color: #9e9e9e;
+}
+#pagelet-comment .sns-group {
+    float: left;
+}
+#pagelet-comment .sns-group .sns.weibo, #pagelet-comment .sns-group .sns.ttweibo, #pagelet-comment .sns-group .sns.qqzone, #pagelet-comment .sns-group .qqzone.checked, #pagelet-comment .sns-group .sns.renren, #pagelet-comment .sns-group .renren.checked, #pagelet-comment .sns-group .weibo.checked, #pagelet-comment .sns-group .ttweibo.checked, #pagelet-detailbar .fav .icon-fav, #pagelet-detailbar .fav:hover .icon-fav, #pagelet-detailbar .fav.repin .icon-fav, #pagelet-detailbar .report .icon-report, #pagelet-detailbar .report:hover .icon-report, #pagelet-detailbar .share .icon-share, #pagelet-detailbar .share .share-list, #pagelet-detailbar .share:hover .icon-share {
+    background-image: url("/perfmjs/example/angular2-youyue/images/toutiao/share_sns.png");
+}
+#pagelet-comment .sns-group .sns.weibo {
+    background-position: -98px 0px;
+}
+#pagelet-comment .sns-group .sns.weibo {
+    background-repeat: no-repeat;
+}
+#pagelet-comment .sns-group .sns.ttweibo {
+    background-position: -98px -58px;
+}
+#pagelet-comment .sns-group .sns.ttweibo {
+    background-repeat: no-repeat;
+}
+#pagelet-comment .sns-group .sns {
+    float: left;
+    width: 28px;
+    height: 28px;
+    margin-top: 11px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+#pagelet-comment .sns-group .sns {
+    float: left;
+    width: 28px;
+    height: 28px;
+    margin-top: 11px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+#pagelet-comment .middle .publish-btn {
+    float: right;
+    width: 90px;
+    height: 35px;
+    text-align: center;
+    line-height: 35px;
+    background: #8db1d2;
+    font-size: 16px;
+    border-radius: 5px;
+    color: #fff;
+    margin-top: 7px;
+    margin-right: 7px;
+}
+#pagelet-comment a {
+    color: #7696b3;
+    font-size: 14px;
+    cursor: pointer;
+}
