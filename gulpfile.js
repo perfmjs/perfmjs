@@ -47,8 +47,6 @@ gulp.task('concat', ['clean-build'], function () {
         .pipe(gulp.dest('build'));
 });
 
-gulp.task('default', ['concat']);
-
 gulp.task('clean-dist', function(cb) {
     del(['./dist'], cb);
 });
@@ -88,3 +86,5 @@ gulp.task('perfmjs3', ['clean-dist'], function () {
 gulp.task('watch', ['perfmjs3'], function() {
     gulp.watch(paths.tsScripts, {ignoreInitial: true}, ['perfmjs3']);
 });
+
+gulp.task('default', ['perfmjs3']);
