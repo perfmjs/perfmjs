@@ -65,7 +65,7 @@ gulp.task('clean-dist', function(cb) {
 gulp.task('perfmjs3', ['clean-dist'], function () {
     var tsResult = gulp.src(paths.tsScripts)
         .pipe(ts({
-            declarationFiles: true,
+            declarationFiles: false,
             noExternalResolve: false,
             module: 'system',
             target: "es5",

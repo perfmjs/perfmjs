@@ -1,5 +1,6 @@
 .idea
 logs
 build
+dist/definitions
 node_modules
 bower_components
