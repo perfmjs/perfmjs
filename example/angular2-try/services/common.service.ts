@@ -1,5 +1,7 @@
 import {Injectable} from 'angular2/di';
+
 import {base} from 'perfmjs/base';
+import {utils} from 'perfmjs/utils';
 
 @Injectable()
 export class CommonService {
@@ -36,14 +38,6 @@ base("commonService", {
         this.option('names', ["Aarav", "Martin", "Shannon", "Ariana", "Kai"]);
         this.option('betPlanContent', new BetPlanContent());
         return this;
-    },
-    request: function(url:string, handler:any) {
-        fetch(url).then(res => res.json())
-            .then(function(json) {
-                handler(json);
-            }).catch(function(ex) {
-                console.log('request:' + url + ' failed:', ex)
-            })
     },
     end: 0
 });

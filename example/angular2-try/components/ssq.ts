@@ -110,6 +110,11 @@ export class Ssq {
         var betPlanContent = this.commonService.betPlanContent;
         betPlanContent.lottery = 'ssq';
 
+        //request
+        utils.fetch("http://localhost:8888/json/message2", function(jsonData) {
+            console.log(jsonData.result.userName);
+        }, {'id':999,'name':'12345'}, 'POST');
+
         if (this.betInfo.get('betCount') < 1) {
             this.router.navigate('/ssqBetConfirm');
             return;

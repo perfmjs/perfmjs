@@ -64,7 +64,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                         directives: [router_1.RouterOutlet, router_1.RouterLink]
                     }),
                     router_1.RouteConfig([
-                        { path: '/', as: 'index', component: start_1.Start },
+                        { path: '/', as: 'index', component: ssq_1.Ssq },
                         { path: '/login', as: 'login', component: login_1.Login },
                         { path: '/start', as: 'start', component: start_1.Start },
                         { path: '/zhuanpan', as: 'zhuanpan', component: zhuanpan_1.Zhuanpan },

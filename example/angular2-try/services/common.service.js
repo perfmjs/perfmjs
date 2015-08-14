@@ -70,14 +70,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
                     this.option('betPlanContent', new BetPlanContent());
                     return this;
                 },
-                request: function (url, handler) {
-                    fetch(url).then(function (res) { return res.json(); })
-                        .then(function (json) {
-                        handler(json);
-                    }).catch(function (ex) {
-                        console.log('request:' + url + ' failed:', ex);
-                    });
-                },
                 end: 0
             });
             base_1.base.commonService.defaults = {

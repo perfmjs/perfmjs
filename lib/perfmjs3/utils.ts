@@ -198,7 +198,47 @@ var _utils = class Utils {
         return first;
     }
 
-    fmtJSONMsg(jsonData:any) {
+    /**
+     * A window.fetch JavaScript polyfill
+     * ref to:
+     * http://blog.gospodarets.com/fetch_in_action/
+     * https://github.com/github/fetch
+     * e.g.
+     * utils.fetch("http://localhost:8888/json/message2", function(jsonData) {
+            console.log(jsonData.result.userName);
+        }, {'id':999,'name':'12345'}, 'POST');
+     * @param url
+     * @param handler
+     * @param jsonParam
+     * @param method
+     * @param formData
+     * @param headers
+     */
+    fetch(url:string, handler:any, jsonParam:any, method:string, formData:FormData, headers:any):void {
+        var self = this;
+        var requestParam = {
+            method: method || 'GET',
+            headers: headers || {'Accept': 'application/json'}
+        };
+        if (requestParam.method.toUpperCase() === 'POST') {
+            if (formData) {
+                requestParam['body'] = formData;
+            } else if (jsonParam) {
+                var formData = new FormData();
+                this.forEach(this.keys(jsonParam), function(item, index) {
+                    formData.append(encodeURIComponent(item), encodeURIComponent(jsonParam[item]));
+                });
+                requestParam['body'] = formData;
+            }
+        }
+        fetch(url,requestParam).then(response=>response.json()).then(function(json) {
+            handler(self.fmtJSONMsg(json));
+        }).catch(function (ex) {
+            console.log('request:' + url + ' failed info:' + ex.message);
+        })
+    }
+
+    fmtJSONMsg(jsonData:any):any {
         //json格式消息与响应的JSONMessage对象保持一致, status: 成功-success, 失败-fail
         var result:any, jsonMessage = {status: "fail", code: '0', msg: '', result: {}};
         try {
