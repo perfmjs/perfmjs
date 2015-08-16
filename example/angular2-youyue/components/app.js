@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', '../services/common-service', './main', './detail', './ToutiaoIndex', './ToutiaoDetail'], function(exports_1) {
-    var angular2_1, di_1, router_1, common_service_1, main_1, detail_1, ToutiaoIndex_1, ToutiaoDetail_1;
+};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', '../directives/common.login', '../services/common-service', './main', './detail', './ToutiaoIndex', './ToutiaoDetail'], function(exports_1) {
+    var angular2_1, di_1, router_1, common_login_1, common_service_1, main_1, detail_1, ToutiaoIndex_1, ToutiaoDetail_1;
     var App;
     return {
         setters:[
@@ -24,6 +24,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             },
             function (_router_1) {
                 router_1 = _router_1;
+            },
+            function (_common_login_1) {
+                common_login_1 = _common_login_1;
             },
             function (_common_service_1) {
                 common_service_1 = _common_service_1;
@@ -45,7 +48,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                 function App(router, commonService) {
                     this.router = router;
                     this.commonService = commonService;
-                    this.router.navigate('/');
                 }
                 App = __decorate([
                     angular2_1.Component({
@@ -60,7 +62,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                         { path: '/index', as: 'main', component: main_1.Main },
                         { path: '/detail', as: 'detail', component: detail_1.Detail },
                         { path: '/toutiaoIndex', as: 'toutiaoIndex', component: ToutiaoIndex_1.ToutiaoIndex },
-                        { path: '/toutiaoDetail', as: 'toutiaoDetail', component: ToutiaoDetail_1.ToutiaoDetail }
+                        { path: '/toutiaoDetail', as: 'toutiaoDetail', component: ToutiaoDetail_1.ToutiaoDetail },
+                        { path: '/login/:sourcePath', as: 'commonLogin', component: common_login_1.CommonLogin }
                     ]),
                     __param(0, di_1.Inject(router_1.Router)), 
                     __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object, common_service_1.CommonService])

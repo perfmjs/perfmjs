@@ -18,10 +18,6 @@
                     var JQuery;
                     return {
                         setters: [
-                            function ($__m) {
-                                JQuery = $__m.JQuery;
-                                $__export('JQuery', $__m.JQuery);
-                            }
                         ],
                         execute: function () {
                             JQuery = $;

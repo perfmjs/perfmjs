@@ -2,6 +2,7 @@ import {Component, View} from 'angular2/angular2';
 import {Inject} from 'angular2/di';
 import {RouteConfig, Router, RouterOutlet, RouterLink, routerInjectables} from 'angular2/router';
 
+import {CommonLogin} from '../directives/common.login';
 import {CommonService} from '../services/common-service';
 import {Main} from './main';
 import {Detail} from './detail';
@@ -22,7 +23,8 @@ import {ToutiaoDetail} from './ToutiaoDetail';
     {path: '/index', as: 'main', component: Main},
     {path: '/detail', as: 'detail', component: Detail},
     {path: '/toutiaoIndex', as: 'toutiaoIndex', component: ToutiaoIndex},
-    {path: '/toutiaoDetail', as: 'toutiaoDetail', component: ToutiaoDetail}
+    {path: '/toutiaoDetail', as: 'toutiaoDetail', component: ToutiaoDetail},
+    {path: '/login/:sourcePath', as: 'commonLogin', component: CommonLogin}
 ])
 export class App {
     router: Router;
@@ -31,6 +33,5 @@ export class App {
     constructor(@Inject(Router) router: Router, commonService: CommonService) {
         this.router = router;
         this.commonService = commonService;
-        this.router.navigate('/');
     }
 }

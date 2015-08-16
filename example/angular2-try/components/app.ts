@@ -11,7 +11,6 @@ import {Ssq} from './ssq';
 import {SsqBetConfirm} from './SsqBetConfirm';
 import {CommonLogin} from '../directives/common.login';
 
-
 @Component({
     selector: 'app'
 })
@@ -22,7 +21,7 @@ import {CommonLogin} from '../directives/common.login';
     directives: [RouterOutlet, RouterLink]
 })
 @RouteConfig([
-    {path: '/', as:'index', component:Ssq},
+    {path: '/', as:'index', component:Start},
     {path: '/login', as:'login', component:Login},
     {path: '/start', as:'start', component:Start},
     {path: '/zhuanpan', as: 'zhuanpan', component:Zhuanpan},
@@ -36,7 +35,6 @@ export class App {
 
     constructor(@Inject(Router) router:Router, commonService: CommonService) {
         this.router = router;
-        this.router.navigate('/');
     }
 
 }

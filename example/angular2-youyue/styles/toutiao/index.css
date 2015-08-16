@@ -34,17 +34,19 @@ header {
     -moz-box-sizing: border-box;
 }
 .top_bar .msg-box {
-    background: url(http://s0.pstatp.com/resource/toutiao_wap/static/image/message_box_086b2f5.png) no-repeat;
+    /*background: url(http://s0.pstatp.com/resource/toutiao_wap/static/image/message_box_086b2f5.png) no-repeat;*/
+    background: url('/perfmjs/example/angular2-youyue/images/toutiao/2x.png') no-repeat;
     background-size: contain;
-    width: 32px;
-    height: 25px;
+    width: 40px;
+    height: 30px;
     margin-left: 12px;
     margin-top: 6px;
     display: block;
     position: relative;
 }
 .top_bar .refresh_title {
-    background: url(http://s0.pstatp.com/resource/toutiao_wap/static/image/toutiao_4370d0f.png) no-repeat right center;
+    /*background: url(http://s0.pstatp.com/resource/toutiao_wap/static/image/toutiao_4370d0f.png) no-repeat right center;*/
+    background: url('/perfmjs/example/angular2-youyue/images/toutiao/youyuekongjian.png') no-repeat right center;
     width: 83px;
     background-size: 83px;
     padding-left: 15px;
@@ -139,6 +141,10 @@ header {
 }
 div {
     display: block;
+}
+.top_menu_list .btn.cur {
+    color: #d00;
+    font-size: 15px;
 }
 .top_menu_list .btn {
     white-space: nowrap;
@@ -717,7 +723,7 @@ a {
 }
 /**写评论**/
 #pagelet-comment {
-    margin-top: 56px;
+    margin-top: 20px;
 }
 #pagelet-comment .top {
     margin-bottom: 18px;
@@ -793,14 +799,6 @@ a {
 }
 #pagelet-comment .sns-group .sns.ttweibo {
     background-repeat: no-repeat;
-}
-#pagelet-comment .sns-group .sns {
-    float: left;
-    width: 28px;
-    height: 28px;
-    margin-top: 11px;
-    margin-left: 5px;
-    cursor: pointer;
 }
 #pagelet-comment .sns-group .sns {
     float: left;

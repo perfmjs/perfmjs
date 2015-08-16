@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/di', 'angular2/router'], function(exports_1) {
-    var angular2_1, di_1, router_1;
+};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', 'angular2/src/dom/browser_adapter'], function(exports_1) {
+    var angular2_1, di_1, router_1, browser_adapter_1;
     var ToutiaoDetail;
     return {
         setters:[
@@ -24,11 +24,22 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             },
             function (_router_1) {
                 router_1 = _router_1;
+            },
+            function (_browser_adapter_1) {
+                browser_adapter_1 = _browser_adapter_1;
             }],
         execute: function() {
             ToutiaoDetail = (function () {
                 function ToutiaoDetail(router) {
+                    this.dom = new browser_adapter_1.BrowserDomAdapter();
                     this.router = router;
+                    var elem = this.dom.querySelector(document, "body");
+                    this.dom.removeClass(elem, "withHeader");
+                    this.dom.removeClass(elem, "article");
+                    this.dom.removeClass(elem, "utms-toutiao");
+                    this.dom.removeClass(elem, "utmm-None");
+                    this.dom.removeClass(elem, "utmc-None");
+                    this.dom.querySelector(document, "title").textContent = "新闻明细内容";
                 }
                 ToutiaoDetail.prototype.goto = function (page) {
                     //this.router.navigate("/toutiaoDetail");

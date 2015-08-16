@@ -53,7 +53,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             App = (function () {
                 function App(router, commonService) {
                     this.router = router;
-                    this.router.navigate('/');
                 }
                 App = __decorate([
                     angular2_1.Component({
@@ -64,7 +63,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                         directives: [router_1.RouterOutlet, router_1.RouterLink]
                     }),
                     router_1.RouteConfig([
-                        { path: '/', as: 'index', component: ssq_1.Ssq },
+                        { path: '/', as: 'index', component: start_1.Start },
                         { path: '/login', as: 'login', component: login_1.Login },
                         { path: '/start', as: 'start', component: start_1.Start },
                         { path: '/zhuanpan', as: 'zhuanpan', component: zhuanpan_1.Zhuanpan },

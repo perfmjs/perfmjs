@@ -11,7 +11,6 @@ import {CommonPipeFactory} from '../pipes/commonPipe';
 import {betBaseSuanfa} from './betBaseSuanfa';
 import {SsqBobao} from './SsqBobao';
 
-
 //build pipe
 var betCountPipeObj = new CommonPipeFactory();
 betCountPipeObj.transform = utils.aop(this, betCountPipeObj.transform, function(value, args) {

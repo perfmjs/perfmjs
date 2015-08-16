@@ -1,7 +1,7 @@
 <header id="header">
     <div class="top_bar">
         <div class="abs_m">
-            <a href="#" class="refresh_title btn"></a><a href="#" class="refresh_btn btn"></a>
+            <a href="#" class="refresh_title btn"></a><a href="javascript:void(0)" class="refresh_btn btn" (^click)="refresh()"></a>
         </div>
         <div class="abs_l" style="display:none">
             <a class="btn user">
@@ -10,11 +10,11 @@
             </a>
         </div>
         <div class="abs_l">
-            <a href="javascript:void(0)" class="msg-box" ga_category="left_button" ga_label="" ga_event="click_show">
+            <a href="javascript:void(0)" class="msg-box" (click)="gotoLoginPage()">
                 <div class="circle" style="display:none"></div>
             </a>
         </div>
-        <div class="abs_r">
+        <div class="abs_r" style="display: none;">
             <a href="/search/" class="btn search"></a>
         </div>
     </div>
@@ -25,43 +25,47 @@
         </div>
         <div id="top_menu" class="top_menu">
             <div class="top_menu_list">
-                <a href1="#channel=__all__" href="javascript:void(0)" class="btn cur" scroll-left="0" (click)="goto('detail')">推荐</a>
-                <a href="#channel=news_society" class="btn" scroll-left="0">社会</a>
-                <a href="#channel=news_entertainment" class="btn" scroll-left="0">娱乐</a>
-                <a href="#channel=news_tech" class="btn" scroll-left="-19">科技</a>
-                <a href="#channel=news_car" class="btn" scroll-left="34">汽车</a>
-                <a href="#channel=news_sports" class="btn" scroll-left="87">体育</a>
-                <a href="#channel=news_finance" class="btn" scroll-left="140">财经</a>
-                <a href="#channel=news_military" class="btn" scroll-left="193">军事</a>
-                <a href="#channel=news_world" class="btn" scroll-left="246">国际</a>
-                <a href="#channel=news_fashion" class="btn" scroll-left="299">时尚</a>
-                <a href="#channel=news_game" class="btn" scroll-left="352">游戏</a>
-                <a href="#channel=news_hot" class="btn" scroll-left="426">热点</a>
-                <a href="#channel=news_history" class="btn" scroll-left="426">历史</a>
-                <a href="#channel=news_food" class="btn" scroll-left="426">美食</a>
-                <a href="#channel=news_discovery" class="btn" scroll-left="426">探索</a>
+                <a *ng-for="#channel of channelsMap.values()" href="javascript:void(0)" [class]="{'btn':true,'cur':channel.selected}" scroll-left="{{channel.scrollLeft}}" (click)="gotoDetailPage()">{{channel.name}}</a>
             </div>
+
+            <!--<div class="top_menu_list">-->
+                <!--<a href="javascript:void(0)" class="btn cur" scroll-left="0" (click)="gotoDetailPage()">推荐</a>-->
+                <!--<a href="#channel=news_society" class="btn" scroll-left="0">社会</a>-->
+                <!--<a href="#channel=news_entertainment" class="btn" scroll-left="0">娱乐</a>-->
+                <!--<a href="#channel=news_tech" class="btn" scroll-left="-19">科技</a>-->
+                <!--<a href="#channel=news_car" class="btn" scroll-left="34">汽车</a>-->
+                <!--<a href="#channel=news_sports" class="btn" scroll-left="87">体育</a>-->
+                <!--<a href="#channel=news_finance" class="btn" scroll-left="140">财经</a>-->
+                <!--<a href="#channel=news_military" class="btn" scroll-left="193">军事</a>-->
+                <!--<a href="#channel=news_world" class="btn" scroll-left="246">国际</a>-->
+                <!--<a href="#channel=news_fashion" class="btn" scroll-left="299">时尚</a>-->
+                <!--<a href="#channel=news_game" class="btn" scroll-left="352">游戏</a>-->
+                <!--<a href="#channel=news_hot" class="btn" scroll-left="426">热点</a>-->
+                <!--<a href="#channel=news_history" class="btn" scroll-left="426">历史</a>-->
+                <!--<a href="#channel=news_food" class="btn" scroll-left="426">美食</a>-->
+                <!--<a href="#channel=news_discovery" class="btn" scroll-left="426">探索</a>-->
+            <!--</div>-->
         </div>
     </div>
 </header>
 <content>
-    <div class="list_content" pull-fresh="">
-        <section hot-time="1439212429" class=" has_action" data-id="5274541695">
+    <div class="list_content" >
+        <section hot-time="1439212429" class="has_action" data-id="5274541695">
             <a href="/group/5274541695/" class="article_link clearfix" onclick="actionLog('click_headline','5274541695')">
                 <h3 class="line3">北京通州房产业务员通宵排队办公积金贷款</h3>
-                <div class="list_img_holder_large  list_img_holder_large_fix" style="background: none;">
-                    <img src="http://p3.pstatp.com/large//6918/8092804688" onerror="errorimg.call(this)" onload="loadimg.call(this)" style="opacity: 1;">
+                <div class="list_img_holder_large list_img_holder_large_fix" style="background: none;">
+                    <img src="http://p3.pstatp.com/large//6918/8092804688"  style="opacity: 1;">
                 </div>
                 <div class="item_info">
                     <span class="hot_label space">热</span>
-                    <span class="src  space">中新网移动版</span>
+                    <span class="src space">中新网移动版</span>
                     <span class="cmt">381</span>
                     <span class="time fr canhide" title="2015-08-10 21:13">10分钟前</span>
                 </div>
             </a>
             <div class="line"></div>
         </section>
-        <section hot-time="1439212143" class=" has_action" data-id="5279078321">
+        <section hot-time="1439212143" class="has_action" data-id="5279078321">
             <a href="/group/5279078321/" class="article_link clearfix" onclick="actionLog('click_headline','5279078321')">
 
                 <h3 class="line3">史上最臭的鱼，你敢吃吗？</h3>
@@ -69,16 +73,16 @@
                 <div class="list_image">
                     <ul class="clearfix">
 
-                        <li><div class="list_img_holder" style="background: none;"><img src="http://p2.pstatp.com/list/6918/6659562940" onerror="errorimg.call(this)" onload="loadimg.call(this)" style="opacity: 1;"></div></li>
+                        <li><div class="list_img_holder" style="background: none;"><img src="http://p2.pstatp.com/list/6918/6659562940"  style="opacity: 1;"></div></li>
 
-                        <li><div class="list_img_holder" style="background: none;"><img src="http://p2.pstatp.com/list/6916/7192190504" onerror="errorimg.call(this)" onload="loadimg.call(this)" style="opacity: 1;"></div></li>
+                        <li><div class="list_img_holder" style="background: none;"><img src="http://p2.pstatp.com/list/6916/7192190504"  style="opacity: 1;"></div></li>
 
-                        <li><div class="list_img_holder" style="background: none;"><img src="http://p3.pstatp.com/list/6920/502899794" onerror="errorimg.call(this)" onload="loadimg.call(this)" style="opacity: 1;"></div></li>
+                        <li><div class="list_img_holder" style="background: none;"><img src="http://p3.pstatp.com/list/6920/502899794"  style="opacity: 1;"></div></li>
 
                     </ul>
                 </div>
                 <div class="item_info">
-                    <span class="src  space">湖南卫视_味道</span>
+                    <span class="src space">湖南卫视_味道</span>
                     <span class="cmt">153</span>
                     <span class="time fr canhide" title="2015-08-10 21:09">49分钟前</span>
                 </div>
@@ -88,22 +92,22 @@
         <section hot-time="1439211142" class="middle_mode has_action" data-id="5231732431">
             <a href="/group/5231732431/" class="article_link clearfix" onclick="actionLog('click_headline','5231732431')">
                 <div class="list_img_holder" style="background: none;">
-                    <img src="http://p2.pstatp.com/list/6911/2330525865" onerror="errorimg.call(this)" onload="loadimg.call(this)" style="opacity: 1;">
+                    <img src="http://p2.pstatp.com/list/6911/2330525865"  style="opacity: 1;">
                 </div>
                 <h3 class="line3">揭秘：男人眼中完美女友的四大标准</h3>
                 <div class="item_info">
-                    <span class="src  space">飘雨桐</span>
+                    <span class="src space">飘雨桐</span>
                     <span class="cmt">13</span>
                     <span class="time fr canhide" title="2015-08-10 20:52">1小时前</span>
                 </div>
             </a>
             <div class="line"></div>
         </section>
-        <section hot-time="1439206225" class=" has_action" data-id="5141860244">
+        <section hot-time="1439206225" class="has_action" data-id="5141860244">
             <a href="/group/5141860244/" class="article_link clearfix" onclick="actionLog('click_headline','5141860244')">
                 <h3 class="line3">2015中国电视业发展研究报告</h3>
                 <div class="item_info">
-                    <span class="src  space">南皮老殷</span>
+                    <span class="src space">南皮老殷</span>
                     <span class="cmt">0</span>
                     <span class="time fr canhide" title="2015-08-10 19:30">2小时前</span>
                 </div>
@@ -113,7 +117,7 @@
         <section hot-time="1439202431" class="middle_mode has_action" data-id="5271674201">
             <a href="/group/5271674201/" class="article_link clearfix" onclick="actionLog('click_headline','5271674201')">
                 <div class="list_img_holder" style="background: none;">
-                    <img src="http://p3.pstatp.com/list/6913/4155540533" onerror="errorimg.call(this)" onload="loadimg.call(this)" style="opacity: 1;">
+                    <img src="http://p3.pstatp.com/list/6913/4155540533"  style="opacity: 1;">
                     <span class="video_btn"></span>
                 </div>
                 <h3 class="line3">模仿达人，一人干五人！中国好声音都不行！这才是真牛逼！</h3>
@@ -126,36 +130,36 @@
             </a>
             <div class="line"></div>
         </section>
-        <section hot-time="1439214522" class=" has_action" data-id="5266761885">
+        <section hot-time="1439214522" class="has_action" data-id="5266761885">
             <a href="/group/5266761885/" class="article_link clearfix" onclick="actionLog('click_headline','5266761885')">
                 <h3 class="line3">揭秘新版百元纸币防伪特征</h3>
                 <div class="list_image">
                     <ul class="clearfix">
-                        <li><div class="list_img_holder" style="background: none;"><img src="http://p2.pstatp.com/list/6910/8092647367" onerror="errorimg.call(this)" onload="loadimg.call(this)" style="opacity: 1;"></div></li>
-                        <li><div class="list_img_holder" style="background: none;"><img src="http://p2.pstatp.com/list/6911/6447856030" onerror="errorimg.call(this)" onload="loadimg.call(this)" style="opacity: 1;"></div></li>
-                        <li><div class="list_img_holder" style="background: none;"><img src="http://p2.pstatp.com/list/6912/2024419641" onerror="errorimg.call(this)" onload="loadimg.call(this)" style="opacity: 1;"></div></li>
+                        <li><div class="list_img_holder" style="background: none;"><img src="http://p2.pstatp.com/list/6910/8092647367"  style="opacity: 1;"></div></li>
+                        <li><div class="list_img_holder" style="background: none;"><img src="http://p2.pstatp.com/list/6911/6447856030"  style="opacity: 1;"></div></li>
+                        <li><div class="list_img_holder" style="background: none;"><img src="http://p2.pstatp.com/list/6912/2024419641"  style="opacity: 1;"></div></li>
                     </ul>
                 </div>
                 <div class="item_info">
-                    <span class="src  space">手机新浪网</span>
+                    <span class="src space">手机新浪网</span>
                     <span class="cmt">1</span>
                     <span class="time fr canhide" title="2015-08-10 21:48">43分钟前</span>
                 </div>
             </a>
             <div class="line"></div>
         </section>
-        <section hot-time="1439210570" class=" has_action" data-id="5270488873">
+        <section hot-time="1439210570" class="has_action" data-id="5270488873">
             <a href="/group/5270488873/" class="article_link clearfix" onclick="actionLog('click_headline','5270488873')">
                 <h3 class="line3">军令如山：解放军对越反击中不可公开的十条戒令是什么？</h3>
                 <div class="list_image">
                     <ul class="clearfix">
-                        <li><div class="list_img_holder" style="background: none;"><img src="http://p1.pstatp.com/list/6918/1361065081" onerror="errorimg.call(this)" onload="loadimg.call(this)" style="opacity: 1;"></div></li>
-                        <li><div class="list_img_holder" style="background: none;"><img src="http://p2.pstatp.com/list/6916/2077861804" onerror="errorimg.call(this)" onload="loadimg.call(this)" style="opacity: 1;"></div></li>
-                        <li><div class="list_img_holder" style="background: none;"><img src="http://p2.pstatp.com/list/6912/3947094221" onerror="errorimg.call(this)" onload="loadimg.call(this)" style="opacity: 1;"></div></li>
+                        <li><div class="list_img_holder" style="background: none;"><img src="http://p1.pstatp.com/list/6918/1361065081"  style="opacity: 1;"></div></li>
+                        <li><div class="list_img_holder" style="background: none;"><img src="http://p2.pstatp.com/list/6916/2077861804"  style="opacity: 1;"></div></li>
+                        <li><div class="list_img_holder" style="background: none;"><img src="http://p2.pstatp.com/list/6912/3947094221"  style="opacity: 1;"></div></li>
                     </ul>
                 </div>
                 <div class="item_info">
-                    <span class="src  space">历史真相分享</span>
+                    <span class="src space">历史真相分享</span>
                     <span class="cmt">180</span>
                     <span class="time fr canhide" title="2015-08-10 20:42">1小时前</span>
                 </div>

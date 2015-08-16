@@ -1,7 +1,8 @@
-3.0.5-rc1/ 2015-08-13
+3.0.5-rc2/ 2015-08-16
 ==================
 * add: add 'common-login' angular2 directives
 * add: add window.fetch polyfill in perfmjs/utils
+* improve: some improvement
 
 3.0.4/ 2015-08-12
 ==================
