@@ -1,8 +1,8 @@
 perfmjs
 =======
-high performance javascript framework V3.x
+high performance javascript framework v3.x
 
-perfmjs V3.x Features:
+perfmjs v3.x Features:
 =======
 开发目的：对mobile更友好，对开发人员更友好，为未来而设计。
 
