@@ -210,7 +210,7 @@ import {utils} from 'perfmjs/utils';
             <div class="top_center fl font16">登录账户</div>
         </div>
     </header>
-    <form target="_self" id="myform" name="myform" method="post" action="./login.php?FromUrl=%2Fuser%2F&amp;logintype=">
+    <form target="_self" name="myform" method="post">
     <div class="loginbox">
         <div class="tstxt">
             </div>
@@ -252,6 +252,7 @@ export class CommonLogin {
 
     register(userName:Control, passwd:Control):boolean {
         var self = this;
+        this.errorText = "";
         if (userName.value === null || passwd.value === null) {
             self.errorText = "用户名和密码不能为空！";
             return;
@@ -268,7 +269,7 @@ export class CommonLogin {
     }
 
     goback() {
-        this.location.back();
-        //this.router.navigate("/" + this.sourcePath);
+        //this.location.back();
+        this.router.navigate("/" + this.sourcePath);
     }
 }

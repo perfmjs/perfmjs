@@ -1,12 +1,39 @@
 perfmjs
 =======
-high performance javascript framework  V3.0.x
+high performance javascript framework V3.x
 
-为什么使用perfmjs?　
+perfmjs V3.x Features:
 =======
-面对复杂的WEB前端业务开发，有了这个“外壳”框架，开发人员就可以立即高效地编写业务上的javascript 代码了！
+开发目的：对mobile更友好，对开发人员更友好，为未来而设计。
 
-Features(for v2.X):
+3条军规：
+
+从业务消费点出发做技术
+
+兼顾安全高可靠与高性能
+
+代码“简约易读易改”
+
+v3.0.0新特性：
+
+向上兼容ES6，H5
+
+Skyjs-node
+
+精简代码(删除无用的模块等)
+
+一站式开发工具，文档齐全，可加密打包
+
+统一捕获错误堆栈
+
+在Github上开源
+
+充分利用现代浏览器的新特性（如并发）
+
+可定制打包多个版本（mini版、ie6版、h5版等）
+
+
+perfmjs V2.x Features
 =======
 fast by default：高效，易用，易读
 

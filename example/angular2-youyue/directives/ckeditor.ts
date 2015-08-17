@@ -38,7 +38,7 @@ export class CKEditor {
 
         CKEDITOR.config.height = 150;
         CKEDITOR.config.width = 'auto';
-        if (CKEDITOR.revision == ('%RE' + 'V%' ) || !!CKEDITOR.plugins.get('wysiwygarea')) {
+        if (CKEDITOR.revision == ('%RE' + 'V%') || !!CKEDITOR.plugins.get('wysiwygarea')) {
             CKEDITOR.replace('ng2ckeditorElement');
         } else {
             CKEDITOR.document.getById('ng2ckeditorElement').setAttribute('contenteditable', 'true');

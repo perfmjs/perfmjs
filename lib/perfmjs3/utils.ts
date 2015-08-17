@@ -235,7 +235,7 @@ var _utils = class Utils {
             handler(self.fmtJSONMsg(json));
         }).catch(function (ex) {
             console.log('request:' + url + ' failed info:' + ex.message);
-        })
+        });
     }
 
     fmtJSONMsg(jsonData:any):any {
@@ -275,8 +275,8 @@ var _utils = class Utils {
         // Make sure leading/trailing whitespace is removed (IE can't handle it)
         data = this.trim(data);
         // Attempt to parse using the native JSON parser first
-        if (window.JSON && window.JSON.parse) {
-            return window.JSON.parse(data);
+        if (JSON && JSON.parse) {
+            return JSON.parse(data);
         }
         // Make sure the incoming data is actual JSON
         // Logic borrowed from http://json.org/json2.js
