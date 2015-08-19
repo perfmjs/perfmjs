@@ -11,9 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', 'angular2/src/directives/class', 'angular2/src/change_detection/change_detection', 'angular2/forms', '../services/common.service', 'perfmjs/utils', '../pipes/commonPipe', './betBaseSuanfa', '../directives/modal', './SsqBobao'], function(exports_1) {
-    var angular2_1, di_1, router_1, class_1, change_detection_1, forms_1, common_service_1, utils_1, commonPipe_1, betBaseSuanfa_1, modal_1, SsqBobao_1;
-    var betPlanPipeObj, SsqBetConfirm;
+};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', 'angular2/src/core/metadata', 'angular2/forms', '../services/common.service', 'perfmjs/utils', './betBaseSuanfa', '../directives/modal', './SsqBobao'], function(exports_1) {
+    var angular2_1, di_1, router_1, metadata_1, forms_1, common_service_1, utils_1, betBaseSuanfa_1, modal_1, SsqBobao_1;
+    var BetPlanPipe, SsqBetConfirm;
     return {
         setters:[
             function (_angular2_1) {
@@ -25,11 +25,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             function (_router_1) {
                 router_1 = _router_1;
             },
-            function (_class_1) {
-                class_1 = _class_1;
-            },
-            function (_change_detection_1) {
-                change_detection_1 = _change_detection_1;
+            function (_metadata_1) {
+                metadata_1 = _metadata_1;
             },
             function (_forms_1) {
                 forms_1 = _forms_1;
@@ -39,9 +36,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             },
             function (_utils_1) {
                 utils_1 = _utils_1;
-            },
-            function (_commonPipe_1) {
-                commonPipe_1 = _commonPipe_1;
             },
             function (_betBaseSuanfa_1) {
                 betBaseSuanfa_1 = _betBaseSuanfa_1;
@@ -53,17 +47,26 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                 SsqBobao_1 = _SsqBobao_1;
             }],
         execute: function() {
-            //build pipe
-            betPlanPipeObj = new commonPipe_1.CommonPipeFactory();
-            betPlanPipeObj.transform = utils_1.utils.aop(this, betPlanPipeObj.transform, function (value, args) {
-                var betPlanContent = value, totalBetCount = 0;
-                utils_1.utils.forEach(betPlanContent.content, function (item, index) {
-                    totalBetCount = totalBetCount + utils_1.utils.toNumber(item.betCount);
-                });
-                betPlanContent.totalBetCount = totalBetCount;
-                betPlanContent.betAmount = betPlanContent.calcTotalAmount();
-                return betPlanContent;
-            });
+            BetPlanPipe = (function () {
+                function BetPlanPipe() {
+                }
+                BetPlanPipe.prototype.transform = function (value, args) {
+                    var betPlanContent = value, totalBetCount = 0;
+                    utils_1.utils.forEach(betPlanContent.content, function (item, index) {
+                        totalBetCount = totalBetCount + utils_1.utils.toNumber(item.betCount);
+                    });
+                    betPlanContent.totalBetCount = totalBetCount;
+                    betPlanContent.betAmount = betPlanContent.calcTotalAmount();
+                    return betPlanContent;
+                };
+                BetPlanPipe = __decorate([
+                    metadata_1.Pipe({
+                        name: 'betPlanPipe'
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], BetPlanPipe);
+                return BetPlanPipe;
+            })();
             SsqBetConfirm = (function () {
                 function SsqBetConfirm(router, commonService) {
                     this.readedProtocolControl = new forms_1.Control(true);
@@ -261,16 +264,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                 };
                 SsqBetConfirm = __decorate([
                     angular2_1.Component({
-                        selector: 'ssqBetConfirm',
-                        viewBindings: [
-                            change_detection_1.Pipes.extend({
-                                'betPlanPipe': commonPipe_1.CommonPipeFactory.toPipe(betPlanPipeObj)
-                            })
-                        ]
+                        selector: 'ssqBetConfirm'
                     }),
                     angular2_1.View({
                         templateUrl: 'templates/ssq/ssqBetConfirm.html',
-                        directives: [angular2_1.coreDirectives, router_1.RouterOutlet, class_1.CSSClass, forms_1.formDirectives, modal_1.Modal, SsqBobao_1.SsqBobao]
+                        directives: [angular2_1.CORE_DIRECTIVES, router_1.RouterOutlet, forms_1.FORM_DIRECTIVES, modal_1.Modal, SsqBobao_1.SsqBobao],
+                        pipes: [BetPlanPipe]
                     }),
                     __param(0, di_1.Inject(router_1.Router)), 
                     __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object, common_service_1.CommonService])

@@ -1,41 +1,40 @@
-import {Component, View, Injectable, coreDirectives, Directive, ElementRef, Renderer} from 'angular2/angular2';
+import {Component, View, Injectable, CORE_DIRECTIVES, Directive, ElementRef, Renderer} from 'angular2/angular2';
 import {Inject, bind} from 'angular2/di';
 import {Router, RouterOutlet, RouterLink, routerInjectables} from 'angular2/router';
-import {CSSClass} from 'angular2/src/directives/class';
-import {Pipes} from 'angular2/src/change_detection/change_detection';
-import {formDirectives, Control} from 'angular2/forms';
+import {Pipes} from 'angular2/src/core/pipes/pipes';
+import {Pipe} from 'angular2/src/core/metadata';
+import {FORM_DIRECTIVES, Control} from 'angular2/forms';
 
 import {CommonService, BetPlanContent} from '../services/common.service';
 import {utils} from 'perfmjs/utils';
 import {joquery} from 'perfmjs/joquery';
-import {CommonPipeFactory} from '../pipes/commonPipe';
 import {betBaseSuanfa} from './betBaseSuanfa';
 import {Modal} from '../directives/modal';
 import {SsqBobao} from './SsqBobao';
 
-//build pipe
-var betPlanPipeObj = new CommonPipeFactory();
-betPlanPipeObj.transform = utils.aop(this, betPlanPipeObj.transform, function(value, args) {
-    var betPlanContent = value, totalBetCount = 0;
-    utils.forEach(betPlanContent.content, function(item, index) {
-        totalBetCount = totalBetCount + utils.toNumber(item.betCount);
-    });
-    betPlanContent.totalBetCount = totalBetCount;
-    betPlanContent.betAmount = betPlanContent.calcTotalAmount();
-    return betPlanContent;
-});
+
+@Pipe({
+    name: 'betPlanPipe'
+})
+class BetPlanPipe {
+    transform(value:any, args:any):any {
+        var betPlanContent = value, totalBetCount = 0;
+        utils.forEach(betPlanContent.content, function(item, index) {
+            totalBetCount = totalBetCount + utils.toNumber(item.betCount);
+        });
+        betPlanContent.totalBetCount = totalBetCount;
+        betPlanContent.betAmount = betPlanContent.calcTotalAmount();
+        return betPlanContent;
+    }
+}
 
 @Component({
-    selector: 'ssqBetConfirm',
-    viewBindings: [
-        Pipes.extend({
-            'betPlanPipe': CommonPipeFactory.toPipe(betPlanPipeObj)
-        })
-    ]
+    selector: 'ssqBetConfirm'
 })
 @View({
     templateUrl: 'templates/ssq/ssqBetConfirm.html',
-    directives: [coreDirectives, RouterOutlet, CSSClass, formDirectives, Modal, SsqBobao]
+    directives: [CORE_DIRECTIVES, RouterOutlet, FORM_DIRECTIVES, Modal, SsqBobao],
+    pipes: [BetPlanPipe]
 })
 export class SsqBetConfirm {
     router:Router;

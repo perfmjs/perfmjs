@@ -1,8 +1,7 @@
-import {Component, View, Injectable, coreDirectives, Directive, ElementRef, Renderer} from 'angular2/angular2';
+import {Component, View, Injectable, CORE_DIRECTIVES, Directive, ElementRef, Renderer} from 'angular2/angular2';
 import {Inject} from 'angular2/di';
 import {Router, routerInjectables} from 'angular2/router';
 import {BrowserDomAdapter} from 'angular2/src/dom/browser_adapter';
-import {CSSClass} from 'angular2/src/directives/class';
 
 import {utils} from 'perfmjs/utils';
 import {CKEditor} from '../directives/ckeditor';
@@ -23,10 +22,13 @@ import {CKEditor} from '../directives/ckeditor';
         }
     `],
     templateUrl: `templates/cms/index.html`,
-    directives: [coreDirectives, CSSClass, CKEditor]
+    directives: [CORE_DIRECTIVES, CKEditor]
 })
 export class CmsEdit {
+
     constructor() {
+        var dom = new BrowserDomAdapter();
+        dom.setInnerHTML(dom.querySelectorAll(document, "title")[0], 'cms-edit')
     }
 
     ng2ckeditorCompleted(event) {

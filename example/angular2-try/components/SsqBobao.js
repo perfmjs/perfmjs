@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/di', 'angular2/src/directives/class', '../directives/message.event'], function(exports_1) {
-    var angular2_1, di_1, class_1, message_event_1;
+};System.register(['angular2/angular2', 'angular2/di', '../directives/message.event'], function(exports_1) {
+    var angular2_1, di_1, message_event_1;
     var MyDirective, RedDec, SsqBobao;
     return {
         setters:[
@@ -21,9 +21,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             },
             function (_di_1) {
                 di_1 = _di_1;
-            },
-            function (_class_1) {
-                class_1 = _class_1;
             },
             function (_message_event_1) {
                 message_event_1 = _message_event_1;
@@ -82,7 +79,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                     }),
                     angular2_1.View({
                         template: "\n    <my-directive message=\"MediterraneaJS\">\n        <p class=\"i-report\">2015001\u671F <span red-better>\u5468\u4E8C21:30\u5F00\u5956{{text}}</span></p>\n    </my-directive>\n    ",
-                        directives: [angular2_1.coreDirectives, class_1.CSSClass, RedDec, MyDirective]
+                        directives: [angular2_1.CORE_DIRECTIVES, RedDec, MyDirective]
                     }), 
                     __metadata('design:paramtypes', [])
                 ], SsqBobao);

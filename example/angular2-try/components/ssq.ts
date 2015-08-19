@@ -1,47 +1,48 @@
-import {Component, View, Injectable, coreDirectives, Directive, ElementRef, Renderer} from 'angular2/angular2';
+import {Component, View, Injectable, CORE_DIRECTIVES, Directive, ElementRef, Renderer} from 'angular2/angular2';
 import {Inject, bind} from 'angular2/di';
 import {Router, RouterOutlet, RouterLink, routerInjectables} from 'angular2/router';
-import {CSSClass} from 'angular2/src/directives/class';
-import {Pipes, defaultPipes} from 'angular2/src/change_detection/change_detection';
-
+import {Pipes} from 'angular2/src/core/pipes/pipes';
+import {Pipe} from 'angular2/src/core/metadata';
 import {CommonService} from '../services/common.service';
 import {utils} from 'perfmjs/utils';
 import {joquery} from 'perfmjs/joquery';
-import {CommonPipeFactory} from '../pipes/commonPipe';
 import {betBaseSuanfa} from './betBaseSuanfa';
 import {SsqBobao} from './SsqBobao';
 
-//build pipe
-var betCountPipeObj = new CommonPipeFactory();
-betCountPipeObj.transform = utils.aop(this, betCountPipeObj.transform, function(value, args) {
-    var betInfo:Map = value;
-    var selectedRedCount = joquery.newInstance(utils.toArray(betInfo.get('red').values())).filter(function(item) {
-        return item.selected;
-    }).toArray().length;
-    var selectedBlueCount = joquery.newInstance(utils.toArray(betInfo.get('blue').values())).filter(function(item) {
-        return item.selected;
-    }).toArray().length;
-    betInfo.set('betCount', betBaseSuanfa.getCodeNumber(6, selectedRedCount, selectedBlueCount));
-    return betInfo.get('betCount');
-});
-var betInfoPipeObj = new CommonPipeFactory();
-betInfoPipeObj.transform = utils.aop(this, betInfoPipeObj.transform, function(value, args) {
-    var betCount:number = value;
-    return betCount<1?'至少选择6个红球+1个蓝球':'共' + betCount + '注，下一步';
-});
+
+@Pipe({
+    name: 'betInfoPipe'
+})
+class BetInfoPipe {
+    transform(value:any, args:any):any {
+        var betInfo:Map = value;
+        var selectedRedCount = joquery.newInstance(utils.toArray(betInfo.get('red').values())).filter(function(item) {
+            return item.selected;
+        }).toArray().length;
+        var selectedBlueCount = joquery.newInstance(utils.toArray(betInfo.get('blue').values())).filter(function(item) {
+            return item.selected;
+        }).toArray().length;
+        betInfo.set('betCount', betBaseSuanfa.getCodeNumber(6, selectedRedCount, selectedBlueCount));
+        return betInfo.get('betCount');
+    }
+}
+@Pipe({
+    name: 'betCountPipe'
+})
+class BetCountPipe {
+    transform(value:any, args:any):any {
+        var betCount:number = value;
+        return betCount<1?'至少选择6个红球+1个蓝球':'共' + betCount + '注，下一步';
+    }
+}
 
 @Component({
-    selector: 'ssq',
-    viewBindings: [
-        Pipes.extend({
-            'betInfoPipe': CommonPipeFactory.toPipe(betInfoPipeObj),
-            'betCountPipe': CommonPipeFactory.toPipe(betCountPipeObj)
-        })
-    ]
+    selector: 'ssq'
 })
 @View({
     templateUrl: 'templates/ssq/ssq.html',
-    directives: [coreDirectives, RouterOutlet, RouterLink, CSSClass, SsqBobao]
+    directives: [CORE_DIRECTIVES, RouterOutlet, RouterLink, SsqBobao],
+    pipes: [BetInfoPipe, BetCountPipe]
 })
 export class Ssq {
     router: Router;

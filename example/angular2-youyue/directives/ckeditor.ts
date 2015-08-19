@@ -1,6 +1,6 @@
-import {Component, View, Injectable, coreDirectives, Directive, ElementRef, Renderer} from 'angular2/angular2';
-import {LifecycleEvent} from 'angular2/annotations';
-import {Inject, bind} from 'angular2/di';
+import {Component, View, Injectable, CORE_DIRECTIVES, Directive, ElementRef, Renderer} from 'angular2/angular2';
+import {LifecycleEvent} from 'angular2/src/core/metadata/directives';
+import {Inject} from 'angular2/di';
 import {CSSClass} from 'angular2/src/directives/class';
 import {BrowserDomAdapter} from 'angular2/src/dom/browser_adapter';
 
@@ -27,7 +27,7 @@ import {async} from 'perfmjs/async';
     template: `
     <textarea id="ng2ckeditorElement" name="ng2ckeditorElement"></textarea>
     `,
-    directives: [coreDirectives, CSSClass]
+    directives: [CORE_DIRECTIVES]
 })
 export class CKEditor {
     messageEvent:MessageEvent = new MessageEvent(this);

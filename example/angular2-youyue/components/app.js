@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', '../directives/common.login', '../services/common-service', './main', './detail', './ToutiaoIndex', './ToutiaoDetail', './cmsEdit'], function(exports_1) {
-    var angular2_1, di_1, router_1, common_login_1, common_service_1, main_1, detail_1, ToutiaoIndex_1, ToutiaoDetail_1, cmsEdit_1;
+};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', '../directives/common.login', '../services/common-service', './ToutiaoIndex', './ToutiaoDetail', './cmsEdit'], function(exports_1) {
+    var angular2_1, di_1, router_1, common_login_1, common_service_1, ToutiaoIndex_1, ToutiaoDetail_1, cmsEdit_1;
     var App;
     return {
         setters:[
@@ -30,12 +30,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             },
             function (_common_service_1) {
                 common_service_1 = _common_service_1;
-            },
-            function (_main_1) {
-                main_1 = _main_1;
-            },
-            function (_detail_1) {
-                detail_1 = _detail_1;
             },
             function (_ToutiaoIndex_1) {
                 ToutiaoIndex_1 = _ToutiaoIndex_1;
@@ -62,8 +56,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                     }),
                     router_1.RouteConfig([
                         { path: '/', as: 'index', component: cmsEdit_1.CmsEdit },
-                        { path: '/index', as: 'main', component: main_1.Main },
-                        { path: '/detail', as: 'detail', component: detail_1.Detail },
                         { path: '/toutiaoIndex', as: 'toutiaoIndex', component: ToutiaoIndex_1.ToutiaoIndex },
                         { path: '/toutiaoDetail', as: 'toutiaoDetail', component: ToutiaoDetail_1.ToutiaoDetail },
                         { path: '/cmsEdit', as: 'cmsEdit', component: cmsEdit_1.CmsEdit },

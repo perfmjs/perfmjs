@@ -25,7 +25,7 @@
         </div>
         <div id="top_menu" class="top_menu">
             <div class="top_menu_list">
-                <a *ng-for="#channel of channelsMap.values()" href="javascript:void(0)" [class]="{'btn':true,'cur':channel.selected}" scroll-left="{{channel.scrollLeft}}" (click)="gotoDetailPage()">{{channel.name}}</a>
+                <a *ng-for="#channel of channelsMap.values()" href="javascript:void(0)" [ng-class]="{'btn':true,'cur':channel.selected}" scroll-left="{{channel.scrollLeft}}" (click)="gotoDetailPage()">{{channel.name}}</a>
             </div>
         </div>
     </div>

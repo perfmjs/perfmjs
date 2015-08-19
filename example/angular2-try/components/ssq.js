@@ -11,9 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', 'angular2/src/directives/class', 'angular2/src/change_detection/change_detection', '../services/common.service', 'perfmjs/utils', 'perfmjs/joquery', '../pipes/commonPipe', './betBaseSuanfa', './SsqBobao'], function(exports_1) {
-    var angular2_1, di_1, router_1, class_1, change_detection_1, common_service_1, utils_1, joquery_1, commonPipe_1, betBaseSuanfa_1, SsqBobao_1;
-    var betCountPipeObj, betInfoPipeObj, Ssq;
+};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', 'angular2/src/core/metadata', '../services/common.service', 'perfmjs/utils', 'perfmjs/joquery', './betBaseSuanfa', './SsqBobao'], function(exports_1) {
+    var angular2_1, di_1, router_1, metadata_1, common_service_1, utils_1, joquery_1, betBaseSuanfa_1, SsqBobao_1;
+    var BetInfoPipe, BetCountPipe, Ssq;
     return {
         setters:[
             function (_angular2_1) {
@@ -25,11 +25,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             function (_router_1) {
                 router_1 = _router_1;
             },
-            function (_class_1) {
-                class_1 = _class_1;
-            },
-            function (_change_detection_1) {
-                change_detection_1 = _change_detection_1;
+            function (_metadata_1) {
+                metadata_1 = _metadata_1;
             },
             function (_common_service_1) {
                 common_service_1 = _common_service_1;
@@ -40,9 +37,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             function (_joquery_1) {
                 joquery_1 = _joquery_1;
             },
-            function (_commonPipe_1) {
-                commonPipe_1 = _commonPipe_1;
-            },
             function (_betBaseSuanfa_1) {
                 betBaseSuanfa_1 = _betBaseSuanfa_1;
             },
@@ -50,24 +44,43 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                 SsqBobao_1 = _SsqBobao_1;
             }],
         execute: function() {
-            //build pipe
-            betCountPipeObj = new commonPipe_1.CommonPipeFactory();
-            betCountPipeObj.transform = utils_1.utils.aop(this, betCountPipeObj.transform, function (value, args) {
-                var betInfo = value;
-                var selectedRedCount = joquery_1.joquery.newInstance(utils_1.utils.toArray(betInfo.get('red').values())).filter(function (item) {
-                    return item.selected;
-                }).toArray().length;
-                var selectedBlueCount = joquery_1.joquery.newInstance(utils_1.utils.toArray(betInfo.get('blue').values())).filter(function (item) {
-                    return item.selected;
-                }).toArray().length;
-                betInfo.set('betCount', betBaseSuanfa_1.betBaseSuanfa.getCodeNumber(6, selectedRedCount, selectedBlueCount));
-                return betInfo.get('betCount');
-            });
-            betInfoPipeObj = new commonPipe_1.CommonPipeFactory();
-            betInfoPipeObj.transform = utils_1.utils.aop(this, betInfoPipeObj.transform, function (value, args) {
-                var betCount = value;
-                return betCount < 1 ? '至少选择6个红球+1个蓝球' : '共' + betCount + '注，下一步';
-            });
+            BetInfoPipe = (function () {
+                function BetInfoPipe() {
+                }
+                BetInfoPipe.prototype.transform = function (value, args) {
+                    var betInfo = value;
+                    var selectedRedCount = joquery_1.joquery.newInstance(utils_1.utils.toArray(betInfo.get('red').values())).filter(function (item) {
+                        return item.selected;
+                    }).toArray().length;
+                    var selectedBlueCount = joquery_1.joquery.newInstance(utils_1.utils.toArray(betInfo.get('blue').values())).filter(function (item) {
+                        return item.selected;
+                    }).toArray().length;
+                    betInfo.set('betCount', betBaseSuanfa_1.betBaseSuanfa.getCodeNumber(6, selectedRedCount, selectedBlueCount));
+                    return betInfo.get('betCount');
+                };
+                BetInfoPipe = __decorate([
+                    metadata_1.Pipe({
+                        name: 'betInfoPipe'
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], BetInfoPipe);
+                return BetInfoPipe;
+            })();
+            BetCountPipe = (function () {
+                function BetCountPipe() {
+                }
+                BetCountPipe.prototype.transform = function (value, args) {
+                    var betCount = value;
+                    return betCount < 1 ? '至少选择6个红球+1个蓝球' : '共' + betCount + '注，下一步';
+                };
+                BetCountPipe = __decorate([
+                    metadata_1.Pipe({
+                        name: 'betCountPipe'
+                    }), 
+                    __metadata('design:paramtypes', [])
+                ], BetCountPipe);
+                return BetCountPipe;
+            })();
             Ssq = (function () {
                 function Ssq(router, commonService) {
                     this.redCodes = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
@@ -156,17 +169,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                 };
                 Ssq = __decorate([
                     angular2_1.Component({
-                        selector: 'ssq',
-                        viewBindings: [
-                            change_detection_1.Pipes.extend({
-                                'betInfoPipe': commonPipe_1.CommonPipeFactory.toPipe(betInfoPipeObj),
-                                'betCountPipe': commonPipe_1.CommonPipeFactory.toPipe(betCountPipeObj)
-                            })
-                        ]
+                        selector: 'ssq'
                     }),
                     angular2_1.View({
                         templateUrl: 'templates/ssq/ssq.html',
-                        directives: [angular2_1.coreDirectives, router_1.RouterOutlet, router_1.RouterLink, class_1.CSSClass, SsqBobao_1.SsqBobao]
+                        directives: [angular2_1.CORE_DIRECTIVES, router_1.RouterOutlet, router_1.RouterLink, SsqBobao_1.SsqBobao],
+                        pipes: [BetInfoPipe, BetCountPipe]
                     }),
                     __param(0, di_1.Inject(router_1.Router)), 
                     __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object, common_service_1.CommonService])

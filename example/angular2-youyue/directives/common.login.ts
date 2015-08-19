@@ -1,8 +1,7 @@
-import {Component, View, Injectable, coreDirectives, Directive, ElementRef, Renderer} from 'angular2/angular2';
+import {Component, View, Injectable, CORE_DIRECTIVES, Directive, ElementRef, Renderer} from 'angular2/angular2';
 import {RouteConfig, Router, RouterOutlet, RouterLink, routerInjectables, Location, RouteParams} from 'angular2/router';
 import {Inject, bind} from 'angular2/di';
-import {CSSClass} from 'angular2/src/directives/class';
-import {FormBuilder, Validators, formDirectives, ControlGroup, Control} from 'angular2/forms';
+import {FormBuilder, Validators, FORM_DIRECTIVES, ControlGroup, Control} from 'angular2/forms';
 
 import {MessageEvent} from './message.event';
 import {utils} from 'perfmjs/utils';
@@ -233,7 +232,7 @@ import {utils} from 'perfmjs/utils';
         <!--</ul>-->
     <!--</section>-->
     `,
-    directives: [coreDirectives, CSSClass, formDirectives]
+    directives: [CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
 export class CommonLogin {
     messageEvent:MessageEvent = new MessageEvent(this);

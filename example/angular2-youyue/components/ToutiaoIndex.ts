@@ -1,8 +1,7 @@
-import {Component, View, Injectable, coreDirectives, Directive, ElementRef, Renderer} from 'angular2/angular2';
+import {Component, View, Injectable, CORE_DIRECTIVES, Directive, ElementRef, Renderer} from 'angular2/angular2';
 import {Inject} from 'angular2/di';
 import {Router, routerInjectables} from 'angular2/router';
 import {BrowserDomAdapter} from 'angular2/src/dom/browser_adapter';
-import {CSSClass} from 'angular2/src/directives/class';
 
 import {utils} from 'perfmjs/utils';
 
@@ -11,7 +10,7 @@ import {utils} from 'perfmjs/utils';
 })
 @View({
     templateUrl: `templates/toutiao/index.html`,
-    directives: [coreDirectives, CSSClass]
+    directives: [CORE_DIRECTIVES]
 })
 export class ToutiaoIndex {
     router:Router;

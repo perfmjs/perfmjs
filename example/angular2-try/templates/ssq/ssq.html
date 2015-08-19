@@ -61,12 +61,12 @@
 			<div class="bet-box">
 				<ul class="ball-con red-balls clearfix" id="normal_redball_area">
 					<li *ng-for="#code of betInfo.get('red').values()">
-						<span [class]="{'flex-center':true,'active':code.selected}" (click)="xuanhao(code)">{{code.code}}</span><i class="gray">9</i>
+						<span [ng-class]="{'flex-center':true,'active':code.selected}" (click)="xuanhao(code)">{{code.code}}</span><i class="gray">9</i>
 					</li>
 				</ul>
 				<ul class="ball-con blue-balls clearfix" id="normal_blueball_area">
 					<li *ng-for="#code of betInfo.get('blue').values()">
-						<span [class]="{'flex-center':true,'active':code.selected}" (click)="xuanhao(code)">{{code.code}}</span><i class="gray">9</i>
+						<span [ng-class]="{'flex-center':true,'active':code.selected}" (click)="xuanhao(code)">{{code.code}}</span><i class="gray">9</i>
 					</li>
 				</ul>
 			</div>
@@ -75,8 +75,8 @@
 	<div class="pick-area">
 		<div class="pick-toolbar">
 			<div class="tc-btn-group">
-				<a href="javascript:void(0);" [class]="{'tc-btn':true,'tc-btn-random':betInfo.get('betCount')<1, 'tc-btn-info':betInfo.get('betCount')>0, 'i-shake':true}"  (click)="randomCode()">{{(betInfo | betCountPipe)>0?'清空':'随机一注'}}</a>
-				<a href="javascript:void(0);" class="tc-btn tc-btn-large tc-btn-primary" (click)="betConfirm()">{{betInfo.get('betCount') | betInfoPipe}}</a>
+				<a href="javascript:void(0);" [ng-class]="{'tc-btn':true,'tc-btn-random':betInfo.get('betCount')<1, 'tc-btn-info':betInfo.get('betCount')>0, 'i-shake':true}"  (click)="randomCode()">{{(betInfo | betInfoPipe)>0?'清空':'随机一注'}}</a>
+				<a href="javascript:void(0);" class="tc-btn tc-btn-large tc-btn-primary" (click)="betConfirm()">{{betInfo.get('betCount') | betCountPipe}}</a>
 			</div>
 		</div>
 	</div>

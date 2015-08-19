@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', 'angular2/src/dom/browser_adapter', 'angular2/src/directives/class', 'perfmjs/utils'], function(exports_1) {
-    var angular2_1, di_1, router_1, browser_adapter_1, class_1, utils_1;
+};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', 'angular2/src/dom/browser_adapter', 'perfmjs/utils'], function(exports_1) {
+    var angular2_1, di_1, router_1, browser_adapter_1, utils_1;
     var ToutiaoIndex;
     return {
         setters:[
@@ -27,9 +27,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             },
             function (_browser_adapter_1) {
                 browser_adapter_1 = _browser_adapter_1;
-            },
-            function (_class_1) {
-                class_1 = _class_1;
             },
             function (_utils_1) {
                 utils_1 = _utils_1;
@@ -76,7 +73,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                     }),
                     angular2_1.View({
                         templateUrl: "templates/toutiao/index.html",
-                        directives: [angular2_1.coreDirectives, class_1.CSSClass]
+                        directives: [angular2_1.CORE_DIRECTIVES]
                     }),
                     __param(0, di_1.Inject(router_1.Router)), 
                     __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object])

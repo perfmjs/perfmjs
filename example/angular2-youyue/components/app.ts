@@ -4,8 +4,6 @@ import {RouteConfig, Router, RouterOutlet, RouterLink, routerInjectables} from '
 
 import {CommonLogin} from '../directives/common.login';
 import {CommonService} from '../services/common-service';
-import {Main} from './main';
-import {Detail} from './detail';
 import {ToutiaoIndex} from './ToutiaoIndex';
 import {ToutiaoDetail} from './ToutiaoDetail';
 import {CmsEdit} from './cmsEdit';
@@ -21,8 +19,6 @@ import {CmsEdit} from './cmsEdit';
 })
 @RouteConfig([
     {path: '/', as: 'index', component: CmsEdit},
-    {path: '/index', as: 'main', component: Main},
-    {path: '/detail', as: 'detail', component: Detail},
     {path: '/toutiaoIndex', as: 'toutiaoIndex', component: ToutiaoIndex},
     {path: '/toutiaoDetail', as: 'toutiaoDetail', component: ToutiaoDetail},
     {path: '/cmsEdit', as: 'cmsEdit', component: CmsEdit},

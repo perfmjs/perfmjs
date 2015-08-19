@@ -1,7 +1,7 @@
-import {Component, View, Injectable, coreDirectives, ElementRef, Renderer, Directive} from 'angular2/angular2';
+import {Component, View, Injectable, CORE_DIRECTIVES, ElementRef, Renderer, Directive} from 'angular2/angular2';
 import {Inject} from 'angular2/di';
 import {RouteConfig, Router, RouterOutlet, RouterLink, routerInjectables} from 'angular2/router';
-import {FormBuilder, Validators, formDirectives, ControlGroup, Control} from 'angular2/forms';
+import {FormBuilder, Validators, FORM_DIRECTIVES, ControlGroup, Control} from 'angular2/forms';
 
 import {Start} from './start';
 import {CommonService} from '../services/common.service';
@@ -18,7 +18,7 @@ class RedDec {
 })
 @View({
     templateUrl: 'templates/login.html',
-    directives: [coreDirectives, RouterOutlet, RouterLink, formDirectives, RedDec]
+    directives: [CORE_DIRECTIVES, RouterOutlet, RouterLink, FORM_DIRECTIVES, RedDec]
 })
 export class Login {
     router:Router;

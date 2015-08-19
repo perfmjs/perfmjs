@@ -1,6 +1,5 @@
-import {Component, View, Injectable, coreDirectives, Directive, ElementRef, Renderer} from 'angular2/angular2';
+import {Component, View, Injectable, CORE_DIRECTIVES, Directive, ElementRef, Renderer} from 'angular2/angular2';
 import {Inject, bind} from 'angular2/di';
-import {CSSClass} from 'angular2/src/directives/class';
 
 import {MessageEvent} from './message.event';
 
@@ -229,7 +228,7 @@ import {MessageEvent} from './message.event';
         <!--</ul>-->
     <!--</section>-->
     `,
-    directives: [coreDirectives, CSSClass]
+    directives: [CORE_DIRECTIVES]
 })
 export class CommonLogin {
     messageEvent:MessageEvent = new MessageEvent(this);

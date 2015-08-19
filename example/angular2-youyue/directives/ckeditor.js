@@ -11,22 +11,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/annotations', 'angular2/di', 'angular2/src/directives/class', './message.event'], function(exports_1) {
-    var angular2_1, annotations_1, di_1, class_1, message_event_1;
+};System.register(['angular2/angular2', 'angular2/src/core/metadata/directives', 'angular2/di', './message.event'], function(exports_1) {
+    var angular2_1, directives_1, di_1, message_event_1;
     var CKEditor;
     return {
         setters:[
             function (_angular2_1) {
                 angular2_1 = _angular2_1;
             },
-            function (_annotations_1) {
-                annotations_1 = _annotations_1;
+            function (_directives_1) {
+                directives_1 = _directives_1;
             },
             function (_di_1) {
                 di_1 = _di_1;
-            },
-            function (_class_1) {
-                class_1 = _class_1;
             },
             function (_message_event_1) {
                 message_event_1 = _message_event_1;
@@ -69,12 +66,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                         selector: 'ng2ckeditor',
                         properties: ['height: ckheight'],
                         events: ['messageEvent'],
-                        lifecycle: [annotations_1.LifecycleEvent.onInit]
+                        lifecycle: [directives_1.LifecycleEvent.onInit]
                     }),
                     angular2_1.View({
                         styles: ["\n        .ng-ckeditor {\n          border:0;\n        }\n    "],
                         template: "\n    <textarea id=\"ng2ckeditorElement\" name=\"ng2ckeditorElement\"></textarea>\n    ",
-                        directives: [angular2_1.coreDirectives, class_1.CSSClass]
+                        directives: [angular2_1.CORE_DIRECTIVES]
                     }),
                     __param(0, di_1.Inject(angular2_1.ElementRef)),
                     __param(1, di_1.Inject(angular2_1.Renderer)), 

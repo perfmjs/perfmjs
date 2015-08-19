@@ -1,3 +1,7 @@
+3.0.5/ 2015-08-20
+==================
+* improve: bump to angular2.0.0-alpha.35
+
 3.0.5-rc3/ 2015-08-19
 ==================
 * add: add 'common-login' angular2 directives

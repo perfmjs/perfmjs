@@ -1,6 +1,5 @@
-import {Component, View, Injectable, coreDirectives, Directive, ElementRef, Renderer} from 'angular2/angular2';
+import {Component, View, Injectable, CORE_DIRECTIVES, Directive, ElementRef, Renderer} from 'angular2/angular2';
 import {Inject, bind} from 'angular2/di';
-import {CSSClass} from 'angular2/src/directives/class';
 import {MessageEvent} from '../directives/message.event';
 
 import {utils} from 'perfmjs/utils';
@@ -45,7 +44,7 @@ class RedDec {
         <p class="i-report">2015001期 <span red-better>周二21:30开奖{{text}}</span></p>
     </my-directive>
     `,
-    directives: [coreDirectives, CSSClass, RedDec, MyDirective]
+    directives: [CORE_DIRECTIVES, RedDec, MyDirective]
 })
 export class SsqBobao {
     messageEvent:MessageEvent = new MessageEvent(this);

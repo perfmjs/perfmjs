@@ -67,7 +67,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                     }),
                     angular2_1.View({
                         templateUrl: 'templates/login.html',
-                        directives: [angular2_1.coreDirectives, router_1.RouterOutlet, router_1.RouterLink, forms_1.formDirectives, RedDec]
+                        directives: [angular2_1.CORE_DIRECTIVES, router_1.RouterOutlet, router_1.RouterLink, forms_1.FORM_DIRECTIVES, RedDec]
                     }),
                     __param(0, di_1.Inject(router_1.Router)), 
                     __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object, common_service_1.CommonService])

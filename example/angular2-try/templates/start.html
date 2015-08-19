@@ -7,7 +7,8 @@
     </li>
 </ul>
 <p *ng-if="names.length > 4">You have many friends!</p>
-<div>keyname: <input #keyname (keyup)></div>
+<!--<div>keyname: <input #keyname (keyup)></div>-->
+<div>keyname: <input #keyname></div>
 <p>{{keyname.value}}</p>
 <div>myControllerMethod: <input (keyup)="myCtrlMethod(keyname.value)"></div>
 <button (click)="myCtrlMethod('just a try')">login</button>
@@ -22,6 +23,3 @@
         <li><a>Contact</a></li>
     </ul>
 </nav>
-<ng2ckeditor (message-event)="ng2ckeditorCompleted($event)"></ng2ckeditor>
-<button (click)="printCKEditorHtml()">getCKEditorHtml</button>
-<common-login></common-login>
