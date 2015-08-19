@@ -18,10 +18,11 @@ class MyDirective {
     text:string;
 
     constructor(@Inject(ElementRef) elem: ElementRef, @Inject(Renderer) renderer: Renderer) {
+        console.log("MyDirective#constructor.text=" + this.text);
     }
 
     onMousedown() {
-        console.log("MyDirective#onMousedown" + this.text);
+        console.log("MyDirective#onMousedown.text=" + this.text);
     }
 }
 

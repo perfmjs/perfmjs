@@ -11,13 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/di', 'angular2/src/directives/class', './message.event'], function(exports_1) {
-    var angular2_1, di_1, class_1, message_event_1;
+};System.register(['angular2/angular2', 'angular2/annotations', 'angular2/di', 'angular2/src/directives/class', './message.event'], function(exports_1) {
+    var angular2_1, annotations_1, di_1, class_1, message_event_1;
     var CKEditor;
     return {
         setters:[
             function (_angular2_1) {
                 angular2_1 = _angular2_1;
+            },
+            function (_annotations_1) {
+                annotations_1 = _annotations_1;
             },
             function (_di_1) {
                 di_1 = _di_1;
@@ -40,9 +43,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                         language: 'en',
                         uiColor: '#000000'
                     };
+                    this.height = 150;
                     this.elem = elem;
                     this.renderer = renderer;
-                    CKEDITOR.config.height = 150;
+                }
+                CKEditor.prototype.onInit = function () {
+                    CKEDITOR.config.height = this.height;
                     CKEDITOR.config.width = 'auto';
                     if (CKEDITOR.revision == ('%RE' + 'V%') || !!CKEDITOR.plugins.get('wysiwygarea')) {
                         CKEDITOR.replace('ng2ckeditorElement');
@@ -51,7 +57,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                         CKEDITOR.document.getById('ng2ckeditorElement').setAttribute('contenteditable', 'true');
                         CKEDITOR.inline('ng2ckeditorElement');
                     }
-                }
+                };
                 CKEditor.prototype.setData = function (html) {
                     CKEDITOR.instances.ng2ckeditorElement.setData(html);
                 };
@@ -61,11 +67,13 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                 CKEditor = __decorate([
                     angular2_1.Component({
                         selector: 'ng2ckeditor',
-                        events: ['messageEvent']
+                        properties: ['height: ckheight'],
+                        events: ['messageEvent'],
+                        lifecycle: [annotations_1.LifecycleEvent.onInit]
                     }),
                     angular2_1.View({
                         styles: ["\n        .ng-ckeditor {\n          border:0;\n        }\n    "],
-                        template: "<textarea id=\"ng2ckeditorElement\" name=\"ng2ckeditorElement\"></textarea>",
+                        template: "\n    <textarea id=\"ng2ckeditorElement\" name=\"ng2ckeditorElement\"></textarea>\n    ",
                         directives: [angular2_1.coreDirectives, class_1.CSSClass]
                     }),
                     __param(0, di_1.Inject(angular2_1.ElementRef)),

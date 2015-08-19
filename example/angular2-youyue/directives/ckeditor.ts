@@ -1,6 +1,8 @@
 import {Component, View, Injectable, coreDirectives, Directive, ElementRef, Renderer} from 'angular2/angular2';
+import {LifecycleEvent} from 'angular2/annotations';
 import {Inject, bind} from 'angular2/di';
 import {CSSClass} from 'angular2/src/directives/class';
+import {BrowserDomAdapter} from 'angular2/src/dom/browser_adapter';
 
 import {MessageEvent} from './message.event';
 import {utils} from 'perfmjs/utils';
@@ -12,7 +14,9 @@ import {async} from 'perfmjs/async';
  */
 @Component({
     selector: 'ng2ckeditor',
-    events: ['messageEvent']
+    properties: ['height: ckheight'],
+    events: ['messageEvent'],
+    lifecycle: [LifecycleEvent.onInit]
 })
 @View({
     styles: [`
@@ -20,7 +24,9 @@ import {async} from 'perfmjs/async';
           border:0;
         }
     `],
-    template: `<textarea id="ng2ckeditorElement" name="ng2ckeditorElement"></textarea>`,
+    template: `
+    <textarea id="ng2ckeditorElement" name="ng2ckeditorElement"></textarea>
+    `,
     directives: [coreDirectives, CSSClass]
 })
 export class CKEditor {
@@ -31,12 +37,14 @@ export class CKEditor {
         language: 'en',
         uiColor: '#000000'
     };
+    height:number = 150;
 
     constructor(@Inject(ElementRef) elem: ElementRef, @Inject(Renderer) renderer: Renderer) {
         this.elem = elem;
         this.renderer = renderer;
-
-        CKEDITOR.config.height = 150;
+    }
+    onInit() {
+        CKEDITOR.config.height = this.height;
         CKEDITOR.config.width = 'auto';
         if (CKEDITOR.revision == ('%RE' + 'V%') || !!CKEDITOR.plugins.get('wysiwygarea')) {
             CKEDITOR.replace('ng2ckeditorElement');
@@ -45,7 +53,6 @@ export class CKEditor {
             CKEDITOR.inline('ng2ckeditorElement');
         }
     }
-
     setData(html:string) {
         CKEDITOR.instances.ng2ckeditorElement.setData(html);
     }

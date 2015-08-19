@@ -27,24 +27,6 @@
             <div class="top_menu_list">
                 <a *ng-for="#channel of channelsMap.values()" href="javascript:void(0)" [class]="{'btn':true,'cur':channel.selected}" scroll-left="{{channel.scrollLeft}}" (click)="gotoDetailPage()">{{channel.name}}</a>
             </div>
-
-            <!--<div class="top_menu_list">-->
-                <!--<a href="javascript:void(0)" class="btn cur" scroll-left="0" (click)="gotoDetailPage()">推荐</a>-->
-                <!--<a href="#channel=news_society" class="btn" scroll-left="0">社会</a>-->
-                <!--<a href="#channel=news_entertainment" class="btn" scroll-left="0">娱乐</a>-->
-                <!--<a href="#channel=news_tech" class="btn" scroll-left="-19">科技</a>-->
-                <!--<a href="#channel=news_car" class="btn" scroll-left="34">汽车</a>-->
-                <!--<a href="#channel=news_sports" class="btn" scroll-left="87">体育</a>-->
-                <!--<a href="#channel=news_finance" class="btn" scroll-left="140">财经</a>-->
-                <!--<a href="#channel=news_military" class="btn" scroll-left="193">军事</a>-->
-                <!--<a href="#channel=news_world" class="btn" scroll-left="246">国际</a>-->
-                <!--<a href="#channel=news_fashion" class="btn" scroll-left="299">时尚</a>-->
-                <!--<a href="#channel=news_game" class="btn" scroll-left="352">游戏</a>-->
-                <!--<a href="#channel=news_hot" class="btn" scroll-left="426">热点</a>-->
-                <!--<a href="#channel=news_history" class="btn" scroll-left="426">历史</a>-->
-                <!--<a href="#channel=news_food" class="btn" scroll-left="426">美食</a>-->
-                <!--<a href="#channel=news_discovery" class="btn" scroll-left="426">探索</a>-->
-            <!--</div>-->
         </div>
     </div>
 </header>

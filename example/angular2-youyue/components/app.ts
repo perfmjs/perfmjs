@@ -8,6 +8,7 @@ import {Main} from './main';
 import {Detail} from './detail';
 import {ToutiaoIndex} from './ToutiaoIndex';
 import {ToutiaoDetail} from './ToutiaoDetail';
+import {CmsEdit} from './cmsEdit';
 
 @Component({
     selector: 'app'
@@ -19,11 +20,12 @@ import {ToutiaoDetail} from './ToutiaoDetail';
     directives: [RouterOutlet, RouterLink]
 })
 @RouteConfig([
-    {path: '/', as: 'index', component: ToutiaoIndex},
+    {path: '/', as: 'index', component: CmsEdit},
     {path: '/index', as: 'main', component: Main},
     {path: '/detail', as: 'detail', component: Detail},
     {path: '/toutiaoIndex', as: 'toutiaoIndex', component: ToutiaoIndex},
     {path: '/toutiaoDetail', as: 'toutiaoDetail', component: ToutiaoDetail},
+    {path: '/cmsEdit', as: 'cmsEdit', component: CmsEdit},
     {path: '/login/:sourcePath', as: 'commonLogin', component: CommonLogin}
 ])
 export class App {

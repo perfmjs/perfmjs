@@ -31,9 +31,10 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
         execute: function() {
             MyDirective = (function () {
                 function MyDirective(elem, renderer) {
+                    console.log("MyDirective#constructor.text=" + this.text);
                 }
                 MyDirective.prototype.onMousedown = function () {
-                    console.log("MyDirective#onMousedown" + this.text);
+                    console.log("MyDirective#onMousedown.text=" + this.text);
                 };
                 MyDirective = __decorate([
                     angular2_1.Directive({

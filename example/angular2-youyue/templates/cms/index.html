@@ -1,0 +1,17 @@
+<link type="text/css" rel="stylesheet" href="styles/ui/pure.css">
+<form class="pure-form">
+    <fieldset class="pure-group">
+        <input type="text" class="pure-input-1-2" placeholder="频道">
+        <input type="text" class="pure-input-1-2" placeholder="标题">
+        <input type="text" class="pure-input-1-2" placeholder="描述图片地址1">
+        <input type="text" class="pure-input-1-2" placeholder="描述图片地址2">
+        <input type="text" class="pure-input-1-2" placeholder="描述图片地址3">
+        <input type="text" class="pure-input-1-2" placeholder="标签，多个以分号分割">
+        <input type="email" class="pure-input-1-2" placeholder="新闻来源">
+        <input type="text" class="pure-input-1-2" placeholder="新闻来源地址">
+        <!--<textarea class="pure-input-1-2" placeholder="Textareas work too"></textarea>-->
+        <ng2ckeditor class="pure-input-1-2" ckheight="100" (message-event)="ng2ckeditorCompleted($event)"></ng2ckeditor>
+        <button type="submit" class="pure-button pure-input-1-2 pure-button-primary">提交</button>
+    </fieldset>
+
+</form>
