@@ -6,6 +6,7 @@ import {eventProxy} from 'perfmjs/event.proxy';
  * 1）控制各个模块的生命周期，创建及销毁
  * 2）允许模块间的通信
  * 3）负责对系统错误的处理
+ * FIXME 该app类未来可能会被废弃
  * @date 2015-07-31
  */
 base("app", {

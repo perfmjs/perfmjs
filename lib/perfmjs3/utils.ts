@@ -1,10 +1,15 @@
 var _utils = class Utils {
     'use strict';
-    version:string = 'core.dev@3.0.0-alpha.1';
+    version:string = 'core.dev@3.0.5';
+    _singletonUtils:Utils;
     _class2type:any;
     global:any = {};
 
     constructor(global:any) {
+        if (this._singletonUtils) {
+            return this._singletonUtils;
+        }
+        this._singletonUtils = this;
         this.global = global || {};
         this.getGlobal("perfmjs.utils");
         this.global['perfmjs']['utils'] = this;
@@ -530,6 +535,4 @@ var _utils = class Utils {
         }
     }
 };
-var __utils = new _utils(this);
-export var utils = __utils;
-export var perfmjs = __utils.root;
+export var utils = new _utils(this);

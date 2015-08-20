@@ -1,6 +1,7 @@
-3.0.6-rc1/ 2015-08-20
+3.0.6-rc2/ 2015-08-20
 ==================
 * add: add RouteData sample to angular2-try
+* release: release perfmjs3.0.6
 
 3.0.5/ 2015-08-20
 ==================
@@ -181,4 +182,4 @@
  * fix: fix some bugs
  * add: perfmjs.utils#toNumber, perfmjs.utils#toBoolean
 
-说明：修改类型为: init(初始化项目)/improve(改善功能)/add(新增功能)/remove(移除功能)/modify(修复功能内容)/fix(修改BUG)
+说明：修改类型为: init(初始化项目)/improve(改善功能)/add(新增功能)/remove(移除功能)/modify(修复功能内容)/fix(修改BUG)/release(发布)

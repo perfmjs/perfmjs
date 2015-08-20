@@ -18,8 +18,8 @@
     <script type="text/javascript" src="libs/system.src@0.16.11.js"></script>
     <script type="text/javascript" src="libs/angular2.dev@2.0.0-alpha.35.js"></script>
     <script type="text/javascript" src="libs/router.dev@2.0.0-alpha.35.js"></script>
-    <script type="text/javascript" src="libs/ckeditor/ckeditor.js"></script>
-    <script type="text/javascript" src="/perfmjs/dist/js/core-3.0.4.js?^{f:'./libs/include.js',m:'common;jquery;zhuanpan;dianqiu'}"></script>
+    <script type="text/javascript" src="/perfmjs/dist/js/core-3.0.6.js"></script>
+    <!--<script type="text/javascript" src="/perfmjs/dist/js/core-3.0.4.js?^{f:'./libs/include.js',m:'common;jquery;zhuanpan;dianqiu'}"></script>-->
     <!--<script src="https://github.jspm.io/jmcriffey/bower-traceur-runtime@0.0.90/traceur-runtime.js"></script>-->
     <!--<script src="https://jspm.io/system@0.16.11.js"></script>-->
     <!--<script src="https://code.angularjs.org/2.0.0-alpha.30/angular2.dev@2.0.0-alpha.34.js"></script>-->
@@ -49,7 +49,36 @@
         }
     });
     System.import("perfmjs/loader").then(function(module) {
-        module.loader.load();
+        module.loader.load({src:"{m:'common;jquery;zhuanpan;dianqiu;'}"})
+                .loadModules({mdCallback:function(source, module, combineUrls) {
+            if (module === 'common') {
+                //do nothing
+            } else if (module === 'jquery') {
+                combineUrls[combineUrls.length] = 'js/zhuanpan/jquery.min.js';
+            } else if (module === 'zhuanpan') {
+                combineUrls[combineUrls.length] = 'js/zhuanpan/jquery.rotate.min.js';
+                combineUrls[combineUrls.length] = 'js/zhuanpan/jcMarquee.js';
+            } else if (module === 'dianqiu') {
+                combineUrls[combineUrls.length] = 'js/dianqiu/scrolltext.js';
+            }
+        }, afterLoadedCallback:function() {
+            module.utils.ready(function($$, app) {
+                if (typeof $ !== 'undefined') {
+                    System.register('perfmjs/jquery', [], function ($__export) {
+                        var JQuery;
+                        return {
+                            setters: [
+                            ],
+                            execute: function () {
+                                JQuery = $;
+                                $__export("JQuery", JQuery);
+                            }
+                        };
+                    });
+                }
+                System.import('./components/index');
+            });
+        }});
     });
 </script>
 </body>

@@ -1,4 +1,4 @@
-import {utils, perfmjs as $$} from 'perfmjs/utils';
+import {utils} from 'perfmjs/utils';
 
 ///#source 1 1 /src/1.0.0/load.js
 /* head.load - v1.0.3 */
@@ -710,7 +710,7 @@ import {utils, perfmjs as $$} from 'perfmjs/utils';
 
     /*for perfmjs begin*/
     utils.getGlobal('headLoad');
-    $$.headLoad = api;
+    utils.root.headLoad = api;
     /*for perfmjs end*/
 }(window);
-export var headLoad = $$.headLoad;
+export var headLoad = utils.root.headLoad;

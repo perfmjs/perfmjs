@@ -58,14 +58,14 @@
         if (loadedWebAlert) {
             webAlert({content:'您收到 <strong>2</strong> 条消息,  currentDomain:' + perfmjs.currentDomain, left:'right', top:'bottom', time:'100', fixed:true});
         }
-        perfmjs.includeRes.load({src:"{n:'css1-webdialog',t:'css',m:'webdialog;'}|{n:'js1-webdialog',t:'js',m:'webdialog;'}"}
-        ).loadModules({name:'css1-webdialog', type:'css', mdCallback:function(source, module, combineUrls) {
+        .loadModules({name:'css1-webdialog', type:'css', mdCallback:function(source, module, combineUrls) {
             if (module === 'webdialog') {
                 combineUrls[combineUrls.length] = '/perfmjs/lib/widget/webdialog/skin/new2010/new2010.css?v=20140703001';
             }
         }, afterLoadedCallback:function() {
             //webAlert({content:'您收到 <strong>2</strong> 条消息', left:'right', top:'bottom', time:'100', fixed:true});
-        }}).loadModules({name:'js1-webdialog', type:'js', mdCallback:function(source, module, combineUrls) {
+        }})perfmjs.includeRes.load({src:"{n:'css1-webdialog',t:'css',m:'webdialog;'}|{n:'js1-webdialog',t:'js',m:'webdialog;'}"}
+        ).loadModules({name:'js1-webdialog', type:'js', mdCallback:function(source, module, combineUrls) {
             if (module === 'webdialog') {
                 combineUrls[combineUrls.length] = '/perfmjs/lib/widget/webdialog/webDialog.js';
             }

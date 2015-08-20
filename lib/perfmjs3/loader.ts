@@ -1,4 +1,4 @@
-import {utils, perfmjs as $$} from 'perfmjs/utils';
+import {utils as _utils} from 'perfmjs/utils';
 import {joquery} from 'perfmjs/joquery';
 import {headLoad} from 'perfmjs/head.load';
 
@@ -10,7 +10,7 @@ import {headLoad} from 'perfmjs/head.load';
  <script type="text/javascript" src="/perfmjs/js/core2/onlyforload.js?v=2012120301^{n:'widget-comm',f:'http://s.no100.com/perfmjs/js/core2/include-comm.js',t:'js',m:'ssq',d:'http://s.no100.com'}"></script>
  <script type="text/javascript" src="/perfmjs/js/core2/onlyforload.js?v=2012120302^{n:'js-comm',f:'http://s.no100.com/perfmjs/js/core2/include-comm.js',t:'js',m:'jq;dlt',d:'http://s.no100.com'}"></script>
  <script type="text/javascript" src="/perfmjs/js/core2/jquery-1.8.3.js"></script>
- <script type="text/javascript" src="/perfmjs/js/core2/utils.js"></script>
+ <script type="text/javascript" src="/perfmjs/js/core2/_utils.js"></script>
  <script type="text/javascript" src="/perfmjs/js/core2/base.js"></script>
  <script type="text/javascript" src="/perfmjs/js/core2/json.js"></script>
  <script type="text/javascript" src="/perfmjs/js/core2/joquery.js"></script>
@@ -20,7 +20,8 @@ import {headLoad} from 'perfmjs/head.load';
  <script type="text/javascript" src="/perfmjs/js/core2/onlyforload.js?v=2012120302^{n:'js-comm',f:'http://s.no100.com/perfmjs/js/core2/include-comm.js',t:'js',m:'jq;dlt',d:'http://s.no100.com'}"></script>
  <script type="text/javascript" src="/perfmjs/js/core2/core.min.js?v=2012120301^{n:'widget-comm',f:'http://s.no100.com/perfmjs/js/core2/include-comm.js',t:'js',m:'ssq',d:'http://s.no100.com'}"></script>
  */
-utils.getGlobal('loader');
+_utils.getGlobal('loader');
+var $$ = _utils.root;
 $$.loader = {
     writejs: function(src, encode) {
         document.write('<script type="text/javascript" src='+src+' charset="'+(encode||"UTF-8")+'"></script>');
@@ -43,7 +44,7 @@ $$.loader = {
     loadHeadRes: function() {
         var args = arguments, _args = [];
         for (var i = 0; i < args.length; i++) {
-            if (utils.isArray(args[i])) {
+            if (_utils.isArray(args[i])) {
                 _args  = _args.concat(args[i]);
                 continue;
             }
@@ -75,7 +76,7 @@ $$.loader = {
     loadedModuleName: {},
     //加载应用需要的所有相关js或css文件
     loadModules: function(options) {
-        options = utils.extend({name:'', type:'js', mdCallback:function(){}, handleUrlsCallback:function(){}, afterLoadedCallback:function(){}}, options);
+        options = _utils.extend({name:'', type:'js', mdCallback:function(){}, handleUrlsCallback:function(){}, afterLoadedCallback:function(){}}, options);
         if (typeof $$.loader.sources !== 'undefined') {
             var sources = $$.loader.sources;
             sources = joquery.newInstance(sources).select(function(item) {
@@ -95,7 +96,7 @@ $$.loader = {
                 var modules = source['m'].split(";");
                 for (var j = 0; j < modules.length; j++) {
                     var module = modules[j];
-                    utils.trim(module).length > 0 && options.mdCallback.call(null, source, module, combineUrls);
+                    _utils.trim(module).length > 0 && options.mdCallback.call(null, source, module, combineUrls);
                 }
                 $$.loader.loadedModuleName[source['n']] = source['n'];
             }
@@ -132,7 +133,7 @@ $$.loader = {
     },
     _parseLoadedRes: function(options) {
         //只认带有script元素的src属性或src参数中含有onlyforload.js或core.js或core.min.js或core-def.js字符的地址
-        options = utils.extend({loadfile:'core-[0-9]+.[0-9]+.[0-9]+.js|core-[0-9]+.[0-9]+.[0-9]+.min.js|onlyforload.js|core.min.js|core.js', isScript:false, src:'{n:"",t:"js",m:"default;"}'}, options);
+        options = _utils.extend({loadfile:'core-[0-9]+.[0-9]+.[0-9]+.js|core-[0-9]+.[0-9]+.[0-9]+.min.js|onlyforload.js|core.min.js|core.js', isScript:false, src:'{n:"",t:"js",m:"default;"}'}, options);
         //将sources数组清空并初始化
         this.sources.length = 0;
         var scripts = options['isScript'] ? document.getElementsByTagName("script") : options['src'].split('|');
@@ -151,7 +152,7 @@ $$.loader = {
                                 scriptOptions = JSON.parse(srcOptions);
                             }
                         }
-                        scriptOptions = utils.extend({n:'',t:'js',m:'default'}, scriptOptions);
+                        scriptOptions = _utils.extend({n:'',t:'js',m:'default'}, scriptOptions);
                         this.sources[this.sources.length] = scriptOptions;
                     }
                     if (options['isScript']) {
@@ -167,7 +168,7 @@ $$.loader = {
     }
 };
 export var loader = $$.loader;
-export var perfmjs = $$;
+export var utils = _utils;
 ////调用例子, 在xxx.html里
 //<script type="text/javascript" src="/perfmjs/dist/js/core-3.0.0.js?^{f:'./libs/include.js',m:'common;jquery;zhuanpan;dianqiu'}"></script>
 //<script>

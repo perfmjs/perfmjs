@@ -1,4 +1,4 @@
-import {utils, perfmjs as $$} from 'perfmjs/utils';
+import {utils} from 'perfmjs/utils';
 
 /**
  * 子类继承父类的例子,调用如：xxx.newInstance(arg) 或 new perfmjs.xxx() 或 new $$.xxx() 或perfmjs.xxx.newInstance(arg) 或用perfmjs.xxx.instance访问实例;
@@ -41,6 +41,7 @@ import {utils, perfmjs as $$} from 'perfmjs/utils';
  export var demo1 = base.demo1;
  * @param name e.g. 'dlt','fc.ssq'
  */
+var $$ = utils.root;
 $$.base = function(name:string, prototype:any, parentPrototype:any, parentDefaults:any) {
     //name必须全局唯一
     if (name.indexOf('base.') < 0) {
@@ -107,4 +108,3 @@ $$.base.defaults = {
     end: 0
 };
 export var base = $$.base;
-export var perfmjs = $$;

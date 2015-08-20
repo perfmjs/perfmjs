@@ -13,9 +13,9 @@ var merge = require('merge2');
 var paths = {
     "core.name.snapshot": "core",
     "core.name.release": "core-2.1.2",
-    "core.ts.snapshot": "core-3.0.4",
+    "core.ts.snapshot": "core-3.0.6",
     scripts: [
-        './lib/perfmjs/core.js',
+        './lib/perfmjs/perfmjs.js',
         './lib/perfmjs/sys-config.js',
         './lib/perfmjs/base.js',
         './lib/perfmjs/joquery.js',

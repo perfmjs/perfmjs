@@ -18,7 +18,7 @@ import {CmsEdit} from './cmsEdit';
     directives: [RouterOutlet, RouterLink]
 })
 @RouteConfig([
-    {path: '/', as: 'index', component: CmsEdit},
+    {path: '/', as: 'index', component: ToutiaoIndex},
     {path: '/toutiaoIndex', as: 'toutiaoIndex', component: ToutiaoIndex},
     {path: '/toutiaoDetail', as: 'toutiaoDetail', component: ToutiaoDetail},
     {path: '/cmsEdit', as: 'cmsEdit', component: CmsEdit},
