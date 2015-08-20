@@ -1,3 +1,7 @@
+3.0.6-rc1/ 2015-08-20
+==================
+* add: add RouteData sample to angular2-try
+
 3.0.5/ 2015-08-20
 ==================
 * improve: bump to angular2.0.0-alpha.35

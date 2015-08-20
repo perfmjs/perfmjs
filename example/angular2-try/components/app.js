@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', '../services/common.service', './login', './start', './zhuanpan', './dianqiu', './ssq', './SsqBetConfirm', '../directives/common.login'], function(exports_1) {
-    var angular2_1, di_1, router_1, common_service_1, login_1, start_1, zhuanpan_1, dianqiu_1, ssq_1, SsqBetConfirm_1, common_login_1;
+};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', './login', './start', './zhuanpan', './dianqiu', './ssq', './SsqBetConfirm', '../directives/common.login'], function(exports_1) {
+    var angular2_1, di_1, router_1, login_1, start_1, zhuanpan_1, dianqiu_1, ssq_1, SsqBetConfirm_1, common_login_1;
     var App;
     return {
         setters:[
@@ -24,9 +24,6 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             },
             function (_router_1) {
                 router_1 = _router_1;
-            },
-            function (_common_service_1) {
-                common_service_1 = _common_service_1;
             },
             function (_login_1) {
                 login_1 = _login_1;
@@ -51,7 +48,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             }],
         execute: function() {
             App = (function () {
-                function App(router, commonService) {
+                function App(router) {
                     this.router = router;
                 }
                 App = __decorate([
@@ -63,9 +60,9 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                         directives: [router_1.RouterOutlet, router_1.RouterLink]
                     }),
                     router_1.RouteConfig([
-                        { path: '/', as: 'index', component: start_1.Start },
+                        { path: '/', as: 'index', component: start_1.Start, data: { adminOnly: false } },
                         { path: '/login', as: 'login', component: login_1.Login },
-                        { path: '/start', as: 'start', component: start_1.Start },
+                        { path: '/start', as: 'start', component: start_1.Start, data: { adminOnly: true } },
                         { path: '/zhuanpan', as: 'zhuanpan', component: zhuanpan_1.Zhuanpan },
                         { path: '/dianqiu', as: 'dianqiu', component: dianqiu_1.Dianqiu },
                         { path: '/ssq', as: 'ssq', component: ssq_1.Ssq },
@@ -73,7 +70,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                         { path: '/commonLogin', as: 'commonLogin', component: common_login_1.CommonLogin }
                     ]),
                     __param(0, di_1.Inject(router_1.Router)), 
-                    __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object, common_service_1.CommonService])
+                    __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object])
                 ], App);
                 return App;
             })();

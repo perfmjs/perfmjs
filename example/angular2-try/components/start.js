@@ -33,10 +33,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
             }],
         execute: function() {
             Start = (function () {
-                function Start(router, commonService) {
+                function Start(router, routeData, routeParams, commonService) {
                     this.myName = 'AngularJS2@爱彩';
                     this.names = commonService.names;
                     this.router = router;
+                    console.log("routeDta:" + routeData.adminOnly + "/routerParams.get(count)=" + routeParams.get("count"));
+                    console.log("routeDta:" + routeData.adminOnly);
                 }
                 Start.prototype.myCtrlMethod = function (inputStr) {
                     console.log('call myControllerMethod:' + inputStr);
@@ -57,8 +59,10 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                         templateUrl: 'templates/start.html',
                         directives: [angular2_1.CORE_DIRECTIVES, router_1.RouterOutlet, router_1.RouterLink, zippy_1.Zippy]
                     }),
-                    __param(0, di_1.Inject(router_1.Router)), 
-                    __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object, common_service_1.CommonService])
+                    __param(0, di_1.Inject(router_1.Router)),
+                    __param(1, di_1.Inject(router_1.ROUTE_DATA)),
+                    __param(2, di_1.Inject(router_1.RouteParams)), 
+                    __metadata('design:paramtypes', [(typeof Router !== 'undefined' && Router) || Object, Object, (typeof RouteParams !== 'undefined' && RouteParams) || Object, common_service_1.CommonService])
                 ], Start);
                 return Start;
             })();
