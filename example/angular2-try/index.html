@@ -48,8 +48,8 @@
             "perfmjs/*":"perfmjs/*"
         }
     });
-    System.import("perfmjs/loader").then(function(module) {
-        module.loader.load({src:"{m:'common;jquery;zhuanpan;dianqiu;'}"})
+    System.import("perfmjs/loader").then(function(systemModule) {
+        systemModule.loader.load({src:"{m:'common;jquery;zhuanpan;dianqiu;'}"})
                 .loadModules({mdCallback:function(source, module, combineUrls) {
             if (module === 'common') {
                 //do nothing
@@ -62,7 +62,7 @@
                 combineUrls[combineUrls.length] = 'js/dianqiu/scrolltext.js';
             }
         }, afterLoadedCallback:function() {
-            module.utils.ready(function($$, app) {
+            systemModule.utils.ready(function($$, app) {
                 if (typeof $ !== 'undefined') {
                     System.register('perfmjs/jquery', [], function ($__export) {
                         var JQuery;

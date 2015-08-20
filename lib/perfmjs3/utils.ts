@@ -1,3 +1,6 @@
+import {FetchPolyfill} from 'perfmjs/fetch';
+
+new FetchPolyfill();
 var _utils = class Utils {
     'use strict';
     version:string = 'core.dev@3.0.5';

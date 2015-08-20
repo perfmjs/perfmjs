@@ -17,8 +17,6 @@
     <script type="text/javascript" src="libs/system.src@0.16.11.js"></script>
     <script type="text/javascript" src="libs/angular2.dev@2.0.0-alpha.35.js"></script>
     <script type="text/javascript" src="libs/router.dev@2.0.0-alpha.35.js"></script>
-    <!--fetch polyfills, using in Safari-->
-    <script type="text/javascript" src="libs/fetch.js"></script>
     <script type="text/javascript" src="/perfmjs/dist/js/core-3.0.6.js"></script>
     <script type="text/javascript" src="libs/ckeditor/ckeditor.js"></script>
 </head>
@@ -35,7 +33,15 @@
             "perfmjs/*":"perfmjs/*"
         }
     });
-    System.import("./components/index");
+    System.import("perfmjs/loader").then(function(systemModule) {
+        systemModule.loader.load({src:"{m:'common;'}"}).loadModules({mdCallback:function(source, module, combineUrls) {
+            if (module === 'common') {
+                //do nothing
+            }
+        }, afterLoadedCallback:function() {
+            System.import('./components/index');
+        }});
+    });
 </script>
 </body>
 </html>

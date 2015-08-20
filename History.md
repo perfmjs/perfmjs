@@ -2,6 +2,7 @@
 ==================
 * add: add RouteData sample to angular2-try
 * release: release perfmjs3.0.6
+* add: add fetch polyfill
 
 3.0.5/ 2015-08-20
 ==================
