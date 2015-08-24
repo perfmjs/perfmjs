@@ -2,7 +2,7 @@ import {Component, View, CORE_DIRECTIVES} from 'angular2/angular2';
 import {Inject} from 'angular2/di';
 import {Router, RouterOutlet, RouterLink, routerInjectables, RouteParams, ROUTE_DATA} from 'angular2/router';
 
-import {CommonService} from '../services/common.service';
+import {CommonService} from '../services/common-service';
 import {Zippy} from './zippy';
 
 @Component({

@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', 'angular2/src/core/metadata', 'angular2/forms', '../services/common.service', 'perfmjs/utils', './betBaseSuanfa', '../directives/modal', './SsqBobao'], function(exports_1) {
+};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', 'angular2/src/core/metadata', 'angular2/forms', '../services/common-service', 'perfmjs/utils', './betBaseSuanfa', '../directives/modal', './SsqBobao'], function(exports_1) {
     var angular2_1, di_1, router_1, metadata_1, forms_1, common_service_1, utils_1, betBaseSuanfa_1, modal_1, SsqBobao_1;
     var BetPlanPipe, SsqBetConfirm;
     return {

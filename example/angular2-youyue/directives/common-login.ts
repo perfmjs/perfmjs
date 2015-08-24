@@ -3,7 +3,7 @@ import {RouteConfig, Router, RouterOutlet, RouterLink, routerInjectables, Locati
 import {Inject, bind} from 'angular2/di';
 import {FormBuilder, Validators, FORM_DIRECTIVES, ControlGroup, Control} from 'angular2/forms';
 
-import {MessageEvent} from './message.event';
+import {MessageEvent} from './message-event';
 import {utils} from 'perfmjs/utils';
 
 @Component({

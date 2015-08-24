@@ -4,7 +4,7 @@ import {RouteConfig, Router, RouterOutlet, RouterLink, routerInjectables} from '
 import {FormBuilder, Validators, FORM_DIRECTIVES, ControlGroup, Control} from 'angular2/forms';
 
 import {Start} from './start';
-import {CommonService} from '../services/common.service';
+import {CommonService} from '../services/common-service';
 
 @Directive({selector: '[red]'})
 class RedDec {

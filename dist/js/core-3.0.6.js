@@ -2526,7 +2526,7 @@ System.register("perfmjs/utils", ['perfmjs/fetch'], function(exports_1) {
                     if (this.isFunction(callback)) {
                         var root = this.root;
                         this.root.headLoad.ready(document, function () {
-                            callback(root, root.app);
+                            callback(root);
                         });
                     }
                 };

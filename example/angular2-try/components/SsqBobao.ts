@@ -1,6 +1,6 @@
 import {Component, View, Injectable, CORE_DIRECTIVES, Directive, ElementRef, Renderer} from 'angular2/angular2';
 import {Inject, bind} from 'angular2/di';
-import {MessageEvent} from '../directives/message.event';
+import {MessageEvent} from '../directives/message-event';
 
 import {utils} from 'perfmjs/utils';
 

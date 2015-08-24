@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', '../services/common.service', './zippy'], function(exports_1) {
+};System.register(['angular2/angular2', 'angular2/di', 'angular2/router', '../services/common-service', './zippy'], function(exports_1) {
     var angular2_1, di_1, router_1, common_service_1, zippy_1;
     var Start;
     return {

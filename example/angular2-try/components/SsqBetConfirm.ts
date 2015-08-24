@@ -5,7 +5,7 @@ import {Pipes} from 'angular2/src/core/pipes/pipes';
 import {Pipe} from 'angular2/src/core/metadata';
 import {FORM_DIRECTIVES, Control} from 'angular2/forms';
 
-import {CommonService, BetPlanContent} from '../services/common.service';
+import {CommonService, BetPlanContent} from '../services/common-service';
 import {utils} from 'perfmjs/utils';
 import {joquery} from 'perfmjs/joquery';
 import {betBaseSuanfa} from './betBaseSuanfa';

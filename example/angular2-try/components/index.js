@@ -1,4 +1,4 @@
-System.register(['angular2/router', 'angular2/angular2', 'angular2/di', './app', '../services/common.service'], function(exports_1) {
+System.register(['angular2/router', 'angular2/angular2', 'angular2/di', './app', '../services/common-service'], function(exports_1) {
     var router_1, angular2_1, di_1, app_1, common_service_1;
     return {
         setters:[
@@ -18,6 +18,7 @@ System.register(['angular2/router', 'angular2/angular2', 'angular2/di', './app',
                 common_service_1 = _common_service_1;
             }],
         execute: function() {
+            console.log('sdsdfsfdfsd');
             angular2_1.bootstrap(app_1.App, [
                 router_1.routerInjectables,
                 common_service_1.CommonService,

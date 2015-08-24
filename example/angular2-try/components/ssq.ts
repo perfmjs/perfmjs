@@ -3,7 +3,7 @@ import {Inject, bind} from 'angular2/di';
 import {Router, RouterOutlet, RouterLink, routerInjectables} from 'angular2/router';
 import {Pipes} from 'angular2/src/core/pipes/pipes';
 import {Pipe} from 'angular2/src/core/metadata';
-import {CommonService} from '../services/common.service';
+import {CommonService} from '../services/common-service';
 import {utils} from 'perfmjs/utils';
 import {joquery} from 'perfmjs/joquery';
 import {betBaseSuanfa} from './betBaseSuanfa';

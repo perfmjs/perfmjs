@@ -30680,4 +30680,4 @@ System.register("angular2/angular2", ["angular2/metadata", "angular2/change_dete
 });
 
 //# sourceMappingURLDisabled=angular2.dev.js.map
-System.config({"paths":{"*":"*.js","angular2/*":"angular2/*"}});
+//System.config({"paths":{"*":"*.js","angular2/*":"angular2/*"}});

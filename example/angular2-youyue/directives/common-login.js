@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
-};System.register(['angular2/angular2', 'angular2/router', 'angular2/di', 'angular2/forms', './message.event', 'perfmjs/utils'], function(exports_1) {
+};System.register(['angular2/angular2', 'angular2/router', 'angular2/di', 'angular2/forms', './message-event', 'perfmjs/utils'], function(exports_1) {
     var angular2_1, router_1, di_1, forms_1, message_event_1, utils_1;
     var CommonLogin;
     return {

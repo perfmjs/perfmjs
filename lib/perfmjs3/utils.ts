@@ -533,7 +533,7 @@ var _utils = class Utils {
         if (this.isFunction(callback)) {
             var root = this.root;
             this.root.headLoad.ready(document, function () {
-                callback(root, root.app);
+                callback(root);
             });
         }
     }
