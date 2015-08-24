@@ -96,7 +96,7 @@ gulp.task('perfmjs3', ['clean-dist-perfmjs'], function () {
 });
 
 /**
- * FIXME: 可以自己使用，但还需要完善
+ * FIXME: 可以在开发环境中直接使用生成的文件，但在生产环境还需要手工去掉重复的“__decorate，__metadata，__param”变量
  * 1. 因为typescript会生成很多angular2的重复的__decorate，__metadata，__param变量，所以最好需要手工修改生成的js文件去重
  * */
 gulp.task('angular2', ['clean-dist-angular2'], function () {

@@ -233,7 +233,7 @@ var _utils = class Utils {
                 requestParam['body'] = formData;
             } else if (jsonParam) {
                 var formData = new FormData();
-                this.forEach(this.keys(jsonParam), function(item, index) {
+                this.forEach(this.keys(jsonParam), function(item:any, index:number) {
                     formData.append(encodeURIComponent(item), encodeURIComponent(jsonParam[item]));
                 });
                 requestParam['body'] = formData;
@@ -410,7 +410,7 @@ var _utils = class Utils {
      */
     forEach(subject:any, fn:any, thisContext:any) {
         if (subject.forEach) {
-            subject.forEach(function(value, key, forEachObj) {
+            subject.forEach(function(value:any, key:any, forEachObj:any) {
                 fn(value, key, forEachObj);
             });
             return;

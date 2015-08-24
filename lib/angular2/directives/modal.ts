@@ -119,11 +119,11 @@ export class Modal {
         this.renderer = renderer;
     }
 
-    onMessage(message) {
+    onMessage(message:any):void {
         this.modal(message.modalParam);
     }
 
-    modal(options) {
+    modal(options:any):void {
         this.params = utils.extend(this.params, options);
         //判断弹窗类型
         if (this.params.type == "overlay") {
@@ -156,7 +156,7 @@ export class Modal {
     }
 
     //关闭事件以及取消绑定事件和清除样式
-    closeHandler(event, data) {
+    closeHandler(event:any, data:any):void {
         this.showModal = false;
         this.kmodaloverlayClass = false;
         this.kmodaladsorbClass = false;

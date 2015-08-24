@@ -130,7 +130,21 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
         }
     }
 });
-System.register("perfmjs/angular2/directives/common-login", ['angular2/angular2', 'angular2/router', 'angular2/di', 'angular2/forms', 'perfmjs/angular2/directives/message-event', 'perfmjs/utils'], function(exports_1) {
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
+    switch (arguments.length) {
+        case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
+        case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
+        case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
+    }
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};System.register("perfmjs/angular2/directives/common-login", ['angular2/angular2', 'angular2/router', 'angular2/di', 'angular2/forms', 'perfmjs/angular2/directives/message-event', 'perfmjs/utils'], function(exports_1) {
     var angular2_1, router_1, di_1, forms_1, message_event_1, utils_1;
     var CommonLogin;
     return {
@@ -207,7 +221,20 @@ System.register("perfmjs/angular2/directives/common-login", ['angular2/angular2'
     }
 });
 
-System.register("perfmjs/angular2/directives/modal", ['angular2/angular2', 'angular2/di', 'perfmjs/utils', 'angular2/src/dom/browser_adapter', 'perfmjs/angular2/directives/message-event'], function(exports_1) {
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
+    switch (arguments.length) {
+        case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
+        case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
+        case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
+    }
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};System.register("perfmjs/angular2/directives/modal", ['angular2/angular2', 'angular2/di', 'perfmjs/utils', 'angular2/src/dom/browser_adapter', 'perfmjs/angular2/directives/message-event'], function(exports_1) {
     var angular2_1, di_1, utils_1, browser_adapter_1, message_event_1;
     var Modal;
     return {
