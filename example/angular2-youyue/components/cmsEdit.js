@@ -8,7 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};System.register(['angular2/angular2', 'angular2/src/dom/browser_adapter', '../directives/ckeditor'], function(exports_1) {
+};System.register(['angular2/angular2', 'angular2/src/dom/browser_adapter', 'perfmjs/angular2/directives/ckeditor'], function(exports_1) {
     var angular2_1, browser_adapter_1, ckeditor_1;
     var CmsEdit;
     return {

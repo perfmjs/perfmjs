@@ -4,7 +4,7 @@ import {Inject} from 'angular2/di';
 import {CSSClass} from 'angular2/src/directives/class';
 import {BrowserDomAdapter} from 'angular2/src/dom/browser_adapter';
 
-import {MessageEvent} from './message-event';
+import {MessageEvent} from 'perfmjs/angular2/directives/message-event';
 import {utils} from 'perfmjs/utils';
 import {async} from 'perfmjs/async';
 

@@ -5,7 +5,6 @@ import {bind} from 'angular2/di';
 import {App} from './app';
 import {CommonService} from '../services/common-service';
 
-console.log('sdsdfsfdfsd');
 bootstrap(App, [
     routerInjectables,
     CommonService,

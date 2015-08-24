@@ -4,7 +4,7 @@ import {Router, routerInjectables} from 'angular2/router';
 import {BrowserDomAdapter} from 'angular2/src/dom/browser_adapter';
 
 import {utils} from 'perfmjs/utils';
-import {CKEditor} from '../directives/ckeditor';
+import {CKEditor} from 'perfmjs/angular2/directives/ckeditor';
 
 
 @Component({

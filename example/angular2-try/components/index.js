@@ -18,7 +18,6 @@ System.register(['angular2/router', 'angular2/angular2', 'angular2/di', './app',
                 common_service_1 = _common_service_1;
             }],
         execute: function() {
-            console.log('sdsdfsfdfsd');
             angular2_1.bootstrap(app_1.App, [
                 router_1.routerInjectables,
                 common_service_1.CommonService,

@@ -9,7 +9,7 @@ import {CommonService, BetPlanContent} from '../services/common-service';
 import {utils} from 'perfmjs/utils';
 import {joquery} from 'perfmjs/joquery';
 import {betBaseSuanfa} from './betBaseSuanfa';
-import {Modal} from '../directives/modal';
+import {Modal} from 'perfmjs/angular2/directives/modal';
 import {SsqBobao} from './SsqBobao';
 
 

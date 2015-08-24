@@ -1,6 +1,7 @@
 3.0.6-rc3/ 2015-08-24
 ==================
 * add: bump to 3.0.6-rc3
+* improve: in gulpfile.js: refactor angular2 directives to a common file
 
 3.0.6-rc2/ 2015-08-20
 ==================

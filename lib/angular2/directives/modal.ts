@@ -2,7 +2,7 @@ import {Component, View, Injectable, CORE_DIRECTIVES, Directive, ElementRef, Ren
 import {Inject, bind} from 'angular2/di';
 import {utils} from 'perfmjs/utils';
 import {BrowserDomAdapter} from 'angular2/src/dom/browser_adapter';
-import {MessageEvent} from './message-event';
+import {MessageEvent} from 'perfmjs/angular2/directives/message-event';
 
 
 /**
