@@ -1,4 +1,5 @@
 import {FetchPolyfill} from 'perfmjs/fetch';
+import {async} from 'perfmjs/async';
 
 new FetchPolyfill();
 var _utils = class Utils {
@@ -212,38 +213,62 @@ var _utils = class Utils {
      * http://blog.gospodarets.com/fetch_in_action/
      * https://github.com/github/fetch
      * e.g.
-     * utils.fetch("http://localhost:8888/json/message2", function(jsonData) {
-            console.log(jsonData.result.userName);
-        }, {'id':999,'name':'12345'}, 'POST');
+     utils.fetch({
+            url: "http://localhost:8888/youyue/user/login",
+            method: 'POST',
+            jsonParam: {name:userName.value, passwd:passwd.value}
+        }).then(function(jsonData) {
+            if (jsonData.status === 'success') {
+                //do something
+            } else {
+                //do something else
+            }
+        },function(err){});
      * @param url
-     * @param handler
      * @param jsonParam
      * @param method
      * @param formData
      * @param headers
      */
-    fetch(url:string, handler:any, jsonParam:any, method:string, formData:FormData, headers:any):void {
-        var self = this;
-        var requestParam = {
-            method: method || 'GET',
-            headers: headers || {'Accept': 'application/json'}
+    fetch(options:any):void {
+        options = this.extend({url:'',jsonParam:undefined,method:'GET',formData:undefined,headers:{'Accept':'application/json;'}
+        }, options);
+        var _self = this, requestParam = {
+            method: options.method,
+            headers: options.headers
         };
+
+        ////add JSON Web Token Params,如果没有CORS跨域问题则可以放到Header里
+        //if (localStorage.getItem("token")) {
+        //    options.url += (options.url.match("[\?]")?'&':'?') + 'x-access-token=' + encodeURIComponent(localStorage.getItem("token"));
+        //}
         if (requestParam.method.toUpperCase() === 'POST') {
-            if (formData) {
-                requestParam['body'] = formData;
-            } else if (jsonParam) {
+            if (options.formData) {
+                requestParam['body'] = options.formData;
+            } else if (options.jsonParam) {
                 var formData = new FormData();
-                this.forEach(this.keys(jsonParam), function(item:any, index:number) {
-                    formData.append(encodeURIComponent(item), encodeURIComponent(jsonParam[item]));
+                this.forEach(this.keys(options.jsonParam), function(item:any, index:number) {
+                    formData.append(encodeURIComponent(item), encodeURIComponent(options.jsonParam[item]));
                 });
                 requestParam['body'] = formData;
             }
+
+            if (requestParam['body']) {
+                requestParam['body'].append('x-access-token', encodeURIComponent(localStorage.getItem("token")));
+            } else {
+                var tokenFormData = new FormData();
+                tokenFormData.append('x-access-token', encodeURIComponent(localStorage.getItem("token")));
+                requestParam['body'] = tokenFormData;
+            }
         }
-        fetch(url,requestParam).then(response=>response.json()).then(function(json) {
-            handler(self.fmtJSONMsg(json));
+        var defer = async.defer();
+        fetch(options.url,requestParam).then(response=>response.json()).then(function(json) {
+            defer.resolve(_self.fmtJSONMsg(json));
         }).catch(function (ex) {
-            console.log('request:' + url + ' failed info:' + ex.message);
+            console.log('request:' + options.url + ' failed info:' + ex.message);
+            defer.reject(ex.message);
         });
+        return defer.promise;
     }
 
     fmtJSONMsg(jsonData:any):any {

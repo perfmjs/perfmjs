@@ -1,4 +1,4 @@
-import {utils, perfmjs as $$} from 'perfmjs/utils';
+import {utils} from 'perfmjs/utils';
 
 /**
  * async v1.0.0
@@ -13,7 +13,7 @@ import {utils, perfmjs as $$} from 'perfmjs/utils';
             console.log('error:' + error);
         });
  defer.resolve('hello');
- //deferred.reject(error.message);
+ //defer.reject(error.message);
  ......
  * 参考：Tillthen（v0.3.4） https://github.com/biril/tillthen
  * https://github.com/kriskowal/q
@@ -23,16 +23,17 @@ import {utils, perfmjs as $$} from 'perfmjs/utils';
  * https://github.com/cujojs/when
  * 在Node.js 中用 Q 实现Promise – Callbacks之外的另一种选择   http://www.ituring.com.cn/article/54547
  */
+var _async;
 (function (createModule) {
     "use strict";
-    if (utils.isNodeJSSupport()) {
+    if (typeof module !== 'undefined' && module.exports) {
         createModule(exports);
-    } else if (utils.isAmdSupport()) {
+    } else if (typeof define === "function" && define.amd && define.amd['async']) {
         define('async', function () {
-            return createModule();
+            return _async = createModule();
         });
-    } else if (utils.isBrowserSupport()) {
-        $$.async = createModule();
+    } else {
+        _async = createModule();
     }
 }(function (async) {
     "use strict";
@@ -123,7 +124,4 @@ import {utils, perfmjs as $$} from 'perfmjs/utils';
     async.version = "1.0.0";
     return async;
 }));
-//if (utils.isSystemSupport()) {
-//    export var async = $$.async;
-//}
-export var async = $$.async;
+if (_async) export var async = _async;

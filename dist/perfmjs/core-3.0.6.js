@@ -231,7 +231,7 @@ System.register("perfmjs/app", ['perfmjs/base', 'perfmjs/event.proxy'], function
 
 System.register("perfmjs/async", ['perfmjs/utils'], function(exports_1) {
     var utils_1;
-    var async;
+    var _async, async;
     return {
         setters:[
             function (_utils_1) {
@@ -251,7 +251,7 @@ System.register("perfmjs/async", ['perfmjs/utils'], function(exports_1) {
                         console.log('error:' + error);
                     });
              defer.resolve('hello');
-             //deferred.reject(error.message);
+             //defer.reject(error.message);
              ......
              * 参考：Tillthen（v0.3.4） https://github.com/biril/tillthen
              * https://github.com/kriskowal/q
@@ -263,16 +263,16 @@ System.register("perfmjs/async", ['perfmjs/utils'], function(exports_1) {
              */
             (function (createModule) {
                 "use strict";
-                if (utils_1.utils.isNodeJSSupport()) {
+                if (typeof module !== 'undefined' && module.exports) {
                     createModule(exports);
                 }
-                else if (utils_1.utils.isAmdSupport()) {
+                else if (typeof define === "function" && define.amd && define.amd['async']) {
                     define('async', function () {
-                        return createModule();
+                        return _async = createModule();
                     });
                 }
-                else if (utils_1.utils.isBrowserSupport()) {
-                    utils_1.perfmjs.async = createModule();
+                else {
+                    _async = createModule();
                 }
             }(function (async) {
                 "use strict";
@@ -372,10 +372,8 @@ System.register("perfmjs/async", ['perfmjs/utils'], function(exports_1) {
                 async.version = "1.0.0";
                 return async;
             }));
-            //if (utils.isSystemSupport()) {
-            //    export var async = $$.async;
-            //}
-            exports_1("async", async = utils_1.perfmjs.async);
+            if (_async)
+                exports_1("async", async = _async);
         }
     }
 });
@@ -2017,13 +2015,16 @@ System.register("perfmjs/loader", ['perfmjs/utils', 'perfmjs/joquery', 'perfmjs/
 //});
 //</script> 
 
-System.register("perfmjs/utils", ['perfmjs/fetch'], function(exports_1) {
-    var fetch_1;
+System.register("perfmjs/utils", ['perfmjs/fetch', 'perfmjs/async'], function(exports_1) {
+    var fetch_1, async_1;
     var _utils, utils;
     return {
         setters:[
             function (_fetch_1) {
                 fetch_1 = _fetch_1;
+            },
+            function (_async_1) {
+                async_1 = _async_1;
             }],
         execute: function() {
             new fetch_1.FetchPolyfill();
@@ -2217,39 +2218,62 @@ System.register("perfmjs/utils", ['perfmjs/fetch'], function(exports_1) {
                  * http://blog.gospodarets.com/fetch_in_action/
                  * https://github.com/github/fetch
                  * e.g.
-                 * utils.fetch("http://localhost:8888/json/message2", function(jsonData) {
-                        console.log(jsonData.result.userName);
-                    }, {'id':999,'name':'12345'}, 'POST');
+                 utils.fetch({
+                        url: "http://localhost:8888/youyue/user/login",
+                        method: 'POST',
+                        jsonParam: {name:userName.value, passwd:passwd.value}
+                    }).then(function(jsonData) {
+                        if (jsonData.status === 'success') {
+                            //do something
+                        } else {
+                            //do something else
+                        }
+                    },function(err){});
                  * @param url
-                 * @param handler
                  * @param jsonParam
                  * @param method
                  * @param formData
                  * @param headers
                  */
-                Utils.prototype.fetch = function (url, handler, jsonParam, method, formData, headers) {
-                    var self = this;
-                    var requestParam = {
-                        method: method || 'GET',
-                        headers: headers || { 'Accept': 'application/json' }
+                Utils.prototype.fetch = function (options) {
+                    options = this.extend({ url: '', jsonParam: undefined, method: 'GET', formData: undefined, headers: { 'Accept': 'application/json;' }
+                    }, options);
+                    var _self = this, requestParam = {
+                        method: options.method,
+                        headers: options.headers
                     };
+                    ////add JSON Web Token Params,如果没有CORS跨域问题则可以放到Header里
+                    //if (localStorage.getItem("token")) {
+                    //    options.url += (options.url.match("[\?]")?'&':'?') + 'x-access-token=' + encodeURIComponent(localStorage.getItem("token"));
+                    //}
                     if (requestParam.method.toUpperCase() === 'POST') {
-                        if (formData) {
-                            requestParam['body'] = formData;
+                        if (options.formData) {
+                            requestParam['body'] = options.formData;
                         }
-                        else if (jsonParam) {
+                        else if (options.jsonParam) {
                             var formData = new FormData();
-                            this.forEach(this.keys(jsonParam), function (item, index) {
-                                formData.append(encodeURIComponent(item), encodeURIComponent(jsonParam[item]));
+                            this.forEach(this.keys(options.jsonParam), function (item, index) {
+                                formData.append(encodeURIComponent(item), encodeURIComponent(options.jsonParam[item]));
                             });
                             requestParam['body'] = formData;
                         }
+                        if (requestParam['body']) {
+                            requestParam['body'].append('x-access-token', encodeURIComponent(localStorage.getItem("token")));
+                        }
+                        else {
+                            var tokenFormData = new FormData();
+                            tokenFormData.append('x-access-token', encodeURIComponent(localStorage.getItem("token")));
+                            requestParam['body'] = tokenFormData;
+                        }
                     }
-                    fetch(url, requestParam).then(function (response) { return response.json(); }).then(function (json) {
-                        handler(self.fmtJSONMsg(json));
+                    var defer = async_1.async.defer();
+                    fetch(options.url, requestParam).then(function (response) { return response.json(); }).then(function (json) {
+                        defer.resolve(_self.fmtJSONMsg(json));
                     }).catch(function (ex) {
-                        console.log('request:' + url + ' failed info:' + ex.message);
+                        console.log('request:' + options.url + ' failed info:' + ex.message);
+                        defer.reject(ex.message);
                     });
+                    return defer.promise;
                 };
                 Utils.prototype.fmtJSONMsg = function (jsonData) {
                     //json格式消息与响应的JSONMessage对象保持一致, status: 成功-success, 失败-fail

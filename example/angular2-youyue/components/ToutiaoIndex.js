@@ -51,9 +51,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                 };
                 ToutiaoIndex.prototype.queryAllChannels = function () {
                     var self = this;
-                    utils_1.utils.fetch('http://localhost:8888/youyue/query/channel', function (jsonData) {
+                    utils_1.utils.fetch({
+                        url: 'http://localhost:8888/youyue/query/channel',
+                        method: 'GET'
+                    }).then(function (jsonData) {
                         if (jsonData.status === 'success') {
-                            var channelList = jsonData.result.list;
                             var scrollLefts = '0,0,0,-19,34,87,140,193,246,299,352,426,426,426,426'.split(',');
                             utils_1.utils.forEach(jsonData.result.list, function (item, index) {
                                 self.channelsMap.set(item, { 'name': item, 'selected': index < 1 ? true : false, 'scrollLeft': (index < scrollLefts.length - 1) ? scrollLefts[index] : 0 });
