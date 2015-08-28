@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+    <title>返回顶部</title>
+    <style>
+        .fix{
+            width:14px;
+            padding:5px;
+            background:#f60;
+            color:#fff;
+            position:fixed;
+            right:10px;
+            top:100px;
+            cursor:pointer;
+        }
+
+    </style>
+</head>
+<body>
+<div style="height:400px;background-color:#cbf3f8"></div>
+<div style="height:400px;background-color:#ffdfbf"></div>
+<div style="height:400px;background-color:#eabfff"></div>
+<div style="height:400px;background-color:#f2ffbf"></div>
+<div style="height:400px;background-color:#cbf3f8"></div>
+<div class="fix" id="J_fix">返回顶部</div>
+<script>
+    var fix = document.getElementById('J_fix');
+    if(!-[1,]&&!window.XMLHttpRequest){ // 判断浏览器是否ie6
+        fix.style.position = 'absolute'; // 先设置容器绝对定位
+        var doc_height = document.documentElement.clientHeight;
+        window.onscroll = function(){   // 当滚动条滚动
+            fix.style.top = document.documentElement.scrollTop + 100;    // 获取滚动条高度给top属性
+        }
+    }
+    fix.onclick = function(){
+        var t = 0; // 时间 ms
+        var d = 800; // 移动到顶部的时间 ms
+        var b = 0; // 当前的位置
+        var c = document.documentElement.scrollTop + document.body.scrollTop;
+        var anim = setInterval(function(){
+            t = t + 25;
+            if(document.documentElement.scrollTop){ //判断浏览器是否支持 document.documentElement.scrollTop
+                document.documentElement.scrollTop = c - queeaseOut(t,b,c,d);
+            }else{
+                document.body.scrollTop = c - queeaseOut(t,b,c,d);
+            }
+            if( t > d ){
+                clearInterval(anim);
+                return false;
+            }
+        },25);
+    };
+
+    /**
+     *  一个缓动算法
+     *  @Param:
+     *  - {t} timestamp，指缓动效果开始执行到当前帧开始执行时经过的时间段，单位ms
+     *  - {b} beginning position，起始位置
+     *  - {c} change，要移动的距离，就是终点位置减去起始位置。
+     *  - {d} duration ，缓和效果持续的时间。
+     */
+    function queeaseOut(t,b,c,d){
+        return -c * ((t=t/d-1)*t*t*t - 1) + b;
+    }
+</script>
+</body>
+</html>

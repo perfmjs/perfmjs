@@ -52,7 +52,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                 ToutiaoIndex.prototype.queryAllChannels = function () {
                     var self = this;
                     utils_1.utils.fetch({
-                        url: 'http://localhost:8888/youyue/query/channel',
+                        url: 'http://localhost:8888/youyue/channel/all',
                         method: 'GET'
                     }).then(function (jsonData) {
                         if (jsonData.status === 'success') {
@@ -62,12 +62,23 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                             });
                         }
                     });
+                    this.loadCms('科技');
+                };
+                ToutiaoIndex.prototype.gotoCms = function (cmsId) {
+                    this.router.navigate("/detail/" + cmsId);
                 };
                 ToutiaoIndex.prototype.gotoLoginPage = function () {
-                    this.router.navigate("/login/toutiaoIndex");
+                    this.router.navigate("/login/index");
                 };
-                ToutiaoIndex.prototype.gotoDetailPage = function () {
-                    this.router.navigate("/toutiaoDetail");
+                ToutiaoIndex.prototype.loadCms = function (channel) {
+                    var self = this;
+                    utils_1.utils.fetch({
+                        url: 'http://localhost:8888/youyue/cms/channel/' + channel
+                    }).then(function (jsonData) {
+                        if (jsonData.status === 'success') {
+                            self.cmsList = jsonData.result.list;
+                        }
+                    });
                 };
                 ToutiaoIndex = __decorate([
                     angular2_1.Component({

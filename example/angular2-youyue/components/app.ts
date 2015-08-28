@@ -19,8 +19,8 @@ import {CmsEdit} from './cmsEdit';
 })
 @RouteConfig([
     {path: '/', as: 'index', component: ToutiaoIndex},
-    {path: '/toutiaoIndex', as: 'toutiaoIndex', component: ToutiaoIndex},
-    {path: '/toutiaoDetail', as: 'toutiaoDetail', component: ToutiaoDetail},
+    {path: '/index', as: 'toutiaoIndex', component: ToutiaoIndex},
+    {path: '/detail/:cmsId', as: 'toutiaoDetail', component: ToutiaoDetail},
     {path: '/cmsEdit', as: 'cmsEdit', component: CmsEdit},
     {path: '/login/:sourcePath', as: 'commonLogin', component: CommonLogin}
 ])

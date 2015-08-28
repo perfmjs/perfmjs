@@ -359,7 +359,6 @@ export class CommonLogin {
     registerUserName: Control = new Control();
     registerPasswd: Control = new Control();
     errorText:string;
-    registerOkInfo:string;
     loginedUser:string;
 
     constructor(@Inject(Router) router:Router, @Inject(Location) location:Location, @Inject(RouteParams) routeParams:RouteParams) {
@@ -380,6 +379,8 @@ export class CommonLogin {
                 }).then(function(jsonData) {
                     if (jsonData.status === 'success') {
                         self.gotoPersonInfo();
+                    } else {
+                        localStorage.removeItem('token');
                     }
                 });
             }

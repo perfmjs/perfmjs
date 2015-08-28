@@ -1,16 +1,17 @@
 <link type="text/css" rel="stylesheet" href="styles/ui/pure.css">
 <form class="pure-form">
     <fieldset class="pure-group">
-        <input type="text" class="pure-input-1-2" placeholder="频道">
-        <input type="text" class="pure-input-1-2" placeholder="标题">
-        <input type="text" class="pure-input-1-2" placeholder="描述图片地址1">
-        <input type="text" class="pure-input-1-2" placeholder="描述图片地址2">
-        <input type="text" class="pure-input-1-2" placeholder="描述图片地址3">
-        <input type="text" class="pure-input-1-2" placeholder="标签，多个以分号分割">
-        <input type="email" class="pure-input-1-2" placeholder="新闻来源">
-        <input type="text" class="pure-input-1-2" placeholder="新闻来源地址">
+        <input type="text" class="pure-input-1-2" placeholder="频道" [ng-form-control]="cmsControls.channel">
+        <input type="text" class="pure-input-1-2" placeholder="标题" [ng-form-control]="cmsControls.title">
+        <div style="margin:10px 10px 10px 20px">是否有一张大图<input type="checkbox" [ng-form-control]="cmsControls.hasBigImg" style="display:inline"></div>
+        <input type="text" class="pure-input-1-2" placeholder="描述图片地址1" [ng-form-control]="cmsControls.img1">
+        <input type="text" class="pure-input-1-2" placeholder="描述图片地址2" [ng-form-control]="cmsControls.img2">
+        <input type="text" class="pure-input-1-2" placeholder="描述图片地址3" [ng-form-control]="cmsControls.img3">
+        <input type="text" class="pure-input-1-2" placeholder="标签，多个以分号分割" [ng-form-control]="cmsControls.label">
+        <input type="text" class="pure-input-1-2" placeholder="新闻来源" [ng-form-control]="cmsControls.source">
+        <input type="text" class="pure-input-1-2" placeholder="新闻来源地址" [ng-form-control]="cmsControls.sourceUrl">
         <input type="file" id="fileinput" />
-        <ng2ckeditor class="pure-input-1-2" ckheight="200" (message-event)="ng2ckeditorCompleted($event)"></ng2ckeditor>
-        <button type="submit" class="pure-button pure-input-1-2 pure-button-primary">提交</button>
+        <ng2ckeditor class="pure-input-1-2" ckheight="400" (message-event)="ng2ckeditorCompleted($event)"></ng2ckeditor>
+        <button type="button" class="pure-button pure-input-1-2 pure-button-primary" (click)="editCms()">提交</button>
     </fieldset>
 </form>

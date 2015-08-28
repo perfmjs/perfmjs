@@ -5,6 +5,7 @@ import {Pipes} from 'angular2/src/core/pipes/pipes';
 import {Pipe} from 'angular2/src/core/metadata';
 import {FORM_DIRECTIVES, Control} from 'angular2/forms';
 
+import {MessageEvent} from 'perfmjs/angular2/directives/message-event';
 import {CommonService, BetPlanContent} from '../services/common-service';
 import {utils} from 'perfmjs/utils';
 import {joquery} from 'perfmjs/joquery';
@@ -40,7 +41,7 @@ export class SsqBetConfirm {
     router:Router;
     betPlanContent:BetPlanContent;
     readedProtocolControl: Control = new Control(true);
-    event:any;
+    event:MessageEvent;
 
     constructor(@Inject(Router) router: Router, commonService: CommonService) {
         this.router = router;

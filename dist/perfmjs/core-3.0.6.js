@@ -2253,16 +2253,16 @@ System.register("perfmjs/utils", ['perfmjs/fetch', 'perfmjs/async'], function(ex
                         else if (options.jsonParam) {
                             var formData = new FormData();
                             this.forEach(this.keys(options.jsonParam), function (item, index) {
-                                formData.append(encodeURIComponent(item), encodeURIComponent(options.jsonParam[item]));
+                                formData.append(item, options.jsonParam[item]);
                             });
                             requestParam['body'] = formData;
                         }
                         if (requestParam['body']) {
-                            requestParam['body'].append('x-access-token', encodeURIComponent(localStorage.getItem("token")));
+                            requestParam['body'].append('x-access-token', localStorage.getItem("token"));
                         }
                         else {
                             var tokenFormData = new FormData();
-                            tokenFormData.append('x-access-token', encodeURIComponent(localStorage.getItem("token")));
+                            tokenFormData.append('x-access-token', localStorage.getItem("token"));
                             requestParam['body'] = tokenFormData;
                         }
                     }

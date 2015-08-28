@@ -4,6 +4,7 @@ import {Router, routerInjectables} from 'angular2/router';
 import {BrowserDomAdapter} from 'angular2/src/dom/browser_adapter';
 
 import {utils} from 'perfmjs/utils';
+import {popup} from 'perfmjs/angular2/directives/popup';
 
 @Component({
     selector: 'toutiao-index'
@@ -16,6 +17,7 @@ export class ToutiaoIndex {
     router:Router;
     dom:BrowserDomAdapter = new BrowserDomAdapter();
     channelsMap:Map = new Map();
+    cmsList:any;
 
     constructor(@Inject(Router) router: Router) {
         this.router = router;
@@ -36,7 +38,7 @@ export class ToutiaoIndex {
     queryAllChannels() {
         var self = this;
         utils.fetch({
-            url: 'http://localhost:8888/youyue/query/channel',
+            url: 'http://localhost:8888/youyue/channel/all',
             method: 'GET'
         }).then(function(jsonData) {
             if (jsonData.status === 'success') {
@@ -46,12 +48,23 @@ export class ToutiaoIndex {
                 });
             }
         });
+        this.loadCms('科技');
     }
 
-    gotoLoginPage() {
-        this.router.navigate("/login/toutiaoIndex");
+    gotoCms(cmsId) {
+        this.router.navigate("/detail/" + cmsId);
     }
-    gotoDetailPage() {
-        this.router.navigate("/toutiaoDetail");
+    gotoLoginPage() {
+        this.router.navigate("/login/index");
+    }
+    loadCms(channel:string) {
+        var self = this;
+        utils.fetch({
+            url: 'http://localhost:8888/youyue/cms/channel/' + channel
+        }).then(function(jsonData){
+            if (jsonData.status === 'success') {
+                self.cmsList = jsonData.result.list;
+            }
+        });
     }
 }
