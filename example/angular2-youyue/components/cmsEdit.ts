@@ -74,7 +74,7 @@ class CmsFormControls {
     clear() {
         this.channel.updateValue("");
         this.title.updateValue("");
-        this.hasBigImg.updateValue(false;
+        this.hasBigImg.updateValue(false);
         this.img1.updateValue("");
         this.img2.updateValue("");
         this.img3.updateValue("");

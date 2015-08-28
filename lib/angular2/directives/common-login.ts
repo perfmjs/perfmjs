@@ -291,7 +291,7 @@ import {utils} from 'perfmjs/utils';
             </dl>
             <p style="color:red">{{errorText}}</p>
             <p><input class="loginbtn" id="loginObj" type="button" value="完成注册" (click)="register(registerUserName, registerPasswd)"></p>
-            <p class="fltxt"><label><input name="StopTag" type="checkbox" disabled="" value="1" checked="checked"><a href="javascript:void(0)">我已阅读相关协议并同意接受《法律声明》</a></label></p>
+            <!--p class="fltxt"><label><input name="StopTag" type="checkbox" disabled="" value="1" checked="checked"><a href="javascript:void(0)">我已阅读相关协议并同意接受《法律声明》</a></label></p-->
             <p class="center" style="margin-top:10px"><a href="javascript:void(0);" class="fontblue" (click)="gotoLogin()">已有帐号登录</a></p>
         </div>
         </form>

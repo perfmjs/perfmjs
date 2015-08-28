@@ -36,6 +36,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
                 function ToutiaoIndex(router) {
                     this.dom = new browser_adapter_1.BrowserDomAdapter();
                     this.channelsMap = new Map();
+                    this.cmsList = [];
                     this.router = router;
                     var elem = this.dom.querySelector(document, "body");
                     this.dom.addClass(elem, "withHeader");

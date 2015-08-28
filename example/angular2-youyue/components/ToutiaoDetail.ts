@@ -35,7 +35,7 @@ import {popup} from 'perfmjs/angular2/directives/popup';
         line-height: 35px;
         text-align: center;
         color: #fff;
-        background: url(http://m.aicaicdn.com/wap5/images/touch_header/backIcon.png?version=20150608) 0 1px no-repeat;
+        background: url(/perfmjs/example/angular2-youyue/images/toutiao/backIcon.png) 0 1px no-repeat;
         background-size: 100% auto;
     }
     `],

@@ -17,7 +17,7 @@ export class ToutiaoIndex {
     router:Router;
     dom:BrowserDomAdapter = new BrowserDomAdapter();
     channelsMap:Map = new Map();
-    cmsList:any;
+    cmsList:any = [];
 
     constructor(@Inject(Router) router: Router) {
         this.router = router;
